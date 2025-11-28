@@ -1,0 +1,96 @@
+<div class="row datatable-body datatable-wrapper statistic-car-by-daily-clone" data-datatable-item-category="statistic-car-by-daily">
+
+
+    <div class="col-md-12 datatable-search-row  datatable-search-box">
+
+
+        <div class="pull-right">
+
+
+            <input type="hidden" name="statistic-car-by-daily-car-id" class="car-id" value="" readonly>
+            <input type="hidden" name="statistic-car-by-daily-time-type" class="time-type" value="month" readonly>
+
+
+            {{--按月查看--}}
+            <button type="button" class="btn btn-default btn-filter time-picker-move picker-move-pre month-pre" data-target="statistic-car-by-daily-month">
+                <i class="fa fa-chevron-left"></i>
+            </button>
+            <input type="text" class="search-filter form-filter filter-keyup month_picker" name="statistic-car-by-daily-month" placeholder="选择月份" readonly="readonly" value="{{ date('Y-m') }}" data-default="{{ date('Y-m') }}" />
+            <button type="button" class="btn btn-default btn-filter time-picker-move picker-move-next month-next" data-target="statistic-car-by-daily-month">
+                <i class="fa fa-chevron-right"></i>
+            </button>
+
+
+            <button type="button" class="btn btn-success btn-filter filter-submit">
+                <i class="fa fa-search"></i> 查询
+            </button>
+
+{{--            <button type="button" class="btn btn-default btn-filter filter-empty">--}}
+{{--                <i class="fa fa-remove"></i> 清空--}}
+{{--            </button>--}}
+
+            <button type="button" class="btn btn-default btn-filter filter-refresh">
+                <i class="fa fa-circle-o-notch"></i> 刷新
+            </button>
+
+            <button type="button" class="btn btn-default btn-filter filter-cancel">
+                <i class="fa fa-undo"></i> 重置
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+    <div class="col-md-12 datatable-body _none" style="margin-top:40px;">
+        <div class="eChart" id="" style="width:100%;min-width:480px;height:320px;"></div>
+    </div>
+
+
+    <div class="col-md-12 datatable-body">
+        <div class="box box-success box-solid-" style="box-shadow:0 0;">
+
+            <div class="box-header with-border-" style="margin-top:16px;">
+                <h3 class="box-title comprehensive-month-title">订单统计</h3>
+            </div>
+            <div class="box-body no-padding">
+                <div class="tableArea full" style="margin-top:0;">
+                    <table class='table table-striped table-bordered table-hover order-column table-for-order'>
+                        <thead>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div class="box-header">
+                &nbsp;
+            </div>
+
+
+            <div class="box-header with-border-">
+                <h3 class="box-title comprehensive-month-title">费用统计</h3>
+            </div>
+            <div class="box-body no-padding">
+                <div class="tableArea full" style="margin-top:0;">
+                    <table class='table table-striped table-bordered table-hover order-column table-for-fee'>
+                        <thead>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

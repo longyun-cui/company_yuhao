@@ -1,3 +1,6 @@
+.content-header>h1 { font-size:20px; }
+.content-header>h1>small { font-size:16px; }
+
 .tableArea .dataTables_wrapper { position:relative; clear:both; zoom:1; overflow-x:auto; }
 .tableArea.overflow-none .dataTables_wrapper { overflow-x:hidden; }
 .tableArea .row { margin-left:0; margin-right:0; padding-left:0; padding-right:0; }
@@ -5,8 +8,26 @@
     padding-left:0; padding-right:0; margin-left:0; margin-right:0;
 }
 
+.dataTables_wrapper {
+    /*display: flex;*/
+    /*flex-direction: column;*/
+}
+.dataTables_scroll { width:100%; }
+.dataTables_info_box { margin-right:16px; float:left; }
+.dataTables_length_box { margin-right:16px; float:left; }
+.dataTables_paginate_box { margin-right:16px; float:right; }
+.dataTables_wrapper .dataTables_info { padding-top: 4px; }
+
 .datatable-body * { font-size:12px; }
 .datatable-body .btn-xs { padding:1px 2px; }
+
+@media (min-width: 768px) {
+    .sidebar-mini.sidebar-collapse .sidebar-menu>li>a {
+        margin-right: 0;
+        text-align: center;
+        margin-left: -12px;
+    }
+}
 
 
 th { white-space: nowrap; }
@@ -14,10 +35,10 @@ th { white-space: nowrap; }
 table.dataTable thead th,
 table.dataTable thead td,
 table.dataTable tfoot th,
-table.dataTable tfoot td { text-align:center; }
+table.dataTable tfoot td { text-align:center; vertical-align: middle; }
 
 table.dataTable tbody th,
-table.dataTable tbody td { padding:8px 4px; }
+table.dataTable tbody td { padding:8px 4px; line-height:20px; }
 
 table.dataTable thead > tr > th { padding-left:0; }
 table.dataTable thead > tr > th.text-left { padding-left:4px; }
@@ -49,7 +70,7 @@ table.dataTable .btn-group-xs>.btn, .btn-xs { line-height:1.4; }
 .edit-img {width:auto;min-width:100px;max-width:100%;height:100px;}
 .edit-img img {width:auto;height:98px;}
 
-.form-container .form-horizontal .control-label { padding-top:0; }
+.form-container .form-horizontal .control-label { padding-top:8px; }
 
 .datatable-body * {  }
 .datatable-body .form-control { padding:4px; }
@@ -58,14 +79,20 @@ table.dataTable .btn-group-xs>.btn, .btn-xs { line-height:1.4; }
 .datatable-body tbody a { font-size:12px; }
 .btn-group-xs>.btn, .btn-xs { padding:1px 2px; margin-left:2px; margin-right:2px; border-radius:2px; }
 table.dataTable thead > tr > th { padding:8px 0px; }
-table.dataTable .text-center { text-align:center; }
 table.dataTable .text-left { text-align:left; }
+table.dataTable .text-center { text-align:center; }
 table.dataTable .text-right { text-align:right; }
+table.dataTable .text-top { vertical-align: top; }
+table.dataTable .text-middle { vertical-align: middle; }
+table.dataTable .text-bottom { vertical-align: bottom; }
 
 #item-content-body .select2-container--classic .select2-selection--single { border-radius:0; }
 
 
-.datatable-search-row { margin-bottom:16px; }
+.datatable-search-row { margin-bottom:8px; margin-bottom:4px; }
+.datatable-search-row .form-control { padding:4px; }
+.datatable-search-row .input-group { float:left; margin-right:4px; }
+.datatable-search-row .input-group.pull-right { margin-left:4px; }
 .datatable-search-row .input-group input { width:120px; }
 .datatable-search-row .input-group button { width:72px; }
 .datatable-search-row .input-group select { width:100px; }
@@ -82,7 +109,7 @@ table.dataTable .text-right { text-align:right; }
 
 
 
-.form-container .form-group { margin-bottom:0; padding:16px 0; border-bottom:1px solid #eee; }
+.form-container .form-group { width:100%;float:left;margin-bottom:0; padding:12px 0; border-bottom:1px solid #f8f8f8; }
 .form-container .box-footer { padding-top:16px; padding-bottom:32px; border-top:0;  }
 .form-container .select2-container--classic .select2-selection--single { border-radius:0; }
 
@@ -107,8 +134,10 @@ table.dataTable .text-right { text-align:right; }
 
 .navbar-nav>.notifications-menu>.dropdown-menu>li .menu,
 .navbar-nav>.messages-menu>.dropdown-menu>li .menu,
-.navbar-nav>.tasks-menu>.dropdown-menu>li .menu { max-height: 320px; }
+.navbar-nav>.tasks-menu>.dropdown-menu>li .menu { max-height: 480px; }
 
 .file-preview { padding:0; }
 .file-drop-zone-title { padding:40px 10px; }
 
+.form-group select.form-control { width:100% !important; }
+form .form-group .select2 { width:100% !important; }

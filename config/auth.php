@@ -69,6 +69,12 @@ return [
             'provider' => 'yh_staffs',
         ],
 
+
+        'wl_staff' => [
+            'driver' => 'session',
+            'provider' => 'wl_staffs',
+        ],
+
     ],
 
     /*
@@ -123,6 +129,14 @@ return [
         'yh_staffs' => [
             'driver' => 'eloquent',
             'model' => App\Models\YH\YH_User::class,
+        ],
+
+
+
+
+        'wl_staffs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\WL\Common\WL_Common_Staff::class,
         ],
 
     ],

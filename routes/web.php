@@ -57,3 +57,26 @@ Route::group(['domain'=>env('DOMAIN_YH_STAFF'), 'namespace'=>'YH'], function () 
 });
 
 
+
+
+
+/*
+ * WL 物流
+ */
+Route::group(['domain'=>env('DOMAIN_WL_ROOT'), 'namespace'=>'WL'], function () {
+    require(__DIR__ . '/WL/wl-root.php');
+});
+Route::group(['domain'=>env('DOMAIN_WL_SUPER'), 'namespace'=>'WL'], function () {
+    require(__DIR__ . '/WL/wl-super.php');
+});
+Route::group(['domain'=>env('DOMAIN_WL_ADMIN'), 'namespace'=>'YH'], function () {
+    require(__DIR__ . '/YH/route-admin.php');
+});
+Route::group(['domain'=>env('DOMAIN_WL_STAFF'), 'namespace'=>'WL'], function () {
+    require(__DIR__ . '/WL/wl-staff.php');
+});
+Route::group(['domain'=>env('DOMAIN_WL_CLIENT'), 'namespace'=>'WL'], function () {
+    require(__DIR__ . '/WL/wl-client.php');
+});
+
+
