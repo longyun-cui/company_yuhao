@@ -197,10 +197,10 @@
                 <div class="box-body">
 
                     {{ csrf_field() }}
-                    <input readonly type="hidden" class="form-control" name="operate[type]" value="create" data-default="create">
-                    <input readonly type="hidden" class="form-control" name="operate[id]" value="0" data-default="0">
-                    <input readonly type="hidden" class="form-control" name="operate[item_category]" value="order" data-default="order">
-                    <input readonly type="hidden" class="form-control" name="operate[item_type]" value="follow" data-default="follow">
+                    <input readonly type="hidden" name="operate[type]" value="create" data-default="create">
+                    <input readonly type="hidden" name="operate[id]" value="0" data-default="0">
+                    <input readonly type="hidden" name="operate[item_category]" value="order" data-default="order">
+                    <input readonly type="hidden" name="operate[item_type]" value="follow" data-default="follow">
 
 
 
@@ -273,10 +273,10 @@
                 <div class="box-body">
 
                     {{ csrf_field() }}
-                    <input readonly type="hidden" class="form-control" name="operate[type]" value="edit" data-default="edit">
-                    <input readonly type="hidden" class="form-control" name="operate[id]" value="0" data-default="0">
-                    <input readonly type="hidden" class="form-control" name="operate[item_category]" value="order" data-default="order">
-                    <input readonly type="hidden" class="form-control" name="operate[item_type]" value="customer" data-default="customer">
+                    <input readonly type="hidden" name="operate[type]" value="edit" data-default="edit">
+                    <input readonly type="hidden" name="operate[id]" value="0" data-default="0">
+                    <input readonly type="hidden" name="operate[item_category]" value="order" data-default="order">
+                    <input readonly type="hidden" name="operate[item_type]" value="customer" data-default="customer">
 
 
                     {{--订单ID--}}
@@ -369,10 +369,10 @@
                 <div class="box-body">
 
                     {{ csrf_field() }}
-                    <input readonly type="hidden" class="form-control" name="operate[type]" value="edit" data-default="edit">
-                    <input readonly type="hidden" class="form-control" name="operate[id]" value="0" data-default="0">
-                    <input readonly type="hidden" class="form-control" name="operate[item_category]" value="order" data-default="order">
-                    <input readonly type="hidden" class="form-control" name="operate[item_type]" value="come" data-default="come">
+                    <input readonly type="hidden" name="operate[type]" value="edit" data-default="edit">
+                    <input readonly type="hidden" name="operate[id]" value="0" data-default="0">
+                    <input readonly type="hidden" name="operate[item_category]" value="order" data-default="order">
+                    <input readonly type="hidden" name="operate[item_type]" value="come" data-default="come">
 
 
 
@@ -479,10 +479,10 @@
                 <div class="box-body">
 
                     {{ csrf_field() }}
-                    <input readonly type="hidden" class="form-control" name="operate[type]" value="edit" data-default="edit">
-                    <input readonly type="hidden" class="form-control" name="operate[id]" value="0" data-default="0">
-                    <input readonly type="hidden" class="form-control" name="operate[item_category]" value="order" data-default="order">
-                    <input readonly type="hidden" class="form-control" name="operate[item_type]" value="come" data-default="come">
+                    <input readonly type="hidden" name="operate[type]" value="edit" data-default="edit">
+                    <input readonly type="hidden" name="operate[id]" value="0" data-default="0">
+                    <input readonly type="hidden" name="operate[item_category]" value="order" data-default="order">
+                    <input readonly type="hidden" name="operate[item_type]" value="come" data-default="come">
 
 
 
@@ -570,7 +570,193 @@
 </div>
 
 
-{{--添加-成交记录--}}
+{{--添加-行程-信息--}}
+<div class="modal fade modal-wrapper" id="modal-for-order-journey-create">
+    <div class="col-md-6 col-md-offset-3 margin-top-64px margin-bottom-64px bg-white">
+
+        <div class="box- box-info- form-container">
+
+            <div class="box-header with-border margin-top-16px">
+                <h3 class="box-title">
+                    <span class="">添加【行程】信息</span>
+                    <span class="id-title"></span>
+                </h3>
+                <div class="box-tools pull-right">
+                </div>
+            </div>
+
+            <form action="" method="post" class="form-horizontal form-bordered " id="form-for-order-journey-create">
+                <div class="box-body">
+
+                    {{ csrf_field() }}
+                    <input readonly type="hidden" name="operate[type]" value="edit" data-default="edit">
+                    <input readonly type="hidden" name="operate[id]" value="0" data-default="0">
+                    <input readonly type="hidden" name="operate[item_category]" value="order" data-default="order">
+                    <input readonly type="hidden" name="operate[item_type]" value="fee" data-default="fee">
+
+                    {{--交易类型--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2">类型</label>
+                        <div class="col-md-8 control-label" style="text-align:left;">
+                            <button type="button" class="btn radio">
+                                <label>
+                                    <input type="radio" name="journey-type" value="1"> 收入
+                                </label>
+                            </button>
+                            <button type="button" class="btn radio">
+                                <label>
+                                    <input type="radio" name="journey-type" value="99" checked="checked"> 费用
+                                </label>
+                            </button>
+                            <button type="button" class="btn radio">
+                                <label>
+                                    <input type="radio" name="journey-type" value="101"> 订单扣款
+                                </label>
+                            </button>
+                            <button type="button" class="btn radio">
+                                <label>
+                                    <input type="radio" name="journey-type" value="111"> 司机罚款
+                                </label>
+                            </button>
+                        </div>
+                    </div>
+                    {{--交易日期--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2">应该时间 (出发&到达)</label>
+                        <div class="col-md-8 ">
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control form-filter time-picker" name="journey-should-departure-datetime" placeholder="应出发时间" readonly="readonly" />
+                            </div>
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control form-filter time-picker" name="journey-should-arrival-datetime" placeholder="应到达时间" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+                    {{--交易日期--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 实际时间 (出发&到达)</label>
+                        <div class="col-md-8 ">
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control form-filter time-picker" name="journey-actual-departure-datetime" placeholder="实际出发时间" readonly="readonly" />
+                            </div>
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control form-filter time-picker" name="journey-actual-arrival-datetime" placeholder="实际到达时间" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+                    {{--品牌--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 名目</label>
+                        <div class="col-md-8 ">
+                            <input type="text" class="form-control" name="fee-title" placeholder="请输入名目" value="" list="_journey_title">
+                        </div>
+                    </div>
+                    <datalist id="_journey_title">
+                        <option value="油费" />
+                        <option value="过路费" />
+                        <option value="尿酸" />
+                        <option value="迪奥" />
+                        <option value="其他" />
+                    </datalist>
+                    {{--金额--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 里程</label>
+                        <div class="col-md-8 ">
+                            <input type="text" class="form-control" name="fee-amount" placeholder="请输如里程" value="">
+                        </div>
+                    </div>
+                    {{--交易类型--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2">记录</label>
+                        <div class="col-md-8 control-label" style="text-align:left;">
+                            <button type="button" class="btn radio">
+                                <label>
+                                    <input type="radio" name="journey-pay-type" value=1 checked="checked"> 记录
+                                </label>
+                            </button>
+                            <button type="button" class="btn radio">
+                                <label>
+                                    <input type="radio" name="journey-pay-type" value=21> 财务
+                                </label>
+                            </button>
+                            <button type="button" class="btn radio">
+                                <label>
+                                    <input type="radio" name="journey-pay-type" value=21> 垫付
+                                </label>
+                            </button>
+                            <button type="button" class="btn radio">
+                                <label>
+                                    <input type="radio" name="journey-pay-type" value=21> 代收
+                                </label>
+                            </button>
+                        </div>
+                    </div>
+                    {{--支付方式--}}
+                    <div class="form-group payment-show" style="display:none;">
+                        <label class="control-label col-md-2">支付方式</label>
+                        <div class="col-md-8 ">
+                            <input type="text" class="form-control" name="journey-payment-method" placeholder="支付方式" value="" list="_payment_method">
+                        </div>
+                    </div>
+                    <datalist id="_payment_method">
+                        <option value="微信" />
+                        <option value="支付宝" />
+                        <option value="银行卡" />
+                        <option value="现金" />
+                        <option value="其他" />
+                    </datalist>
+                    {{--付款账号--}}
+                    <div class="form-group payment-show" style="display:none;">
+                        <label class="control-label col-md-2">付款账号</label>
+                        <div class="col-md-8 ">
+                            <input type="text" class="form-control search-input" id="keyword" name="journey-account-from" placeholder="付款账号" value="" list="_journey_account_from" autocomplete="on">
+                        </div>
+                    </div>
+                    <datalist id="_journey_account_from">
+                    </datalist>
+                    {{--收款账号--}}
+                    <div class="form-group payment-show" style="display:none;">
+                        <label class="control-label col-md-2">收款账号</label>
+                        <div class="col-md-8 ">
+                            <input type="text" class="form-control search-input" id="keyword" name="journey-account-to" placeholder="收款账号" value="" list="_transaction_receipt_account" autocomplete="on">
+                        </div>
+                    </div>
+                    <datalist id="_journey_account_to">
+                    </datalist>
+                    {{--交易单号--}}
+                    <div class="form-group payment-show" style="display:none;">
+                        <label class="control-label col-md-2">交易单号</label>
+                        <div class="col-md-8 ">
+                            <input type="text" class="form-control" name="journey-reference-no" placeholder="交易单号" value="">
+                        </div>
+                    </div>
+                    {{--备注--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2">备注</label>
+                        <div class="col-md-8 ">
+                            <textarea class="form-control" name="fee-description" rows="3" cols="100%"></textarea>
+                        </div>
+                    </div>
+
+
+                </div>
+            </form>
+
+            <div class="box-footer">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <button type="button" class="btn btn-success" id="item-submit-for-order-journey-create"><i class="fa fa-check"></i> 提交</button>
+                        <button type="button" class="btn btn-default modal-cancel">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{{--添加-成交-记录--}}
 <div class="modal fade modal-wrapper" id="modal-for-order-trade-create">
     <div class="col-md-6 col-md-offset-3 margin-top-64px margin-bottom-64px bg-white">
 
@@ -589,10 +775,10 @@
                 <div class="box-body">
 
                     {{ csrf_field() }}
-                    <input readonly type="hidden" class="form-control" name="operate[type]" value="edit" data-default="edit">
-                    <input readonly type="hidden" class="form-control" name="operate[id]" value="0" data-default="0">
-                    <input readonly type="hidden" class="form-control" name="operate[item_category]" value="order" data-default="order">
-                    <input readonly type="hidden" class="form-control" name="operate[item_type]" value="trade" data-default="trade">
+                    <input readonly type="hidden" name="operate[type]" value="edit" data-default="edit">
+                    <input readonly type="hidden" name="operate[id]" value="0" data-default="0">
+                    <input readonly type="hidden" name="operate[item_category]" value="order" data-default="order">
+                    <input readonly type="hidden" name="operate[item_type]" value="trade" data-default="trade">
 
                     {{--交易类型--}}
                     <div class="form-group _none">
@@ -710,7 +896,7 @@
 </div>
 
 
-{{--添加-费用记录--}}
+{{--添加-费用-信息--}}
 <div class="modal fade modal-wrapper" id="modal-for-order-fee-create">
     <div class="col-md-6 col-md-offset-3 margin-top-64px margin-bottom-64px bg-white">
 
@@ -729,10 +915,10 @@
                 <div class="box-body">
 
                     {{ csrf_field() }}
-                    <input readonly type="hidden" class="form-control" name="operate[type]" value="edit" data-default="edit">
-                    <input readonly type="hidden" class="form-control" name="operate[id]" value="0" data-default="0">
-                    <input readonly type="hidden" class="form-control" name="operate[item_category]" value="order" data-default="order">
-                    <input readonly type="hidden" class="form-control" name="operate[item_type]" value="fee" data-default="fee">
+                    <input readonly type="hidden" name="operate[type]" value="edit" data-default="edit">
+                    <input readonly type="hidden" name="operate[id]" value="0" data-default="0">
+                    <input readonly type="hidden" name="operate[item_category]" value="order" data-default="order">
+                    <input readonly type="hidden" name="operate[item_type]" value="fee" data-default="fee">
 
                     {{--交易类型--}}
                     <div class="form-group">
@@ -750,12 +936,12 @@
                             </button>
                             <button type="button" class="btn radio">
                                 <label>
-                                    <input type="radio" name="fee-type" value="101"> 扣款
+                                    <input type="radio" name="fee-type" value="101"> 订单扣款
                                 </label>
                             </button>
                             <button type="button" class="btn radio">
                                 <label>
-                                    <input type="radio" name="fee-type" value="111"> 罚款
+                                    <input type="radio" name="fee-type" value="111"> 司机罚款
                                 </label>
                             </button>
                         </div>

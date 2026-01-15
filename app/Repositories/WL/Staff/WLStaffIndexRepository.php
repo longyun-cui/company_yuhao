@@ -1,5 +1,5 @@
 <?php
-namespace App\Repositories\WL;
+namespace App\Repositories\WL\Staff;
 
 use App\Models\WL\Common\WL_Common_Company;
 use App\Models\WL\Common\WL_Common_Department;
@@ -33,7 +33,7 @@ use Response, Auth, Validator, DB, Exception, Cache, Blade, Carbon;
 use QrCode, Excel;
 
 
-class WLStaffRepository {
+class WLStaffIndexRepository {
 
     private $env;
     private $auth_check;

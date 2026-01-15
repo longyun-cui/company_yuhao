@@ -33,159 +33,207 @@ Route::group(['middleware' => ['wl.staff.login']], function () {
 
 
     // select2
-    Route::post('/v1/operate/select2/select2-company', $controller.'@v1_operate_select2_company');
-    Route::post('/v1/operate/select2/select2-department', $controller.'@v1_operate_select2_department');
-    Route::post('/v1/operate/select2/select2-team', $controller.'@v1_operate_select2_team');
-    Route::post('/v1/operate/select2/select2-staff', $controller.'@v1_operate_select2_staff');
-    Route::post('/v1/operate/select2/select2-car', $controller.'@v1_operate_select2_car');
-    Route::post('/v1/operate/select2/select2-driver', $controller.'@v1_operate_select2_driver');
-    Route::post('/v1/operate/select2/select2-client', $controller.'@v1_operate_select2_client');
-    Route::post('/v1/operate/select2/select2-project', $controller.'@v1_operate_select2_project');
-    Route::post('/v1/operate/select2/select2-order', $controller.'@v1_operate_select2_order');
-
-
-    // 【公司】
-    Route::post('/v1/operate/company/datatable-list-query', $controller.'@v1_operate__company_datatable_list_query');
-    Route::post('/v1/operate/company/item-get', $controller.'@v1_operate__company_item_get');
-    Route::post('/v1/operate/company/item-save', $controller.'@v1_operate__company_item_save');
-
-
-    // 【部门】
-    Route::post('/v1/operate/department/datatable-list-query', $controller.'@v1_operate__department_datatable_list_query');
-    Route::post('/v1/operate/department/item-get', $controller.'@v1_operate__department_item_get');
-    Route::post('/v1/operate/department/item-save', $controller.'@v1_operate__department_item_save');
-
-
-    // 【团队】
-    Route::post('/v1/operate/team/datatable-list-query', $controller.'@v1_operate__team_datatable_list_query');
-    Route::post('/v1/operate/team/item-get', $controller.'@v1_operate__team_item_get');
-    Route::post('/v1/operate/team/item-save', $controller.'@v1_operate__team_item_save');
-
-
-    // 【员工】
-    Route::post('/v1/operate/staff/datatable-list-query', $controller.'@v1_operate__staff_datatable_list_query');
-    Route::post('/v1/operate/staff/item-get', $controller.'@v1_operate__staff_item_get');
-    Route::post('/v1/operate/staff/item-save', $controller.'@v1_operate__staff_item_save');
-
-
-    // 【车辆】
-    Route::post('/v1/operate/car/datatable-list-query', $controller.'@v1_operate__car_datatable_list_query');
-    Route::post('/v1/operate/car/item-get', $controller.'@v1_operate__car_item_get');
-    Route::post('/v1/operate/car/item-save', $controller.'@v1_operate__car_item_save');
-
-
-    // 【司机】
-    Route::post('/v1/operate/driver/datatable-list-query', $controller.'@v1_operate__driver_datatable_list_query');
-    Route::post('/v1/operate/driver/item-get', $controller.'@v1_operate__driver_item_get');
-    Route::post('/v1/operate/driver/item-save', $controller.'@v1_operate__driver_item_save');
-
-
-    // 【客户】
-    Route::post('/v1/operate/client/datatable-list-query', $controller.'@v1_operate__client_datatable_list_query');
-    Route::post('/v1/operate/client/item-get', $controller.'@v1_operate__client_item_get');
-    Route::post('/v1/operate/client/item-save', $controller.'@v1_operate__client_item_save');
-
-
-    // 【项目】
-    Route::post('/v1/operate/project/datatable-list-query', $controller.'@v1_operate__project_datatable_list_query');
-    Route::post('/v1/operate/project/item-get', $controller.'@v1_operate__project_item_get');
-    Route::post('/v1/operate/project/item-save', $controller.'@v1_operate__project_item_save');
-
-
-    // 【工单】列表
-    Route::post('/v1/operate/order/datatable-list-query', $controller.'@v1_operate__order_datatable_list_query');
-    // 【工单】操作
-    Route::post('/v1/operate/order/item-get', $controller.'@v1_operate__order_item_get');
-    Route::post('/v1/operate/order/item-save', $controller.'@v1_operate__order_item_save');
-    Route::post('/v1/operate/order/item-publish', $controller.'@v1_operate__order_item_publish');
-    // 【工单】操作记录
-    Route::post('/v1/operate/order/item-operation-record-datatable-query', $controller.'@v1_operate__order_item_operation_record_datatable_query');
-    Route::post('/v1/operate/order/item-fee-record-datatable-query', $controller.'@v1_operate__order_item_fee_record_datatable_query');
-    // 【工单】跟进
-    Route::post('/v1/operate/order/item-customer-save', $controller.'@v1_operate__order_item_customer_save');
-    Route::post('/v1/operate/order/item-callback-save', $controller.'@v1_operate__order_item_callback_save');
-    Route::post('/v1/operate/order/item-come-save', $controller.'@v1_operate__order_item_come_save');
-    Route::post('/v1/operate/order/item-follow-save', $controller.'@v1_operate__order_item_follow_save');
-    Route::post('/v1/operate/order/item-fee-save', $controller.'@v1_operate__order_item_fee_save');
-    Route::post('/v1/operate/order/item-trade-save', $controller.'@v1_operate__order_item_trade_save');
-
-
-    // 【费用】
-    Route::post('/v1/operate/fee/datatable-list-query', $controller.'@v1_operate__fee_datatable_list_query');
-    Route::post('/v1/operate/fee/item-get', $controller.'@v1_operate__fee_item_get');
-    Route::post('/v1/operate/fee/item-save', $controller.'@v1_operate__fee_item_save');
-    // 【费用】跟进
-    Route::post('/v1/operate/fee/item-financial-save', $controller.'@v1_operate__fee_item_financial_save');
-
-
-    // 【财务】
-    Route::post('/v1/operate/finance/datatable-list-query', $controller.'@v1_operate__finance_datatable_list_query');
-    Route::post('/v1/operate/finance/item-get', $controller.'@v1_operate__finance_item_get');
-    Route::post('/v1/operate/finance/item-save', $controller.'@v1_operate__finance_item_save');
+    Route::post('/o1/select2/select2-company', $controller.'@v1_operate_select2_company');
+    Route::post('/o1/select2/select2-department', $controller.'@v1_operate_select2_department');
+    Route::post('/o1/select2/select2-team', $controller.'@v1_operate_select2_team');
+    Route::post('/o1/select2/select2-staff', $controller.'@v1_operate_select2_staff');
+    Route::post('/o1/select2/select2-car', $controller.'@v1_operate_select2_car');
+    Route::post('/o1/select2/select2-driver', $controller.'@v1_operate_select2_driver');
+    Route::post('/o1/select2/select2-client', $controller.'@v1_operate_select2_client');
+    Route::post('/o1/select2/select2-project', $controller.'@v1_operate_select2_project');
+    Route::post('/o1/select2/select2-order', $controller.'@v1_operate_select2_order');
 
 
 
 
     // 【通用】启用 & 禁用
-    Route::post('/v1/operate/universal/item-enable', $controller.'@v1_operate__universal_item_enable');
-    Route::post('/v1/operate/universal/item-disable', $controller.'@v1_operate__universal_item_disable');
+    Route::post('/o1/universal/item-enable', $controller.'@v1_operate__universal_item_enable');
+    Route::post('/o1/universal/item-disable', $controller.'@v1_operate__universal_item_disable');
     // 【通用】字段修改
-    Route::post('/v1/operate/universal/field-set', $controller.'@v1_operate__universal_field_set');
+    Route::post('/o1/universal/field-set', $controller.'@v1_operate__universal_field_set');
+
+
+
+
+    // 【公司】
+    Route::post('/o1/company/datatable-list-query', $controller.'@o1__company__datatable_list_query');
+    Route::post('/o1/company/item-get', $controller.'@o1__company__item_get');
+    Route::post('/o1/company/item-save', $controller.'@o1__company__item_save');
+    // 【公司】启用 & 禁用
+    Route::post('/o1/company/item-enable', $controller.'@o1__company__item_enable');
+    Route::post('/o1/company/item-disable', $controller.'@o1__company__item_disable');
+
+
+
+
+    // 【部门】
+    Route::post('/o1/department/datatable-list-query', $controller.'@o1__department__datatable_list_query');
+    Route::post('/o1/department/item-get', $controller.'@o1__department__item_get');
+    Route::post('/o1/department/item-save', $controller.'@o1__department__item_save');
+    // 【部门】启用 & 禁用
+    Route::post('/o1/department/item-enable', $controller.'@o1__department__item_enable');
+    Route::post('/o1/department/item-disable', $controller.'@o1__department__item_disable');
+
+
+
+
+    // 【团队】
+    Route::post('/o1/team/datatable-list-query', $controller.'@o1__team__datatable_list_query');
+    Route::post('/o1/team/item-get', $controller.'@o1__team__item_get');
+    Route::post('/o1/team/item-save', $controller.'@o1__team__item_save');
+    // 【团队】启用 & 禁用
+    Route::post('/o1/team/item-enable', $controller.'@o1__team__item_enable');
+    Route::post('/o1/team/item-disable', $controller.'@o1__team__item_disable');
+
+
+
+
+    // 【员工】
+    Route::post('/o1/staff/datatable-list-query', $controller.'@o1__staff__datatable_list_query');
+    Route::post('/o1/staff/item-get', $controller.'@o1__staff__item_get');
+    Route::post('/o1/staff/item-save', $controller.'@o1__staff__item_save');
+    // 【员工】启用 & 禁用
+    Route::post('/o1/staff/item-enable', $controller.'@o1__staff__item_enable');
+    Route::post('/o1/staff/item-disable', $controller.'@o1__staff__item_disable');
+
+
+
+
+    // 【车辆】
+    Route::post('/o1/car/datatable-list-query', $controller.'@o1__car__datatable_list_query');
+    Route::post('/o1/car/item-get', $controller.'@o1__car__item_get');
+    Route::post('/o1/car/item-save', $controller.'@o1__car__item_save');
+    // 【车辆】启用 & 禁用
+    Route::post('/o1/car/item-enable', $controller.'@o1__car__item_enable');
+    Route::post('/o1/car/item-disable', $controller.'@o1__car__item_disable');
+
+
+
+
+    // 【司机】
+    Route::post('/o1/driver/datatable-list-query', $controller.'@o1__driver__datatable_list_query');
+    Route::post('/o1/driver/item-get', $controller.'@o1__driver__item_get');
+    Route::post('/o1/driver/item-save', $controller.'@o1__driver__item_save');
+    // 【司机】启用 & 禁用
+    Route::post('/o1/driver/item-enable', $controller.'@o1__driver__item_enable');
+    Route::post('/o1/driver/item-disable', $controller.'@o1__driver__item_disable');
+
+
+
+
+    // 【客户】
+    Route::post('/o1/client/datatable-list-query', $controller.'@o1__client__datatable_list_query');
+    Route::post('/o1/client/item-get', $controller.'@o1__client__item_get');
+    Route::post('/o1/client/item-save', $controller.'@o1__client__item_save');
+    // 【客户】启用 & 禁用
+    Route::post('/o1/client/item-enable', $controller.'@o1__client__item_enable');
+    Route::post('/o1/client/item-disable', $controller.'@o1__client__item_disable');
+
+
+
+
+    // 【项目】
+    Route::post('/o1/project/datatable-list-query', $controller.'@o1__project__datatable_list_query');
+    Route::post('/o1/project/item-get', $controller.'@o1__project__item_get');
+    Route::post('/o1/project/item-save', $controller.'@o1__project__item_save');
+    // 【项目】启用 & 禁用
+    Route::post('/o1/project/item-enable', $controller.'@o1__project__item_enable');
+    Route::post('/o1/project/item-disable', $controller.'@o1__project__item_disable');
+
+
+
+
+    // 【工单】列表
+    Route::post('/o1/order/datatable-list-query', $controller.'@o1__order__datatable_list_query');
+    // 【工单】操作
+    Route::post('/o1/order/item-get', $controller.'@o1__order__item_get');
+    Route::post('/o1/order/item-save', $controller.'@o1__order__item_save');
+    // 【工单】启用 & 禁用
+    Route::post('/o1/project/item-enable', $controller.'@o1__order__item_enable');
+    Route::post('/o1/project/item-disable', $controller.'@o1__order__item_disable');
+    // 【工单】发布
+    Route::post('/o1/order/item-publish', $controller.'@o1__order__item_publish');
+    // 【工单】操作记录
+    Route::post('/o1/order/item-operation-record-list/datatable-query', $controller.'@o1__order__item_operation_record_list_datatable_query');
+    Route::post('/o1/order/item-fee-record-datatable-query', $controller.'@o1__order__item_fee_record_datatable_query');
+    // 【工单】跟进
+    Route::post('/o1/order/item-follow-save', $controller.'@o1__order__item_follow_save');
+    Route::post('/o1/order/item-journey-save', $controller.'@o1__order__item_journey_save');
+    Route::post('/o1/order/item-fee-save', $controller.'@o1__order__item_fee_save');
+    Route::post('/o1/order/item-trade-save', $controller.'@o1__order__item_trade_save');
+
+
+
+
+    // 【费用】
+    Route::post('/o1/fee/datatable-list-query', $controller.'@o1__fee__datatable_list_query');
+    Route::post('/o1/fee/item-get', $controller.'@o1__fee__item_get');
+    Route::post('/o1/fee/item-save', $controller.'@o1__fee__item_save');
+    // 【费用】财务
+    Route::post('/o1/fee/item-financial-save', $controller.'@o1__fee__item_financial_save');
+
+
+
+
+    // 【财务】
+    Route::post('/o1/finance/datatable-list-query', $controller.'@o1__finance__datatable_list_query');
+    Route::post('/o1/finance/item-get', $controller.'@o1__finance__item_get');
+    Route::post('/o1/finance/item-save', $controller.'@o1__finance__item_save');
 
 
 
 
     // 【统计】客户
-    Route::post('/v1/operate/statistic/statistic-client-by-daily',
-        $controller.'@v1_operate__get_statistic_data_of_statistic_client_by_daily');
-    Route::post('/v1/operate/statistic/statistic-client-by-daily-for-order',
-        $controller.'@v1_operate__get_statistic_data_of_statistic_client_by_daily_for_order');
-    Route::post('/v1/operate/statistic/statistic-client-by-daily-for-fee',
-        $controller.'@v1_operate__get_statistic_data_of_statistic_client_by_daily_for_fee');
+    Route::post('/o1/statistic/statistic-client-by-daily',
+        $controller.'@o1__get_statistic_data__of__statistic_client_by_daily');
+    Route::post('/o1/statistic/statistic-client-by-daily-for-order',
+        $controller.'@o1__get_statistic_data__of__statistic_client_by_daily_for_order');
+    Route::post('/o1/statistic/statistic-client-by-daily-for-fee',
+        $controller.'@o1__get_statistic_data__of__statistic_client_by_daily_for_fee');
 
     // 【统计】项目
-    Route::post('/v1/operate/statistic/statistic-project-by-daily',
-        $controller.'@v1_operate__get_statistic_data_of_statistic_project_by_daily');
-    Route::post('/v1/operate/statistic/statistic-project-by-daily-for-order',
-        $controller.'@v1_operate__get_statistic_data_of_statistic_project_by_daily_for_order');
-    Route::post('/v1/operate/statistic/statistic-project-by-daily-for-fee',
-        $controller.'@v1_operate__get_statistic_data_of_statistic_project_by_daily_for_fee');
+    Route::post('/o1/statistic/statistic-project-by-daily',
+        $controller.'@o1__get_statistic_data__of__statistic_project_by_daily');
+    Route::post('/o1/statistic/statistic-project-by-daily-for-order',
+        $controller.'@o1__get_statistic_data__of__statistic_project_by_daily_for_order');
+    Route::post('/o1/statistic/statistic-project-by-daily-for-fee',
+        $controller.'@o1__get_statistic_data__of__statistic_project_by_daily_for_fee');
 
     // 【统计】订单
-    Route::post('/v1/operate/statistic/statistic-order-by-daily',
-        $controller.'@v1_operate__get_statistic_data_of_statistic_order_by_daily');
+    Route::post('/o1/statistic/statistic-order-by-daily',
+        $controller.'@o1__get_statistic_data__of__statistic_order_by_daily');
 
     // 【统计】车辆
-    Route::post('/v1/operate/statistic/statistic-car-by-daily',
-        $controller.'@v1_operate__get_statistic_data_of_statistic_car_by_daily');
-    Route::post('/v1/operate/statistic/statistic-car-by-daily-for-order',
-        $controller.'@v1_operate__get_statistic_data_of_statistic_car_by_daily_for_order');
-    Route::post('/v1/operate/statistic/statistic-car-by-daily-for-fee',
-        $controller.'@v1_operate__get_statistic_data_of_statistic_car_by_daily_for_fee');
+    Route::post('/o1/statistic/statistic-car-by-daily',
+        $controller.'@o1__get_statistic_data__of__statistic_car_by_daily');
+    Route::post('/o1/statistic/statistic-car-by-daily-for-order',
+        $controller.'@o1__get_statistic_data__of__statistic_car_by_daily_for_order');
+    Route::post('/o1/statistic/statistic-car-by-daily-for-fee',
+        $controller.'@o1__get_statistic_data__of__statistic_car_by_daily_for_fee');
 
     // 【统计】司机
-    Route::post('/v1/operate/statistic/statistic-driver-by-daily',
-        $controller.'@v1_operate__get_statistic_data_of_statistic_driver_by_daily');
-    Route::post('/v1/operate/statistic/statistic-driver-by-daily-for-order',
-        $controller.'@v1_operate__get_statistic_data_of_statistic_driver_by_daily_for_order');
-    Route::post('/v1/operate/statistic/statistic-driver-by-daily-for-fee',
-        $controller.'@v1_operate__get_statistic_data_of_statistic_driver_by_daily_for_fee');
+    Route::post('/o1/statistic/statistic-driver-by-daily',
+        $controller.'@o1__get_statistic_data__of__statistic_driver_by_daily');
+    Route::post('/o1/statistic/statistic-driver-by-daily-for-order',
+        $controller.'@o1__get_statistic_data__of__statistic_driver_by_daily_for_order');
+    Route::post('/o1/statistic/statistic-driver-by-daily-for-fee',
+        $controller.'@o1__get_statistic_data__of__statistic_driver_by_daily_for_fee');
 
     // 【统计】员工
-    Route::post('/v1/operate/statistic/statistic-staff-by-daily',
-        $controller.'@v1_operate__get_statistic_data_of_statistic_staff_by_daily');
+    Route::post('/o1/statistic/statistic-staff-by-daily',
+        $controller.'@o1__get_statistic_data__of__statistic_staff_by_daily');
 
     // 【统计】费用
-    Route::post('/v1/operate/statistic/statistic-fee-by-daily',
-        $controller.'@v1_operate__get_statistic_data_of_statistic_fee_by_daily');
-    Route::post('/v1/operate/statistic/statistic-fee-by-monthly',
-        $controller.'@v1_operate__get_statistic_data_of_statistic_fee_by_monthly');
+    Route::post('/o1/statistic/statistic-fee-by-daily',
+        $controller.'@o1__get_statistic_data__of__statistic_fee_by_daily');
+    Route::post('/o1/statistic/statistic-fee-by-monthly',
+        $controller.'@o1__get_statistic_data__of__statistic_fee_by_monthly');
 
     // 【统计】财务
-    Route::post('/v1/operate/statistic/statistic-finance-by-daily',
-        $controller.'@v1_operate__get_statistic_data_of_statistic_finance_by_daily');
-    Route::post('/v1/operate/statistic/statistic-finance-by-monthly',
-        $controller.'@v1_operate__get_statistic_data_of_statistic_finance_by_monthly');
+    Route::post('/o1/statistic/statistic-finance-by-daily',
+        $controller.'@o1__get_statistic_data__of__statistic_finance_by_daily');
+    Route::post('/o1/statistic/statistic-finance-by-monthly',
+        $controller.'@o1__get_statistic_data__of__statistic_finance_by_monthly');
 
 
 });

@@ -151,25 +151,25 @@
 
             {{--项目列表--}}
             @if(in_array($me->staff_type,[0,1,9,11,41,61,71,81]))
-                <li class="treeview _none-">
-                    <a class="tab-control datatable-control"
-                       data-type="create"
-                       data-unique="y"
-                       data-id="project-list"
-                       data-title='项目列表'
-                       data-content='<i class="fa fa-cube text-white"></i> 项目列表'
-                       data-icon='<i class="fa fa-cube text-blue"></i>'
+            <li class="treeview _none-">
+                <a class="tab-control datatable-control"
+                   data-type="create"
+                   data-unique="y"
+                   data-id="project-list"
+                   data-title='项目列表'
+                   data-content='<i class="fa fa-cube text-white"></i> 项目列表'
+                   data-icon='<i class="fa fa-cube text-blue"></i>'
 
-                       data-datatable-type="create"
-                       data-datatable-unique="y"
-                       data-datatable-id="datatable-project-list"
-                       data-datatable-target="project-list"
-                       data-datatable-clone-object="project-list-clone"
-                    >
-                        <i class="fa fa-cube text-white"></i>
-                        <span>项目列表</span>
-                    </a>
-                </li>
+                   data-datatable-type="create"
+                   data-datatable-unique="y"
+                   data-datatable-id="datatable-project-list"
+                   data-datatable-target="project-list"
+                   data-datatable-clone-object="project-list-clone"
+                >
+                    <i class="fa fa-cube text-white"></i>
+                    <span>项目列表</span>
+                </a>
+            </li>
             @endif
 
 

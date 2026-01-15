@@ -36,6 +36,7 @@ class WL_Common_Fee extends Model
         'client_id',
         'project_id',
         'order_id',
+        'order_operation_record_id',
         'order_task_date',
 
         'car_id',

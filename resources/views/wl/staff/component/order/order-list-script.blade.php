@@ -5,7 +5,7 @@
 
 
         // 【通用】显示详情
-        $(".main-content").off('dblclick', ".modal-show-for-item-detail").on('dblclick', ".modal-show-for-item-detail", function() {
+        $(".main-content").off('dblclick', ".modal-show--for--item-detail").on('dblclick', ".modal-show--for--item-detail", function() {
             var $that = $(this);
             var $order_category = $(this).data('order-category');
             var $id = $(this).data('id');
@@ -19,7 +19,7 @@
             $datatable_wrapper.find('tr').removeClass('operating');
             $row.addClass('operating');
 
-            var $modal = $('#modal-for-delivery-item-detail');
+            var $modal = $('#modal--for--delivery-item-detail');
             $modal.find('.id-title').html('【'+$id+'】');
             $modal.find('.delivery-location-box').html($row.find('[data-key="location"]').html());
             $modal.find('.delivery-client-name-box').html($row.find('[data-key="client_name"]').html());
@@ -62,20 +62,20 @@
 
 
 
-        // 【通用】操作记录
-        $(".main-content").off('click', ".modal-show-for-order-operation-record").on('click', ".modal-show-for-order-operation-record", function() {
+        // 【工单】操作记录
+        $(".main-content").off('click', ".modal-show--for--order-item-operation-record").on('click', ".modal-show--for--order-item-operation-record", function() {
             var $that = $(this);
             var $id = $(this).data('id');
             var $datatable_wrapper = $that.closest('.datatable-wrapper');
             var $item_category = $datatable_wrapper.data('datatable-item-category');
             var $table_id = $datatable_wrapper.find('table').filter('[id][id!=""]').attr("id");
 
-            Datatable_Order_Operation_Record.init($id);
+            Datatable__for__Order_Item_Operation_Record_List.init($id);
 
-            $('#modal-for-order-operation-record-list').modal('show');
+            $('#modal--for--order-item-operation-record-list').modal('show');
         });
-        // 【通用】操作记录
-        $(".main-content").off('click', ".modal-show-for-order-fee-record").on('click', ".modal-show-for-order-fee-record", function() {
+        // 【工单】操作记录
+        $(".main-content").off('click', ".modal-show--for--order-item-fee-record").on('click', ".modal-show--for--order-item-fee-record", function() {
             var $that = $(this);
             var $id = $(this).data('id');
             var $datatable_wrapper = $that.closest('.datatable-wrapper');
@@ -84,14 +84,14 @@
 
             Datatable_Order_Fee_Record.init($id);
 
-            $('#modal-for-order-fee-record-list').modal('show');
+            $('#modal--for--order-fee-record-list').modal('show');
         });
 
 
 
 
-        // 【工单】【客户信息】编辑-显示
-        $(".main-wrapper").off('click', ".item-modal-show-for-customer-update").on('click', ".item-modal-show-for-customer-update", function() {
+        // 【工单】【跟进】显示
+        $(".main-wrapper").off('click', ".modal-show--for--order-item-follow-create").on('click', ".modal-show--for--order-item-follow-create", function() {
             var $that = $(this);
             var $id = $(this).data('id');
             var $row = $that.parents('tr');
@@ -104,472 +104,25 @@
             $datatable_wrapper.find('tr').removeClass('operating');
             $row.addClass('operating');
 
-            var $data = new Object();
+            form_reset('#form--for--order-item-follow-create');
 
-            //
-            var $index = layer.load(1, {
-                shade: [0.3, '#fff'],
-                content: '<span class="loadtip">正在提交</span>',
-                success: function (layer) {
-                    layer.find('.layui-layer-content').css({
-                        'padding-top': '40px',
-                        'width': '100px',
-                    });
-                    layer.find('.loadtip').css({
-                        'font-size':'20px',
-                        'margin-left':'-18px'
-                    });
-                }
-            });
-
-            //
-            $.post(
-                "{{ url('/v1/operate/order/item-get') }}",
-                {
-                    _token: $('meta[name="_token"]').attr('content'),
-                    operate: "item-get",
-                    item_type: "order",
-                    item_id: $that.data('id')
-                },
-                'json'
-            )
-                .done(function($response, status, jqXHR) {
-                    console.log('done');
-                    $response = JSON.parse($response);
-                    if(!$response.success)
-                    {
-                        if($response.msg) layer.msg($response.msg);
-                    }
-                    else
-                    {
-                        var $modal = $('#modal-for-order-customer-update');
-                        // $modal.find('.box-title').html('更新客户信息【'+$that.attr('data-id')+'】');
-                        $modal.find('.id-title').html('【'+$id+'】');
-                        $modal.find('input[name="operate[type]"]').val('edit');
-                        $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));
-
-                        $modal.find('input[name="mobile"]').val($response.data.mobile);
-                        $modal.find('input[name="customer_remark"]').val($response.data.customer_remark);
-                        $modal.find('input[name="is_wx"][value="'+$response.data.is_wx+'"]').prop('checked', true);
-                        $modal.find('input[name="is_come"][value="'+$response.data.is_come+'"]').prop('checked', true);
-                        // $modal.find('select[name="department_id"]').val($response.data.department_id);
-
-                        if($response.data.client_contact_er)
-                        {
-                            $modal.find('select[name="client_contact_id"]').append(new Option($response.data.client_contact_er.name, $response.data.client_contact_id, true, true)).trigger('change');
-                        }
-
-                        var $datatable_wrapper = $that.closest('.datatable-wrapper');
-                        var $table_id = $datatable_wrapper.find('table').filter('[id][id!=""]').attr("id");
-                        $modal.find('.edit-submit').attr('data-datatable-list-id',$table_id);
-
-                        $modal.modal('show');
-                    }
-                })
-                .fail(function(jqXHR, status, error) {
-                    console.log('fail');
-                    layer.msg('服务器错误！');
-
-                })
-                .always(function(jqXHR, status) {
-                    console.log('always');
-                    layer.closeAll('loading');
-                });
-
-        });
-        // 【工单】【客户信息】编辑-提交
-        $(".main-wrapper").off('click', "#form-submit-for-order-customer-update").on('click', "#form-submit-for-order-customer-update", function() {
-            var $that = $(this);
-            var $table_id = $that.data('datatable-list-id');
-
-            var $index = layer.load(1, {
-                shade: [0.3, '#fff'],
-                content: '<span class="loadtip">正在提交</span>',
-                success: function (layer) {
-                    layer.find('.layui-layer-content').css({
-                        'padding-top': '40px',
-                        'width': '100px',
-                    });
-                    layer.find('.loadtip').css({
-                        'font-size':'20px',
-                        'margin-left':'-18px'
-                    });
-                }
-            });
-
-            var options = {
-                url: "{{ url('/v1/operate/order/item-customer-save') }}",
-                type: "post",
-                dataType: "json",
-                // target: "#div2",
-                // clearForm: true,
-                // restForm: true,
-                success: function ($response, status, xhr, $form) {
-                    // 请求成功时的回调
-                    if(!$response.success)
-                    {
-                        layer.msg($response.msg);
-                    }
-                    else
-                    {
-                        layer.msg($response.msg);
-
-                        // 重置输入框
-                        form_reset('#form-for-order-customer-update');
-
-                        $('#modal-for-order-customer-update').modal('hide');
-                        // $('#modal-for-order-trade-create').modal('hide').on("hidden.bs.modal", function () {
-                        //     $("body").addClass("modal-open");
-                        // });
-
-                        // $('#'+$table_id).DataTable().ajax.reload(null,false);
-                    }
-                },
-                error: function(xhr, status, error, $form) {
-                    // 请求失败时的回调
-                    console.log('error');
-                    layer.closeAll('loading');
-                },
-                complete: function(xhr, status, $form) {
-                    // 无论成功或失败都会执行的回调
-                    console.log('always');
-                    layer.closeAll('loading');
-                }
-
-
-            };
-            $("#form-for-order-customer-update").ajaxSubmit(options);
-        });
-
-
-
-
-        // 【工单】【回访】编辑-显示
-        $(".main-wrapper").off('click', ".item-modal-show-for-callback-update").on('click', ".item-modal-show-for-callback-update", function() {
-            var $that = $(this);
-            var $id = $(this).data('id');
-            var $row = $that.parents('tr');
-            var $datatable_wrapper = $that.closest('.datatable-wrapper');
-            var $item_category = $datatable_wrapper.data('datatable-item-category');
-            var $table_id = $datatable_wrapper.find('table').filter('[id][id!=""]').attr("id");
-
-            $('.datatable-wrapper').removeClass('operating');
-            $datatable_wrapper.addClass('operating');
-            $datatable_wrapper.find('tr').removeClass('operating');
-            $row.addClass('operating');
-
-            var $data = new Object();
-
-            //
-            var $index = layer.load(1, {
-                shade: [0.3, '#fff'],
-                content: '<span class="loadtip">正在提交</span>',
-                success: function (layer) {
-                    layer.find('.layui-layer-content').css({
-                        'padding-top': '40px',
-                        'width': '100px',
-                    });
-                    layer.find('.loadtip').css({
-                        'font-size':'20px',
-                        'margin-left':'-18px'
-                    });
-                }
-            });
-
-            //
-            $.post(
-                "{{ url('/v1/operate/order/item-get') }}",
-                {
-                    _token: $('meta[name="_token"]').attr('content'),
-                    operate: "item-get",
-                    item_type: "order",
-                    item_id: $that.data('id')
-                },
-                'json'
-            )
-                .done(function($response, status, jqXHR) {
-                    console.log('done');
-                    $response = JSON.parse($response);
-                    if(!$response.success)
-                    {
-                        if($response.msg) layer.msg($response.msg);
-                    }
-                    else
-                    {
-                        var $modal = $('#modal-for-order-callback-update');
-
-                        // $modal.find('.box-title').html('更新上门状态【'+$that.attr('data-id')+'】');
-                        $modal.find('.id-title').html('【'+$id+'】');
-                        $modal.find('input[name="operate[type]"]').val('edit');
-                        $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));
-
-                        $modal.find('input[name="is_come"][value="'+$response.data.is_come+'"]').prop('checked', true);
-                        $modal.find('input[name="callback_datetime"]').val($response.data.callback_datetime);
-
-
-                        var $datatable_wrapper = $that.closest('.datatable-wrapper');
-                        var $table_id = $datatable_wrapper.find('table').filter('[id][id!=""]').attr("id");
-                        $modal.find('.edit-submit').attr('data-datatable-list-id',$table_id);
-
-                        $modal.modal('show');
-                    }
-                })
-                .fail(function(jqXHR, status, error) {
-                    console.log('fail');
-                    layer.msg('服务器错误！');
-
-                })
-                .always(function(jqXHR, status) {
-                    console.log('always');
-                    layer.closeAll('loading');
-                });
-
-        });
-        // 【工单】【回访】编辑-提交
-        $(".main-wrapper").off('click', "#form-submit-for-order-callback-update").on('click', "#form-submit-for-order-callback-update", function() {
-            var $that = $(this);
-            var $table_id = $that.data('datatable-list-id');
-
-            var $index = layer.load(1, {
-                shade: [0.3, '#fff'],
-                content: '<span class="loadtip">正在提交</span>',
-                success: function (layer) {
-                    layer.find('.layui-layer-content').css({
-                        'padding-top': '40px',
-                        'width': '100px',
-                    });
-                    layer.find('.loadtip').css({
-                        'font-size':'20px',
-                        'margin-left':'-18px'
-                    });
-                }
-            });
-
-            var options = {
-                url: "{{ url('/v1/operate/order/item-callback-save') }}",
-                type: "post",
-                dataType: "json",
-                // target: "#div2",
-                // clearForm: true,
-                // restForm: true,
-                success: function ($response, status, xhr, $form) {
-                    // 请求成功时的回调
-                    if(!$response.success)
-                    {
-                        layer.msg($response.msg);
-                    }
-                    else
-                    {
-                        layer.msg($response.msg);
-
-                        // 重置输入框
-                        form_reset('#form-for-order-callback-update');
-
-                        $('#modal-for-order-callback-update').modal('hide');
-                        // $('#modal-for-order-trade-create').modal('hide').on("hidden.bs.modal", function () {
-                        //     $("body").addClass("modal-open");
-                        // });
-
-                        // $('#'+$table_id).DataTable().ajax.reload(null,false);
-                    }
-                },
-                error: function(xhr, status, error, $form) {
-                    // 请求失败时的回调
-                    console.log('error');
-                    layer.closeAll('loading');
-                },
-                complete: function(xhr, status, $form) {
-                    // 无论成功或失败都会执行的回调
-                    console.log('always');
-                    layer.closeAll('loading');
-                }
-
-
-            };
-            $("#form-for-order-callback-update").ajaxSubmit(options);
-        });
-
-
-
-
-        // 【工单】【上门状态】编辑-显示
-        $(".main-wrapper").off('click', ".item-modal-show-for-come-update").on('click', ".item-modal-show-for-come-update", function() {
-            var $that = $(this);
-            var $id = $(this).data('id');
-            var $row = $that.parents('tr');
-            var $datatable_wrapper = $that.closest('.datatable-wrapper');
-            var $item_category = $datatable_wrapper.data('datatable-item-category');
-            var $table_id = $datatable_wrapper.find('table').filter('[id][id!=""]').attr("id");
-
-            $('.datatable-wrapper').removeClass('operating');
-            $datatable_wrapper.addClass('operating');
-            $datatable_wrapper.find('tr').removeClass('operating');
-            $row.addClass('operating');
-
-            var $data = new Object();
-
-            //
-            var $index = layer.load(1, {
-                shade: [0.3, '#fff'],
-                content: '<span class="loadtip">正在提交</span>',
-                success: function (layer) {
-                    layer.find('.layui-layer-content').css({
-                        'padding-top': '40px',
-                        'width': '100px',
-                    });
-                    layer.find('.loadtip').css({
-                        'font-size':'20px',
-                        'margin-left':'-18px'
-                    });
-                }
-            });
-
-            //
-            $.post(
-                "{{ url('/v1/operate/order/item-get') }}",
-                {
-                    _token: $('meta[name="_token"]').attr('content'),
-                    operate: "item-get",
-                    item_type: "order",
-                    item_id: $that.data('id')
-                },
-                'json'
-            )
-                .done(function($response, status, jqXHR) {
-                    console.log('done');
-                    $response = JSON.parse($response);
-                    if(!$response.success)
-                    {
-                        if($response.msg) layer.msg($response.msg);
-                    }
-                    else
-                    {
-                        var $modal = $('#modal-for-order-come-update');
-
-                        // $modal.find('.box-title').html('更新上门状态【'+$that.attr('data-id')+'】');
-                        $modal.find('.id-title').html('【'+$id+'】');
-                        $modal.find('input[name="operate[type]"]').val('edit');
-                        $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));
-
-                        $modal.find('input[name="is_come"][value="'+$response.data.is_come+'"]').prop('checked', true);
-                        $modal.find('input[name="come_datetime"]').val($response.data.come_datetime);
-
-
-                        var $datatable_wrapper = $that.closest('.datatable-wrapper');
-                        var $table_id = $datatable_wrapper.find('table').filter('[id][id!=""]').attr("id");
-                        $modal.find('.edit-submit').attr('data-datatable-list-id',$table_id);
-
-                        $modal.modal('show');
-                    }
-                })
-                .fail(function(jqXHR, status, error) {
-                    console.log('fail');
-                    layer.msg('服务器错误！');
-
-                })
-                .always(function(jqXHR, status) {
-                    console.log('always');
-                    layer.closeAll('loading');
-                });
-
-        });
-        // 【工单】【上门状态】编辑-提交
-        $(".main-wrapper").off('click', "#form-submit-for-order-come-update").on('click', "#form-submit-for-order-come-update", function() {
-            var $that = $(this);
-            var $table_id = $that.data('datatable-list-id');
-
-            var $index = layer.load(1, {
-                shade: [0.3, '#fff'],
-                content: '<span class="loadtip">正在提交</span>',
-                success: function (layer) {
-                    layer.find('.layui-layer-content').css({
-                        'padding-top': '40px',
-                        'width': '100px',
-                    });
-                    layer.find('.loadtip').css({
-                        'font-size':'20px',
-                        'margin-left':'-18px'
-                    });
-                }
-            });
-
-            var options = {
-                url: "{{ url('/v1/operate/order/item-come-save') }}",
-                type: "post",
-                dataType: "json",
-                // target: "#div2",
-                // clearForm: true,
-                // restForm: true,
-                success: function ($response, status, xhr, $form) {
-                    // 请求成功时的回调
-                    if(!$response.success)
-                    {
-                        layer.msg($response.msg);
-                    }
-                    else
-                    {
-                        layer.msg($response.msg);
-
-                        // 重置输入框
-                        form_reset('#form-for-order-come-update');
-
-                        $('#modal-for-order-come-update').modal('hide');
-                        // $('#modal-for-order-trade-create').modal('hide').on("hidden.bs.modal", function () {
-                        //     $("body").addClass("modal-open");
-                        // });
-
-                        // $('#'+$table_id).DataTable().ajax.reload(null,false);
-                    }
-                },
-                error: function(xhr, status, error, $form) {
-                    // 请求失败时的回调
-                    console.log('error');
-                    layer.closeAll('loading');
-                },
-                complete: function(xhr, status, $form) {
-                    // 无论成功或失败都会执行的回调
-                    console.log('always');
-                    layer.closeAll('loading');
-                }
-
-
-            };
-            $("#form-for-order-come-update").ajaxSubmit(options);
-        });
-
-
-
-
-        // 【工单】【添加跟进记录】添加-显示
-        $(".main-wrapper").off('click', ".item-modal-show-for-follow-create").on('click', ".item-modal-show-for-follow-create", function() {
-            var $that = $(this);
-            var $id = $(this).data('id');
-            var $row = $that.parents('tr');
-            var $datatable_wrapper = $that.closest('.datatable-wrapper');
-            var $item_category = $datatable_wrapper.data('datatable-item-category');
-            var $table_id = $datatable_wrapper.find('table').filter('[id][id!=""]').attr("id");
-
-            $('.datatable-wrapper').removeClass('operating');
-            $datatable_wrapper.addClass('operating');
-            $datatable_wrapper.find('tr').removeClass('operating');
-            $row.addClass('operating');
-
-            form_reset('#form-for-order-follow-create');
-
-            var $modal = $('#modal-for-order-follow-create');
+            var $modal = $('#modal--for--order-item-follow-create');
 
             $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));
             $modal.find('.id-title').html('【'+$id+'】');
 
             $modal.modal('show');
-            // $('#modal-for-order-follow-create').modal({show: true,backdrop: 'static'});
+            // $('#modal--for--order-follow-create').modal({show: true,backdrop: 'static'});
             // $('.modal-backdrop').each(function() {
             //     $(this).attr('id', 'id_' + Math.random());
             // });
         });
-        // 【工单】【添加跟进记录】编辑-提交
-        $(".main-wrapper").off('click', "#form-submit-for-order-follow-create").on('click', "#form-submit-for-order-follow-create", function() {
+        // 【工单】【跟进】提交
+        $(".main-wrapper").off('click', "#form-submit--for--order-item-follow-create").on('click', "#form-submit--for--order-item-follow-create", function() {
             var $that = $(this);
+            var $item_id = $that.data('item-id');
+            var $table_id = $that.data('datatable-list-id');
+            var $row = $('#'+$table_id).find('[data-key="id"][data-value='+$item_id+']').parents('tr');
 
             var $index = layer.load(1, {
                 shade: [0.3, '#fff'],
@@ -587,7 +140,7 @@
             });
 
             var options = {
-                url: "{{ url('/v1/operate/order/item-follow-save') }}",
+                url: "{{ url('/o1/order/item-follow-save') }}",
                 type: "post",
                 dataType: "json",
                 // data: { _token: $('meta[name="_token"]').attr('content') },
@@ -605,14 +158,114 @@
                         layer.msg($response.msg);
 
                         // 重置输入框
-                        form_reset('#form-for-order-follow-create');
+                        form_reset('#form--for--order-follow-create');
 
-                        $('#modal-for-order-follow-create').modal('hide');
-                        // $('#modal-for-order-trade-create').modal('hide').on("hidden.bs.modal", function () {
+                        $('#modal--for--order-item-follow-create').modal('hide');
+                        // $('#modal--for--order-item-follow-create').modal('hide').on("hidden.bs.modal", function () {
+                        //     $("body").addClass("modal-open");
+                        // });
+
+                        $('#'+$table_id).DataTable().ajax.reload(null,false);
+                    }
+                },
+                error: function(xhr, status, error, $form) {
+                    // 请求失败时的回调
+                    layer.closeAll('loading');
+                    console.log('#form-submit--for--order-item-follow-create.click.error');
+                    layer.msg('服务器错误！');
+                },
+                complete: function(xhr, status, $form) {
+                    // 无论成功或失败都会执行的回调
+                    layer.closeAll('loading');
+                    console.log('#form-submit--for--order-item-follow-create.click.complete');
+                }
+
+
+            };
+            $("#form--for--order-item-follow-create").ajaxSubmit(options);
+        });
+
+
+
+        // 【工单】【行程】显示
+        $(".main-wrapper").off('click', ".modal-show--for--order-item-journey-create").on('click', ".modal-show--for--order-item-journey-create", function() {
+            var $that = $(this);
+            var $id = $(this).data('id');
+            var $row = $that.parents('tr');
+            var $datatable_wrapper = $that.closest('.datatable-wrapper');
+            var $item_category = $datatable_wrapper.data('datatable-item-category');
+            var $table_id = $datatable_wrapper.find('table').filter('[id][id!=""]').attr("id");
+
+            $('.datatable-wrapper').removeClass('operating');
+            $datatable_wrapper.addClass('operating');
+            $datatable_wrapper.find('tr').removeClass('operating');
+            $row.addClass('operating');
+
+            form_reset('#form--for--order-item-journey-create');
+
+            var $modal = $('#modal--for--order-item-journey-create');
+            $modal.find('.id-title').html('【'+$id+'】');
+
+            $modal.find('#item-submit--for--order-item-journey-create').data('item-id',$id);
+            $modal.find('#item-submit--for--order-item-journey-create').data('datatable-list-id',$table_id);
+            $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));
+            $modal.find('.journey-create-order-id').html($id);
+
+            $modal.modal('show');
+        });
+        // 【工单】【行程】提交
+        $(".main-wrapper").off('click', "#item-submit--for--order-item-journey-create").on('click', "#item-submit--for--order-item-journey-create", function() {
+            var $that = $(this);
+            var $item_id = $that.data('item-id');
+            var $table_id = $that.data('datatable-list-id');
+            var $row = $('#'+$table_id).find('[data-key="id"][data-value='+$item_id+']').parents('tr');
+
+            var $index = layer.load(1, {
+                shade: [0.3, '#fff'],
+                content: '<span class="loadtip">正在提交</span>',
+                success: function (layer) {
+                    layer.find('.layui-layer-content').css({
+                        'padding-top': '40px',
+                        'width': '100px',
+                    });
+                    layer.find('.loadtip').css({
+                        'font-size':'20px',
+                        'margin-left':'-18px'
+                    });
+                }
+            });
+
+            var options = {
+                url: "{{ url('/o1/order/item-journey-save') }}",
+                type: "post",
+                dataType: "json",
+                // target: "#div2",
+                // clearForm: true,
+                // restForm: true,
+                success: function ($response, status, xhr, $form) {
+                    // 请求成功时的回调
+                    if(!$response.success)
+                    {
+                        layer.msg($response.msg);
+                    }
+                    else
+                    {
+                        layer.msg($response.msg);
+
+                        // 重置输入框
+                        form_reset('#form--for--order-item-journey-create');
+
+                        $('#modal--for--order-item-journey-create').modal('hide');
+                        // $('#modal--for--order-trade-create').modal('hide').on("hidden.bs.modal", function () {
                         //     $("body").addClass("modal-open");
                         // });
 
                         // $('#'+$table_id).DataTable().ajax.reload(null,false);
+
+                        var $order = $response.data.order;
+                        console.log($row);
+                        console.log($order);
+                        update_order_row($row,$order);
                     }
                 },
                 error: function(xhr, status, error, $form) {
@@ -628,14 +281,14 @@
 
 
             };
-            $("#form-for-order-follow-create").ajaxSubmit(options);
+            $("#form--for--order-item-journey-create").ajaxSubmit(options);
         });
 
 
 
 
-        // 【工单】【添加成交记录】添加-显示
-        $(".main-wrapper").off('click', ".item-modal-show-for-trade-create").on('click', ".item-modal-show-for-trade-create", function() {
+        // 【工单】【费用】显示
+        $(".main-wrapper").off('click', ".modal-show--for--order-item-fee-create").on('click', ".modal-show--for--order-item-fee-create", function() {
             var $that = $(this);
             var $id = $(this).data('id');
             var $row = $that.parents('tr');
@@ -648,9 +301,109 @@
             $datatable_wrapper.find('tr').removeClass('operating');
             $row.addClass('operating');
 
-            form_reset('#form-for-order-trade-create');
+            form_reset('#form--for--order-item-fee-create');
 
-            var $modal = $('#modal-for-order-trade-create');
+            var $modal = $('#modal--for--order-item-fee-create');
+            $modal.find('.id-title').html('【'+$id+'】');
+
+            $modal.find('#item-submit--for--order-item-fee-create').data('item-id',$id);
+            $modal.find('#item-submit--for--order-item-fee-create').data('datatable-list-id',$table_id);
+            $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));
+            $modal.find('.fee-create-order-id').html($id);
+
+            $modal.modal('show');
+        });
+        // 【工单】【费用】提交
+        $(".main-wrapper").off('click', "#item-submit--for--order-item-fee-create").on('click', "#item-submit--for--order-item-fee-create", function() {
+            var $that = $(this);
+            var $item_id = $that.data('item-id');
+            var $table_id = $that.data('datatable-list-id');
+            var $row = $('#'+$table_id).find('[data-key="id"][data-value='+$item_id+']').parents('tr');
+
+            var $index = layer.load(1, {
+                shade: [0.3, '#fff'],
+                content: '<span class="loadtip">正在提交</span>',
+                success: function (layer) {
+                    layer.find('.layui-layer-content').css({
+                        'padding-top': '40px',
+                        'width': '100px',
+                    });
+                    layer.find('.loadtip').css({
+                        'font-size':'20px',
+                        'margin-left':'-18px'
+                    });
+                }
+            });
+
+            var options = {
+                url: "{{ url('/o1/order/item-fee-save') }}",
+                type: "post",
+                dataType: "json",
+                // target: "#div2",
+                // clearForm: true,
+                // restForm: true,
+                success: function ($response, status, xhr, $form) {
+                    // 请求成功时的回调
+                    if(!$response.success)
+                    {
+                        layer.msg($response.msg);
+                    }
+                    else
+                    {
+                        layer.msg($response.msg);
+
+                        // 重置输入框
+                        form_reset('#form--for--order-item-fee-create');
+
+                        $('#modal--for--order-item-fee-create').modal('hide');
+                        // $('#modal--for--order-trade-create').modal('hide').on("hidden.bs.modal", function () {
+                        //     $("body").addClass("modal-open");
+                        // });
+
+                        // $('#'+$table_id).DataTable().ajax.reload(null,false);
+
+                        var $order = $response.data.order;
+                        console.log($row);
+                        console.log($order);
+                        update_order_row($row,$order);
+                    }
+                },
+                error: function(xhr, status, error, $form) {
+                    // 请求失败时的回调
+                    console.log('error');
+                    layer.closeAll('loading');
+                },
+                complete: function(xhr, status, $form) {
+                    // 无论成功或失败都会执行的回调
+                    console.log('always');
+                    layer.closeAll('loading');
+                }
+
+
+            };
+            $("#form--for--order-item-fee-create").ajaxSubmit(options);
+        });
+
+
+
+
+        // 【工单】【成交】显示
+        $(".main-wrapper").off('click', ".item-modal-show--for--order-item-trade-create").on('click', ".item-modal-show--for--order-item-trade-create", function() {
+            var $that = $(this);
+            var $id = $(this).data('id');
+            var $row = $that.parents('tr');
+            var $datatable_wrapper = $that.closest('.datatable-wrapper');
+            var $item_category = $datatable_wrapper.data('datatable-item-category');
+            var $table_id = $datatable_wrapper.find('table').filter('[id][id!=""]').attr("id");
+
+            $('.datatable-wrapper').removeClass('operating');
+            $datatable_wrapper.addClass('operating');
+            $datatable_wrapper.find('tr').removeClass('operating');
+            $row.addClass('operating');
+
+            form_reset('#form--for--order-trade-create');
+
+            var $modal = $('#modal--for--order-trade-create');
             $modal.find('.id-title').html('【'+$id+'】');
 
             $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));
@@ -658,8 +411,8 @@
 
             $modal.modal('show');
         });
-        // 【工单】【添加成交记录】编辑-提交
-        $(".main-wrapper").off('click', "#item-submit-for-order-trade-create").on('click', "#item-submit-for-order-trade-create", function() {
+        // 【工单】【成交】提交
+        $(".main-wrapper").off('click', "#item-submit--for--order-item-trade-create").on('click', "#item-submit--for--order-item-trade-create", function() {
             var $that = $(this);
             var $table_id = $that.data('datatable-list-id');
 
@@ -696,10 +449,10 @@
                         layer.msg($response.msg);
 
                         // 重置输入框
-                        form_reset('#form-for-order-trade-create');
+                        form_reset('#form--for--order-trade-create');
 
-                        $('#modal-for-order-trade-create').modal('hide');
-                        // $('#modal-for-order-trade-create').modal('hide').on("hidden.bs.modal", function () {
+                        $('#modal--for--order-trade-create').modal('hide');
+                        // $('#modal--for--order-trade-create').modal('hide').on("hidden.bs.modal", function () {
                         //     $("body").addClass("modal-open");
                         // });
 
@@ -719,103 +472,12 @@
 
 
             };
-            $("#form-for-order-trade-create").ajaxSubmit(options);
+            $("#form--for--order-trade-create").ajaxSubmit(options);
         });
 
 
 
 
-        // 【工单】【费用】显示
-        $(".main-wrapper").off('click', ".modal-show-for-order-fee-create").on('click', ".modal-show-for-order-fee-create", function() {
-            var $that = $(this);
-            var $id = $(this).data('id');
-            var $row = $that.parents('tr');
-            var $datatable_wrapper = $that.closest('.datatable-wrapper');
-            var $item_category = $datatable_wrapper.data('datatable-item-category');
-            var $table_id = $datatable_wrapper.find('table').filter('[id][id!=""]').attr("id");
-
-            $('.datatable-wrapper').removeClass('operating');
-            $datatable_wrapper.addClass('operating');
-            $datatable_wrapper.find('tr').removeClass('operating');
-            $row.addClass('operating');
-
-            form_reset('#form-for-order-fee-create');
-
-            var $modal = $('#modal-for-order-fee-create');
-            $modal.find('.id-title').html('【'+$id+'】');
-
-            $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));
-            $modal.find('.follow-create-order-id').html($id);
-
-            $modal.modal('show');
-        });
-        // 【工单】【费用】提交
-        $(".main-wrapper").off('click', "#item-submit-for-order-fee-create").on('click', "#item-submit-for-order-fee-create", function() {
-            var $that = $(this);
-            var $table_id = $that.data('datatable-list-id');
-
-            var $index = layer.load(1, {
-                shade: [0.3, '#fff'],
-                content: '<span class="loadtip">正在提交</span>',
-                success: function (layer) {
-                    layer.find('.layui-layer-content').css({
-                        'padding-top': '40px',
-                        'width': '100px',
-                    });
-                    layer.find('.loadtip').css({
-                        'font-size':'20px',
-                        'margin-left':'-18px'
-                    });
-                }
-            });
-
-            var options = {
-                url: "{{ url('/v1/operate/order/item-fee-save') }}",
-                type: "post",
-                dataType: "json",
-                // target: "#div2",
-                // clearForm: true,
-                // restForm: true,
-                success: function ($response, status, xhr, $form) {
-                    // 请求成功时的回调
-                    if(!$response.success)
-                    {
-                        layer.msg($response.msg);
-                    }
-                    else
-                    {
-                        layer.msg($response.msg);
-
-                        // 重置输入框
-                        form_reset('#form-for-order-fee-create');
-
-                        $('#modal-for-order-fee-create').modal('hide');
-                        // $('#modal-for-order-trade-create').modal('hide').on("hidden.bs.modal", function () {
-                        //     $("body").addClass("modal-open");
-                        // });
-
-                        // $('#'+$table_id).DataTable().ajax.reload(null,false);
-                    }
-                },
-                error: function(xhr, status, error, $form) {
-                    // 请求失败时的回调
-                    console.log('error');
-                    layer.closeAll('loading');
-                },
-                complete: function(xhr, status, $form) {
-                    // 无论成功或失败都会执行的回调
-                    console.log('always');
-                    layer.closeAll('loading');
-                }
-
-
-            };
-            $("#form-for-order-fee-create").ajaxSubmit(options);
-        });
-        
-        
-        
-        
         
         
         
@@ -1149,7 +811,7 @@
         // 【编辑】
         $(".main-wrapper").on('click', ".item-create-show", function() {
             var $that = $(this);
-            $('#modal-body-for-order-create').modal('show');
+            $('#modal-body--for--order-create').modal('show');
         });
 
         // 【编辑】
@@ -1172,7 +834,7 @@
 
 
         // 【获取】内容详情
-        $(".main-wrapper").on('click', ".item-modal-show-for-detail", function() {
+        $(".main-wrapper").on('click', ".item-modal-show--for--detail", function() {
             var $that = $(this);
             var $row = $that.parents('tr');
             console.log();
@@ -1203,7 +865,7 @@
 
             $('.info-body').html($data.html);
 
-            var $modal = $('#modal-body-for-info-detail');
+            var $modal = $('#modal-body--for--info-detail');
 
             $modal.find('.item-detail-project .item-detail-text').html($row.find('td[data-key=project_id]').attr('data-value'));
             $modal.find('.item-detail-client .item-detail-text').html($row.find('td[data-key=client_name]').attr('data-value'));
@@ -1217,16 +879,16 @@
 
         });
         // 【取消】内容详情
-        $(".main-wrapper").on('click', ".item-cancel-for-detail", function() {
+        $(".main-wrapper").on('click', ".item-cancel--for--detail", function() {
             var that = $(this);
-            $('#modal-body-for-info-detail').modal('hide').on("hidden.bs.modal", function () {
+            $('#modal-body--for--info-detail').modal('hide').on("hidden.bs.modal", function () {
                 $("body").addClass("modal-open");
             });
         });
 
 
         // 【获取】内容详情-审核
-        $(".main-wrapper").on('click', ".item-modal-show-for-detail-inspected", function() {
+        $(".main-wrapper").on('click', ".item-modal-show--for--detail-inspected", function() {
             var $that = $(this);
             var $row = $that.parents('tr');
             var $datatable_wrapper = $that.closest('.datatable-wrapper');
@@ -1247,7 +909,7 @@
             $('.info-detail-title').html($that.attr('data-id'));
             $('.info-set-title').html($that.attr('data-id'));
 
-            var $modal = $('#modal-body-for-detail-inspected');
+            var $modal = $('#modal-body--for--detail-inspected');
             $modal.attr('data-datatable-id',$table_id);
 
             $modal.find('.item-detail-project .item-detail-text').html($row.find('td[data-key=project_id]').attr('data-option-name'));
@@ -1276,9 +938,9 @@
 
         });
         // 【取消】内容详情-审核
-        $(".main-wrapper").on('click', ".item-cancel-for-detail-inspected", function() {
+        $(".main-wrapper").on('click', ".item-cancel--for--detail-inspected", function() {
             var that = $(this);
-            var $modal = $('#modal-body-for-detail-inspected');
+            var $modal = $('#modal-body--for--detail-inspected');
             $modal.find('select[name="detail-inspected-result"]').prop("checked", false);
             $modal.find('select[name="detail-inspected-result"]').find('option').attr("selected",false);
             $modal.find('select[name="detail-inspected-result"]').find('option[value="-1"]').attr("selected",true);
@@ -1288,9 +950,9 @@
             });
         });
         // 【提交】内容详情-审核
-        $(".main-wrapper").on('click', ".item-summit-for-detail-inspected", function() {
+        $(".main-wrapper").on('click', ".item-summit--for--detail-inspected", function() {
             var $that = $(this);
-            var $modal = $('#modal-body-for-detail-inspected');
+            var $modal = $('#modal-body--for--detail-inspected');
             var $table_id = $modal.attr('data-datatable-id');
             var $table = $('#'+$table_id);
 
@@ -1318,8 +980,8 @@
                     {
                         layer.msg(data.msg);
 
-                        $(".item-cancel-for-detail-inspected").click();
-                        // $('#datatable-for-order-list').DataTable().ajax.reload(null,false);
+                        $(".item-cancel--for--detail-inspected").click();
+                        // $('#datatable--for--order-list').DataTable().ajax.reload(null,false);
 
                         var $result_html = '--';
                         if($inspected_result == "通过" || $inspected_result == "内部通过")
@@ -1344,7 +1006,7 @@
                         $row.find('td[data-key=inspected_result]').attr('data-value',$inspected_result);
                         $row.find('td[data-key=inspected_result]').html($result_html);
                         $row.find('td[data-key=inspected_description]').attr('data-value',$inspected_description);
-                        $row.find('.item-modal-show-for-detail-inspected').removeClass('bg-teal').addClass('bg-blue').html('再审');
+                        $row.find('.item-modal-show--for--detail-inspected').removeClass('bg-teal').addClass('bg-blue').html('再审');
 
                     }
                 },
@@ -1358,7 +1020,7 @@
 
 
         // 【推送】【显示】
-        $(".main-wrapper").on('click', ".item-modal-show-for-push", function() {
+        $(".main-wrapper").on('click', ".item-modal-show--for--push", function() {
 
             $('select[name=info-select-set-column-value]').attr("selected","");
             $('select[name=info-select-set-column-value]').find('option').eq(0).val(0).text('');
@@ -1377,15 +1039,15 @@
             $('input[name=info-select-set-operate-type]').val($that.attr('data-operate-type'));
 
 
-            $('#modal-body-for-info-select-set').find('select[name=info-select-set-column-value2]').next('.select2-container').hide();
-            $('#modal-body-for-info-select-set').find('select[name=info-select-set-column-value2]').hide();
+            $('#modal-body--for--info-select-set').find('select[name=info-select-set-column-value2]').next('.select2-container').hide();
+            $('#modal-body--for--info-select-set').find('select[name=info-select-set-column-value2]').hide();
 
-            var $option_html = $('#option-list-for-client').html();
+            var $option_html = $('#option-list--for--client').html();
             $('select[name=info-select-set-column-value]').html($option_html);
             $('select[name=info-select-set-column-value]').find("option[value='"+$that.attr("data-value")+"']").attr("selected","selected");
 
 
-            $('#modal-body-for-info-select-set').modal('show');
+            $('#modal-body--for--info-select-set').modal('show');
 
         });
 
@@ -1414,7 +1076,7 @@
                             }
                             else
                             {
-                                $('#datatable-for-order-list').DataTable().ajax.reload(null,false);
+                                $('#datatable--for--order-list').DataTable().ajax.reload(null,false);
                             }
                         },
                         'json'
@@ -1444,7 +1106,7 @@
                             }
                             else
                             {
-                                $('#datatable-for-order-list').DataTable().ajax.reload(null,false);
+                                $('#datatable--for--order-list').DataTable().ajax.reload(null,false);
                             }
                         },
                         'json'
@@ -1474,7 +1136,7 @@
                             }
                             else
                             {
-                                $('#datatable-for-order-list').DataTable().ajax.reload(null,false);
+                                $('#datatable--for--order-list').DataTable().ajax.reload(null,false);
                             }
                         },
                         'json'
@@ -1570,7 +1232,7 @@
                             }
                             else
                             {
-                                $('#datatable-for-order-list').DataTable().ajax.reload(null,false);
+                                $('#datatable--for--order-list').DataTable().ajax.reload(null,false);
                             }
                         },
                         'json'
@@ -1600,7 +1262,7 @@
                             }
                             else
                             {
-                                $('#datatable-for-order-list').DataTable().ajax.reload(null,false);
+                                $('#datatable--for--order-list').DataTable().ajax.reload(null,false);
                             }
                         },
                         'json'
@@ -1650,7 +1312,7 @@
                             }
                             else
                             {
-                                // $('#datatable-for-order-list').DataTable().ajax.reload(null,false);
+                                // $('#datatable--for--order-list').DataTable().ajax.reload(null,false);
                                 $('#'+$table_id).DataTable().ajax.reload(null,false);
                             }
                         },
@@ -1668,7 +1330,7 @@
 
             var $that = $(this);
             var $row = $that.parents('tr');
-            $('#datatable-for-order-list').find('tr').removeClass('operating');
+            $('#datatable--for--order-list').find('tr').removeClass('operating');
             $row.addClass('operating');
 
             var $index = layer.load(1, {
@@ -1751,9 +1413,9 @@
                         $html += '<br>';
 
 
-            var $option_html_for_client = $('#option-list-for-client').html();
-            var $option_html_for_delivered_result = $('#option-list-for-delivered-result').html();
-            var $option_html_for_is_distributive_condition = $('#option-list-for-is_distributive_condition-2').html();
+            var $option_html_for_client = $('#option-list--for--client').html();
+            var $option_html_for_delivered_result = $('#option-list--for--delivered-result').html();
+            var $option_html_for_is_distributive_condition = $('#option-list--for--is_distributive_condition-2').html();
 
             var $delivered_result = $('select[name="select-delivered-result"]').val();
             var $client_id = $('select[name="select-client-id"]').val();
@@ -1798,7 +1460,7 @@
                             }
                             else
                             {
-                                // $('#datatable-for-order-list').DataTable().ajax.reload(null,false);
+                                // $('#datatable--for--order-list').DataTable().ajax.reload(null,false);
 
                                 var $delivered_result = $('select[name="select-delivered-result"]').val();
                                 var $client_id = $('select[name="select-client-id"]').val();
@@ -1861,11 +1523,11 @@
             var $table_id = $datatable_wrapper.find('table').filter('[id][id!=""]').attr("id");
             var $table = $('#'+$table_id);
 
-            var $modal = $('#modal-body-for-deliver-set');
+            var $modal = $('#modal-body--for--deliver-set');
             $modal.attr('data-datatable-id',$table_id);
 
             var $row = $that.parents('tr');
-            $('#datatable-for-order-list').find('tr').removeClass('operating');
+            $('#datatable--for--order-list').find('tr').removeClass('operating');
             $row.addClass('operating');
 
             $('.deliver-set-title').html($that.attr("data-id"));
@@ -1966,8 +1628,8 @@
                         $('#deliver-set-distributed-client-list').html($html_for_distributed);
 
 
-                        var $option_html_for_client = $('#option-list-for-client').html();
-                        var $option_html_for_delivered_result = $('#option-list-for-delivered-result').html();
+                        var $option_html_for_client = $('#option-list--for--client').html();
+                        var $option_html_for_delivered_result = $('#option-list--for--delivered-result').html();
 
                     }
                 },
@@ -1976,16 +1638,16 @@
 
         });
         // 【交付】【取消】
-        $(".main-wrapper").on('click', "#item-cancel-for-deliver-set", function() {
+        $(".main-wrapper").on('click', "#item-cancel--for--deliver-set", function() {
             var that = $(this);
-            $('#modal-body-for-deliver-set').modal('hide').on("hidden.bs.modal", function () {
+            $('#modal-body--for--deliver-set').modal('hide').on("hidden.bs.modal", function () {
                 $("body").addClass("modal-open");
             });
         });
         // 【交付】确认
-        $(".main-wrapper").on('click', "#item-submit-for-deliver-set", function() {
+        $(".main-wrapper").on('click', "#item-submit--for--deliver-set", function() {
             var $that = $(this);
-            var $modal = $('#modal-body-for-deliver-set');
+            var $modal = $('#modal-body--for--deliver-set');
             var $table_id = $modal.attr('data-datatable-id');
             var $table = $('#'+$table_id);
 
@@ -2039,7 +1701,7 @@
                             {
                                 layer.msg("已交付");
                                 $table.DataTable().ajax.reload(null,false);
-                                $('#modal-body-for-deliver-set').modal('hide').on("hidden.bs.modal", function () {
+                                $('#modal-body--for--deliver-set').modal('hide').on("hidden.bs.modal", function () {
                                     $("body").addClass("modal-open");
                                 });
                             }
@@ -2069,7 +1731,7 @@
 
             var $that = $(this);
             var $row = $that.parents('tr');
-            $('#datatable-for-order-list').find('tr').removeClass('operating');
+            $('#datatable--for--order-list').find('tr').removeClass('operating');
             $row.addClass('operating');
 
             var $index = layer.load(1, {
@@ -2152,8 +1814,8 @@
                         $html += '<br>';
 
 
-                        var $option_html_for_client = $('#option-list-for-client').html();
-                        var $option_html_for_delivered_result = $('#option-list-for-delivered-result').html();
+                        var $option_html_for_client = $('#option-list--for--client').html();
+                        var $option_html_for_delivered_result = $('#option-list--for--delivered-result').html();
 
                         var $delivered_result = $('select[name="select-delivered-result"]').val();
                         var $client_id = $('select[name="select-client-id"]').val();
@@ -2218,7 +1880,7 @@
 
             var $that = $(this);
             var $row = $that.parents('tr');
-            $('#datatable-for-order-list').find('tr').removeClass('operating');
+            $('#datatable--for--order-list').find('tr').removeClass('operating');
             $row.addClass('operating');
 
             $('.distribute-set-title').html($that.attr("data-id"));
@@ -2229,7 +1891,7 @@
             $('#distribute-set-distributed-order-list').html('');
             $('#distribute-set-distributed-client-list').html('');
 
-            $('#modal-body-for-distribute-set').modal('show');
+            $('#modal-body--for--distribute-set').modal('show');
 
             var $index = layer.load(1, {
                 shade: [0.3, '#fff'],
@@ -2319,8 +1981,8 @@
                         $('#distribute-set-distributed-client-list').html($html_for_distributed);
 
 
-                        var $option_html_for_client = $('#option-list-for-client').html();
-                        var $option_html_for_delivered_result = $('#option-list-for-delivered-result').html();
+                        var $option_html_for_client = $('#option-list--for--client').html();
+                        var $option_html_for_delivered_result = $('#option-list--for--delivered-result').html();
 
                     }
                 },
@@ -2329,14 +1991,14 @@
 
         });
         // 【分发】【取消】
-        $(".main-wrapper").on('click', "#item-cancel-for-distribute-set", function() {
+        $(".main-wrapper").on('click', "#item-cancel--for--distribute-set", function() {
             var that = $(this);
-            $('#modal-body-for-distribute-set').modal('hide').on("hidden.bs.modal", function () {
+            $('#modal-body--for--distribute-set').modal('hide').on("hidden.bs.modal", function () {
                 $("body").addClass("modal-open");
             });
         });
         // 【分发】确认
-        $(".main-wrapper").on('click', "#item-submit-for-distribute-set", function() {
+        $(".main-wrapper").on('click', "#item-submit--for--distribute-set", function() {
             var $that = $(this);
             layer.msg('确定"分发"么？', {
                 time: 0
@@ -2384,7 +2046,7 @@
                             else
                             {
                                 layer.msg("已分发");
-                                $('#modal-body-for-distribute-set').modal('hide').on("hidden.bs.modal", function () {
+                                $('#modal-body--for--distribute-set').modal('hide').on("hidden.bs.modal", function () {
                                     $("body").addClass("modal-open");
                                 });
                             }
@@ -2411,13 +2073,13 @@
 
 
         // 【修改记录】【显示】
-        $(".main-wrapper").on('click', ".item-modal-show-for-modify", function() {
+        $(".main-wrapper").on('click', ".item-modal-show--for--modify", function() {
             var that = $(this);
             var $id = that.attr("data-id");
 
             TableDatatablesAjax_record.init($id);
 
-            $('#modal-body-for-modify-list').modal('show');
+            $('#modal-body--for--modify-list').modal('show');
         });
 
 
@@ -2440,7 +2102,7 @@
             $datatable_wrapper.find('input[name="bulk-id"]').prop('checked',this.checked); // checked为true时为默认显示的状态
         });
         // 【批量操作】批量-导出
-        $(".main-wrapper").on('click', '#bulk-submit-for-export', function() {
+        $(".main-wrapper").on('click', '#bulk-submit--for--export', function() {
             // var $checked = [];
             // $('input[name="bulk-id"]:checked').each(function() {
             //     $checked.push($(this).val());
@@ -2458,13 +2120,13 @@
             $ids = $ids.slice(0, -1);
             // console.log($ids);
 
-            var $url = url_build('/statistic/statistic-export-for-order-by-ids?ids='+$ids);
+            var $url = url_build('/statistic/statistic-export--for--order-by-ids?ids='+$ids);
             window.open($url);
 
 
         });
         // 【批量操作】批量-交付
-        $(".main-wrapper").on('click', '#bulk-submit-for-delivered', function() {
+        $(".main-wrapper").on('click', '#bulk-submit--for--delivered', function() {
             // var $checked = [];
             // $('input[name="bulk-id"]:checked').each(function() {
             //     $checked.push($(this).val());
@@ -2482,7 +2144,7 @@
             $ids = $ids.slice(0, -1);
             // console.log($ids);
 
-            // var $url = url_build('/statistic/statistic-export-for-order-by-ids?ids='+$ids);
+            // var $url = url_build('/statistic/statistic-export--for--order-by-ids?ids='+$ids);
             // window.open($url);
 
             layer.msg('确定"批量交付"么', {
@@ -2528,7 +2190,7 @@
                             else
                             {
                                 layer.closeAll('loading');
-                                // $('#datatable-for-order-list').DataTable().ajax.reload(null,false);
+                                // $('#datatable--for--order-list').DataTable().ajax.reload(null,false);
 
                                 $('input[name="bulk-id"]:checked').each(function() {
 
@@ -2584,7 +2246,7 @@
 
         });
         // 【批量操作】批量-导出
-        $(".main-wrapper").off('click', '.bulk-submit-for-order-export').on('click', '.bulk-submit-for-order-export', function() {
+        $(".main-wrapper").off('click', '.bulk-submit--for--order-export').on('click', '.bulk-submit--for--order-export', function() {
             // var $checked = [];
             // $('input[name="bulk-id"]:checked').each(function() {
             //     $checked.push($(this).val());
@@ -2611,7 +2273,7 @@
 
         });
         // 【批量操作】批量-交付
-        $(".main-wrapper").off('click', '.bulk-submit-for-order-delivered').on('click', '.bulk-submit-for-order-delivered', function() {
+        $(".main-wrapper").off('click', '.bulk-submit--for--order-delivered').on('click', '.bulk-submit--for--order-delivered', function() {
             // var $checked = [];
             // $('input[name="bulk-id"]:checked').each(function() {
             //     $checked.push($(this).val());
@@ -2629,7 +2291,7 @@
             $ids = $ids.slice(0, -1);
             // console.log($ids);
 
-            // var $url = url_build('/statistic/statistic-export-for-order-by-ids?ids='+$ids);
+            // var $url = url_build('/statistic/statistic-export--for--order-by-ids?ids='+$ids);
             // window.open($url);
 
             layer.msg('确定"批量交付"么', {
@@ -2675,7 +2337,7 @@
                             else
                             {
                                 layer.closeAll('loading');
-                                // $('#datatable-for-order-list').DataTable().ajax.reload(null,false);
+                                // $('#datatable--for--order-list').DataTable().ajax.reload(null,false);
 
                                 $('input[name="bulk-id"]:checked').each(function() {
 
@@ -2734,7 +2396,7 @@
 
 
         // 【交付列表】【批量操作】批量-导出
-        $(".main-wrapper").on('click', '#bulk-submit-for-order-export', function() {
+        $(".main-wrapper").on('click', '#bulk-submit--for--order-export', function() {
             // var $checked = [];
             // $('input[name="bulk-id"]:checked').each(function() {
             //     $checked.push($(this).val());
@@ -2752,12 +2414,12 @@
             $ids = $ids.slice(0, -1);
             // console.log($ids);
 
-            var $url = url_build('/statistic/statistic-export-for-order-by-ids?ids='+$ids);
+            var $url = url_build('/statistic/statistic-export--for--order-by-ids?ids='+$ids);
             window.open($url);
 
         });
         // 【交付列表】【批量操作】批量-更改导出状态
-        $(".main-wrapper").on('click', '#bulk-submit-for-exported', function() {
+        $(".main-wrapper").on('click', '#bulk-submit--for--exported', function() {
             // var $checked = [];
             // $('input[name="bulk-id"]:checked').each(function() {
             //     $checked.push($(this).val());
@@ -2826,7 +2488,7 @@
 
         });
         // 【交付列表】【批量操作】批量-导出
-        $(".main-wrapper").off('click', '.bulk-submit-for-order-export').on('click', '.bulk-submit-for-order-export', function() {
+        $(".main-wrapper").off('click', '.bulk-submit--for--order-export').on('click', '.bulk-submit--for--order-export', function() {
             // var $checked = [];
             // $('input[name="bulk-id"]:checked').each(function() {
             //     $checked.push($(this).val());
@@ -2849,7 +2511,7 @@
 
         });
         // 【交付列表】【批量操作】批量-更改导出状态
-        $(".main-wrapper").off('click', '.bulk-submit-for-order-exported').on('click', '.bulk-submit-for-order-exported', function() {
+        $(".main-wrapper").off('click', '.bulk-submit--for--order-exported').on('click', '.bulk-submit--for--order-exported', function() {
             // var $checked = [];
             // $('input[name="bulk-id"]:checked').each(function() {
             //     $checked.push($(this).val());
@@ -2951,10 +2613,10 @@
 
         $('.select2-project').each(function() {
             // 获取当前 Select2 元素的 jQuery 对象
-            const $select = $(this);
+            var $select = $(this);
 
             // 动态查找最近的模态框父容器
-            const $modalWrapper = $select.closest('.modal-wrapper');
+            var $modalWrapper = $select.closest('.modal-wrapper');
 
             // 初始化 Select2
             $select.select2({
@@ -2992,4 +2654,61 @@
 
 
     });
+
+    function update_order_row($row,$order)
+    {
+        // 派车日期
+        var $assign_date = $order.assign_date;
+        var $assign_time_value = '';
+        if($assign_date)
+        {
+            var $date = new Date($assign_date*1000);
+            var $year = $date.getFullYear();
+            var $month = ('00'+($date.getMonth()+1)).slice(-2);
+            var $day = ('00'+($date.getDate())).slice(-2);
+            $assign_time_value = $year+'-'+$month+'-'+$day;
+        }
+        $row.find('[data-key="assign_date"]').attr('data-value',$assign_time_value).html($assign_time_value);
+
+        // 任务日期
+        var $task_date = $order.task_date;
+        var $task_time_value = '';
+        if($assign_date)
+        {
+            var $date = new Date($task_date*1000);
+            var $year = $date.getFullYear();
+            var $month = ('00'+($date.getMonth()+1)).slice(-2);
+            var $day = ('00'+($date.getDate())).slice(-2);
+            $task_time_value = $year+'-'+$month+'-'+$day;
+        }
+        $row.find('[data-key="task_date"]').attr('data-value',$task_time_value).html($task_time_value);
+
+        // 费用
+        var $financial_expense_total = parseFloat($order.financial_expense_total);
+        $row.find('[data-key="financial_expense_total"]').attr('data-value',$financial_expense_total).html($financial_expense_total);
+
+        // 订单扣款
+        var $financial_deduction_total = parseFloat($order.financial_deduction_total);
+        $row.find('[data-key="financial_deduction_total"]').attr('data-value',$financial_deduction_total).html($financial_deduction_total);
+
+        // 已收款
+        var $financial_income_total = parseFloat($order.financial_income_total);
+        $row.find('[data-key="financial_income_total"]').attr('data-value',$financial_income_total).html($financial_income_total);
+
+        // 应收款
+        var $financial_income_should = parseFloat($order.freight_amount) - parseFloat($order.financial_deduction_total);
+        $financial_income_should = parseFloat($financial_income_should);
+        $row.find('[data-key="financial_income_should"]').attr('data-value',$financial_income_should).html($financial_income_should);
+
+        // 待收款
+        var $financial_income_pending = parseFloat($order.freight_amount) - parseFloat($order.financial_deduction_total) - parseFloat($order.financial_income_total);
+        $financial_income_pending = parseFloat($financial_income_pending);
+        $row.find('[data-key="financial_income_pending"]').attr('data-value',$financial_income_pending).html($financial_income_pending);
+
+        // 利润
+        var $financial_profit = parseFloat($order.freight_amount) - parseFloat($order.financial_deduction_total) - parseFloat($order.financial_expense_total);
+        $financial_profit = parseFloat($financial_profit);
+        $row.find('[data-key="financial_profit"]').attr('data-value',$financial_profit).html($financial_profit);
+
+    }
 </script>

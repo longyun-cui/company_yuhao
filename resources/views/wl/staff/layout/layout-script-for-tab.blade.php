@@ -189,7 +189,7 @@
                 }
                 else if($id == "datatable-order-list")
                 {
-                    Datatable_for_Order_List($config.id);
+                    Datatable_for_Order_List('#'+$config.id);
                 }
                 else if($id == "datatable-fee-list")
                 {

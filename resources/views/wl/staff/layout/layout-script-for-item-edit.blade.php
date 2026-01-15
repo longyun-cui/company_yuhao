@@ -2253,7 +2253,7 @@
     //
     function form_reset($form_id)
     {
-        console.log('form_reset');
+        console.log($form_id+'.form_reset');
         var $form = $($form_id);
         // $form.find('.select2-container').remove();
         $form.find('textarea.form-control, input.form-control, select').each(function () {

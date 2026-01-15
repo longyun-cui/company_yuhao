@@ -1,13 +1,13 @@
 <script>
-    var Datatable_Order_Operation_Record = function ($id) {
-        var datatableAjax_order_operation_record = function ($id) {
+    var Datatable__for__Order_Item_Operation_Record_List = function ($id) {
+        var datatableAjax__order_item_operation_record = function ($id) {
 
-            var dt_order_operation_record = $('#datatable-order-operation-record');
-            if($.fn.DataTable.isDataTable(dt_order_operation_record))
+            var dt__order_item_operation_record = $('#datatable--for--order-item-operation-record-list');
+            if($.fn.DataTable.isDataTable(dt__order_item_operation_record))
             {
                 // 已经初始化
                 console.log('#datatable-order-operation-record // 已经初始化');
-                $(dt_order_operation_record).DataTable().destroy();
+                $(dt__order_item_operation_record).DataTable().destroy();
             }
             else
             {
@@ -15,17 +15,17 @@
                 console.log('#datatable-order-operation-record // 未初始化');
             }
 
-            var ajax_datatable_order_operation_record = dt_order_operation_record.DataTable({
+            var ajax_datatable_order_operation_record = dt__order_item_operation_record.DataTable({
                 "retrieve": true,
                 "destroy": true,
 //                "aLengthMenu": [[20, 50, 200, 500, -1], ["20", "50", "200", "500", "全部"]],
-                "aLengthMenu": [[10, 50], ["20", "50"]],
+                "aLengthMenu": [[50], ["50"]],
                 "bAutoWidth": false,
                 "processing": true,
                 "serverSide": true,
                 "searching": false,
                 "ajax": {
-                    'url': "/v1/operate/order/item-operation-record-datatable-query?id="+$id,
+                    'url': "/o1/order/item-operation-record-list/datatable-query?id="+$id,
                     "type": 'POST',
                     "dataType" : 'json',
                     "data": function (d) {
@@ -77,11 +77,13 @@
                         "width": "80px",
                         "orderable": false,
                         render: function(data, type, row, meta) {
-                            if(data == 1) return '<small class="btn-xs bg-green">跟进记录</small>';
+                            if(data == 1) return '<small class="btn-xs bg-green">跟进</small>';
                             else if(data == 11) return '<small class="btn-xs bg-teal">用户信息</small>';
                             else if(data == 21) return '<small class="btn-xs bg-teal">客户回访</small>';
                             else if(data == 31) return '<small class="btn-xs bg-yellow">上门状态</small>';
-                            else if(data == 88) return '<small class="btn-xs bg-red">成交记录</small>';
+                            else if(data == 71) return '<small class="btn-xs bg-purple">行程</small>';
+                            else if(data == 81) return '<small class="btn-xs bg-red">费用</small>';
+                            else if(data == 88) return '<small class="btn-xs bg-red">成交</small>';
                             else return '有误';
                         }
                     },
@@ -192,7 +194,7 @@
 
         };
         return {
-            init: datatableAjax_order_operation_record
+            init: datatableAjax__order_item_operation_record
         }
     }();
 </script>
