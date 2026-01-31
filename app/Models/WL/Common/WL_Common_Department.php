@@ -1,5 +1,6 @@
 <?php
 namespace App\Models\WL\Common;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,20 +17,28 @@ class WL_Common_Department extends Model
         'department_active', 'department_status', 'department_result',
         'department_category', 'department_type', 'department_group',
 
-        'rank',
-        'version',
+        'login_number', 'password', 'wx_union_id',
 
-        'owner_active',
-        'owner_id', 'creator_id', 'updater_id', 'user_id', 'belong_id', 'source_id', 'object_id', 'p_id', 'parent_id',
+        'owner_id', 'creator_id', 'updater_id', 'user_id', 'belong_id', 'source_id', 'object_id', 'p_id', 'parent_id', 'admin_id',
 
-        'leader_id',
+        'name', 'username', 'nickname', 'true_name', 'short_name', 'alias_name',
+        'title', 'subtitle', 'description', 'content', 'remark', 'tag', 'custom', 'custom2', 'custom3',
+        'attachment',
+        'attachment_name',
+        'attachment_scr',
+        'portrait_img',
+        'cover_pic',
+
+        'contact', 'contact_name', 'contact_phone', 'contact_email', 'contact_wx_id', 'contact_wx_qr_code_img', 'contact_address',
+        'linkman', 'linkman_name', 'linkman_phone', 'linkman_email', 'linkman_wx_id', 'linkman_wx_qr_code_img', 'linkman_address',
+
+        'company_id',
         'superior_department_id',
+        'leader_id',
 
         'name', 'username', 'nickname', 'true_name', 'short_name', 'alias_name',
         'title', 'subtitle', 'description', 'content', 'remark', 'tag', 'custom', 'custom2', 'custom3', 'attachment', 'portrait_img', 'cover_pic',
 
-        'contact', 'contact_name', 'contact_phone', 'contact_email', 'contact_wx_id', 'contact_wx_qr_code_img', 'contact_address',
-        'linkman', 'linkman_name', 'linkman_phone', 'linkman_email', 'linkman_wx_id', 'linkman_wx_qr_code_img', 'linkman_address',
 
         'visit_num', 'share_num', 'favor_num',  'follow_num', 'fans_num',
     ];
@@ -74,6 +83,12 @@ class WL_Common_Department extends Model
 
 
 
+    // 创作者
+    function company_er()
+    {
+        return $this->belongsTo('App\Models\WL\Common\WL_Common_Company','company_id','id');
+    }
+
     // 【一对多】下级部门
     function subordinate_department_list()
     {
@@ -94,7 +109,7 @@ class WL_Common_Department extends Model
     }
 
 
-    // 【一对多】部门（大区）员工
+    // 【一对多】部门员工
     function department_staff_list()
     {
         return $this->hasMany('App\Models\WL\Common\WL_Common_Staff','department_id','id');
@@ -103,81 +118,10 @@ class WL_Common_Department extends Model
 
 
 
-    // 【多对多】审核人关联的项目
-    function pivot_department_user()
-    {
-        return $this->belongsToMany('App\Models\WL\Common\WL_Common_Staff','dk_pivot_user_department','department_id','user_id');
-//            ->wherePivot('relation_type', 1);
-//            ->withTimestamps();
-    }
-
-
-    // 多对多 审核人关联的项目
-    function pivot_department_project()
-    {
-        return $this->belongsToMany('App\Models\WL\Common\WL_Common_Project','dk_pivot_team_project','team_id','project_id');
-//            ->wherePivot('relation_type', 1);
-//            ->withTimestamps();
-    }
-
-
     // 工单
     function order_list_for_department()
     {
         return $this->hasMany('App\Models\WL\Common\WL_Common_Order','department_id','id');
-    }
-
-
-
-
-    // 驾驶员
-    function driver_er()
-    {
-        return $this->belongsTo('App\Models\WL\Common\WL_Common_Driver','driver_id','id');
-    }
-
-
-
-
-    // 车辆订单
-    function car_order_list()
-    {
-        return $this->hasMany('App\Models\DK\YH_Order','car_id','id');
-    }
-    // 车挂订单
-    function trailer_order_list()
-    {
-        return $this->hasMany('App\Models\DK\YH_Order','trailer_id','id');
-    }
-    // 车辆订单【当前】
-    function car_order_list_for_current()
-    {
-        return $this->hasMany('App\Models\DK\YH_Order','car_id','id');
-    }
-    // 车挂订单【当前】
-    function trailer_order_list_for_current()
-    {
-        return $this->hasMany('App\Models\DK\YH_Order','trailer_id','id');
-    }
-    // 车辆订单【已完成】
-    function car_order_list_for_completed()
-    {
-        return $this->hasMany('App\Models\DK\YH_Order','car_id','id');
-    }
-    // 车挂订单【已完成】
-    function trailer_order_list_for_completed()
-    {
-        return $this->hasMany('App\Models\DK\YH_Order','trailer_id','id');
-    }
-    // 车辆订单【未来】
-    function car_order_list_for_future()
-    {
-        return $this->hasMany('App\Models\DK\YH_Order','car_id','id');
-    }
-    // 车挂订单【未来】
-    function trailer_order_list_for_future()
-    {
-        return $this->hasMany('App\Models\DK\YH_Order','trailer_id','id');
     }
 
 
@@ -190,70 +134,4 @@ class WL_Common_Department extends Model
     }
 
 
-
-
-    // 其他人的
-    function pivot_item_relation()
-    {
-        return $this->hasMany('App\Models\DK\YH_Pivot_User_Item','item_id','id');
-    }
-
-    // 其他人的
-    function others()
-    {
-        return $this->hasMany('App\Models\DK\YH_Pivot_User_Item','item_id','id');
-    }
-
-    // 收藏
-    function collections()
-    {
-        return $this->hasMany('App\Models\DK\YH_Pivot_User_Collection','item_id','id');
-    }
-
-    // 转发内容
-    function forward_item()
-    {
-        return $this->belongsTo('App\Models\DK\YH_Item','item_id','id');
-    }
-
-
-
-
-    // 与我相关的话题
-    function pivot_collection_item_users()
-    {
-        return $this->belongsToMany('App\Models\WL\WL_Common_Staff','pivot_user_item','item_id','user_id');
-    }
-
-
-
-
-    // 一对多 关联的目录
-    function menu()
-    {
-        return $this->belongsTo('App\Models\DK\YH_Menu','menu_id','id');
-    }
-
-    // 多对多 关联的目录
-    function menus()
-    {
-        return $this->belongsToMany('App\Models\DK\YH_Menu','pivot_menu_item','item_id','menu_id');
-    }
-
-
-    /**
-     * 获得此文章的所有评论。
-     */
-    public function comments()
-    {
-        return $this->morphMany('App\Models\Comment', 'itemable');
-    }
-
-    /**
-     * 获得此文章的所有标签。
-     */
-    public function tags()
-    {
-        return $this->morphToMany('App\Models\Tag', 'taggable');
-    }
 }

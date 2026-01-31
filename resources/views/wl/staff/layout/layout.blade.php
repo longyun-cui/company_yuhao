@@ -85,6 +85,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     {{--<link rel="stylesheet" href="https://cdn.bootcss.com/select2/4.0.5/css/select2.min.css">--}}
     <link rel="stylesheet" href="{{ asset('/lib/css/select2-4.0.5.min.css') }}">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
 
     <link rel="stylesheet" href="{{ asset('/resource/common/css/common.css') }}" media="all" />
     <link rel="stylesheet" href="{{ asset('/resource/common/css/AdminLTE/index.css') }}">
@@ -182,14 +184,14 @@ desired effect
 <script src="{{ asset('/resource/component/js/jquery.form-4.2.2.min.js') }}"></script>
 
 {{--<script src="https://cdn.bootcss.com/moment.js/2.19.0/moment.min.js"></script>--}}
-<script src="{{ asset('/resource/component/js/moment-2.19.0.min.js') }}"></script>
-<script src="{{ asset('/resource/component/js/moment-2.19.0-locale-zh-cn.js') }}"></script>
-<script src="{{ asset('/resource/component/js/moment-2.19.0-locale-ko.js') }}"></script>
+<script src="{{ asset('/resource/component/js/moment-2.19.0-with-locales.min.js') }}"></script>
+{{--<script src="{{ asset('/resource/component/js/moment-2.19.0-locale-zh-cn.js') }}"></script>--}}
+{{--<script src="{{ asset('/resource/component/js/moment-2.19.0-locale-ko.js') }}"></script>--}}
 
 {{--<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>--}}
 {{--<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>--}}
 <script src="{{ asset('/resource/component/js/bootstrap-datetimepicker-4.17.47.min.js') }}"></script>
-<script src="{{ asset('/resource/component/js/bootstrap-datetimepicker.zh-CN.js') }}" charset="UTF-8"></script>
+{{--<script src="{{ asset('/resource/component/js/bootstrap-datetimepicker.zh-CN.js') }}" charset="UTF-8"></script>--}}
 <script src="{{ asset('/resource/component/js/bootstrap-datepicker-1.9.0.min.js') }}"></script>
 <script src="{{ asset('/resource/component/js/bootstrap-datepicker-1.9.0.zh-CN.min.js') }}"></script>
 
@@ -207,6 +209,9 @@ desired effect
 
 {{--<script src="{{ asset('/resource/component/js/echarts-3.7.2.min.js') }}"></script>--}}
 <script src="{{ asset('/resource/component/js/echarts-5.4.1.min.js') }}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/zh.js"></script>
 
 
 {{--layout-script--}}

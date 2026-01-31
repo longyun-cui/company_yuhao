@@ -23,6 +23,8 @@ class WL_Common_Staff extends Authenticatable
         'staff_active', 'staff_status', 'staff_result',
         'staff_category', 'staff_type',  'user_group',
 
+        'staff_position',
+
         'login_number', 'password', 'wx_union_id',
 
         'owner_id', 'creator_id', 'updater_id', 'user_id', 'belong_id', 'source_id', 'object_id', 'p_id', 'parent_id',
@@ -45,6 +47,7 @@ class WL_Common_Staff extends Authenticatable
         'sub_team_id',
         'group_id',
 
+        'leader_id',
         'team_leader_id',
         'sub_team_leader_id',
         'group_leader_id',
@@ -142,6 +145,12 @@ class WL_Common_Staff extends Authenticatable
 
 
 
+    // 公司
+    function company_er()
+    {
+        return $this->belongsTo('App\Models\WL\Common\WL_Common_Company','company_id','id');
+    }
+
     // 部门
     function department_er()
     {
@@ -163,6 +172,13 @@ class WL_Common_Staff extends Authenticatable
     function group_er()
     {
         return $this->belongsTo('App\Models\WL\Common\WL_Common_Team','group_id','id');
+    }
+
+
+    // 【一对一】负责人
+    function leader()
+    {
+        return $this->belongsTo('App\Models\WL\Common\WL_Common_Staff','leader_id','id');
     }
 
 

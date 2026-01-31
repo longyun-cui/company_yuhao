@@ -203,9 +203,9 @@
                 </li>
 
                 <li class="dropdown- notifications-alert">
-                    <a href="javascript:void(0);" class="item-create-modal-show"
-                       data-form-id="form-for-order-edit"
-                       data-modal-id="modal-for-order-edit"
+                    <a href="javascript:void(0);" class="modal-show--for--order-item-create"
+                       data-form-id="form--for--order-item-edit"
+                       data-modal-id="modal--for--order-item-edit"
                        data-title="添加工单"
                     >
                         <i class="fa fa-plus text-yellow"></i>

@@ -1,5 +1,6 @@
 <script>
-
+    // 设置中文
+    moment.locale('zh-cn');
 
     var $wl_common_department_list = {!! json_encode($wl_common_department_list, JSON_HEX_TAG)!!};
     // console.log($wl_common_department_list);
@@ -25,25 +26,84 @@
         // localStorage.removeItem('last_delivery_id');
 
         // setInterval(query_last_delivery, 60000);
+        // $("#datepicker").flatpickr({
+        //     locale: "zh",  // 使用中文
+        //     dateFormat: "Y-m-d H:i",  // 日期时间格式
+        //     enableTime: true  // 启用时间选择
+        // });
 
 
-
-
+        // $('.time-picker').flatpickr({
+        //     locale: "zh",  // 使用中文
+        //     dateFormat: "Y-m-d H:i",  // 日期时间格式
+        //     enableTime: true,  // 启用时间选择
+        //     time_24hr: true, // 使用24小时制
+        // });
         $('.time-picker').datetimepicker({
-            locale: moment.locale('zh-cn'),
-            format: 'YYYY-MM-DD HH:mm', // 同时包含日期和时间
-            sideBySide: true,           // 并排显示日期和时间选择器
-            stepping: 1,               // 时间步长（可选，例如15分钟）
+            // 1. 格式控制是否显示时间
+            format: 'YYYY-MM-DD HH:mm',  // 包含HH:mm自动启用时间选择
+            // format: 'YYYY-MM-DD',      // 只显示日期
+
+            // 2. 显示模式
+            sideBySide: true,           // ✅ 并排显示日期和时间选择器
+            inline: false,              // 内联模式
+
+            // 3. 工具栏按钮
+            showTodayButton: true,      // 今天按钮
+            showClear: true,            // 清除按钮
+            showClose: true,            // 关闭按钮
+
+            // 4. 语言
+            locale: moment.locale('zh-cn'),          // 中文
+
+            // 6. 工具栏位置
+            toolbarPlacement: 'bottom', // 'top' 或 'bottom'
+
             ignoreReadonly: true
         });
+        // $('.time-picker').datetimepicker({
+        //     format: 'YYYY-MM-DD HH:mm', // 同时包含日期和时间
+        //     locale: moment.locale('zh-cn'),
+        //
+        //     // 显示工具栏按钮
+        //     showTodayButton: true,       // 显示"今天"按钮
+        //     showClear: true,            // 显示"清除"按钮
+        //     showClose: true,            // 显示"关闭"按钮
+        //
+        //     // 时间选择相关 - 启用时间选择会显示确定/取消按钮
+        //     timePicker: true,           // 启用时间选择
+        //     toolbarPlacement: 'bottom',  // 工具栏位置: 'top', 'bottom'
+        //
+        //     sideBySide: true,           // 并排显示日期和时间选择器
+        //     stepping: 1,               // 时间步长（可选，例如15分钟）
+        //     ignoreReadonly: true
+        // });
+
         $('.date-picker').datetimepicker({
-            locale: moment.locale('zh-cn'),
-            format: "YYYY-MM-DD",
+            // 1. 格式控制是否显示时间
+            format: 'YYYY-MM-DD',  // 包含HH:mm自动启用时间选择
+            // format: 'YYYY-MM-DD',      // 只显示日期
+
+            // 2. 显示模式
+            sideBySide: true,           // ✅ 并排显示日期和时间选择器
+            inline: false,              // 内联模式
+
+            // 3. 工具栏按钮
+            showTodayButton: true,      // 今天按钮
+            showClear: true,            // 清除按钮
+            showClose: true,            // 关闭按钮
+
+            // 4. 语言
+            locale: moment.locale('zh-cn'),          // 中文
+
+            // 6. 工具栏位置
+            toolbarPlacement: 'bottom', // 'top' 或 'bottom'
+
             ignoreReadonly: true
         });
         $('.month-picker').datetimepicker({
-            locale: moment.locale('zh-cn'),
             format: "YYYY-MM",
+            locale: moment.locale('zh-cn'),
             ignoreReadonly: true
         });
 
@@ -63,101 +123,6 @@
 
 
 
-        $('.select2-department').select2({
-            ajax: {
-                url: "{{ url('/v1/operate/select2/select2-department') }}",
-                type: 'post',
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        _token: $('meta[name="_token"]').attr('content'),
-                        department_category: this.data('department-category'),
-                        department_type: this.data('department-type'),
-                        keyword: params.term, // search term
-                        page: params.page
-                    };
-                },
-                processResults: function (data, params) {
-
-                    params.page = params.page || 1;
-                    return {
-                        results: data,
-                        pagination: {
-                            more: (params.page * 30) < data.total_count
-                        }
-                    };
-                },
-                cache: true
-            },
-            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-            minimumInputLength: 0,
-            theme: 'classic'
-        });
-
-        $('.select2-team').select2({
-            ajax: {
-                url: "{{ url('/v1/operate/select2/select2-team') }}",
-                type: 'post',
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        _token: $('meta[name="_token"]').attr('content'),
-                        team_category: this.data('team-category'),
-                        team_type: this.data('team-type'),
-                        keyword: params.term, // search term
-                        page: params.page
-                    };
-                },
-                processResults: function (data, params) {
-
-                    params.page = params.page || 1;
-                    return {
-                        results: data,
-                        pagination: {
-                            more: (params.page * 30) < data.total_count
-                        }
-                    };
-                },
-                cache: true
-            },
-            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-            minimumInputLength: 0,
-            theme: 'classic'
-        });
-
-        $('.select2-staff').select2({
-            ajax: {
-                url: "{{ url('/v1/operate/select2/select2-staff') }}",
-                type: 'post',
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        _token: $('meta[name="_token"]').attr('content'),
-                        staff_category: this.data('staff-category'),
-                        staff_type: this.data('staff-type'),
-                        keyword: params.term, // search term
-                        page: params.page
-                    };
-                },
-                processResults: function (data, params) {
-
-                    params.page = params.page || 1;
-                    return {
-                        results: data,
-                        pagination: {
-                            more: (params.page * 30) < data.total_count
-                        }
-                    };
-                },
-                cache: true
-            },
-            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-            minimumInputLength: 0,
-            theme: 'classic'
-        });
 
         $('.select2-car').select2({
         // $(".main-content").on('select2', ".select2-car", function() {
@@ -200,34 +165,32 @@
             placeholder: "搜索或选择车辆..."
         });
 
-        $(".select2-car1").each(function() {
-            var $select = $(this);
 
-            // 获取模态框的正确方式
-            var $modal = $select.data('modal')
-                ? $($select.data('modal'))
-                : $(document.body);
 
-            // 确保模态框存在
-            if ($modal.length === 0) {
-                $modal = $(document.body);
+
+
+        // 公司
+        $('.select2--company').each(function() {
+            var $this = $(this);
+
+            var $dropdownParent = $(document.body);
+            var $modalSelector = $this.data('modal');
+            if ($modalSelector)
+            {
+                $dropdownParent = $($modalSelector);
             }
 
-            // 获取模态框的 DOM 元素
-            var modalElement = $modal.get(0);
-
-            $select.select2({
+            $this.select2({
                 ajax: {
-                    // 保持原有配置不变
-                    url: "{{ url('/v1/operate/select2/select2-car') }}",
+                    url: "{{ url('/o1/select2/select2--company') }}",
                     type: 'post',
                     dataType: 'json',
                     delay: 250,
                     data: function (params) {
                         return {
                             _token: $('meta[name="_token"]').attr('content'),
-                            contact_category: $select.data('contact-category'),
-                            contact_type: $select.data('contact-type'),
+                            item_category: this.data('item-category'),
+                            item_type: this.data('item-type'),
                             keyword: params.term,
                             page: params.page
                         };
@@ -244,15 +207,682 @@
                     cache: true
                 },
                 escapeMarkup: function (markup) { return markup; },
-                dropdownParent: modalElement,  // 使用 DOM 元素而非选择器
+                dropdownParent: $dropdownParent,
                 minimumInputLength: 0,
-                // width: '100%',
+                theme: 'classic'
+            });
+
+
+            $this.change(function() {
+
+                var $company_id = $(this).val();
+
+                var $department_target = $(this).data('department-target');
+                $($department_target).val(null).trigger('change');
+                $($department_target).data('company-id',$company_id);
+
+                var $team_target = $(this).data('team-target');
+                $($team_target).val(null).trigger('change');
+                $($team_target).data('company-id',$company_id);
+
+                var $staff_target = $(this).data('staff-target');
+                $($staff_target).val(null).trigger('change');
+                $($staff_target).data('company-id',$company_id);
+
+            });
+        });
+        // 部门
+        $('.select2--department').each(function() {
+            var $this = $(this);
+
+            var $dropdownParent = $(document.body);
+            var $modalSelector = $this.data('modal');
+            if ($modalSelector)
+            {
+                $dropdownParent = $($modalSelector);
+            }
+
+            $this.select2({
+                ajax: {
+                    url: "{{ url('/o1/select2/select2--department') }}",
+                    type: 'post',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            _token: $('meta[name="_token"]').attr('content'),
+                            department_category: $(this.data('department-category')).find('input[type="radio"]:checked').val(),
+                            item_category: this.data('item-category'),
+                            item_type: this.data('item-type'),
+                            company_id: this.data('company-id'),
+                            keyword: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) { return markup; },
+                dropdownParent: $dropdownParent,
+                minimumInputLength: 0,
+                theme: 'classic'
+            });
+
+
+            $this.change(function() {
+
+                var $department_id = $(this).val();
+
+                var $team_target = $(this).data('team-target');
+                $($team_target).val(null).trigger('change');
+                $($team_target).data('department-id',$department_id);
+
+                var $staff_target = $(this).data('staff-target');
+                $($staff_target).val(null).trigger('change');
+                $($staff_target).data('department-id',$department_id);
+            });
+        });
+        // 团队
+        $('.select2--team').each(function() {
+            var $this = $(this);
+
+            var $dropdownParent = $(document.body);
+            var $modalSelector = $this.data('modal');
+            if ($modalSelector)
+            {
+                $dropdownParent = $($modalSelector);
+            }
+
+            $this.select2({
+                ajax: {
+                    url: "{{ url('/o1/select2/select2--team') }}",
+                    type: 'post',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            _token: $('meta[name="_token"]').attr('content'),
+                            item_category: this.data('item-category'),
+                            item_type: this.data('item-type'),
+                            department_id: this.data('department-id'),
+                            keyword: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) { return markup; },
+                dropdownParent: $dropdownParent,
+                minimumInputLength: 0,
+                theme: 'classic'
+            });
+
+
+            $this.change(function() {
+
+                var $team_id = $(this).val();
+
+                var $staff_target = $(this).data('staff-target');
+                $($staff_target).val(null).trigger('change');
+                $($staff_target).data('team-id',$team_id);
+            });
+        });
+        // 员工
+        $('.select2--staff').each(function() {
+            var $this = $(this);
+
+            var $dropdownParent = $(document.body);
+            var $modalSelector = $this.data('modal');
+            if ($modalSelector)
+            {
+                $dropdownParent = $($modalSelector);
+            }
+
+            $this.select2({
+                ajax: {
+                    url: "{{ url('/o1/select2/select2--staff') }}",
+                    type: 'post',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            _token: $('meta[name="_token"]').attr('content'),
+                            item_category: this.data('item-category'),
+                            item_type: this.data('item-type'),
+                            department_id: this.data('department-id'),
+                            team_id: this.data('team-id'),
+                            keyword: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) { return markup; },
+                dropdownParent: $dropdownParent,
+                minimumInputLength: 0,
+                theme: 'classic'
+            });
+        });
+
+
+        // 车队
+        $('.select2--motorcade').each(function() {
+            var $this = $(this);
+
+            var $dropdownParent = $(document.body);
+            var $modalSelector = $this.data('modal');
+            if ($modalSelector)
+            {
+                $dropdownParent = $($modalSelector);
+            }
+
+            $this.select2({
+                ajax: {
+                    url: "{{ url('/o1/select2/select2--motorcade') }}",
+                    type: 'post',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            _token: $('meta[name="_token"]').attr('content'),
+                            item_category: this.data('item-category'),
+                            item_type: this.data('item-type'),
+                            keyword: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) { return markup; },
+                dropdownParent: $dropdownParent,
+                minimumInputLength: 0,
+                theme: 'classic'
+            });
+        });
+        // 车辆
+        $('.select2--car').each(function() {
+            var $this = $(this);
+
+            var $dropdownParent = $(document.body);
+            var $modalSelector = $this.data('modal');
+            if ($modalSelector)
+            {
+                $dropdownParent = $($modalSelector);
+            }
+
+            $this.select2({
+                ajax: {
+                    url: "{{ url('/o1/select2/select2--car') }}",
+                    type: 'post',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            _token: $('meta[name="_token"]').attr('content'),
+                            item_category: this.data('item-category'),
+                            item_type: this.data('item-type'),
+                            car_type: this.data('car-type'),
+                            motorcade_id: this.data('motorcade-id'),
+                            keyword: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                templateSelection: function(data, container) {
+                    // 检查是否为有效选中项（避免空数据打印）
+                    if (data.id && data.text)
+                    {
+                        console.log("Selected:", data.id, data.text);
+                        console.log(data);
+                    }
+                    if(data.driver_er)
+                    {
+                        $(data.element).data("car-id",data.id);
+                        $(data.element).data("trailer-id",data.trailer_id);
+                        $(data.element).data("driver-id",data.driver_id);
+                        $(data.element).data("driver-name",data.driver_er.driver_name);
+                        $(data.element).data("driver-phone",data.driver_er.driver_phone);
+                        $(data.element).data("copilot-id",data.copilot_id);
+                        $(data.element).data("copilot-name",data.driver_er.copilot_name);
+                        $(data.element).data("copilot-phone",data.driver_er.copilot_phone);
+                    }
+                    else
+                    {
+                        $(data.element).data("car-id",0);
+                        $(data.element).data("trailer-id",0);
+                        $(data.element).data("driver-id",0);
+                        $(data.element).data("driver-name",'');
+                        $(data.element).data("driver-phone",'');
+                        $(data.element).data("copilot-id",0);
+                        $(data.element).data("copilot-name",'');
+                        $(data.element).data("copilot-phone",'');
+                    }
+                    return data.text;
+                },
+                escapeMarkup: function (markup) { return markup; },
+                dropdownParent: $dropdownParent,
+                minimumInputLength: 0,
+                theme: 'classic'
+            });
+        });
+        // 司机
+        $('.select2--driver').each(function() {
+            var $this = $(this);
+
+            var $dropdownParent = $(document.body);
+            var $modalSelector = $this.data('modal');
+            if ($modalSelector)
+            {
+                $dropdownParent = $($modalSelector);
+            }
+
+            $this.select2({
+                ajax: {
+                    url: "{{ url('/o1/select2/select2--driver') }}",
+                    type: 'post',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            _token: $('meta[name="_token"]').attr('content'),
+                            item_category: this.data('item-category'),
+                            item_type: this.data('item-type'),
+                            company_id: this.data('company-id'),
+                            department_id: this.data('department-id'),
+                            team_id: this.data('team-id'),
+                            motorcade_id: this.data('motorcade-id'),
+                            keyword: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) { return markup; },
+                dropdownParent: $dropdownParent,
+                minimumInputLength: 0,
+                theme: 'classic'
+            });
+        });
+
+
+        // 客户
+        $('.select2--client').each(function() {
+            var $this = $(this);
+
+            var $dropdownParent = $(document.body);
+            var $modalSelector = $this.data('modal');
+            if ($modalSelector)
+            {
+                $dropdownParent = $($modalSelector);
+            }
+
+            $this.select2({
+                ajax: {
+                    url: "{{ url('/o1/select2/select2--client') }}",
+                    type: 'post',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            _token: $('meta[name="_token"]').attr('content'),
+                            item_category: this.data('item-category'),
+                            item_type: this.data('item-type'),
+                            keyword: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) { return markup; },
+                dropdownParent: $dropdownParent,
+                minimumInputLength: 0,
+                theme: 'classic'
+            });
+        });
+        // 项目
+        $('.select2--project').each(function() {
+            var $this = $(this);
+
+            var $dropdownParent = $(document.body);
+            var $modalSelector = $this.data('modal');
+            if ($modalSelector)
+            {
+                $dropdownParent = $($modalSelector);
+            }
+
+            $this.select2({
+                ajax: {
+                    url: "{{ url('/o1/select2/select2--project') }}",
+                    type: 'post',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            _token: $('meta[name="_token"]').attr('content'),
+                            item_category: this.data('item-category'),
+                            item_type: this.data('item-type'),
+                            keyword: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) { return markup; },
+                dropdownParent: $dropdownParent,
+                minimumInputLength: 0,
                 theme: 'classic'
             });
         });
 
 
     });
+
+
+
+
+
+    // 表单初始化
+    function form_reset($form_id)
+    {
+        console.log($form_id+'.form_reset');
+        var $form = $($form_id);
+        // $form.find('.select2-container').remove();
+        $form.find('textarea.form-control, input.form-control, select').each(function () {
+            $(this).val("");
+            $(this).val($(this).data('default'));
+        });
+
+        $form.find('select option').prop("selected",false);
+        $form.find('select').find('option:eq(0)').prop('selected', true);
+
+
+        // $form.find(".select2-box").val(-1).trigger("change");
+        // $form.find(".select2-box").val("-1").trigger("change");
+        // selectFirstOption($form_id + " .select2-box");
+        $.each( $form.find(".select2-box"), function(index, element) {
+            select2FirstOptionSelected(element);
+        });
+
+        // $form.find(".select2-box-c").val(-1).trigger("change");
+        // $form.find(".select2-box-c").val("-1").trigger("change");
+        // selectFirstOption($form_id + " .select2-box-c");
+        $.each( $form.find(".select2-box-c"), function(index, element) {
+            select2FirstOptionSelected(element);
+        });
+
+
+        $.each( $form.find(".select2-reset"), function(index, element) {
+            select2FirstOptionSelected(element);
+        });
+
+
+        $form.find(".select2-multi-box-c").val([]).trigger('change');
+        $form.find(".select2-multi-box-c").val(null).trigger('change');
+        $form.find(".select2-multi-box-c").empty().trigger('change');
+    }
+
+
+    //
+    function selectFirstOption(selector)
+    {
+        var $select = $(selector);
+        var firstVal = $select.find('option:first').val();
+        if(firstVal)
+        {
+            console.log('selectFirstOption is');
+            $select.val(firstVal).trigger('change');
+        }
+        else
+        {
+            console.log('selectFirstOption not');
+            // $select.val([]).trigger('change');
+            $select.val(null).trigger('change');
+        }
+    }
+
+    //
+    function select2FirstOptionSelected(dom)
+    {
+        var $dom = $(dom);
+        var firstVal = $dom.find('option:first').val();
+        if(firstVal)
+        {
+            $dom.val(firstVal).trigger('change');
+        }
+        else
+        {
+            $dom.val(null).trigger('change');
+        }
+    }
+
+
+
+
+
+    function select2_client_init(selector,$default)
+    {
+        var $element = $(selector);
+        if ($element.data('select2'))
+        {
+            $element.select2('destroy'); // 销毁旧实例
+        }
+
+        // 重新初始化
+        $element.select2({
+            ajax: {
+                url: "{{ url('/v1/operate/select2/select2_client') }}",
+                type: 'post',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        _token: $('meta[name="_token"]').attr('content'),
+                        keyword: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function (data, params) {
+
+                    params.page = params.page || 1;
+                    return {
+                        results: data,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+            minimumInputLength: 0,
+            theme: 'classic'
+        });
+
+        if($default) $element.val($default).trigger('change');
+    }
+
+    function select2_project_init(selector,$default)
+    {
+        var $element = $(selector);
+        if ($element.data('select2'))
+        {
+            $element.select2('destroy'); // 销毁旧实例
+        }
+
+        // 重新初始化
+        $element.select2({
+            ajax: {
+                url: "{{ url('/v1/operate/select2/select2_project') }}",
+                type: 'post',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        _token: $('meta[name="_token"]').attr('content'),
+                        keyword: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function (data, params) {
+
+                    params.page = params.page || 1;
+                    return {
+                        results: data,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+            minimumInputLength: 0,
+            theme: 'classic'
+        });
+
+        if($default) $element.val($default).trigger('change');
+    }
+
+    function select2_location_district_init(selector,$default)
+    {
+        var $element = $(selector);
+        if ($element.data('select2'))
+        {
+            $element.select2('destroy'); // 销毁旧实例
+        }
+
+        var $city_dom = $($element.data('city-target'));
+        var $city_value = '';
+        // var $city_value = $city_dom.val();
+
+        // 重新初始化
+        $element.select2({
+            ajax: {
+                url: "{{ url('/v1/operate/select2/select2_location' ) }}",
+                type: 'post',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        _token: $('meta[name="_token"]').attr('content'),
+                        keyword: params.term, // search term
+                        page: params.page,
+                        type: 'district',
+                        location_city: $city_value
+                    };
+                },
+                processResults: function (data, params) {
+
+                    params.page = params.page || 1;
+                    return {
+                        results: data,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+            minimumInputLength: 0,
+            theme: 'classic'
+        });
+
+        if($default) $element.val($default).trigger('change');
+    }
+
+
+
+
+    function convertMinutesToHoursAndMinutes($totalMinutes)
+    {
+        const $hours = Math.floor($totalMinutes / 60);
+        const $minutes = $totalMinutes % 60;
+        let result = "";
+        if($hours > 0)
+        {
+            if($minutes == 0) result += ($hours+'H');
+            else result += ($hours+'小时');
+        }
+        if($minutes > 0)
+        {
+            result += ($minutes+'分钟');
+        }
+        return result;
+    }
+
 
 
     // 是否为本人登录

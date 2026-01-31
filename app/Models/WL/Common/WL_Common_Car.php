@@ -24,6 +24,9 @@ class WL_Common_Car extends Model
         'contact', 'contact_name', 'contact_phone', 'contact_email', 'contact_wx_id', 'contact_wx_qr_code_img', 'contact_address',
         'linkman', 'linkman_name', 'linkman_phone', 'linkman_email', 'linkman_wx_id', 'linkman_wx_qr_code_img', 'linkman_address',
 
+        'motorcade_id',
+        'trailer_id',
+
         'driver_id',
         'copilot_id',
 
@@ -33,30 +36,30 @@ class WL_Common_Car extends Model
         'trailer_weight',
         'trailer_axis_count',
 
-        'car_type',
-        'car_owner',
-        'car_function',
-        'car_brand',
-        'car_identification_number',
+        'car_info_type',
+        'car_info_owner',
+        'car_info_function',
+        'car_info_brand',
+        'car_info_identification_number',
 
-        'engine_number',
-        'locomotive_wheelbase',
-        'main_fuel_tank',
-        'auxiliary_fuel_tank',
-        'total_mass',
-        'curb_weight',
-        'load_weight',
-        'traction_mass',
-        'overall_size',
-        'purchase_date',
-        'purchase_price',
-        'sale_date',
-        'sale_date',
-        'registration_date',
-        'issue_date',
-        'inspection_validity',
-        'transportation_license_validity',
-        'transportation_license_change_time',
+        'car_info_engine_number',
+        'car_info_locomotive_wheelbase',
+        'car_info_main_fuel_tank',
+        'car_info_auxiliary_fuel_tank',
+        'car_info_total_mass',
+        'car_info_curb_weight',
+        'car_info_load_weight',
+        'car_info_traction_mass',
+        'car_info_overall_size',
+        'car_info_purchase_date',
+        'car_info_purchase_price',
+        'car_info_sale_date',
+        'car_info_sale_date',
+        'car_info_registration_date',
+        'car_info_issue_date',
+        'car_info_inspection_validity',
+        'car_info_transportation_license_validity',
+        'car_info_transportation_license_change_time',
         'ETC_account',
 
         'visit_num', 'share_num', 'favor_num',  'follow_num', 'fans_num',
@@ -102,10 +105,27 @@ class WL_Common_Car extends Model
 
 
 
-    // 驾驶员
+    // 车队
+    function motorcade_er()
+    {
+        return $this->belongsTo('App\Models\WL\Common\WL_Common_Motorcade','motorcade_id','id');
+    }
+    // 车挂
+    function trailer_er()
+    {
+        return $this->belongsTo('App\Models\WL\Common\WL_Common_Car','trailer_id','id');
+    }
+
+    // 驾驶员（主驾）
     function driver_er()
     {
         return $this->belongsTo('App\Models\WL\Common\WL_Common_Driver','driver_id','id');
+    }
+
+    // 驾驶员（副驾）
+    function copilot_er()
+    {
+        return $this->belongsTo('App\Models\WL\Common\WL_Common_Driver','copilot_id','id');
     }
 
 

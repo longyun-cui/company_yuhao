@@ -8,6 +8,28 @@
         <ul class="sidebar-menu">
 
 
+            {{--公司列表--}}
+            @if(in_array($me->staff_type,[0,1,9,11]))
+            <li class="treeview">
+                <a class="tab-control datatable-control"
+                   data-type="create"
+                   data-unique="y"
+                   data-id="company-list"
+                   data-title='公司列表'
+                   data-content='<i class="fa fa-copyright text-white"></i> 公司列表'
+                   data-icon='<i class="fa fa-copyright text-blue"></i>'
+
+                   data-datatable-type="create"
+                   data-datatable-unique="y"
+                   data-datatable-id="datatable-company-list"
+                   data-datatable-target="company-list"
+                   data-datatable-clone-object="company-list-clone"
+                >
+                    <i class="fa fa-copyright text-white"></i>
+                    <span>公司列表</span>
+                </a>
+            </li>
+            @endif
             {{--部门列表--}}
             @if(in_array($me->staff_type,[0,1,9,11]))
             <li class="treeview">
@@ -78,74 +100,96 @@
 
 
 
-            {{--车辆列表--}}
-            @if(in_array($me->staff_type,[0,1,9,11,81,84]))
-                <li class="treeview">
-                    <a class="tab-control datatable-control"
-                       data-type="create"
-                       data-unique="y"
-                       data-id="car-list"
-                       data-title='车辆列表'
-                       data-content='<i class="fa fa-truck text-white"></i> 车辆列表'
-                       data-icon='<i class="fa fa-truck text-blue"></i>'
+            {{--车队列表--}}
+            @if(in_array($me->staff_type,[0,1,9,11]))
+            <li class="treeview">
+                <a class="tab-control datatable-control"
+                   data-type="create"
+                   data-unique="y"
+                   data-id="motorcade-list"
+                   data-title='车队列表'
+                   data-content='<i class="fa fa-truck text-white"></i> 车队列表'
+                   data-icon='<i class="fa fa-truck text-blue"></i>'
 
-                       data-datatable-type="create"
-                       data-datatable-unique="y"
-                       data-datatable-id="datatable-car-list"
-                       data-datatable-target="car-list"
-                       data-datatable-clone-object="car-list-clone"
-                    >
-                        <i class="fa fa-truck text-white"></i>
-                        <span>车辆列表</span>
-                    </a>
-                </li>
+                   data-datatable-type="create"
+                   data-datatable-unique="y"
+                   data-datatable-id="datatable-motorcade-list"
+                   data-datatable-target="motorcade-list"
+                   data-datatable-clone-object="motorcade-list-clone"
+                >
+                    <i class="fa fa-truck text-white"></i>
+                    <span>车队列表</span>
+                </a>
+            </li>
+            @endif
+            {{--车辆列表--}}
+            @if(in_array($me->staff_type,[0,1,9,11]))
+            <li class="treeview">
+                <a class="tab-control datatable-control"
+                   data-type="create"
+                   data-unique="y"
+                   data-id="car-list"
+                   data-title='车辆列表'
+                   data-content='<i class="fa fa-car text-white"></i> 车辆列表'
+                   data-icon='<i class="fa fa-car text-blue"></i>'
+
+                   data-datatable-type="create"
+                   data-datatable-unique="y"
+                   data-datatable-id="datatable-car-list"
+                   data-datatable-target="car-list"
+                   data-datatable-clone-object="car-list-clone"
+                >
+                    <i class="fa fa-car text-white"></i>
+                    <span>车辆列表</span>
+                </a>
+            </li>
             @endif
             {{--司机列表--}}
-            @if(in_array($me->staff_type,[0,1,9,11,81,84]))
-                <li class="treeview">
-                    <a class="tab-control datatable-control"
-                       data-type="create"
-                       data-unique="y"
-                       data-id="driver-list"
-                       data-title='司机列表'
-                       data-content='<i class="fa fa-male text-white"></i> 司机列表'
-                       data-icon='<i class="fa fa-male text-blue"></i>'
+            @if(in_array($me->staff_type,[0,1,9,11]))
+            <li class="treeview">
+                <a class="tab-control datatable-control"
+                   data-type="create"
+                   data-unique="y"
+                   data-id="driver-list"
+                   data-title='司机列表'
+                   data-content='<i class="fa fa-male text-white"></i> 司机列表'
+                   data-icon='<i class="fa fa-male text-blue"></i>'
 
-                       data-datatable-type="create"
-                       data-datatable-unique="y"
-                       data-datatable-id="datatable-driver-list"
-                       data-datatable-target="driver-list"
-                       data-datatable-clone-object="driver-list-clone"
-                    >
-                        <i class="fa fa-male text-white"></i>
-                        <span>司机列表</span>
-                    </a>
-                </li>
+                   data-datatable-type="create"
+                   data-datatable-unique="y"
+                   data-datatable-id="datatable-driver-list"
+                   data-datatable-target="driver-list"
+                   data-datatable-clone-object="driver-list-clone"
+                >
+                    <i class="fa fa-male text-white"></i>
+                    <span>司机列表</span>
+                </a>
+            </li>
             @endif
 
             
             
             {{--客户列表--}}
             @if(in_array($me->staff_type,[0,1,9,11,61]))
-                <li class="treeview _none-">
-                    <a class="tab-control datatable-control"
-                       data-type="create"
-                       data-unique="y"
-                       data-id="client-list"
-                       data-title='客户列表'
-                       data-content='<i class="fa fa-user-secret text-white"></i> 客户列表'
-                       data-icon='<i class="fa fa-user-secret text-blue"></i>'
+            <li class="treeview _none-">
+                <a class="tab-control datatable-control"
+                   data-type="create"
+                   data-unique="y"
+                   data-id="client-list"
+                   data-title='客户列表'
+                   data-content='<i class="fa fa-user-secret text-white"></i> 客户列表'
+                   data-icon='<i class="fa fa-user-secret text-blue"></i>'
 
-                       data-datatable-type="create"
-                       data-datatable-unique="y"
-                       data-datatable-id="datatable-client-list"
-                       data-datatable-target="client-list"
-                       data-datatable-clone-object="client-list-clone"
-                    >
-                        <i class="fa fa-user-secret text-white"></i>
-                        <span>客户列表</span>
-                    </a>
-                </li>
+                   data-datatable-type="create"
+                   data-datatable-unique="y"
+                   data-datatable-id="datatable-client-list"
+                   data-datatable-target="client-list"
+                   data-datatable-clone-object="client-list-clone"
+                >
+                    <i class="fa fa-user-secret text-white"></i>
+                    <span>客户列表</span>
+                </a>
+            </li>
             @endif
 
 

@@ -18,20 +18,25 @@ class WL_Common_Team extends Model
         'team_active', 'team_status',
         'team_category', 'team_type',
 
-        'department_id',
-
-        'owner_id', 'creator_id', 'user_id', 'belong_id', 'source_id', 'object_id',
-        'admin_id',
-        'p_id',
-        'parent_id',
-
-        'superior_team_id',
-        'leader_id',
-
-        'owner_id', 'creator_id', 'updater_id', 'user_id', 'belong_id', 'source_id', 'object_id', 'p_id', 'parent_id',
+        'owner_id', 'creator_id', 'updater_id', 'user_id', 'belong_id', 'source_id', 'object_id', 'p_id', 'parent_id', 'admin_id',
 
         'name', 'username', 'nickname', 'true_name', 'short_name', 'alias_name',
-        'title', 'subtitle', 'description', 'content', 'remark', 'tag', 'custom', 'custom2', 'custom3', 'attachment', 'portrait_img', 'cover_pic',
+        'title', 'subtitle', 'description', 'content', 'remark', 'tag', 'custom', 'custom2', 'custom3',
+        'attachment',
+        'attachment_name',
+        'attachment_scr',
+        'portrait_img',
+        'cover_pic',
+
+        'contact', 'contact_name', 'contact_phone', 'contact_email', 'contact_wx_id', 'contact_wx_qr_code_img', 'contact_address',
+        'linkman', 'linkman_name', 'linkman_phone', 'linkman_email', 'linkman_wx_id', 'linkman_wx_qr_code_img', 'linkman_address',
+
+        'company_id',
+        'department_id',
+        'superior_team_id',
+        'superior_sub_team_id',
+        'superior_group_id',
+        'leader_id',
 
         'visit_num', 'share_num', 'favor_num',  'follow_num', 'fans_num',
     ];
@@ -76,24 +81,30 @@ class WL_Common_Team extends Model
 
 
 
-    // 部门
+    // 所属公司
+    function company_er()
+    {
+        return $this->belongsTo('App\Models\WL\Common\WL_Common_Company','company_id','id');
+    }
+
+    // 所属部门
     function department_er()
     {
         return $this->belongsTo('App\Models\WL\Common\WL_Common_Department','department_id','id');
     }
 
 
+    // 上级团队
+    function superior_team_er()
+    {
+        return $this->belongsTo('App\Models\WL\Common\WL_Common_Team','superior_team_id','id');
+    }
     // 【一对多】下级团队
     function subordinate_team_list()
     {
         return $this->hasMany('App\Models\WL\Common\WL_Common_Team','superior_team_id','id');
     }
 
-    // 【反向一对多】上级团队
-    function superior_team_er()
-    {
-        return $this->belongsTo('App\Models\WL\Common\WL_Common_Team','superior_team_id','id');
-    }
 
 
 
@@ -108,9 +119,14 @@ class WL_Common_Team extends Model
 
 
     // 【一对多】团队成员
-    function district_staff_list()
+    function team_staff_list()
     {
         return $this->hasMany('App\Models\WL\Common\WL_Common_Staff','team_id','id');
+    }
+    // 【一对多】分部成员
+    function sub_team_list()
+    {
+        return $this->hasMany('App\Models\WL\Common\WL_Common_Staff','sub_team_id','id');
     }
     // 【一对多】小组成员
     function group_staff_list()
@@ -118,7 +134,7 @@ class WL_Common_Team extends Model
         return $this->hasMany('App\Models\WL\Common\WL_Common_Staff','group_id','id');
     }
     // 【一对多】小队成员
-    function group_unit_list()
+    function unit_staff_list()
     {
         return $this->hasMany('App\Models\WL\Common\WL_Common_Staff','unit_id','id');
     }

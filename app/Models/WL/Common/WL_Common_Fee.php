@@ -31,6 +31,7 @@ class WL_Common_Fee extends Model
         'item_id',
 
         'company_id',
+        'department_id',
         'team_id',
 
         'client_id',
@@ -70,7 +71,12 @@ class WL_Common_Fee extends Model
         'name', 'username', 'nickname', 'true_name', 'short_name', 'alias_name',
         'title', 'subtitle', 'description', 'content', 'remark', 'tag', 'custom', 'custom2', 'custom3', 'attachment', 'portrait_img', 'cover_pic',
 
-        'visit_num', 'share_num', 'favor_num',  'follow_num', 'fans_num',
+        'visit_num',
+        'share_num',
+        'favor_num',
+
+        'follow_num',
+        'fans_num',
 
     ];
     protected $dateFormat = 'U';

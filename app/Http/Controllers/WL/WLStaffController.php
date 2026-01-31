@@ -9,11 +9,14 @@ use App\Models\WL\Common\WL_Common_Staff;
 
 use App\Repositories\WL\WLStaffRepository;
 
+use App\Repositories\WL\Staff\WLStaffCommonRepository;
+
 use App\Repositories\WL\Staff\WLStaffCompanyRepository;
 use App\Repositories\WL\Staff\WLStaffDepartmentRepository;
 use App\Repositories\WL\Staff\WLStaffTeamRepository;
 use App\Repositories\WL\Staff\WLStaffStaffRepository;
 
+use App\Repositories\WL\Staff\WLStaffMotorcadeRepository;
 use App\Repositories\WL\Staff\WLStaffCarRepository;
 use App\Repositories\WL\Staff\WLStaffDriverRepository;
 
@@ -30,11 +33,14 @@ class WLStaffController extends Controller
     //
     private $repo;
 
+    private $common_repo;
+
     private $company_repo;
     private $department_repo;
     private $team_repo;
     private $staff_repo;
 
+    private $motorcade_repo;
     private $car_repo;
     private $driver_repo;
 
@@ -47,11 +53,14 @@ class WLStaffController extends Controller
     {
         $this->repo = new WLStaffRepository;
 
+        $this->common_repo = new WLStaffCommonRepository;
+
         $this->company_repo = new WLStaffCompanyRepository;
         $this->department_repo = new WLStaffDepartmentRepository;
         $this->team_repo = new WLStaffTeamRepository;
         $this->staff_repo = new WLStaffStaffRepository;
 
+        $this->motorcade_repo = new WLStaffMotorcadeRepository;
         $this->car_repo = new WLStaffCarRepository;
         $this->driver_repo = new WLStaffDriverRepository;
 
@@ -135,49 +144,54 @@ class WLStaffController extends Controller
 
 
     // 公司
-    public function v1_operate_select2_company()
+    public function o1__select2__company()
     {
-        return $this->repo->v1_operate_select2_company(request()->all());
+        return $this->common_repo->o1__select2__company(request()->all());
     }
     // 部门
-    public function v1_operate_select2_department()
+    public function o1__select2__department()
     {
-        return $this->repo->v1_operate_select2_department(request()->all());
+        return $this->common_repo->o1__select2__department(request()->all());
     }
     // 团队
-    public function v1_operate_select2_team()
+    public function o1__select2__team()
     {
-        return $this->repo->v1_operate_select2_team(request()->all());
+        return $this->common_repo->o1__select2__team(request()->all());
     }
     // 员工
-    public function v1_operate_select2_staff()
+    public function o1__select2__staff()
     {
-        return $this->repo->v1_operate_select2_staff(request()->all());
+        return $this->common_repo->o1__select2__staff(request()->all());
+    }
+    // 车队
+    public function o1__select2__motorcade()
+    {
+        return $this->common_repo->o1__select2__motorcade(request()->all());
     }
     // 车辆
-    public function v1_operate_select2_car()
+    public function o1__select2__car()
     {
-        return $this->repo->v1_operate_select2_car(request()->all());
+        return $this->common_repo->o1__select2__car(request()->all());
     }
-    // 司机
-    public function v1_operate_select2_driver()
+    // 驾驶员
+    public function o1__select2__driver()
     {
-        return $this->repo->v1_operate_select2_driver(request()->all());
+        return $this->common_repo->o1__select2__driver(request()->all());
     }
     // 客户
-    public function v1_operate_select2_client()
+    public function o1__select2__client()
     {
-        return $this->repo->v1_operate_select2_client(request()->all());
+        return $this->common_repo->o1__select2__client(request()->all());
     }
     // 项目
-    public function v1_operate_select2_project()
+    public function o1__select2__project()
     {
-        return $this->repo->v1_operate_select2_project(request()->all());
+        return $this->common_repo->o1__select2__project(request()->all());
     }
     // 订单
-    public function v1_operate_select2_order()
+    public function o1__select2__order()
     {
-        return $this->repo->v1_operate_select2_order(request()->all());
+        return $this->common_repo->o1__select2__order(request()->all());
     }
 
 
@@ -283,232 +297,469 @@ class WLStaffController extends Controller
 
 
     // 【公司】datatable
-    public function o1__company__datatable_list_query()
+    public function o1__company__list__datatable_query()
     {
-        return $this->repo->o1__company__datatable_list_query(request()->all());
+        return $this->company_repo->o1__company__list__datatable_query(request()->all());
     }
     // 【公司】获取
     public function o1__company__item_get()
     {
-        return $this->repo->o1__company__item_get(request()->all());
+        return $this->company_repo->o1__company__item_get(request()->all());
     }
     // 【公司】编辑-保存
     public function o1__company__item_save()
     {
-        return $this->repo->o1__company__item_save(request()->all());
+        return $this->company_repo->o1__company__item_save(request()->all());
+    }
+    // 【公司】删除
+    public function o1__company__item_delete()
+    {
+        return $this->company_repo->o1__company__item_delete(request()->all());
+    }
+    // 【公司】恢复
+    public function o1__company__item_restore()
+    {
+        return $this->company_repo->o1__company__item_restore(request()->all());
+    }
+    // 【公司】彻底删除
+    public function o1__company__item_delete_permanently()
+    {
+        return $this->company_repo->o1__company__item_delete_permanently(request()->all());
     }
     // 【公司】启用
     public function o1__company__item_enable()
     {
-        return $this->repo->o1__company__item_enable(request()->all());
+        return $this->company_repo->o1__company__item_enable(request()->all());
     }
     // 【公司】禁用
     public function o1__company__item_disable()
     {
-        return $this->repo->o1__company__item_disable(request()->all());
+        return $this->company_repo->o1__company__item_disable(request()->all());
     }
+    // 【公司】操作记录
+    public function o1__company__item_operation_record_list__datatable_query()
+    {
+        return $this->company_repo->o1__company__item_operation_record_list__datatable_query(request()->all());
+    }
+
+
+
+
 
 
 
 
     // 【部门】datatable
-    public function o1__department__datatable_list_query()
+    public function o1__department__list__datatable_query()
     {
-        return $this->repo->o1__department__datatable_list_query(request()->all());
+        return $this->department_repo->o1__department__list__datatable_query(request()->all());
     }
     // 【部门】获取
     public function o1__department__item_get()
     {
-        return $this->repo->o1__department__item_get(request()->all());
+        return $this->department_repo->o1__department__item_get(request()->all());
     }
     // 【部门】编辑-保存
     public function o1__department__item_save()
     {
-        return $this->repo->o1__department__item_save(request()->all());
+        return $this->department_repo->o1__department__item_save(request()->all());
+    }
+    // 【部门】删除
+    public function o1__department__item_delete()
+    {
+        return $this->department_repo->o1__department__item_delete(request()->all());
+    }
+    // 【部门】恢复
+    public function o1__department__item_restore()
+    {
+        return $this->department_repo->o1__department__item_restore(request()->all());
+    }
+    // 【部门】彻底删除
+    public function o1__department__item_delete_permanently()
+    {
+        return $this->department_repo->o1__department__item_delete_permanently(request()->all());
     }
     // 【部门】启用
     public function o1__department__item_enable()
     {
-        return $this->repo->o1__department__item_enable(request()->all());
+        return $this->department_repo->o1__department__item_enable(request()->all());
     }
     // 【部门】禁用
     public function o1__department__item_disable()
     {
-        return $this->repo->o1__department__item_disable(request()->all());
+        return $this->department_repo->o1__department__item_disable(request()->all());
     }
+    // 【部门】操作记录
+    public function o1__department__item_operation_record_list__datatable_query()
+    {
+        return $this->department_repo->o1__department__item_operation_record_list__datatable_query(request()->all());
+    }
+
+
+
+
 
 
 
 
     // 【团队】datatable
-    public function o1__team__datatable_list_query()
+    public function o1__team__list__datatable_query()
     {
-        return $this->repo->o1__team__datatable_list_query(request()->all());
+        return $this->team_repo->o1__team__list__datatable_query(request()->all());
     }
     // 【团队】获取
     public function o1__team__item_get()
     {
-        return $this->repo->o1__team__item_get(request()->all());
+        return $this->team_repo->o1__team__item_get(request()->all());
     }
     // 【团队】编辑-保存
     public function o1__team__item_save()
     {
-        return $this->repo->o1__team__item_save(request()->all());
+        return $this->team_repo->o1__team__item_save(request()->all());
+    }
+    // 【团队】删除
+    public function o1__team__item_delete()
+    {
+        return $this->team_repo->o1__team__item_delete(request()->all());
+    }
+    // 【团队】恢复
+    public function o1__team__item_restore()
+    {
+        return $this->team_repo->o1__team__item_restore(request()->all());
+    }
+    // 【团队】彻底删除
+    public function o1__team__item_delete_permanently()
+    {
+        return $this->team_repo->o1__team__item_delete_permanently(request()->all());
     }
     // 【团队】启用
     public function o1__team__item_enable()
     {
-        return $this->repo->o1__team__item_enable(request()->all());
+        return $this->team_repo->o1__team__item_enable(request()->all());
     }
     // 【团队】禁用
     public function o1__team__item_disable()
     {
-        return $this->repo->o1__team__item_disable(request()->all());
+        return $this->team_repo->o1__team__item_disable(request()->all());
     }
+    // 【团队】操作记录
+    public function o1__team__item_operation_record_list__datatable_query()
+    {
+        return $this->team_repo->o1__team__item_operation_record_list__datatable_query(request()->all());
+    }
+
+
+
+
 
 
 
 
     // 【员工】datatable
-    public function o1__staff__datatable_list_query()
+    public function o1__staff__list__datatable_query()
     {
-        return $this->repo->o1__staff__datatable_list_query(request()->all());
+        return $this->staff_repo->o1__staff__list__datatable_query(request()->all());
     }
     // 【员工】获取
     public function o1__staff__item_get()
     {
-        return $this->repo->o1__staff__item_get(request()->all());
+        return $this->staff_repo->o1__staff__item_get(request()->all());
     }
     // 【员工】编辑-保存
     public function o1__staff__item_save()
     {
-        return $this->repo->o1__staff__item_save(request()->all());
+        return $this->staff_repo->o1__staff__item_save(request()->all());
+    }
+    // 【团队】删除
+    public function o1__staff__item_delete()
+    {
+        return $this->staff_repo->o1__staff__item_delete(request()->all());
+    }
+    // 【团队】恢复
+    public function o1__staff__item_restore()
+    {
+        return $this->staff_repo->o1__staff__item_restore(request()->all());
+    }
+    // 【团队】彻底删除
+    public function o1__staff__item_delete_permanently()
+    {
+        return $this->staff_repo->o1__staff__item_delete_permanently(request()->all());
     }
     // 【员工】启用
     public function o1__staff__item_enable()
     {
-        return $this->repo->o1__staff__item_enable(request()->all());
+        return $this->staff_repo->o1__staff__item_enable(request()->all());
     }
     // 【员工】禁用
     public function o1__staff__item_disable()
     {
-        return $this->repo->o1__staff__item_disable(request()->all());
+        return $this->staff_repo->o1__staff__item_disable(request()->all());
     }
+    // 【员工】操作记录
+    public function o1__staff__item_operation_record_list__datatable_query()
+    {
+        return $this->staff_repo->o1__staff__item_operation_record_list__datatable_query(request()->all());
+    }
+
+
+
+
+
+
+
+
+    // 【车队】datatable
+    public function o1__motorcade__list__datatable_query()
+    {
+        return $this->motorcade_repo->o1__motorcade__list__datatable_query(request()->all());
+    }
+    // 【车队】获取
+    public function o1__motorcade__item_get()
+    {
+        return $this->motorcade_repo->o1__motorcade__item_get(request()->all());
+    }
+    // 【车队】编辑-保存
+    public function o1__motorcade__item_save()
+    {
+        return $this->motorcade_repo->o1__motorcade__item_save(request()->all());
+    }
+    // 【车队】删除
+    public function o1__motorcade__item_delete()
+    {
+        return $this->motorcade_repo->o1__motorcade__item_delete(request()->all());
+    }
+    // 【车队】恢复
+    public function o1__motorcade__item_restore()
+    {
+        return $this->motorcade_repo->o1__motorcade__item_restore(request()->all());
+    }
+    // 【车队】彻底删除
+    public function o1__motorcade__item_delete_permanently()
+    {
+        return $this->motorcade_repo->o1__motorcade__item_delete_permanently(request()->all());
+    }
+    // 【车队】启用
+    public function o1__motorcade__item_enable()
+    {
+        return $this->motorcade_repo->o1__motorcade__item_enable(request()->all());
+    }
+    // 【车队】禁用
+    public function o1__motorcade__item_disable()
+    {
+        return $this->motorcade_repo->o1__motorcade__item_disable(request()->all());
+    }
+    // 【车队】操作记录
+    public function o1__motorcade__item_operation_record_list__datatable_query()
+    {
+        return $this->motorcade_repo->o1__motorcade__item_operation_record_list__datatable_query(request()->all());
+    }
+
+
+
+
 
 
 
 
     // 【车辆】datatable
-    public function o1__car__datatable_list_query()
+    public function o1__car__list__datatable_query()
     {
-        return $this->repo->o1__car__datatable_list_query(request()->all());
+        return $this->car_repo->o1__car__list__datatable_query(request()->all());
     }
     // 【车辆】获取
     public function o1__car__item_get()
     {
-        return $this->repo->o1__car__item_get(request()->all());
+        return $this->car_repo->o1__car__item_get(request()->all());
     }
     // 【车辆】编辑-保存
     public function o1__car__item_save()
     {
-        return $this->repo->o1__car__item_save(request()->all());
+        return $this->car_repo->o1__car__item_save(request()->all());
+    }
+    // 【车辆】删除
+    public function o1__car__item_delete()
+    {
+        return $this->car_repo->o1__car__item_delete(request()->all());
+    }
+    // 【车辆】恢复
+    public function o1__car__item_restore()
+    {
+        return $this->car_repo->o1__car__item_restore(request()->all());
+    }
+    // 【车辆】彻底删除
+    public function o1__car__item_delete_permanently()
+    {
+        return $this->car_repo->o1__car__item_delete_permanently(request()->all());
     }
     // 【车辆】启用
     public function o1__car__item_enable()
     {
-        return $this->repo->o1__car__item_enable(request()->all());
+        return $this->car_repo->o1__car__item_enable(request()->all());
     }
     // 【车辆】禁用
     public function o1__car__item_disable()
     {
-        return $this->repo->o1__car__item_disable(request()->all());
+        return $this->car_repo->o1__car__item_disable(request()->all());
     }
-
-
-
-
-    // 【司机】datatable
-    public function o1__driver__datatable_list_query()
+    // 【车辆】操作记录
+    public function o1__car__item_operation_record_list__datatable_query()
     {
-        return $this->repo->o1__driver__datatable_list_query(request()->all());
+        return $this->car_repo->o1__car__item_operation_record_list__datatable_query(request()->all());
     }
-    // 【司机】获取
+
+
+
+
+
+
+
+
+    // 【驾驶员】datatable
+    public function o1__driver__list__datatable_query()
+    {
+        return $this->driver_repo->o1__driver__list__datatable_query(request()->all());
+    }
+    // 【驾驶员】获取
     public function o1__driver__item_get()
     {
-        return $this->repo->o1__driver__item_get(request()->all());
+        return $this->driver_repo->o1__driver__item_get(request()->all());
     }
-    // 【司机】编辑-保存
+    // 【驾驶员】编辑-保存
     public function o1__driver__item_save()
     {
-        return $this->repo->o1__driver__item_save(request()->all());
+        return $this->driver_repo->o1__driver__item_save(request()->all());
     }
-    // 【司机】启用
+    // 【驾驶员】删除
+    public function o1__driver__item_delete()
+    {
+        return $this->driver_repo->o1__driver__item_delete(request()->all());
+    }
+    // 【驾驶员】恢复
+    public function o1__driver__item_restore()
+    {
+        return $this->driver_repo->o1__driver__item_restore(request()->all());
+    }
+    // 【驾驶员】彻底删除
+    public function o1__driver__item_delete_permanently()
+    {
+        return $this->driver_repo->o1__driver__item_delete_permanently(request()->all());
+    }
+    // 【驾驶员】启用
     public function o1__driver__item_enable()
     {
-        return $this->repo->o1__driver__item_enable(request()->all());
+        return $this->driver_repo->o1__driver__item_enable(request()->all());
     }
-    // 【司机】禁用
+    // 【驾驶员】禁用
     public function o1__driver__item_disable()
     {
-        return $this->repo->o1__driver__item_disable(request()->all());
+        return $this->driver_repo->o1__driver__item_disable(request()->all());
     }
+    // 【驾驶员】操作记录
+    public function o1__driver__item_operation_record_list__datatable_query()
+    {
+        return $this->driver_repo->o1__driver__item_operation_record_list__datatable_query(request()->all());
+    }
+
+
+
+
 
 
 
 
     // 【客户】datatable
-    public function o1__client__datatable_list_query()
+    public function o1__client__list__datatable_query()
     {
-        return $this->repo->o1__client__datatable_list_query(request()->all());
+        return $this->client_repo->o1__client__list__datatable_query(request()->all());
     }
     // 【客户】获取
     public function o1__client__item_get()
     {
-        return $this->repo->o1__client__item_get(request()->all());
+        return $this->client_repo->o1__client__item_get(request()->all());
     }
     // 【客户】编辑-保存
     public function o1__client__item_save()
     {
-        return $this->repo->o1__client__item_save(request()->all());
+        return $this->client_repo->o1__client__item_save(request()->all());
+    }
+    // 【客户】删除
+    public function o1__client__item_delete()
+    {
+        return $this->client_repo->o1__client__item_delete(request()->all());
+    }
+    // 【客户】恢复
+    public function o1__client__item_restore()
+    {
+        return $this->client_repo->o1__client__item_restore(request()->all());
+    }
+    // 【客户】彻底删除
+    public function o1__client__item_delete_permanently()
+    {
+        return $this->client_repo->o1__client__item_delete_permanently(request()->all());
     }
     // 【客户】启用
     public function o1__client__item_enable()
     {
-        return $this->repo->o1__client__item_enable(request()->all());
+        return $this->client_repo->o1__client__item_enable(request()->all());
     }
     // 【客户】禁用
     public function o1__client__item_disable()
     {
-        return $this->repo->o1__client__item_disable(request()->all());
+        return $this->client_repo->o1__client__item_disable(request()->all());
+    }
+    // 【客户】操作记录
+    public function o1__client__item_operation_record_list__datatable_query()
+    {
+        return $this->client_repo->o1__client__item_operation_record_list__datatable_query(request()->all());
     }
 
 
 
 
     // 【项目】datatable
-    public function o1__project__datatable_list_query()
+    public function o1__project__list__datatable_query()
     {
-        return $this->repo->o1__project__datatable_list_query(request()->all());
+        return $this->project_repo->o1__project__list__datatable_query(request()->all());
     }
     // 【项目】获取
     public function o1__project__item_get()
     {
-        return $this->repo->o1__project__item_get(request()->all());
+        return $this->project_repo->o1__project__item_get(request()->all());
     }
     // 【项目】编辑-保存
     public function o1__project__item_save()
     {
-        return $this->repo->o1__project__item_save(request()->all());
+        return $this->project_repo->o1__project__item_save(request()->all());
+    }
+    // 【项目】删除
+    public function o1__project__item_delete()
+    {
+        return $this->project_repo->o1__project__item_delete(request()->all());
+    }
+    // 【项目】恢复
+    public function o1__project__item_restore()
+    {
+        return $this->project_repo->o1__project__item_restore(request()->all());
+    }
+    // 【项目】彻底删除
+    public function o1__project__item_delete_permanently()
+    {
+        return $this->project_repo->o1__project__item_delete_permanently(request()->all());
     }
     // 【项目】启用
     public function o1__project__item_enable()
     {
-        return $this->repo->o1__project__item_enable(request()->all());
+        return $this->project_repo->o1__project__item_enable(request()->all());
     }
     // 【项目】禁用
     public function o1__project__item_disable()
     {
-        return $this->repo->o1__project__item_disable(request()->all());
+        return $this->project_repo->o1__project__item_disable(request()->all());
+    }
+    // 【项目】操作记录
+    public function o1__project__item_operation_record_list__datatable_query()
+    {
+        return $this->project_repo->o1__project__item_operation_record_list__datatable_query(request()->all());
     }
 
 
@@ -522,9 +773,9 @@ class WLStaffController extends Controller
      * ORDER - 工单
      */
     // 【工单】datatable
-    public function o1__order__datatable_list_query()
+    public function o1__order__list__datatable_query()
     {
-        return $this->order_repo->o1__order__datatable_list_query(request()->all());
+        return $this->order_repo->o1__order__list__datatable_query(request()->all());
     }
     // 【工单】获取
     public function o1__order__item_get()
@@ -544,15 +795,21 @@ class WLStaffController extends Controller
         return $this->order_repo->o1__order__item_publish(request()->all());
     }
 
-    // 【工单】操作记录
-    public function o1__order__item_operation_record_list_datatable_query()
+
+    // 【工单】【全部操作】操作记录
+    public function o1__order__item_operation_record_list__datatable_query()
     {
-        return $this->order_repo->o1__order__item_operation_record_list_datatable_query(request()->all());
+        return $this->order_repo->o1__order__item_operation_record_list__datatable_query(request()->all());
     }
-    // 【工单】操作记录
-    public function o1__order__item_fee_record_datatable_list_query()
+    // 【工单】【行程】列表
+    public function o1__order__item_journey_record_list__datatable_query()
     {
-        return $this->order_repo->o1__order__item_fee_record_datatable_list_query(request()->all());
+        return $this->order_repo->o1__order__item_journey_record_list__datatable_query(request()->all());
+    }
+    // 【工单】【费用】记录
+    public function o1__order__item_fee_record_list__datatable_query()
+    {
+        return $this->order_repo->o1__order__item_fee_record_list__datatable_query(request()->all());
     }
 
 
@@ -576,6 +833,10 @@ class WLStaffController extends Controller
     {
         return $this->order_repo->o1__order__item_trade_save(request()->all());
     }
+
+
+
+
 
 
 
@@ -683,17 +944,17 @@ class WLStaffController extends Controller
     }
 
 
-    // 【统计】【司机】日报
+    // 【统计】【驾驶员】日报
     public function o1__get_statistic_data__of__statistic_driver_by_daily()
     {
         return $this->repo->o1__get_statistic_data__of__statistic_driver_by_daily(request()->all());
     }
-    // 【统计】【司机】订单-日报
+    // 【统计】【驾驶员】订单-日报
     public function o1__get_statistic_data__of__statistic_driver_by_daily_for_order()
     {
         return $this->repo->o1__get_statistic_data__of__statistic_driver_by_daily_for_order(request()->all());
     }
-    // 【统计】【司机】费用-日报
+    // 【统计】【驾驶员】费用-日报
     public function o1__get_statistic_data__of__statistic_driver_by_daily_for_fee()
     {
         return $this->repo->o1__get_statistic_data__of__statistic_driver_by_daily_for_fee(request()->all());

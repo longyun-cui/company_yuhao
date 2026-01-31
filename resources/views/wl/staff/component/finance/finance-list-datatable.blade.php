@@ -1,5 +1,5 @@
 <script>
-    function Datatable_for_Finance_List($tableId)
+    function Datatable__for__Finance_List($tableId)
     {
 
         let $that = $($tableId);
@@ -19,7 +19,7 @@
 //                "scrollY": true,
             "scrollCollapse": true,
             "ajax": {
-                'url': "{{ url('/v1/operate/finance/datatable-list-query') }}",
+                'url': "{{ url('/o1/finance/finance-list/datatable-query') }}",
                 "type": 'POST',
                 "dataType" : 'json',
                 "data": function (d) {

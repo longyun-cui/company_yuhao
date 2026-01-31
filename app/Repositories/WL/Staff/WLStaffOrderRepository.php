@@ -17,16 +17,9 @@ use App\Models\WL\Common\WL_Common_Order_Operation_Record;
 use App\Models\WL\Common\WL_Common_Finance;
 use App\Models\WL\Common\WL_Common_Fee;
 
+use App\Models\WL\Common\WL_Common_Transport_Journey;
 use App\Models\WL\Staff\WL_Staff_Record_Operation;
 use App\Models\WL\Staff\WL_Staff_Record_Visit;
-
-
-use App\Models\WL\CLient\WL_Client_Staff;
-
-use App\Models\YH\YH_Item;
-use App\Models\YH\YH_Task;
-use App\Models\YH\YH_Pivot_Circle_Order;
-use App\Models\YH\YH_Pivot_Item_Relation;
 
 use App\Repositories\Common\CommonRepository;
 
@@ -40,7 +33,7 @@ class WLStaffOrderRepository {
     private $auth_check;
     private $me;
     private $me_admin;
-    private $modelUser;
+    private $modelOrder;
     private $modelItem;
     private $view_blade_403;
     private $view_blade_404;
@@ -48,9 +41,6 @@ class WLStaffOrderRepository {
 
     public function __construct()
     {
-        $this->modelUser = new WL_Common_Staff;
-        $this->modelItem = new YH_Item;
-
         $this->view_blade_403 = env('TEMPLATE_WL_STAFF').'entrance.errors.403';
         $this->view_blade_404 = env('TEMPLATE_WL_STAFF').'entrance.errors.404';
 
@@ -85,7 +75,7 @@ class WLStaffOrderRepository {
      * 工单-管理 Order
      */
     // 【工单】返回-列表-数据
-    public function o1__order__datatable_list_query($post_data)
+    public function o1__order__list__datatable_query($post_data)
     {
         $this->get_me();
         $me = $this->me;
@@ -420,7 +410,12 @@ class WLStaffOrderRepository {
                 'owner'=>function($query) { $query->select('id','username'); },
                 'client_er'=>function($query) { $query->select('id','name'); },
                 'project_er'=>function($query) { $query->select('id','name'); },
-                'car_er'=>function($query) { $query->select('id','name'); },
+                'car_er'=>function($query) {
+                    $query->select('id','name','driver_id')
+                        ->with([
+                            'driver_er'=>function($query) { $query->select('id','driver_name','driver_phone'); },
+                        ]);
+                    },
                 'trailer_er'=>function($query) { $query->select('id','name'); },
                 'driver_er'=>function($query) { $query->select('id','driver_name','driver_phone'); },
                 'copilot_er'=>function($query) { $query->select('id','driver_name','driver_phone'); },
@@ -439,8 +434,6 @@ class WLStaffOrderRepository {
             'project_id.required' => '请选择项目！',
             'project_id.numeric' => '选择项目参数有误！',
             'project_id.min' => '请选择项目！',
-//            'location_city.required' => '请选择城市！',
-//            'location_district.required' => '请选择行政区！',
             'transport_departure_place.required' => '请输入出发地！',
             'transport_destination_place.required' => '请输入目的地！',
 //            'description.required' => '请输入备注！',
@@ -448,8 +441,6 @@ class WLStaffOrderRepository {
         $v = Validator::make($post_data, [
             'operate' => 'required',
             'project_id' => 'required|numeric|min:1',
-//            'location_city' => 'required',
-//            'location_district' => 'required',
             'transport_departure_place' => 'required',
             'transport_destination_place' => 'required',
 //            'description' => 'required',
@@ -495,19 +486,64 @@ class WLStaffOrderRepository {
 
 //        $post_data['is_repeat'] = $is_repeat;
 
-        // 判断客户是否存在
+        // 判断【客户】是否存在
         if(!empty($post_data['client_id']))
         {
             $client = WL_Common_Client::find($post_data['client_id']);
             if(!$client) return response_error([],"选择【客户】不存在，刷新页面重试！");
         }
-        // 判断项目是否存在
+        // 判断【项目】是否存在
         if(!empty($post_data['project_id']))
         {
             $project = WL_Common_Project::find($post_data['project_id']);
             if(!$project) return response_error([],"选择【项目】不存在，刷新页面重试！");
         }
+        // 判断【车辆】是否存在
+        if(!empty($post_data['car_id']))
+        {
+            $car = WL_Common_Car::find($post_data['car_id']);
+            if(!$car) return response_error([],"选择【车】不存在，刷新页面重试！");
+        }
+        // 判断【车挂】是否存在
+        if(!empty($post_data['trailer_id']))
+        {
+            $trailer = WL_Common_Car::find($post_data['trailer_id']);
+            if(!$trailer) return response_error([],"选择【挂】不存在，刷新页面重试！");
+        }
+        // 判断【主驾】是否存在
+        if(!empty($post_data['driver_id']))
+        {
+            $driver = WL_Common_Driver::find($post_data['driver_id']);
+            if(!$driver) return response_error([],"选择【主驾】不存在，刷新页面重试！");
+        }
+        // 判断【副驾】是否存在
+        if(!empty($post_data['copilot_id']))
+        {
+            $copilot = WL_Common_Driver::find($post_data['copilot_id']);
+            if(!$copilot) return response_error([],"选择【副驾】不存在，刷新页面重试！");
+        }
 
+
+
+        if($post_data['car_owner_type'] == 1)
+        {
+            if(!empty($driver))
+            {
+                $post_data['driver_name'] = $driver->driver_name;
+                $post_data['driver_phone'] = $driver->driver_phone;
+            }
+            if(!empty($copilot))
+            {
+                $post_data['copilot_name'] = $copilot->driver_name;
+                $post_data['copilot_phone'] = $copilot->driver_phone;
+            }
+        }
+        else
+        {
+            $post_data['driver_id'] = 0;
+            $post_data['copilot_id'] = 0;
+
+        }
 
 
         // 启动数据库事务
@@ -529,21 +565,18 @@ class WLStaffOrderRepository {
 
 
             $mine_data = $post_data;
-            $mine_data['department_district_id'] = $me->department_district_id;
-            $mine_data['department_group_id'] = $me->department_group_id;
-            if($me->department_district_er) $mine_data['department_manager_id'] = $me->department_district_er->leader_id;
-            if($me->department_group_er) $mine_data['department_supervisor_id'] = $me->department_group_er->leader_id;
+            unset($mine_data['operate']);
 
-            if(!empty($custom_location_city) && !empty($custom_location_district))
+            $mine_data['company_id'] = $me->company_id;
+            $mine_data['department_id'] = $me->department_id;
+            $mine_data['team_id'] = $me->team_id;
+
+            if(!empty($project))
             {
-                $mine_data['location_city'] = $custom_location_city;
-                $mine_data['location_district'] = $custom_location_district;
+                $mine_data['client_id'] = $project->client_id;
             }
 
-            unset($mine_data['operate']);
-            unset($mine_data['operate_id']);
-            unset($mine_data['operate_category']);
-            unset($mine_data['operate_type']);
+
 
 
             $bool = $mine->fill($mine_data)->save();
@@ -557,7 +590,7 @@ class WLStaffOrderRepository {
 ////                    $circle->pivot_order_list()->syncWithoutDetaching($circle_data);  //
 //                }
             }
-            else throw new Exception("insert--order--fail");
+            else throw new Exception("WL_Common_Order--insert--fail");
 
             DB::commit();
             return response_success(['id'=>$mine->id]);
@@ -573,155 +606,7 @@ class WLStaffOrderRepository {
 
     }
 
-    // 【工单】发布
-    public function o1__order__item_publish($post_data)
-    {
-        $messages = [
-            'operate.required' => 'operate.required.',
-            'item_id.required' => 'item_id.required.',
-        ];
-        $v = Validator::make($post_data, [
-            'operate' => 'required',
-            'item_id' => 'required',
-        ], $messages);
-        if ($v->fails())
-        {
-            $messages = $v->errors();
-            return response_error([],$messages->first());
-        }
 
-        $time = time();
-        $date = date("Y-m-d");
-
-        $operate = $post_data["operate"];
-        if($operate != 'order-publish') return response_error([],"参数[operate]有误！");
-        $id = $post_data["item_id"];
-        if(intval($id) !== 0 && !$id) return response_error([],"参数[ID]有误！");
-
-        $item = WL_Common_Order::withTrashed()->find($id);
-        if(!$item) return response_error([],"该内容不存在，刷新页面重试！");
-
-        if($item->is_published != 0)
-        {
-            return response_error([],"该【工单】已经发布过了，不要重复发布，刷新页面看下！");
-        }
-
-        $this->get_me();
-        $me = $this->me;
-        if(!in_array($me->user_type,[0,1,9,11,81,84,88])) return response_error([],"你没有操作权限！");
-        if(in_array($me->user_type,[88]) && $item->creator_id != $me->id) return response_error([],"该内容不是你的，你不能操作！");
-
-
-        $project_id = $item->project_id;
-        $client_phone = $item->client_phone;
-
-//        $is_today_repeat = WL_Common_Order::where(['client_phone'=>(int)$client_phone])
-//            ->where('id','<>',$id)
-//            ->where('is_published','>',0)
-//            ->where('published_date',$date)
-//            ->where('item_category',$item->item_category)
-//            ->count("*");
-//        if($is_today_repeat > 0)
-//        {
-//            return response_error([],"该号码今日已经提交过，不能重复提交！");
-//        }
-//
-//        $is_repeat = WL_Common_Order::where(['project_id'=>$project_id,'client_phone'=>(int)$client_phone])
-//            ->where('id','<>',$id)
-//            ->where('is_published','>',0)
-//            ->where('item_category',$item->item_category)
-//            ->count("*");
-//        if($is_repeat == 0)
-//        {
-//            $is_repeat = DK_Pivot_Client_Delivery::where(['project_id'=>$project_id,'client_phone'=>(int)$client_phone])->count("*");
-//        }
-
-        // 启动数据库事务
-        DB::beginTransaction();
-        try
-        {
-            if($item->inspected_status == 1)
-            {
-                $item->inspected_status = 9;
-            }
-
-
-            // 二奢直接交付
-            if($item->item_category == 99 && false)
-            {
-                $inspected_result = '通过';
-                $delivered_result = '已交付';
-
-                // 审核
-                $item->inspector_id = 0;
-                $item->inspected_status = 1;
-                $item->inspected_result = $inspected_result;
-                $item->inspected_at = $time;
-                $item->inspected_date = $date;
-
-
-                $project = WL_Common_Project::find($item->project_id);
-                if($project->client_id != 0)
-                {
-                    $delivered_client_id = $project->client_id;
-                    $client = WL_Common_Client::find($delivered_client_id);
-                    if(!$client) return response_error([],"客户不存在！");
-                }
-                else $delivered_client_id = 0;
-
-                $delivered_project_id = $item->project_id;
-
-
-                // 交付
-                $item->is_distributive_condition = 0;
-                $item->client_id = $delivered_client_id;
-                $item->deliverer_id = 0;
-                $item->delivered_status = 1;
-                $item->delivered_result = $delivered_result;
-                $item->delivered_at = $time;
-                $item->delivered_date = $date;
-
-            }
-
-
-//            $item->is_repeat = $is_repeat;
-            $item->is_published = 1;
-            $item->published_at = time();
-            $item->published_date = $date;
-            $bool = $item->save();
-            if(!$bool) throw new Exception("WL_Common_Order--update--fail");
-            else
-            {
-                $record = new WL_Staff_Record_Operation;
-
-                $record_data["ip"] = Get_IP();
-                $record_data["record_object"] = 21;
-                $record_data["record_category"] = 11;
-                $record_data["record_type"] = 1;
-                $record_data["creator_id"] = $me->id;
-                $record_data["order_id"] = $id;
-                $record_data["operate_object"] = 71;
-                $record_data["operate_category"] = 11;
-                $record_data["operate_type"] = 1;
-
-                $bool_1 = $record->fill($record_data)->save();
-                if(!$bool_1) throw new Exception("WL_Staff_Record_Operation--insert--fail");
-            }
-
-            DB::commit();
-
-            return response_success([],"发布成功!");
-        }
-        catch (Exception $e)
-        {
-            DB::rollback();
-            $msg = '操作失败，请重试！';
-            $msg = $e->getMessage();
-//            exit($e->getMessage());
-            return response_fail([],$msg);
-        }
-
-    }
 
     // 【工单】字段 修改
     public function o1__order__item_field_set($post_data)
@@ -972,8 +857,401 @@ class WLStaffOrderRepository {
     }
 
 
+
+
+
+    // 【工单】删除
+    public function o1__order__item_delete($post_data)
+    {
+        $messages = [
+            'operate.required' => 'operate.required.',
+            'item_id.required' => 'item_id.required.',
+        ];
+        $v = Validator::make($post_data, [
+            'operate' => 'required',
+            'item_id' => 'required',
+        ], $messages);
+        if ($v->fails())
+        {
+            $messages = $v->errors();
+            return response_error([],$messages->first());
+        }
+
+
+        $operate = $post_data["operate"];
+        if($operate != 'order--item-delete') return response_error([],"参数【operate】有误！");
+        $item_id = $post_data["item_id"];
+        if(intval($item_id) !== 0 && !$item_id) return response_error([],"参数[ID]有误！");
+
+        $this->get_me();
+        $me = $this->me;
+
+        // 判断用户操作权限
+        if(!in_array($me->user_type,[0,1,9,11])) return response_error([],"你没有操作权限！");
+
+        // 判断对象是否合法
+        $mine = WL_Common_Order::withTrashed()->find($item_id);
+        if(!$mine) return response_error([],"该【工单】不存在，刷新页面重试！");
+
+
+        // 启动数据库事务
+        DB::beginTransaction();
+        try
+        {
+            $mine->timestamps = false;
+            $bool = $mine->delete();  // 普通删除
+            if(!$bool) throw new Exception("WL_Common_Order--delete--fail");
+
+            DB::commit();
+            return response_success([]);
+        }
+        catch (Exception $e)
+        {
+            DB::rollback();
+            $msg = '操作失败，请重试！';
+            $msg = $e->getMessage();
+//            exit($e->getMessage());
+            return response_fail([],$msg);
+        }
+
+    }
+    // 【工单】恢复
+    public function o1__order__item_restore($post_data)
+    {
+        $messages = [
+            'operate.required' => 'operate.required.',
+            'item_id.required' => 'operate.required.',
+        ];
+        $v = Validator::make($post_data, [
+            'operate' => 'required',
+            'item_id' => 'required',
+        ], $messages);
+        if ($v->fails())
+        {
+            $messages = $v->errors();
+            return response_error([],$messages->first());
+        }
+
+        $operate = $post_data["operate"];
+        if($operate != 'order--item-restore') return response_error([],"参数【operate】有误！");
+        $id = $post_data["item_id"];
+        if(intval($id) !== 0 && !$id) return response_error([],"参数[ID]有误！");
+
+        $this->get_me();
+        $me = $this->me;
+
+        // 判断用户操作权限
+        if(!in_array($me->user_type,[0,1,9,11,19])) return response_error([],"你没有操作权限！");
+
+        // 判断对象是否合法
+        $mine = WL_Common_Order::withTrashed()->find($id);
+        if(!$mine) return response_error([],"该【工单】不存在，刷新页面重试！");
+
+        // 启动数据库事务
+        DB::beginTransaction();
+        try
+        {
+            $mine->timestamps = false;
+            $bool = $mine->restore();
+            if(!$bool) throw new Exception("WL_Common_Order--restore--fail");
+
+            DB::commit();
+            return response_success([]);
+        }
+        catch (Exception $e)
+        {
+            DB::rollback();
+            $msg = '操作失败，请重试！';
+            $msg = $e->getMessage();
+//            exit($e->getMessage());
+            return response_fail([],$msg);
+        }
+
+    }
+    // 【工单】彻底删除
+    public function o1__order__item_delete_permanently($post_data)
+    {
+        $messages = [
+            'operate.required' => 'operate.required.',
+            'item_id.required' => 'item_id.required.',
+        ];
+        $v = Validator::make($post_data, [
+            'operate' => 'required',
+            'item_id' => 'required',
+        ], $messages);
+        if ($v->fails())
+        {
+            $messages = $v->errors();
+            return response_error([],$messages->first());
+        }
+
+        $operate = $post_data["operate"];
+        if($operate != 'order--item-delete-permanently') return response_error([],"参数【operate】有误！");
+        $id = $post_data["item_id"];
+        if(intval($id) !== 0 && !$id) return response_error([],"参数[ID]有误！");
+
+        $this->get_me();
+        $me = $this->me;
+
+        // 判断用户操作权限
+        if(!in_array($me->user_type,[0,1,9,11,19])) return response_error([],"你没有操作权限！");
+
+        // 判断对象是否合法
+        $mine = WL_Common_Order::withTrashed()->find($id);
+        if(!$mine) return response_error([],"该【工单】不存在，刷新页面重试！");
+
+        // 启动数据库事务
+        DB::beginTransaction();
+        try
+        {
+            $mine_copy = $mine;
+            $bool = $mine->forceDelete();
+            if(!$bool) throw new Exception("WL_Common_Order--delete--fail");
+
+            DB::commit();
+            return response_success([]);
+        }
+        catch (Exception $e)
+        {
+            DB::rollback();
+            $msg = '操作失败，请重试！';
+            $msg = $e->getMessage();
+//            exit($e->getMessage());
+            return response_fail([],$msg);
+        }
+
+    }
+
+
+    // 【工单】启用
+    public function o1__order__item_enable($post_data)
+    {
+        $messages = [
+            'operate.required' => 'operate.required.',
+            'item_id.required' => 'item_id.required.',
+        ];
+        $v = Validator::make($post_data, [
+            'operate' => 'required',
+            'item_id' => 'required',
+        ], $messages);
+        if ($v->fails())
+        {
+            $messages = $v->errors();
+            return response_error([],$messages->first());
+        }
+
+
+        $operate = $post_data["operate"];
+        if($operate != 'order--item-enable') return response_error([],"参数【operate】有误！");
+        $id = $post_data["item_id"];
+        if(intval($id) !== 0 && !$id) return response_error([],"参数[ID]有误！");
+
+        $this->get_me();
+        $me = $this->me;
+
+        // 判断用户操作权限
+        if(!in_array($me->user_type,[0,1,9,11])) return response_error([],"你没有操作权限！");
+
+        // 判断对象是否合法
+        $mine = WL_Common_Order::find($id);
+        if(!$mine) return response_error([],"该【工单】不存在，刷新页面重试！");
+//        if($mine->client_id != $me->client_id) return response_error([],"归属错误，刷新页面重试！");
+
+
+        // 启动数据库事务
+        DB::beginTransaction();
+        try
+        {
+            $mine->item_status = 1;
+            $mine->timestamps = false;
+            $bool = $mine->save();
+            if(!$bool) throw new Exception("WL_Common_Order--update--fail");
+
+            DB::commit();
+            return response_success([]);
+        }
+        catch (Exception $e)
+        {
+            DB::rollback();
+            $msg = '操作失败，请重试！';
+            $msg = $e->getMessage();
+//            exit($e->getMessage());
+            return response_fail([],$msg);
+        }
+
+    }
+    // 【工单】禁用
+    public function o1__order__item_disable($post_data)
+    {
+        $messages = [
+            'operate.required' => 'operate.required.',
+            'item_id.required' => 'item_id.required.',
+        ];
+        $v = Validator::make($post_data, [
+            'operate' => 'required',
+            'item_id' => 'required',
+        ], $messages);
+        if ($v->fails())
+        {
+            $messages = $v->errors();
+            return response_error([],$messages->first());
+        }
+
+
+        $operate = $post_data["operate"];
+        if($operate != 'order--item-disable') return response_error([],"参数【operate】有误！");
+        $id = $post_data["item_id"];
+        if(intval($id) !== 0 && !$id) return response_error([],"参数[ID]有误！");
+
+        $this->get_me();
+        $me = $this->me;
+
+        // 判断用户操作权限
+        if(!in_array($me->user_type,[0,1,9,11])) return response_error([],"你没有操作权限！");
+
+        // 判断对象是否合法
+        $mine = WL_Common_Order::find($id);
+        if(!$mine) return response_error([],"该【工单】不存在，刷新页面重试！");
+//        if($mine->client_id != $me->client_id) return response_error([],"归属错误，刷新页面重试！");
+
+
+        // 启动数据库事务
+        DB::beginTransaction();
+        try
+        {
+            $mine->item_status = 9;
+            $mine->timestamps = false;
+            $bool = $mine->save();
+            if(!$bool) throw new Exception("WL_Common_Order--update--fail");
+
+            DB::commit();
+            return response_success([]);
+        }
+        catch (Exception $e)
+        {
+            DB::rollback();
+            $msg = '操作失败，请重试！';
+            $msg = $e->getMessage();
+//            exit($e->getMessage());
+            return response_fail([],$msg);
+        }
+
+    }
+
+
+    // 【工单】发布
+    public function o1__order__item_publish($post_data)
+    {
+        $messages = [
+            'operate.required' => 'operate.required.',
+            'item_id.required' => 'item_id.required.',
+        ];
+        $v = Validator::make($post_data, [
+            'operate' => 'required',
+            'item_id' => 'required',
+        ], $messages);
+        if ($v->fails())
+        {
+            $messages = $v->errors();
+            return response_error([],$messages->first());
+        }
+
+
+        $operate = $post_data["operate"];
+        if($operate != 'order--item-publish') return response_error([],"参数【operate】有误！");
+        $id = $post_data["item_id"];
+        if(intval($id) !== 0 && !$id) return response_error([],"参数[ID]有误！");
+
+        $this->get_me();
+        $me = $this->me;
+
+        // 判断用户操作权限
+        if(!in_array($me->user_type,[0,1,9,11])) return response_error([],"你没有操作权限！");
+
+        // 判断对象是否合法
+        $mine = WL_Common_Order::find($id);
+        if(!$mine) return response_error([],"该【工单】不存在，刷新页面重试！");
+        if(in_array($me->user_type,[88]) && $mine->creator_id != $me->id) return response_error([],"该内容不是你的，你不能操作！");
+        if($mine->is_published != 0)
+        {
+            return response_error([],"该【工单】已经发布过了，不要重复发布，刷新页面看下！");
+        }
+
+
+        $datetime = date('Y-m-d H:i:s');
+        $date = date("Y-m-d");
+        $time = time();
+
+
+        $operation_record_data = [];
+
+        $record_data["operate_category"] = 1;
+        $record_data["operate_type"] = 11;
+        $record_data["client_id"] = $mine->client_id;
+        $record_data["project_id"] = $mine->project_id;
+        $record_data["order_id"] = $id;
+        $record_data["creator_id"] = $me->id;
+        $record_data["team_id"] = $me->team_id;
+        $record_data["department_id"] = $me->department_id;
+        $record_data["company_id"] = $me->company_id;
+//        $record_data["custom_date"] = $fee_data["fee_datetime"];
+//        $record_data["custom_datetime"] = $fee_data["fee_datetime"];
+
+        $operation = [];
+        $operation['operation'] = 'item.publish';
+        $operation['field'] = 'is_published';
+        $operation['title'] = '操作';
+        $operation['before'] = '';
+        $operation['after'] = '发布';
+        $operation_record_data[] = $operation;
+
+        $record_data["content"] = json_encode($operation_record_data);
+
+
+
+        // 启动数据库事务
+        DB::beginTransaction();
+        try
+        {
+            $mine->is_published = 1;
+            $mine->published_at = time();
+            $mine->published_date = $date;
+            $bool = $mine->save();
+            if(!$bool) throw new Exception("WL_Common_Order--update--fail");
+            else
+            {
+                $order_operation_record = new WL_Common_Order_Operation_Record;
+                $bool_op = $order_operation_record->fill($record_data)->save();
+                if($bool_op)
+                {
+                    $mine->last_operation_datetime = $datetime;
+                    $mine->last_operation_date = $datetime;
+                    $bool_order = $mine->save();
+                    if(!$bool_order) throw new Exception("WL_Common_Order--update--fail");
+                }
+                else throw new Exception("WL_Common_Order_Operation_Record--insert--fail");
+            }
+
+            DB::commit();
+
+            return response_success([],"发布成功!");
+        }
+        catch (Exception $e)
+        {
+            DB::rollback();
+            $msg = '操作失败，请重试！';
+            $msg = $e->getMessage();
+//            exit($e->getMessage());
+            return response_fail([],$msg);
+        }
+
+    }
+
+
+
+
     // 【工单】【操作记录】返回-列表-数据
-    public function o1__order__item_operation_record_list_datatable_query($post_data)
+    public function o1__order__item_operation_record_list__datatable_query($post_data)
     {
         $this->get_me();
         $me = $this->me;
@@ -1020,18 +1298,19 @@ class WLStaffOrderRepository {
 //        dd($list->toArray());
         return datatable_response($list, $draw, $total);
     }
-    // 【工单】【费用记录】返回-列表-数据
-    public function o1__order__item_fee_record_datatable_list_query($post_data)
+    // 【工单】【行程记录】返回-列表-数据
+    public function o1__order__item_journey_record_list__datatable_query($post_data)
     {
         $this->get_me();
         $me = $this->me;
 
         $id  = $post_data["id"];
-        $query = WL_Common_Order_Operation_Record::select('*')
+        $query = WL_Common_Transport_Journey::select('*')
             ->with([
                 'creator'=>function($query) { $query->select(['id','username','true_name']); },
             ])
-            ->where(['order_id'=>$id]);
+//            ->where('operate_type',88)
+            ->where('order_id',$id);
 //            ->where(['record_object'=>21,'operate_object'=>61,'item_id'=>$id]);
 
         if(!empty($post_data['name'])) $query->where('name', 'like', "%{$post_data['name']}%");
@@ -1039,8 +1318,57 @@ class WLStaffOrderRepository {
 
         $total = $query->count();
 
-        $draw  = isset($post_data['draw'])  ? $post_data['draw']  : 1;
-        $skip  = isset($post_data['start'])  ? $post_data['start']  : 0;
+        $draw  = isset($post_data['draw'])  ? $post_data['draw'] : 1;
+        $skip  = isset($post_data['start'])  ? $post_data['start'] : 0;
+        $limit = isset($post_data['length']) ? $post_data['length'] : 50;
+
+        if(isset($post_data['order']))
+        {
+            $columns = $post_data['columns'];
+            $order = $post_data['order'][0];
+            $order_column = $order['column'];
+            $order_dir = $order['dir'];
+
+            $field = $columns[$order_column]["data"];
+            $query->orderBy($field, $order_dir);
+        }
+        else $query->orderBy("id", "desc");
+
+        if($limit == -1) $list = $query->get();
+        else $list = $query->skip($skip)->take($limit)->withTrashed()->get();
+
+        foreach ($list as $k => $v)
+        {
+            $list[$k]->encode_id = encode($v->id);
+
+            if($v->owner_id == $me->id) $list[$k]->is_me = 1;
+            else $list[$k]->is_me = 0;
+        }
+//        dd($list->toArray());
+        return datatable_response($list, $draw, $total);
+    }
+    // 【工单】【费用记录】返回-列表-数据
+    public function o1__order__item_fee_record_list__datatable_query($post_data)
+    {
+        $this->get_me();
+        $me = $this->me;
+
+        $id  = $post_data["id"];
+        $query = WL_Common_Fee::select('*')
+            ->with([
+                'creator'=>function($query) { $query->select(['id','username','true_name']); },
+            ])
+//            ->where('operate_type',88)
+            ->where('order_id',$id);
+//            ->where(['record_object'=>21,'operate_object'=>61,'item_id'=>$id]);
+
+        if(!empty($post_data['name'])) $query->where('name', 'like', "%{$post_data['name']}%");
+
+
+        $total = $query->count();
+
+        $draw  = isset($post_data['draw'])  ? $post_data['draw'] : 1;
+        $skip  = isset($post_data['start'])  ? $post_data['start'] : 0;
         $limit = isset($post_data['length']) ? $post_data['length'] : 50;
 
         if(isset($post_data['order']))
@@ -1110,11 +1438,23 @@ class WLStaffOrderRepository {
 
         $operation_record_data = [];
 
+        // 操作
+        if(true)
+        {
+            $operation = [];
+            $operation['operation'] = 'item.follow';
+            $operation['field'] = '';
+            $operation['title'] = '操作';
+            $operation['before'] = '';
+            $operation['after'] = '跟进';
+            $operation_record_data[] = $operation;
+        }
         // 时间
         $operation_data["follow_date"] = $post_data['follow-datetime'];
         $operation_data["follow_datetime"] = $post_data['follow-datetime'];
         if(!empty($operation_data["follow_datetime"]))
         {
+            $operation = [];
             $operation['field'] = 'follow_datetime';
             $operation['title'] = '时间';
             $operation['before'] = '';
@@ -1125,6 +1465,7 @@ class WLStaffOrderRepository {
         $operation_data["follow_description"] = $post_data['follow-description'];
         if(!empty($operation_data["follow_description"]))
         {
+            $operation = [];
             $operation['field'] = 'follow_description';
             $operation['title'] = '说明';
             $operation['before'] = '';
@@ -1223,109 +1564,149 @@ class WLStaffOrderRepository {
         $operation_record_data = [];
 
         // 类型
-        $operation_data["journey_type"] = $post_data['journey-type'];
-        if(!empty($operation_data["journey_type"]))
+        $journey_type = $post_data['journey-type'];
+        if(!empty($journey_type))
         {
-            $operation['field'] = 'fee_type';
+            $operation['field'] = 'journey_type';
             $operation['title'] = '类型';
             $operation['before'] = '';
-            if($operation_data["journey_type"] == 1)
+            if($journey_type == 1)
             {
                 $operation['after'] = "运输";
             }
-            else if($operation_data["journey_type"] == 99)
+            else if($journey_type == 99)
             {
                 $operation['after'] = "卸货";
             }
-            else if($operation_data["journey_type"] == 101)
+            else if($journey_type == 101)
             {
                 $operation['after'] = "空单";
             }
             else
             {
-                $operation['after'] = $operation_data["fee_type"];
+                $operation['after'] = $journey_type;
             }
             $operation_record_data[] = $operation;
         }
+        // 出发地
+        $journey_departure_place = $post_data['journey-departure-place'];
+        if(!empty($journey_departure_place))
+        {
+            $operation['field'] = 'journey_departure_place';
+            $operation['title'] = '出发地';
+            $operation['before'] = '';
+            $operation['after'] = $journey_departure_place;
+            $operation_record_data[] = $operation;
+        }
+        // 经停地
+        $journey_stopover_place = $post_data['journey-stopover-place'];
+        if(!empty($journey_stopover_place))
+        {
+            $operation['field'] = 'journey_stopover_place';
+            $operation['title'] = '经停地';
+            $operation['before'] = '';
+            $operation['after'] = $journey_stopover_place;
+            $operation_record_data[] = $operation;
+        }
+        // 目的地
+        $journey_destination_place = $post_data['journey-destination-place'];
+        if(!empty($journey_destination_place))
+        {
+            $operation['field'] = 'journey_destination_place';
+            $operation['title'] = '目的地';
+            $operation['before'] = '';
+            $operation['after'] = $journey_destination_place;
+            $operation_record_data[] = $operation;
+        }
         // 应出发时间
-        $operate_data["journey_should_departure_datetime"] = $post_data['journey-should-departure-datetime'];
-        if(!empty($operate_data["journey_should_departure_datetime"]))
+        $journey_should_departure_datetime = $post_data['journey-should-departure-datetime'];
+        if(!empty($journey_should_departure_datetime))
         {
             $operation['field'] = 'journey_should_departure_datetime';
             $operation['title'] = '应出发时间';
             $operation['before'] = '';
-            $operation['after'] = $operate_data["journey_should_departure_datetime"];
+            $operation['after'] = $journey_should_departure_datetime;
             $operation_record_data[] = $operation;
         }
         // 应到达时间
-        $operate_data["journey_should_arrival_datetime"] = $post_data['journey-should-arrival-datetime'];
-        if(!empty($operate_data["journey_should_arrival_datetime"]))
+        $journey_should_arrival_datetime = $post_data['journey-should-arrival-datetime'];
+        if(!empty($journey_should_arrival_datetime))
         {
             $operation['field'] = 'journey_should_arrival_datetime';
             $operation['title'] = '应到达时间';
             $operation['before'] = '';
-            $operation['after'] = $operate_data["journey_should_arrival_datetime"];
+            $operation['after'] = $journey_should_arrival_datetime;
             $operation_record_data[] = $operation;
         }
         // 实际出发时间
-        $operate_data["journey_actual_departure_datetime"] = $post_data['journey-actual-departure-datetime'];
-        if(!empty($operate_data["journey_actual_departure_datetime"]))
+        $journey_actual_departure_datetime = $post_data['journey-actual-departure-datetime'];
+        if(!empty($journey_actual_departure_datetime))
         {
             $operation['field'] = 'journey_actual_departure_datetime';
             $operation['title'] = '实际出发时间';
             $operation['before'] = '';
-            $operation['after'] = $operate_data["journey_actual_departure_datetime"];
+            $operation['after'] = $journey_actual_departure_datetime;
             $operation_record_data[] = $operation;
         }
         // 应到达时间
-        $operate_data["journey_actual_arrival_datetime"] = $post_data['journey-actual-arrival-datetime'];
-        if(!empty($operate_data["journey_actual_arrival_datetime"]))
+        $journey_actual_arrival_datetime = $post_data['journey-actual-arrival-datetime'];
+        if(!empty($journey_actual_arrival_datetime))
         {
             $operation['field'] = 'journey_actual_arrival_datetime';
             $operation['title'] = '应到达时间';
             $operation['before'] = '';
-            $operation['after'] = $operate_data["journey_actual_arrival_datetime"];
+            $operation['after'] = $journey_actual_arrival_datetime;
             $operation_record_data[] = $operation;
         }
-        // 里程
-        $operate_data["journey_mileage"] = $post_data['journey-mileage'];
-        if(!empty($operate_data["journey_mileage"]))
+        // 距离
+        $journey_distance = $post_data['journey-distance'];
+        if(!empty($journey_distance))
         {
-            $operation['field'] = 'journey_mileage';
-            $operation['title'] = '里程';
+            $operation['field'] = 'journey_distance';
+            $operation['title'] = '距离';
             $operation['before'] = '';
-            $operation['after'] = $operate_data["journey_mileage"];
+            $operation['after'] = $journey_distance;
             $operation_record_data[] = $operation;
         }
         // 时效
-        $operate_data["journey_time_limitation"] = $post_data['journey-time-limitation'];
-        if(!empty($operate_data["journey_time_limitation"]))
+        $journey_time_limitation = $post_data['journey-time-limitation'];
+        if(!empty($journey_time_limitation))
         {
             $operation['field'] = 'journey_time_limitation';
             $operation['title'] = '时效';
             $operation['before'] = '';
-            $operation['after'] = $operate_data["journey_time_limitation"];
+            $operation['after'] = $journey_time_limitation;
+            $operation_record_data[] = $operation;
+        }
+        // 实际里程
+        $journey_actual_mileage = $post_data['journey-actual-mileage'];
+        if(!empty($journey_actual_mileage))
+        {
+            $operation['field'] = 'journey_actual_mileage';
+            $operation['title'] = '实际里程';
+            $operation['before'] = '';
+            $operation['after'] = $journey_actual_mileage;
             $operation_record_data[] = $operation;
         }
 //        // 时间
-//        $operate_data["journey_date"] = $post_data['journey-datetime'];
-//        $operate_data["journey_datetime"] = $post_data['journey-datetime'];
-//        if(!empty($operate_data["journey_datetime"]))
+//        $journey_date = $post_data['journey-datetime'];
+//        $journey_datetime = $post_data['journey-datetime'];
+//        if(!empty($journey_datetime))
 //        {
 //            $operation['field'] = 'journey_datetime';
 //            $operation['title'] = '时间';
 //            $operation['before'] = '';
-//            $operation['after'] = $operate_data["journey_datetime"];
+//            $operation['after'] = $journey_datetime;
 //            $operation_record_data[] = $operation;
 //        }
         // 备注
-        $operate_data["journey_description"] = $post_data['journey-description'];
-        if(!empty($operate_data["follow_description"]))
+        $journey_description = $post_data['journey-description'];
+        if(!empty($journey_description))
         {
             $operation['field'] = 'journey_description';
             $operation['title'] = '备注';
             $operation['before'] = '';
-            $operation['after'] = $operate_data["journey_description"];
+            $operation['after'] = $journey_description;
             $operation_record_data[] = $operation;
         }
 
@@ -1339,13 +1720,12 @@ class WLStaffOrderRepository {
         $record_data["creator_id"] = $me->id;
         $record_data["team_id"] = $me->team_id;
         $record_data["department_id"] = $me->department_id;
-//        $record_data["company_id"] = $me->company_id;
-//        $record_data["custom_date"] = $operate_data["follow_datetime"];
-//        $record_data["custom_datetime"] = $operate_data["follow_datetime"];
+        $record_data["company_id"] = $me->company_id;
+//        $record_data["custom_date"] = $journey_date;
+//        $record_data["custom_datetime"] = $journey_datetime;
         $record_data["content"] = json_encode($operation_record_data);
 //        $record_data["custom_datetime"] = $datetime;
 //        $record_data["custom_date"] = $datetime;
-
 
 
 
@@ -1354,17 +1734,58 @@ class WLStaffOrderRepository {
         DB::beginTransaction();
         try
         {
-            $order_operation_record = new WL_Common_Order_Operation_Record;
-            $bool_oor = $order_operation_record->fill($record_data)->save();
-            if($bool_oor)
+            $journey_data["journey_category"] = 1;
+            $journey_data["journey_type"] = $journey_type;
+            $journey_data["client_id"] = $order->client_id;
+            $journey_data["project_id"] = $order->project_id;
+            $journey_data["order_id"] = $operate_id;
+            $journey_data["order_task_date"] = $order->task_date;
+            $journey_data["car_id"] = $order->car_id;
+            $journey_data["driver_id"] = $order->driver_id;
+            $journey_data["creator_id"] = $me->id;
+            $journey_data["department_id"] = $me->department_id;
+            $journey_data["team_id"] = $me->team_id;
+
+            $journey_data["transport_departure_place"] = $journey_departure_place;
+            $journey_data["transport_stopover_place"] = $journey_stopover_place;
+            $journey_data["transport_destination_place"] = $journey_destination_place;
+            $journey_data["transport_distance"] = !empty($journey_distance) ? $journey_distance : 0;
+            $journey_data["transport_time_limitation"] = !empty($journey_time_limitation) ? ($journey_time_limitation * 60) : 0;
+            $journey_data["transport_actual_mileage"] = !empty($journey_actual_mileage) ? $journey_actual_mileage : 0;
+            $journey_data["should_departure_datetime"] = $journey_should_departure_datetime;
+            $journey_data["should_arrival_datetime"] = $journey_should_arrival_datetime;
+            $journey_data["actual_departure_datetime"] = $journey_actual_departure_datetime;
+            $journey_data["actual_arrival_datetime"] = $journey_actual_arrival_datetime;
+            $journey_data["description"] = $journey_description;
+
+            $journey = new WL_Common_Transport_Journey();
+            $bool_journey = $journey->fill($journey_data)->save();
+            if($bool_journey)
             {
-//                $mine->timestamps = false;
-                $order->last_operation_datetime = $datetime;
-                $order->last_operation_date = $datetime;
-                $bool_order = $order->save();
-                if(!$bool_order) throw new Exception("WL_Common_Order--update--fail");
+                $record_data['custom_id'] = $journey->id;
+
+                $order_operation_record = new WL_Common_Order_Operation_Record;
+                $bool_oor = $order_operation_record->fill($record_data)->save();
+                if($bool_oor)
+                {
+                    $journey->order_operation_record_id = $order_operation_record->id;
+                    $bool_journey_2 = $journey->save();
+                    if(!$bool_journey_2) throw new Exception("WL_Common_Transport_Journey--update--fail");
+
+                    $order = WL_Common_Order::lockForUpdate()->find($operate_id);
+
+                    $order->transport_actual_mileage += $journey_actual_mileage;
+
+                    $order->last_operation_datetime = $datetime;
+                    $order->last_operation_date = $datetime;
+                    $bool_order = $order->save();
+                    if(!$bool_order) throw new Exception("WL_Common_Order--update--fail");
+                }
+                else throw new Exception("WL_Common_Order_Operation_Record--insert--fail");
             }
-            else throw new Exception("WL_Common_Order_Operation_Record--insert--fail");
+            else throw new Exception("WL_Common_Transport_Journey--insert--fail");
+
+
 
             DB::commit();
             return response_success(['id'=>$order->id]);
@@ -1422,19 +1843,19 @@ class WLStaffOrderRepository {
         $operation_record_data = [];
 
 
-        $fee_data["fee_category"] = 1;
-        $fee_data["fee_type"] = 1;
-        $fee_data["client_id"] = $order->client_id;
-        $fee_data["project_id"] = $order->project_id;
-        $fee_data["order_id"] = $operate_id;
-        $fee_data["order_task_date"] = $order->task_date;
-        $fee_data["car_id"] = $order->car_id;
-        $fee_data["driver_id"] = $order->driver_id;
-        $fee_data["creator_id"] = $me->id;
-        $fee_data["department_id"] = $me->department_id;
-        $fee_data["team_id"] = $me->team_id;
 
 
+        // 操作
+        if(true)
+        {
+            $operation = [];
+            $operation['operation'] = 'item.fee';
+            $operation['field'] = '';
+            $operation['title'] = '操作';
+            $operation['before'] = '';
+            $operation['after'] = '费用';
+            $operation_record_data[] = $operation;
+        }
         // 类型
         $operation_data["fee_type"] = $post_data['fee-type'];
         if(!empty($operation_data["fee_type"]))
@@ -1540,26 +1961,36 @@ class WLStaffOrderRepository {
 
 
 
-        $record_data["operate_category"] = 1;
-        $record_data["operate_type"] = 81;
+        $record_data["operate_category"] = 81;
+        $record_data["operate_type"] = 1;
         $record_data["client_id"] = $order->client_id;
         $record_data["project_id"] = $order->project_id;
         $record_data["order_id"] = $operate_id;
         $record_data["creator_id"] = $me->id;
         $record_data["team_id"] = $me->team_id;
         $record_data["department_id"] = $me->department_id;
-//        $record_data["company_id"] = $me->company_id;
+        $record_data["company_id"] = $me->company_id;
         $record_data["custom_date"] = $fee_data["fee_datetime"];
         $record_data["custom_datetime"] = $fee_data["fee_datetime"];
-        $record_data["content"] = json_encode($operation_record);
-//        $follow_data["custom_datetime"] = $datetime;
-//        $follow_data["custom_date"] = $datetime;
+        $record_data["content"] = json_encode($operation_record_data);
 
 
         // 启动数据库事务
         DB::beginTransaction();
         try
         {
+            $fee_data["fee_category"] = 1;
+            $fee_data["fee_type"] = $operation_data["fee_type"];
+            $fee_data["client_id"] = $order->client_id;
+            $fee_data["project_id"] = $order->project_id;
+            $fee_data["order_id"] = $operate_id;
+            $fee_data["order_task_date"] = $order->task_date;
+            $fee_data["car_id"] = $order->car_id;
+            $fee_data["driver_id"] = $order->driver_id;
+            $fee_data["creator_id"] = $me->id;
+            $fee_data["department_id"] = $me->department_id;
+            $fee_data["team_id"] = $me->team_id;
+
             $fee = new WL_Common_Fee;
             $bool_fee = $fee->fill($fee_data)->save();
             if($bool_fee)

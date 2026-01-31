@@ -28,13 +28,13 @@
                 if($tabPane.length)
                 {
                     // 存在则激活
-                    console.log('已存在！');
+                    console.log('【Tab】 '+'#'+$config.id+' 已存在！');
                     $tabLink.tab('show');
                 }
                 else
                 {
                     // 创建新标签页
-                    console.log('不存在！');
+                    console.log('【Tab】 '+'#'+$config.id+' 不存在！');
                     createTab($config);
                     // 激活新标签页
                     $('a[href="#'+$config.id+'"]').tab('show');
@@ -94,7 +94,7 @@
 
 
 
-        // 通用标签控制逻辑
+        // 【datatable】控制逻辑
         $(".main-wrapper").on('click', ".datatable-control", function() {
 
             var $btn = $(this);
@@ -133,7 +133,8 @@
 
             if($.fn.DataTable.isDataTable('#'+$config.id))
             {
-                console.log('DataTable 已存在！');
+                console.log('【DataTable】' + '#'+$config.id + ' 已存在！');
+
                 if($reload == 'y')
                 {
                     $('#'+$config.id).DataTable().ajax.reload(null,false);
@@ -141,7 +142,7 @@
             }
             else
             {
-                console.log('DataTable 未初始化！');
+                console.log('【DataTable】' + '#'+$config.id + ' 未初始化！');
 
                 var $clone = $('.'+$config.clone_object).clone(true);
                 $clone.removeClass($config.clone_object);
@@ -159,45 +160,53 @@
                 if($id == "datatable-list")
                 {
                 }
+                else if($id == "datatable-company-list")
+                {
+                    Datatable__for__Company_List('#'+$config.id);
+                }
                 else if($id == "datatable-department-list")
                 {
-                    Datatable_for_Department_List('#'+$config.id);
+                    Datatable__for__Department_List('#'+$config.id);
                 }
                 else if($id == "datatable-team-list")
                 {
-                    Datatable_for_Team_List('#'+$config.id);
+                    Datatable__for__Team_List('#'+$config.id);
                 }
                 else if($id == "datatable-staff-list")
                 {
-                    Datatable_for_Staff_List('#'+$config.id);
+                    Datatable__for__Staff_List('#'+$config.id);
+                }
+                else if($id == "datatable-motorcade-list")
+                {
+                    Datatable__for__Motorcade_List('#'+$config.id);
                 }
                 else if($id == "datatable-car-list")
                 {
-                    Datatable_for_Car_List('#'+$config.id);
+                    Datatable__for__Car_List('#'+$config.id);
                 }
                 else if($id == "datatable-driver-list")
                 {
-                    Datatable_for_Driver_List('#'+$config.id);
+                    Datatable__for__Driver_List('#'+$config.id);
                 }
                 else if($id == "datatable-client-list")
                 {
-                    Datatable_for_Client_List('#'+$config.id);
+                    Datatable__for__Client_List('#'+$config.id);
                 }
                 else if($id == "datatable-project-list")
                 {
-                    Datatable_for_Project_List('#'+$config.id);
+                    Datatable__for__Project_List('#'+$config.id);
                 }
                 else if($id == "datatable-order-list")
                 {
-                    Datatable_for_Order_List('#'+$config.id);
+                    Datatable__for__Order_List('#'+$config.id);
                 }
                 else if($id == "datatable-fee-list")
                 {
-                    Datatable_for_Fee_List('#'+$config.id);
+                    Datatable__for__Fee_List('#'+$config.id);
                 }
                 else if($id == "datatable-finance-list")
                 {
-                    Datatable_for_Finance_List('#'+$config.id);
+                    Datatable__for__Finance_List('#'+$config.id);
                 }
                 else if($id == "datatable-statistic-order-daily")
                 {
@@ -301,7 +310,7 @@
                     ignoreReadonly: true
                 });
 
-                // Datatable_for_Statistic_Staff_Daily('#'+$datatable_id,$chart_id);
+                // Datatable__for__Statistic_Staff_Daily('#'+$datatable_id,$chart_id);
 
                 Datatable_Statistic_of_Client_by_Daily_for_Order('#'+$datatable_id_for_order,$chart_id);
                 Datatable_Statistic_of_Client_by_Daily_for_Fee('#'+$datatable_id_for_fee,$chart_id);
@@ -489,7 +498,7 @@
                     ignoreReadonly: true
                 });
 
-                // Datatable_for_Statistic_Staff_Daily('#'+$datatable_id,$chart_id);
+                // Datatable__for__Statistic_Staff_Daily('#'+$datatable_id,$chart_id);
             }
 
         });
@@ -680,7 +689,7 @@
                     ignoreReadonly: true
                 });
 
-                // Datatable_for_Statistic_Staff_Daily('#'+$datatable_id,$chart_id);
+                // Datatable__for__Statistic_Staff_Daily('#'+$datatable_id,$chart_id);
 
                 Datatable_Statistic_of_Driver_by_Daily_for_Order('#'+$datatable_id_for_order,$chart_id);
                 Datatable_Statistic_of_Driver_by_Daily_for_Fee('#'+$datatable_id_for_fee,$chart_id);
@@ -725,29 +734,88 @@
     // 创建标签页函数
     function createTabInit($config)
     {
+
+        //iCheck for checkbox and radio inputs
+        $('#'+$config.target).find('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+            checkboxClass: 'icheckbox_minimal-blue',
+            radioClass: 'iradio_minimal-blue'
+        });
+
         $('#'+$config.target).find('.select2-box-c').select2({
             theme: 'classic'
         });
         $('#'+$config.target).find('.time-picker-c').datetimepicker({
-            locale: moment.locale('zh-cn'),
-            format: "YYYY-MM-DD HH:mm",
+            // 1. 格式控制是否显示时间
+            format: 'YYYY-MM-DD HH:mm',  // 包含HH:mm自动启用时间选择
+            // format: 'YYYY-MM-DD',      // 只显示日期
+
+            // 2. 显示模式
+            sideBySide: true,           // ✅ 并排显示日期和时间选择器
+            inline: false,              // 内联模式
+
+            // 3. 工具栏按钮
+            showTodayButton: true,      // 今天按钮
+            showClear: true,            // 清除按钮
+            showClose: true,            // 关闭按钮
+
+            // 4. 语言
+            locale: moment.locale('zh-cn'),          // 中文
+
+            // 6. 工具栏位置
+            toolbarPlacement: 'bottom', // 'top' 或 'bottom'
+
             ignoreReadonly: true
         });
         $('#'+$config.target).find('.date-picker-c').datetimepicker({
-            locale: moment.locale('zh-cn'),
-            format: "YYYY-MM-DD",
+            // 1. 格式控制是否显示时间
+            // format: 'YYYY-MM-DD HH:mm',  // 包含HH:mm自动启用时间选择
+            format: 'YYYY-MM-DD',      // 只显示日期
+
+            // 2. 显示模式
+            sideBySide: true,           // ✅ 并排显示日期和时间选择器
+            inline: false,              // 内联模式
+
+            // 3. 工具栏按钮
+            showTodayButton: true,      // 今天按钮
+            showClear: true,            // 清除按钮
+            showClose: true,            // 关闭按钮
+
+            // 4. 语言
+            locale: moment.locale('zh-cn'),          // 中文
+
+            // 6. 工具栏位置
+            toolbarPlacement: 'bottom', // 'top' 或 'bottom'
+
             ignoreReadonly: true
         });
         $('#'+$config.target).find('.month-picker-c').datetimepicker({
-            locale: moment.locale('zh-cn'),
-            format: "YYYY-MM",
+            // 1. 格式控制是否显示时间
+            // format: 'YYYY-MM-DD HH:mm',  // 包含HH:mm自动启用时间选择
+            // format: 'YYYY-MM-DD',      // 只显示日期
+            format: 'YYYY-MM',      // 只显示月份
+
+            // 2. 显示模式
+            sideBySide: true,           // ✅ 并排显示日期和时间选择器
+            inline: false,              // 内联模式
+
+            // 3. 工具栏按钮
+            showTodayButton: true,      // 今天按钮
+            showClear: true,            // 清除按钮
+            showClose: true,            // 关闭按钮
+
+            // 4. 语言
+            locale: moment.locale('zh-cn'),          // 中文
+
+            // 6. 工具栏位置
+            toolbarPlacement: 'bottom', // 'top' 或 'bottom'
+
             ignoreReadonly: true
         });
 
         // select2
         $('#'+$config.target).find('.select2-department-c').select2({
             ajax: {
-                url: "{{ url('/v1/operate/select2/select2-department') }}",
+                url: "{{ url('/o1/select2/select2-department') }}",
                 type: 'post',
                 dataType: 'json',
                 delay: 250,
@@ -778,7 +846,7 @@
         });
         $('#'+$config.target).find('.select2-team-c').select2({
             ajax: {
-                url: "{{ url('/v1/operate/select2/select2-team') }}",
+                url: "{{ url('/o1/select2/select2-team') }}",
                 type: 'post',
                 dataType: 'json',
                 delay: 250,
@@ -810,7 +878,7 @@
         });
         $('#'+$config.target).find('.select2-staff-c').select2({
             ajax: {
-                url: "{{ url('/v1/operate/select2/select2-staff') }}",
+                url: "{{ url('/o1/select2/select2-staff') }}",
                 type: 'post',
                 dataType: 'json',
                 delay: 250,
