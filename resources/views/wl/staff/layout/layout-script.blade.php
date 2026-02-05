@@ -477,8 +477,8 @@
                     // 检查是否为有效选中项（避免空数据打印）
                     if (data.id && data.text)
                     {
-                        console.log("Selected:", data.id, data.text);
-                        console.log(data);
+                        // console.log("Selected:", data.id, data.text);
+                        // console.log(data);
                     }
                     if(data.driver_er)
                     {
@@ -659,13 +659,19 @@
         console.log($form_id+'.form_reset');
         var $form = $($form_id);
         // $form.find('.select2-container').remove();
-        $form.find('textarea.form-control, input.form-control, select').each(function () {
+        // input
+        $form.find('textarea.form-control, input.form-control').each(function () {
             $(this).val("");
             $(this).val($(this).data('default'));
+
         });
 
+        // radio
+        $form.find('input[type="radio"][data-default="default"]').prop('checked', true).trigger('change');
+
+        // select
         $form.find('select option').prop("selected",false);
-        $form.find('select').find('option:eq(0)').prop('selected', true);
+        $form.find('select').find('option:eq(0)').prop('selected', true).trigger('change');
 
 
         // $form.find(".select2-box").val(-1).trigger("change");

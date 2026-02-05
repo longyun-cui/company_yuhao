@@ -30,9 +30,11 @@ class WL_Common_Project extends Model
         'transport_destination_place',
 
         'transport_mileage',
+        'transport_distance',
         'transport_time_limitation',
 
         'freight_amount',
+        'settlement_period',
 
 
         'contact', 'contact_name', 'contact_phone', 'contact_email', 'contact_wx_id', 'contact_wx_qr_code_img', 'contact_address',

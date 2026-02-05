@@ -168,13 +168,60 @@
                     }
                 },
                 {
+                    "title": "账期",
+                    "data": "settlement_period",
+                    "className": "",
+                    "width": "80px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).attr('data-row-index',iRow);
+
+                            $(nTd).addClass('modal-show--for--project-field-set');
+                            $(nTd).attr('data-column-type','radio');
+                            $(nTd).attr('data-column-name','账期');
+
+                            $(nTd).attr('data-id',row.id);
+                            $(nTd).attr('data-name','运费');
+                            $(nTd).attr('data-key','freight_amount');
+                            $(nTd).attr('data-value',data);
+
+                            if(row.client_id) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(data == 1)
+                        {
+                            return '<i class="fa fa-clock-o text-red"></i> 单次结算';
+                        }
+                        if(data == 3)
+                        {
+                            return '<i class="fa fa-clock-o text-yellow"></i> 多次结算</small>';
+                        }
+                        if(data == 7)
+                        {
+                            return '<i class="fa fa-clock-o text-blue"></i> 周结</small>';
+                        }
+                        if(data == 31)
+                        {
+                            return '<i class="fa fa-clock-o text-green"></i> 月结</small>';
+                        }
+                        else
+                        {
+                            return '有误';
+                        }
+                    }
+                },
+                {
                     "title": "运费",
                     "data": "freight_amount",
                     "className": "",
                     "width": "80px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1 && row.item_status != 97)
+                        if(row.is_completed != 1)
                         {
                             $(nTd).attr('data-row-index',iRow);
 
@@ -182,8 +229,10 @@
                             $(nTd).attr('data-column-type','text');
                             $(nTd).attr('data-column-name','运费');
 
-                            $(nTd).attr('data-id',row.id).attr('data-name','运费');
-                            $(nTd).attr('data-key','freight_amount').attr('data-value',data);
+                            $(nTd).attr('data-id',row.id);
+                            $(nTd).attr('data-name','运费');
+                            $(nTd).attr('data-key','freight_amount');
+                            $(nTd).attr('data-value',data);
 
                             if(row.client_id) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
@@ -200,7 +249,7 @@
                     "width": "80px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1 && row.item_status != 97)
+                        if(row.is_completed != 1)
                         {
                             $(nTd).attr('data-row-index',iRow);
 
@@ -208,8 +257,10 @@
                             $(nTd).attr('data-column-type','text');
                             $(nTd).attr('data-column-name','出发地');
 
-                            $(nTd).attr('data-id',row.id).attr('data-name','出发地');
-                            $(nTd).attr('data-key','transport_departure_place').attr('data-value',data);
+                            $(nTd).attr('data-id',row.id);
+                            $(nTd).attr('data-name','出发地');
+                            $(nTd).attr('data-key','transport_departure_place');
+                            $(nTd).attr('data-value',data);
 
                             if(row.client_id) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
@@ -234,8 +285,10 @@
                             $(nTd).attr('data-column-type','text');
                             $(nTd).attr('data-column-name','目的地');
 
-                            $(nTd).attr('data-id',row.id).attr('data-name','目的地');
-                            $(nTd).attr('data-key','transport_destination_place').attr('data-value',data);
+                            $(nTd).attr('data-id',row.id);
+                            $(nTd).attr('data-name','目的地');
+                            $(nTd).attr('data-key','transport_destination_place');
+                            $(nTd).attr('data-value',data);
 
                             if(row.client_id) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');

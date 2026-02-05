@@ -7,7 +7,7 @@ class WL_Common_Finance extends Model
 {
     use SoftDeletes;
     //
-    protected $table = "wl__common__financial__record";
+    protected $table = "wl__common__finance";
     protected $fillable = [
         'active', 'status', 'result',
         'category', 'type', 'group',
@@ -17,10 +17,14 @@ class WL_Common_Finance extends Model
         'finance_active', 'finance_status', 'finance_result',
         'finance_category', 'finance_type', 'finance_group',
 
-        'is_published', 'publisher_id', 'published_at', 'published_date',
-        'is_verified', 'verifier_id', 'verified_at', 'verified_date',
-        'is_audited', 'auditor_id', 'audited_at', 'audited_date',
-        'is_completed', 'completer_id', 'completed_at', 'completed_date',
+        'is_published', 'publisher_id', 'published_at', 'published_date', 'published_datetime',
+        'is_verified', 'verifier_id', 'verified_at', 'verified_date', 'verified_datetime',
+        'is_audited', 'auditor_id', 'audited_at', 'audited_date', 'audited_datetime',
+
+        'is_confirmed', 'confirmer_id', 'confirmed_at', 'confirmed_date', 'confirmed_datetime',
+        'is_completed', 'completer_id', 'completed_at', 'completed_date', 'completed_datetime',
+
+        'is_recorded', 'recorder_id', 'recorded_at', 'recorded_date', 'recorded_datetime',
 
         'create_type',
         'owner_active',
@@ -31,11 +35,14 @@ class WL_Common_Finance extends Model
         'item_id',
 
         'company_id',
+        'department_id',
         'team_id',
 
         'client_id',
         'project_id',
+
         'order_id',
+        'order_operation_record_id',
         'order_task_date',
 
         'car_id',

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\WL;
 
+use App\Repositories\WL\Staff\WLStaffFinanceRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -25,7 +26,9 @@ use App\Repositories\WL\Staff\WLStaffProjectRepository;
 
 use App\Repositories\WL\Staff\WLStaffOrderRepository;
 
-use Response, Auth, Validator, DB, Exception;
+use App\Repositories\WL\Staff\WLStaffFeeRepository;
+
+use Response, Auth, Validator, DB, Exception, Cache, Blade, Carbon, DateTime;
 use QrCode, Excel;
 
 class WLStaffController extends Controller
@@ -49,6 +52,9 @@ class WLStaffController extends Controller
 
     private $order_repo;
 
+    private $fee_repo;
+    private $finance_repo;
+
     public function __construct()
     {
         $this->repo = new WLStaffRepository;
@@ -68,6 +74,9 @@ class WLStaffController extends Controller
         $this->project_repo = new WLStaffProjectRepository;
 
         $this->order_repo = new WLStaffOrderRepository;
+
+        $this->fee_repo = new WLStaffFeeRepository;
+        $this->finance_repo = new WLStaffFinanceRepository;
     }
 
 
@@ -842,44 +851,64 @@ class WLStaffController extends Controller
 
 
     // 【费用】datatable
-    public function o1__fee__datatable_list_query()
+    public function o1__fee__list__datatable_query()
     {
-        return $this->repo->o1__fee__datatable_list_query(request()->all());
+        return $this->fee_repo->o1__fee__list__datatable_query(request()->all());
     }
     // 【费用】获取
     public function o1__fee__item_get()
     {
-        return $this->repo->o1__fee__item_get(request()->all());
+        return $this->fee_repo->o1__fee__item_get(request()->all());
     }
     // 【费用】编辑-保存
     public function o1__fee__item_save()
     {
-        return $this->repo->o1__fee__item_save(request()->all());
+        return $this->fee_repo->o1__fee__item_save(request()->all());
     }
     // 【费用】财务-保存
-    public function o1__fee__item_financial_save()
+    public function o1__fee__item_finance_bookkeeping()
     {
-        return $this->repo->o1__fee__item_financial_save(request()->all());
+        return $this->fee_repo->o1__fee__item_finance_bookkeeping(request()->all());
+    }
+
+
+    // 【费用】【全部操作】操作记录
+    public function o1__fee__item_operation_record_list__datatable_query()
+    {
+        return $this->fee_repo->o1__fee__item_operation_record_list__datatable_query(request()->all());
     }
 
 
 
 
-    // 【费用】datatable
-    public function o1__finance__datatable_list_query()
+
+
+
+
+    // 【财务】datatable
+    public function o1__finance__list__datatable_query()
     {
-        return $this->repo->o1__finance__datatable_list_query(request()->all());
+        return $this->finance_repo->o1__finance__list__datatable_query(request()->all());
     }
-    // 【费用】获取
+    // 【财务】获取
     public function o1__finance__item_get()
     {
-        return $this->repo->o1__finance__item_get(request()->all());
+        return $this->finance_repo->o1__finance__item_get(request()->all());
     }
-    // 【费用】编辑-保存
+    // 【财务】编辑-保存
     public function o1__finance__item_save()
     {
-        return $this->repo->o1__finance__item_save(request()->all());
+        return $this->finance_repo->o1__finance__item_save(request()->all());
     }
+
+
+    // 【财务】【全部操作】操作记录
+    public function o1__finance__item_operation_record_list__datatable_query()
+    {
+        return $this->finance_repo->o1__finance__item_operation_record_list__datatable_query(request()->all());
+    }
+
+
 
 
 

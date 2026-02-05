@@ -71,6 +71,7 @@ table.dataTable .btn-group-xs>.btn, .btn-xs { line-height:1.4; }
 .edit-img img {width:auto;height:98px;}
 
 .form-container .form-horizontal .control-label { padding-top:8px; }
+.form-container .form-horizontal .control-text { padding-top:8px; }
 
 .datatable-body * {  }
 .datatable-body .form-control { padding:4px; }
@@ -109,7 +110,7 @@ table.dataTable .text-bottom { vertical-align: bottom; }
 
 
 
-.form-container .form-group { width:100%;float:left;margin-bottom:0; padding:12px 0; border-bottom:1px solid #f8f8f8; }
+.form-container .form-group { width:100%; float:left; margin-bottom:0; padding:8px 0; border-bottom:1px solid #f8f8f8; }
 .form-container .box-footer { padding-top:16px; padding-bottom:32px; border-top:0;  }
 .form-container .select2-container--classic .select2-selection--single { border-radius:0; }
 

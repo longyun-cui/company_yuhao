@@ -81,9 +81,10 @@ class WLStaffDriverRepository {
         // 状态 [|]
         if(!empty($post_data['item_status']))
         {
-            if(!in_array($post_data['item_status'],[-1,0,'-1','0']))
+            $item_status_int = intval($post_data['item_status']);
+            if(!in_array($item_status_int,[-1,0]))
             {
-                $query->where('item_status', $post_data['item_status']);
+                $query->where('item_status', $item_status_int);
             }
         }
         else

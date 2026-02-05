@@ -1,21 +1,21 @@
 <script>
-    var Datatable__for__Order_Item_Operation_Record_List = function ($id) {
-        var datatableAjax__order_item_operation_record = function ($id) {
+    var Datatable__for__Finance_Item_Operation_Record_List = function ($id) {
+        var datatableAjax__finance_item_operation_record = function ($id) {
 
-            var dt__order_item_operation_record = $('#datatable--for--order-item-operation-record-list');
-            if($.fn.DataTable.isDataTable(dt__order_item_operation_record))
+            var dt__finance_item_operation_record = $('#datatable--for--finance-item-operation-record-list');
+            if($.fn.DataTable.isDataTable(dt__finance_item_operation_record))
             {
                 // 已经初始化
-                console.log('#datatable--for--order-item-operation-record-list // 已经初始化');
-                $(dt__order_item_operation_record).DataTable().destroy();
+                console.log('#datatable--for--finance-item-operation-record-list // 已经初始化');
+                $(dt__finance_item_operation_record).DataTable().destroy();
             }
             else
             {
                 // 未初始化
-                console.log('#datatable--for--order-item-operation-record-list // 未初始化');
+                console.log('#datatable--for--finance-item-operation-record-list // 未初始化');
             }
 
-            var ajax_datatable_order_operation_record = dt__order_item_operation_record.DataTable({
+            var ajax_datatable_finance_operation_record = dt__finance_item_operation_record.DataTable({
                 "retrieve": true,
                 "destroy": true,
 //                "aLengthMenu": [[20, 50, 200, 500, -1], ["20", "50", "200", "500", "全部"]],
@@ -25,16 +25,16 @@
                 "serverSide": true,
                 "searching": false,
                 "ajax": {
-                    'url': "/o1/order/item-operation-record-list/datatable-query?id="+$id,
+                    'url': "/o1/finance/item-operation-record-list/datatable-query?id="+$id,
                     "type": 'POST',
                     "dataType" : 'json',
                     "data": function (d) {
                         d._token = $('meta[name="_token"]').attr('content');
-                        d.name = $('input[name="order-operation-name"]').val();
-                        d.title = $('input[name="order-operation-title"]').val();
-                        d.keyword = $('input[name="order-operation-keyword"]').val();
-                        d.type = $('select[name="order-operation-type"]').val();
-                        d.status = $('select[name="order-operation-status"]').val();
+                        d.name = $('input[name="finance-operation-name"]').val();
+                        d.title = $('input[name="finance-operation-title"]').val();
+                        d.keyword = $('input[name="finance-operation-keyword"]').val();
+                        d.type = $('select[name="finance-operation-type"]').val();
+                        d.status = $('select[name="finance-operation-status"]').val();
                     },
                 },
                 "pagingType": "simple_numbers",
@@ -217,7 +217,7 @@
 
         };
         return {
-            init: datatableAjax__order_item_operation_record
+            init: datatableAjax__finance_item_operation_record
         }
     }();
 </script>

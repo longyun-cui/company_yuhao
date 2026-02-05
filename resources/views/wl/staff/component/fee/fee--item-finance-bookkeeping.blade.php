@@ -1,5 +1,5 @@
 {{--添加-财务-信息--}}
-<div class="modal fade modal-wrapper" id="modal--for--fee-item-edit">
+<div class="modal fade modal-wrapper" id="modal--for--fee-item-finance-bookkeeping">
     <div class="col-md-8 col-md-offset-2 margin-top-16px margin-bottom-64px bg-white">
 
 
@@ -7,14 +7,14 @@
 
             <div class="box-header with-border margin-top-16px">
                 <h3 class="box-title">
-                    <span class="">费用记录</span>
+                    <span class="">费用入账</span>
                     <span class="id-title"></span>
                 </h3>
                 <div class="box-tools pull-right">
                 </div>
             </div>
 
-            <form action="" method="post" class="form-horizontal form-bordered " id="form--for--fee-item-edit">
+            <form action="" method="post" class="form-horizontal form-bordered " id="form--for--fee-item-finance-bookkeeping">
                 <div class="box-body">
 
                     {{ csrf_field() }}
@@ -23,49 +23,32 @@
                     <input readonly type="hidden" name="operate[item_category]" value="order" data-default="order">
                     <input readonly type="hidden" name="operate[item_type]" value="fee" data-default="fee">
 
-                    {{--交易类型--}}
-                    <div class="form-group">
-                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 类型</label>
-                        <div class="col-md-9 control-label" style="text-align:left;">
-                            <button type="button" class="btn radio">
-                                <label>
-                                    <input type="radio" name="finance-type" value="1" checked="checked" data-default="default"> 收入
-                                </label>
-                            </button>
-                            <button type="button" class="btn radio">
-                                <label>
-                                    <input type="radio" name="finance-type" value="99"> 费用
-                                </label>
-                            </button>
-                        </div>
-                    </div>
-
                     {{--交易时间--}}
                     <div class="form-group payment-show">
                         <label class="control-label col-md-2"><sup class="text-red">*</sup> 名目</label>
                         <div class="col-md-9 control-text ">
-                            <input type="text" class="form-control" name="fee-title" placeholder="请输入名目" value="" list="_fee_title">
+                            <span class="finance-transaction-title-inn"></span>
                         </div>
                     </div>
                     {{--交易时间--}}
                     <div class="form-group payment-show">
                         <label class="control-label col-md-2"><sup class="text-red">*</sup> 金额</label>
                         <div class="col-md-9 control-text ">
-                            <input type="text" class="form-control" name="fee-amount" placeholder="请输入金额" value="">
+                            <span class="finance-transaction-amount-inn"></span>
                         </div>
                     </div>
                     {{--交易时间--}}
                     <div class="form-group payment-show">
                         <label class="control-label col-md-2"><sup class="text-red">*</sup> 交易时间</label>
                         <div class="col-md-9 ">
-                            <input type="text" class="form-control form-filter time-picker" name="fee-transaction-datetime" readonly="readonly" />
+                            <input type="text" class="form-control form-filter time-picker" name="finance-transaction-datetime" readonly="readonly" />
                         </div>
                     </div>
                     {{--支付方式--}}
                     <div class="form-group payment-show">
                         <label class="control-label col-md-2">支付方式</label>
                         <div class="col-md-9 ">
-                            <input type="text" class="form-control" name="fee-transaction-payment-method" placeholder="支付方式" value="" list="_payment_method">
+                            <input type="text" class="form-control" name="finance-transaction-payment-method" placeholder="支付方式" value="" list="_payment_method">
                         </div>
                     </div>
                     <datalist id="_payment_method">
@@ -79,7 +62,7 @@
                     <div class="form-group payment-show">
                         <label class="control-label col-md-2">付款账号</label>
                         <div class="col-md-9 ">
-                            <input type="text" class="form-control search-input" name="fee-transaction-account-from" placeholder="付款账号" value="" list="_fee_account_from" autocomplete="on">
+                            <input type="text" class="form-control search-input" name="finance-transaction-account-from" placeholder="付款账号" value="" list="_fee_account_from" autocomplete="on">
                         </div>
                     </div>
                     <datalist id="_fee_account_from">
@@ -88,7 +71,7 @@
                     <div class="form-group payment-show">
                         <label class="control-label col-md-2">收款账号</label>
                         <div class="col-md-9 ">
-                            <input type="text" class="form-control search-input" name="fee-transaction-account-to" placeholder="收款账号" value="" list="_fee_account_to" autocomplete="on">
+                            <input type="text" class="form-control search-input" name="finance-transaction-account-to" placeholder="收款账号" value="" list="_fee_account_to" autocomplete="on">
                         </div>
                     </div>
                     <datalist id="_fee_account_to">
@@ -97,14 +80,14 @@
                     <div class="form-group payment-show">
                         <label class="control-label col-md-2">交易单号</label>
                         <div class="col-md-9 ">
-                            <input type="text" class="form-control" name="fee-transaction-reference-no" placeholder="交易单号" value="">
+                            <input type="text" class="form-control" name="finance-transaction-reference-no" placeholder="交易单号" value="">
                         </div>
                     </div>
                     {{--交易说明--}}
                     <div class="form-group payment-show">
                         <label class="control-label col-md-2">交易说明</label>
                         <div class="col-md-9 ">
-                            <textarea class="form-control" name="fee-transaction-description" rows="3" cols="100%"></textarea>
+                            <textarea class="form-control" name="finance-transaction-description" rows="3" cols="100%"></textarea>
                         </div>
                     </div>
 
@@ -114,7 +97,7 @@
             <div class="box-footer">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <button type="button" class="btn btn-success" id="item-submit--for--fee-item-edit"><i class="fa fa-check"></i> 提交</button>
+                        <button type="button" class="btn btn-success" id="item-submit--for--fee-item-finance-bookkeeping"><i class="fa fa-check"></i> 提交</button>
                         <button type="button" class="btn btn-default modal-cancel">取消</button>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-{{--编辑-客户--}}
+{{--项目-编辑--}}
 <div class="modal fade modal-main-body modal-wrapper" id="modal--for--project-item-edit">
     <div class="modal-content col-md-8 col-md-offset-2 margin-top-24px margin-bottom-64px bg-white">
         <div class="box- box-info- form-container">
@@ -55,6 +55,49 @@
                 </div>
 
 
+                {{--结算账期--}}
+                <div class="form-group form-category">
+                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 结算账期</label>
+                    <div class="col-md-8">
+                        <div class="btn-group">
+
+                            <button type="button" class="btn radio-btn radio-settlement-period">
+                            <span class="radio">
+                                <label>
+                                    <input type="radio" name="settlement_period" value="1" checked="checked" data-default="default"> 单次结算
+                                </label>
+                            </span>
+                            </button>
+
+                            <button type="button" class="btn radio-btn radio-settlement-period">
+                            <span class="radio">
+                                <label>
+                                    <input type="radio" name="settlement_period" value="3"> 多次结算
+                                </label>
+                            </span>
+                            </button>
+
+                            <button type="button" class="btn radio-btn radio-settlement-period">
+                            <span class="radio">
+                                <label>
+                                    <input type="radio" name="settlement_period" value="7"> 周结
+                                </label>
+                            </span>
+                            </button>
+
+                            <button type="button" class="btn radio-btn radio-settlement-period">
+                            <span class="radio">
+                                <label>
+                                    <input type="radio" name="settlement_period" value="31"> 月结
+                                </label>
+                            </span>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+
+
                 {{--客户--}}
                 <div class="form-group">
                     <label class="control-label col-md-2"><sup class="text-red">*</sup> 客户</label>
@@ -98,10 +141,10 @@
                 </div>
                 {{--里程 & 时效--}}
                 <div class="form-group" >
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 里程 & 时效</label>
+                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 距离 & 时效</label>
                     <div class="col-md-8 ">
                         <div class="col-sm-6 col-md-6 padding-0">
-                            <input type="text" class="form-control" name="transport_distance" placeholder="里程" value="0" data-default="">
+                            <input type="text" class="form-control" name="transport_distance" placeholder="距离" value="0" data-default="">
                         </div>
                         <div class="col-sm-6 col-md-6 padding-0">
                             <input type="text" class="form-control" name="transport_time_limitation" placeholder="时效" value="0" data-default="">

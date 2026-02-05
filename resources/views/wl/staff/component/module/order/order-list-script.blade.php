@@ -110,12 +110,16 @@
                         $modal.find('input[name="transport_departure_place"]').val($response.data.transport_departure_place);
                         $modal.find('input[name="transport_destination_place"]').val($response.data.transport_destination_place);
 
+                        // 距离
                         $modal.find('input[name="transport_distance"]').val($response.data.transport_distance);
-                        $modal.find('input[name="transport_time_limitation"]').val($response.data.transport_time_limitation);
+                        // 时效
+                        var $transport_time_limitation = parseFloat(($response.data.transport_time_limitation / 60).toFixed(2));
+                        $modal.find('input[name="transport_time_limitation"]').val($transport_time_limitation);
 
-                        $modal.find('input[name="freight_amount"]').val($response.data.freight_amount);
-                        $modal.find('input[name="oil_card_amount"]').val($response.data.oil_card_amount);
-                        $modal.find('input[name="information_fee"]').val($response.data.information_fee);
+                        // 运费 & 油卡 & 信息费
+                        $modal.find('input[name="freight_amount"]').val(parseFloat($response.data.freight_amount));
+                        $modal.find('input[name="oil_card_amount"]').val(parseFloat($response.data.oil_card_amount));
+                        $modal.find('input[name="information_fee"]').val(parseFloat($response.data.information_fee));
 
                         // radio 车辆所属
                         $modal.find('input[name="car_owner_type"]').prop('checked', false);
@@ -262,15 +266,18 @@
         });
 
 
-        // 【工单】select2 选择项目
+        // 【工单】【添加工单】select2 选择项目
         $('#select2--project--for-order-item-edit').on('select2:select', function(e) {
             $('input[name=transport_departure_place]').val(e.params.data.transport_departure_place);
             $('input[name=transport_destination_place]').val(e.params.data.transport_destination_place);
+            // 距离
             $('input[name=transport_distance]').val(e.params.data.transport_distance);
-            $('input[name=transport_time_limitation]').val(e.params.data.transport_time_limitation);
-            $('input[name=freight_amount]').val(e.params.data.freight_amount);
+            // 时效
+            var $transport_time_limitation = parseFloat((e.params.data.transport_time_limitation / 60).toFixed(2));
+            $('input[name=transport_time_limitation]').val($transport_time_limitation);
+            $('input[name=freight_amount]').val(parseFloat(e.params.data.freight_amount));
         });
-        // 【工单】select2 选择车辆
+        // 【工单】【添加工单】select2 选择车辆
         $('#select2--car--for-order-item-edit').on('select2:select', function(e) {
 
             console.log("用户选择了:", e.params.data); // 仅触发1次
@@ -333,7 +340,7 @@
 
 
         });
-        // 【工单】select2 选择主驾
+        // 【工单】【添加工单】select2 选择主驾
         $('#select2--driver--for--order-item-edit').on('select2:select', function(e) {
             console.log("用户选择了:", e.params.data); // 仅触发1次
             var $that = $(this);
@@ -349,6 +356,50 @@
             {
                 $modal.find('input[name=copilot_name]').val(e.params.data.text);
                 $modal.find('input[name=copilot_phone]').val(e.params.data.driver_phone);
+            }
+        });
+
+
+        // 【工单】【添加费用】费用类型
+        $(".main-wrapper").on('change', '#modal--for--order-item-fee-create input[name="fee-type"]', function() {
+            var $that = $(this);
+            var $modal = $that.parents('.modal-wrapper');
+
+            var $value = $(this).val();
+            if($value == 1)
+            {
+                $modal.find('input[name="fee-record-type"][value="1"]').prop('checked', true).trigger('change');
+                $modal.find('.fee-record-type-box').show();
+                $modal.find('.collection-box').show();
+                $modal.find('.advance-box').hide();
+            }
+            else if($value == 99)
+            {
+                $modal.find('input[name="fee-record-type"][value="1"]').prop('checked', true).trigger('change');
+                $modal.find('.fee-record-type-box').show();
+                $modal.find('.advance-box').show();
+                $modal.find('.collection-box').hide();
+            }
+            else
+            {
+                $modal.find('input[name="fee-record-type"][value="1"]').prop('checked', true).trigger('change');
+                $modal.find('.fee-record-type-box').hide();
+                $modal.find('.payment-show').hide();
+            }
+        });
+        // 【工单】【添加费用】记录类型
+        $(".main-wrapper").on('change', '#modal--for--order-item-fee-create input[name="fee-record-type"]', function() {
+            var $that = $(this);
+            var $modal = $that.parents('.modal-wrapper');
+
+            var $value = $(this).val();
+            if($value == 81)
+            {
+                $modal.find('.payment-show').show();
+            }
+            else
+            {
+                $modal.find('.payment-show').hide();
             }
         });
 
@@ -1082,11 +1133,11 @@
                     // 请求失败时的回调
                     layer.closeAll('loading');
                     console.log($(this).attr('id')+'.click.error');
+                    layer.msg('服务器错误！');
                 },
                 complete: function(xhr, status, $form) {
                     // 无论成功或失败都会执行的回调
                     layer.closeAll('loading');
-                    layer.msg('服务器错误！');
                     console.log($(this).attr('id')+'.click.complete');
                 }
 

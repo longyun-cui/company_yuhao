@@ -80,9 +80,10 @@ class WLStaffCarRepository {
         // 状态 [|]
         if(!empty($post_data['item_status']))
         {
-            if(!in_array($post_data['item_status'],[-1,0,'-1','0']))
+            $item_status_int = intval($post_data['item_status']);
+            if(!in_array($item_status_int,[-1,0]))
             {
-                $query->where('item_status', $post_data['item_status']);
+                $query->where('item_status', $item_status_int);
             }
         }
         else
@@ -94,9 +95,10 @@ class WLStaffCarRepository {
         // 部门
         if(!empty($post_data['department_id']))
         {
-            if(!in_array($post_data['department_id'],[-1,0]))
+            $department_id_int = intval($post_data['department_id']);
+            if(!in_array($department_id_int,[-1,0]))
             {
-                $query->where('department_id', $post_data['department_id']);
+                $query->where('department_id', $department_id_int);
             }
         }
 
@@ -104,9 +106,10 @@ class WLStaffCarRepository {
         // 员工类型
         if(!empty($post_data['staff_category']))
         {
-            if(!in_array($post_data['staff_category'],[-1,0]))
+            $staff_category_int = intval($post_data['staff_category']);
+            if(!in_array($staff_category_int,[-1,0]))
             {
-                $query->where('staff_category', $post_data['staff_category']);
+                $query->where('staff_category', $staff_category_int);
             }
         }
 

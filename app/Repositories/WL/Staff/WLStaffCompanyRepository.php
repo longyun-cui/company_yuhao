@@ -90,9 +90,10 @@ class WLStaffCompanyRepository {
         // 状态 [|]
         if(!empty($post_data['item_status']))
         {
-            if(!in_array($post_data['item_status'],[-1,0,'-1','0']))
+            $item_status_int = intval($post_data['item_status']);
+            if(!in_array($item_status_int,[-1,0]))
             {
-                $query->where('item_status', $post_data['item_status']);
+                $query->where('item_status', $item_status_int);
             }
         }
         else
@@ -103,9 +104,10 @@ class WLStaffCompanyRepository {
         // 公司类型 [公司|渠道|商务]
         if(!empty($post_data['company_category']))
         {
-            if(!in_array($post_data['company_category'],[-1,0]))
+            $company_category_int = intval($post_data['company_category']);
+            if(!in_array($company_category_int,[-1,0]))
             {
-                $query->where('company_category', $post_data['company_category']);
+                $query->where('company_category', $company_category_int);
             }
         }
 

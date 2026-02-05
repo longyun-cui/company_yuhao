@@ -135,8 +135,12 @@
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--item-fee-record')
 
     {{--费用--}}
-    @include(env('TEMPLATE_WL_STAFF').'component.fee.fee-operation')
+    @include(env('TEMPLATE_WL_STAFF').'component.fee.fee-edit')
+    @include(env('TEMPLATE_WL_STAFF').'component.fee.fee--item-finance-bookkeeping')
+    @include(env('TEMPLATE_WL_STAFF').'component.fee.fee--item-operation-record')
     {{--财务--}}
+    @include(env('TEMPLATE_WL_STAFF').'component.finance.finance-edit')
+    @include(env('TEMPLATE_WL_STAFF').'component.finance.finance--item-operation-record')
     @include(env('TEMPLATE_WL_STAFF').'component.finance.finance-operation')
 
 
@@ -221,9 +225,11 @@
     {{--费用--}}
     @include(env('TEMPLATE_WL_STAFF').'component.fee.fee-list-datatable')
     @include(env('TEMPLATE_WL_STAFF').'component.fee.fee-list-script')
+    @include(env('TEMPLATE_WL_STAFF').'component.fee.fee--item-operation-record-datatable')
     {{--财务--}}
     @include(env('TEMPLATE_WL_STAFF').'component.finance.finance-list-datatable')
     @include(env('TEMPLATE_WL_STAFF').'component.finance.finance-list-script')
+    @include(env('TEMPLATE_WL_STAFF').'component.finance.finance--item-operation-record-datatable')
 
 
     {{--统计--}}

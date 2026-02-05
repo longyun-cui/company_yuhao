@@ -266,7 +266,7 @@
                    data-type="create"
                    data-unique="y"
                    data-id="finance-list"
-                   data-title='成交记录'
+                   data-title='财务列表'
                    data-content='<i class="fa fa-dollar text-red"></i> 财务列表'
                    data-icon='<i class="fa fa-dollar text-red"></i>'
 

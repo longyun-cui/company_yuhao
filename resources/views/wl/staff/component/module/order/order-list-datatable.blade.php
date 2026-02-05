@@ -784,11 +784,57 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '';
-                        else return data;
+                        return convertMinutesToHoursAndMinutes(data);
                     }
                 },
 
+                {
+                    "title": "账期",
+                    "data": "settlement_period",
+                    "className": "",
+                    "width": "80px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).attr('data-row-index',iRow);
+
+                            $(nTd).addClass('modal-show--for--item-field-set-');
+                            $(nTd).attr('data-column-type','radio');
+                            $(nTd).attr('data-column-name','账期');
+
+                            $(nTd).attr('data-id',row.id);
+                            $(nTd).attr('data-name','运费');
+                            $(nTd).attr('data-key','freight_amount');
+                            $(nTd).attr('data-value',data);
+
+                            if(row.client_id) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(data == 1)
+                        {
+                            return '<i class="fa fa-clock-o text-red"></i> 单次结算';
+                        }
+                        if(data == 3)
+                        {
+                            return '<i class="fa fa-clock-o text-yellow"></i> 多次结算</small>';
+                        }
+                        if(data == 7)
+                        {
+                            return '<i class="fa fa-clock-o text-blue"></i> 周结</small>';
+                        }
+                        if(data == 31)
+                        {
+                            return '<i class="fa fa-clock-o text-green"></i> 月结</small>';
+                        }
+                        else
+                        {
+                            return '有误';
+                        }
+                    }
+                },
                 {
                     "title": "运价",
                     "data": "freight_amount",

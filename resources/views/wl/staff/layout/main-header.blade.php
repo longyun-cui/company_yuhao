@@ -192,13 +192,12 @@
                 </li>
 
                 <li class="dropdown- notifications-alert">
-                    <a href="javascript:void(0);" class="item-modal-show-for-fee-create"
-                       data-form-id="form-for-order-edit"
-                       data-modal-id="modal-for-order-edit"
-                       data-title="添加工单"
-                       data-id="603289"
+                    <a href="javascript:void(0);" class="modal-show--for--finance-item-create"
+                       data-form-id="form--for--finance-item-edit"
+                       data-modal-id="modal--for--finance-item-edit"
+                       data-title="添加财务记录"
                     >
-                        <i class="fa fa-plus text-yellow"></i> 费用
+                        <i class="fa fa-plus text-yellow"></i> 财务
                     </a>
                 </li>
 
@@ -208,7 +207,7 @@
                        data-modal-id="modal--for--order-item-edit"
                        data-title="添加工单"
                     >
-                        <i class="fa fa-plus text-yellow"></i>
+                        <i class="fa fa-plus text-yellow"></i> 工单
                     </a>
                 </li>
 

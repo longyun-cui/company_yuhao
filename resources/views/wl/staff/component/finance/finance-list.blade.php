@@ -6,11 +6,11 @@
 
         <div class=" pull-left">
 
-            @if(in_array($me->user_type,[0,1,9,11,19,41,81,61]))
-            <button type="button" onclick="" class="btn btn-filter btn-success- item-create-modal-show"
-                    data-form-id="form-for-finance-edit"
-                    data-modal-id="modal-for-finance-edit"
-                    data-title="添加费用"
+            @if(in_array($me->user_type,[0,1,9,11]))
+            <button type="button" onclick="" class="btn btn-filter modal-show--for--finance-item-create"
+                    data-form-id="form--for--finance-item-edit"
+                    data-modal-id="modal--for--finance-item-edit"
+                    data-title="添加财务记录"
             >
                 <i class="fa fa-plus"></i> 添加
             </button>
@@ -91,7 +91,7 @@
             </div>
 
             <div class="box-body no-padding">
-                <div class="tableArea full margin-top-8px">
+                <div class="tableArea full- margin-top-8px">
                     <table class='table table-striped table-bordered table-hover order-column'>
                         <thead>
                         </thead>

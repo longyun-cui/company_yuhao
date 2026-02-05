@@ -211,7 +211,7 @@
                     "title": "说明",
                     "data": "transaction_description",
                     "className": "",
-                    "width": "",
+                    "width": "300px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.user_status != 97)
@@ -312,9 +312,9 @@
                         $html_record = '<a class="btn btn-xs bg-purple- item-modal-show-for-modify" data-id="'+data+'">记录</a>';
 
                         var html =
-                            $html_edit+
+                            // $html_edit+
                             $html_pay+
-                            $html_delete+
+                            // $html_delete+
                             $html_record+
                             '';
                         return html;

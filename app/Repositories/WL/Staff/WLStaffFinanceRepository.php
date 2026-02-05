@@ -1,31 +1,11 @@
 <?php
 namespace App\Repositories\WL\Staff;
 
-use App\Models\WL\Common\WL_Common_Company;
-use App\Models\WL\Common\WL_Common_Department;
-use App\Models\WL\Common\WL_Common_Team;
-use App\Models\WL\Common\WL_Common_Staff;
-
-use App\Models\WL\Common\WL_Common_Car;
-use App\Models\WL\Common\WL_Common_Driver;
-
-use App\Models\WL\Common\WL_Common_Client;
-use App\Models\WL\Common\WL_Common_Project;
-use App\Models\WL\Common\WL_Common_Order;
-
 use App\Models\WL\Common\WL_Common_Finance;
 use App\Models\WL\Common\WL_Common_Fee;
 
-use App\Models\WL\Staff\WL_Staff_Record_Operation;
-use App\Models\WL\Staff\WL_Staff_Record_Visit;
-
-
-use App\Models\WL\CLient\WL_Client_Staff;
-
-use App\Models\YH\YH_Item;
-use App\Models\YH\YH_Task;
-use App\Models\YH\YH_Pivot_Circle_Order;
-use App\Models\YH\YH_Pivot_Item_Relation;
+use App\Models\WL\Common\WL_Common_Order;
+use App\Models\WL\Common\WL_Common_Order_Operation_Record;
 
 use App\Repositories\Common\CommonRepository;
 
@@ -47,8 +27,6 @@ class WLStaffFinanceRepository {
 
     public function __construct()
     {
-        $this->modelUser = new WL_Common_Staff;
-        $this->modelItem = new YH_Item;
 
         $this->view_blade_403 = env('TEMPLATE_WL_STAFF').'entrance.errors.403';
         $this->view_blade_404 = env('TEMPLATE_WL_STAFF').'entrance.errors.404';
@@ -84,7 +62,7 @@ class WLStaffFinanceRepository {
      * 财务-管理 Financial
      */
     // 【费用】返回-列表-数据
-    public function v1__finance__datatable_list_query($post_data)
+    public function o1__finance__list__datatable_query($post_data)
     {
         $this->get_me();
         $me = $this->me;
@@ -108,11 +86,26 @@ class WLStaffFinanceRepository {
         if(!empty($post_data['keyword'])) $query->where('content', 'like', "%{$post_data['keyword']}%");
 
         // 状态 [|]
+        if(!empty($post_data['item_status']))
+        {
+            $item_status_int = intval($post_data['item_status']);
+            if(!in_array($item_status_int,[-1,0]))
+            {
+                $query->where('item_status', $item_status_int);
+            }
+        }
+        else
+        {
+            $query->where('item_status', 1);
+        }
+
+        // 状态 [|]
         if(!empty($post_data['finance_status']))
         {
-            if(!in_array($post_data['finance_status'],[-1,0]))
+            $finance_status_int = intval($post_data['finance_status']);
+            if(!in_array($finance_status_int,[-1,0]))
             {
-                $query->where('finance_status', $post_data['finance_status']);
+                $query->where('finance_status', $finance_status_int);
             }
         }
         else
@@ -123,8 +116,8 @@ class WLStaffFinanceRepository {
 
         $total = $query->count();
 
-        $draw  = isset($post_data['draw'])  ? $post_data['draw']  : 1;
-        $skip  = isset($post_data['start'])  ? $post_data['start']  : 0;
+        $draw  = isset($post_data['draw'])  ? $post_data['draw'] : 1;
+        $skip  = isset($post_data['start'])  ? $post_data['start'] : 0;
         $limit = isset($post_data['length']) ? $post_data['length'] : 100;
 
         if(isset($post_data['order']))
@@ -144,6 +137,56 @@ class WLStaffFinanceRepository {
         else $list = $query->skip($skip)->take($limit)->get();
 //        dd($list->toArray());
 
+        return datatable_response($list, $draw, $total);
+    }
+
+
+    // 【费用】【操作记录】返回-列表-数据
+    public function o1__finance__item_operation_record_list__datatable_query($post_data)
+    {
+        $this->get_me();
+        $me = $this->me;
+
+        $id  = $post_data["id"];
+        $query = WL_Common_Order_Operation_Record::select('*')
+            ->with([
+                'creator'=>function($query) { $query->select(['id','username','true_name']); },
+            ])
+            ->where(['finance_id'=>$id]);
+//            ->where(['record_object'=>21,'operate_object'=>61,'item_id'=>$id]);
+
+        if(!empty($post_data['name'])) $query->where('name', 'like', "%{$post_data['name']}%");
+
+
+        $total = $query->count();
+
+        $draw  = isset($post_data['draw'])  ? $post_data['draw']  : 1;
+        $skip  = isset($post_data['start'])  ? $post_data['start']  : 0;
+        $limit = isset($post_data['length']) ? $post_data['length'] : 50;
+
+        if(isset($post_data['order']))
+        {
+            $columns = $post_data['columns'];
+            $order = $post_data['order'][0];
+            $order_column = $order['column'];
+            $order_dir = $order['dir'];
+
+            $field = $columns[$order_column]["data"];
+            $query->orderBy($field, $order_dir);
+        }
+        else $query->orderBy("id", "desc");
+
+        if($limit == -1) $list = $query->get();
+        else $list = $query->skip($skip)->take($limit)->withTrashed()->get();
+
+        foreach ($list as $k => $v)
+        {
+            $list[$k]->encode_id = encode($v->id);
+
+            if($v->owner_id == $me->id) $list[$k]->is_me = 1;
+            else $list[$k]->is_me = 0;
+        }
+//        dd($list->toArray());
         return datatable_response($list, $draw, $total);
     }
 

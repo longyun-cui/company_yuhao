@@ -1,5 +1,5 @@
 {{--操作列表--}}
-<div class="modal fade- modal-main-body modal-wrapper" id="modal--for--order-item-operation-record-list">
+<div class="modal fade- modal-main-body modal-wrapper" id="modal--for--finance-item-operation-record-list">
     <div class="col-md-8 col-md-offset-2 margin-top-16px margin-bottom-64px bg-white">
 
         <div class="box- box-info- form-container">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
 
-                <table class='table table-striped table-bordered' id='datatable--for--order-item-operation-record-list'>
+                <table class='table table-striped table-bordered' id='datatable--for--finance-item-operation-record-list'>
                     <thead>
                     <tr role='row' class='heading'>
                         <th></th>

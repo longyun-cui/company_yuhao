@@ -91,9 +91,10 @@ class WLStaffDepartmentRepository {
         // 状态 [|]
         if(!empty($post_data['item_status']))
         {
-            if(!in_array($post_data['item_status'],[-1,0,'-1','0']))
+            $item_status_int = intval($post_data['item_status']);
+            if(!in_array($item_status_int,[-1,0]))
             {
-                $query->where('item_status', $post_data['item_status']);
+                $query->where('item_status', $item_status_int);
             }
         }
         else
@@ -104,9 +105,10 @@ class WLStaffDepartmentRepository {
         // 部门类型 [人事部|行政部|财务部]
         if(!empty($post_data['department_category']))
         {
-            if(!in_array($post_data['department_category'],[-1,0]))
+            $department_category_int = intval($post_data['department_category']);
+            if(!in_array($department_category_int,[-1,0]))
             {
-                $query->where('department_category', $post_data['department_category']);
+                $query->where('department_category', $department_category_int);
             }
         }
 

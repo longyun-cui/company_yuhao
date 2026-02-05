@@ -74,6 +74,7 @@ class WL_Common_Order extends Model
 
 
         'transport_mileage',
+        'transport_distance',
         'transport_time_limitation',
 
         'should_departure_time',
@@ -96,6 +97,7 @@ class WL_Common_Order extends Model
         'financial_fine_total',
 
 
+        'settlement_period',
         'freight_amount',
         'deposit_amount',
         'oil_card_amount',

@@ -35,12 +35,21 @@ class WL_Common_Order_Operation_Record extends Model
         'parent_id',
         'p_id',
 
+        'company_id',
+        'department_id',
         'team_id',
         'staff_id',
+
         'client_id',
         'project_id',
-        'item_id',
+
         'order_id',
+
+        'fee_id',
+        'finance_id',
+
+        'item_id',
+        'custom_id',
 
         'column',
         'column_type',

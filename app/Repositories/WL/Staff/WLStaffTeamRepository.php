@@ -85,9 +85,10 @@ class WLStaffTeamRepository {
         // 状态 [|]
         if(!empty($post_data['item_status']))
         {
-            if(!in_array($post_data['item_status'],[-1,0,'-1','0']))
+            $item_status_int = intval($post_data['item_status']);
+            if(!in_array($item_status_int,[-1,0]))
             {
-                $query->where('item_status', $post_data['item_status']);
+                $query->where('item_status', $item_status_int);
             }
         }
         else
@@ -95,12 +96,13 @@ class WLStaffTeamRepository {
             $query->where('item_status', 1);
         }
 
-        // 团队类型 [大区|组]
+        // 团队类型 [团队|分部|小组|小队]
         if(!empty($post_data['team_type']))
         {
-            if(!in_array($post_data['team_type'],[-1,0]))
+            $team_type_int = intval($post_data['item_status']);
+            if(!in_array($team_type_int,[-1,0]))
             {
-                $query->where('team_type', $post_data['team_type']);
+                $query->where('team_type', $team_type_int);
             }
         }
 

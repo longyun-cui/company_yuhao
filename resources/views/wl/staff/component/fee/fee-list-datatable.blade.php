@@ -1,7 +1,6 @@
 <script>
     function Datatable__for__Fee_List($tableId)
     {
-
         let $that = $($tableId);
         let $datatable_wrapper = $that.parents('.datatable-wrapper');
         let $tableSearch = $datatable_wrapper.find('.datatable-search-box');
@@ -60,25 +59,28 @@
                 },
                 {
                     "title": "状态",
-                    "data": "is_completed",
+                    "data": "is_recorded",
                     "width": "80px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
-                        if(data == 0)
+                        if([1,99].includes(row.fee_type))
                         {
-                            return '<i class="fa fa-square-o text-orange"></i> 待记账';
-                        }
-                        else if(data == 1)
-                        {
-                            return '<i class="fa fa-check-square-o text-black"></i> 已记账';
-                        }
-                        else if(data == 101)
-                        {
-                            return '<i class="fa fa-minus-square-o text-black"></i> 不记账';
+                            if(data == 0)
+                            {
+                                return '<i class="fa fa-square-o text-orange"></i> 待入账';
+                            }
+                            else if(data == 1)
+                            {
+                                return '<i class="fa fa-check-square-o text-black"></i> 已入账';
+                            }
+                            else
+                            {
+                                return '<i class="fa fa-question-circle text-black"></i> 有误';
+                            }
                         }
                         else
                         {
-                            return '<i class="fa fa-question-circle text-black"></i> 有误';
+                            return '<i class="fa fa-minus-square-o text-black"></i> 无需记账';
                         }
                     }
                 },
@@ -118,11 +120,11 @@
                         }
                         else if(data == 101)
                         {
-                            return '<i class="fa fa-info-circle text-red"></i> 扣款';
+                            return '<i class="fa fa-info-circle text-red"></i> 订单扣款';
                         }
                         else if(data == 111)
                         {
-                            return '<i class="fa fa-times-circle text-orange"></i> 罚款';
+                            return '<i class="fa fa-times-circle text-orange"></i> 司机罚款';
                         }
                         else
                         {
@@ -148,8 +150,10 @@
                     "data": "fee_title",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        $(nTd).attr('data-id',row.id).attr('data-name','名目');
-                        $(nTd).attr('data-key','fee_title').attr('data-value',data);
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','名目');
+                        $(nTd).attr('data-key','fee_title');
+                        $(nTd).attr('data-value',data);
                     },
                     render: function(data, type, row, meta) {
                         if(data) return data;
@@ -163,8 +167,10 @@
                     "width": "80px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        $(nTd).attr('data-id',row.id).attr('data-name','金额');
-                        $(nTd).attr('data-key','fee_amount').attr('data-value',data);
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','金额');
+                        $(nTd).attr('data-key','fee_amount');
+                        $(nTd).attr('data-value',data);
                     },
                     render: function(data, type, row, meta) {
                         if(data) return parseFloat(data);
@@ -206,7 +212,7 @@
                 {
                     "title": "工单",
                     "data": "order_id",
-                    "className": "text-left",
+                    "className": "",
                     "width": "300px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -257,10 +263,10 @@
                     }
                 },
                 {
-                    "title": "备注",
-                    "data": "remark",
-                    "className": "",
-                    "width": "",
+                    "title": "说明",
+                    "data": "fee_description",
+                    "className": "text-left",
+                    "width": "300px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.user_status != 97)
@@ -333,52 +339,37 @@
                     "width": "160px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
-                        var html_edit = '';
+                        var $html_edit = '';
                         var $html_delete = '';
-                        var $html_pay = '<a class="btn btn-xs btn-default disabled" data-id="'+data+'">记账</a>';
+                        var $html_bookkeeping = '';
 
-
-                        if(row.is_completed == 0)
-                        {
-                            $html_pay = '<a class="btn btn-xs btn-success- item-modal-show-for-fee-financial-create" data-id="'+data+'">记账</a>';
-                        }
-                        else if(row.is_completed == 1)
-                        {
-                            $html_pay = '<a class="btn btn-xs btn-default disabled" data-id="'+data+'">记账</a>';
-                        }
-                        else if(row.is_completed == 101)
-                        {
-                            $html_pay = '<a class="btn btn-xs btn-default disabled" data-id="'+data+'">记账</a>';
-                        }
-                        else
-                        {
-                            $html_pay = '<a class="btn btn-xs btn-default disabled" data-id="'+data+'">记账</a>';
-                        }
-
-
-                        if(row.user_category == 1)
-                        {
-                            $html_edit = '<a class="btn btn-xs btn-default disabled" data-id="'+data+'">编辑</a>';
-                        }
-                        else
-                        {
-                            $html_edit = '<a class="btn btn-xs btn-primary- item-admin-edit-link" data-id="'+data+'">编辑</a>';
-                        }
-
+                        // 删除
                         if(row.deleted_at == null)
                         {
+                            $html_delete = '<a class="btn btn-xs item-admin-delete-submit" data-id="'+data+'">删除</a>';
+                        }
+                        else
+                        {
+                            $html_delete = '<a class="btn btn-xs item-admin-restore-submit" data-id="'+data+'">恢复</a>';
+                        }
+
+
+                        if([1,99].includes(row.fee_type) && row.is_recorded == 0)
+                        {
+                            $html_bookkeeping = '<a class="btn btn-xs modal-show--for--fee-item-finance-bookkeeping" data-id="'+data+'">入账</a>';
                             $html_delete = '<a class="btn btn-xs bg-black- item-admin-delete-submit" data-id="'+data+'">删除</a>';
                         }
                         else
                         {
-                            $html_delete = '<a class="btn btn-xs bg-grey- item-admin-restore-submit" data-id="'+data+'">恢复</a>';
+                            $html_bookkeeping = '<a class="btn btn-xs btn-default disabled" data-id="'+data+'">入账</a>';
+                            $html_delete = '<a class="btn btn-xs btn-default disabled" data-id="'+data+'">删除</a>';
                         }
 
                         $html_record = '<a class="btn btn-xs bg-purple- item-modal-show-for-modify" data-id="'+data+'">记录</a>';
 
                         var html =
-                            // $html_edit+
-                            $html_pay+
+                            $html_edit+
+                            $html_bookkeeping+
                             $html_delete+
                             $html_record+
                             '';
@@ -388,7 +379,8 @@
             ],
             "drawCallback": function (settings) {
 
-                console.log('fee-list-datatable-execute');
+                console.log($tableId+'.execute');
+                console.log('fee-list.datatable-query.execute');
 
 //                    let startIndex = this.api().context[0]._iDisplayStart;//获取本页开始的条数
 //                    this.api().column(1).nodes().each(function(cell, i) {
