@@ -221,60 +221,34 @@
 
                         {{--部门管理--}}
                         @if(in_array($me->user_type,[0,1,9,11]))
-                        <li class="header">部门</li>
+                        <li class="header">导入</li>
                         @endif
 
-                        @if(in_array($me->user_type,[0,1,9,11]))
+                        @if(in_array(env('APP_ENV'),['local']) || in_array($me->staff_position,[0,1,9]))
                         <li class="header">
-                            <a href="{{ url('/department/department-create') }}">
-                                <i class="fa fa-plus text-red"></i> 添加部门
-                            </a>
-                        </li>
-                        @endif
-
-
-                        {{--员工管理--}}
-                        @if(in_array($me->user_type,[0,1,9,11,81]))
-                            <li class="header">员工</li>
-                        @endif
-
-                        @if(in_array($me->user_type,[0,1,9,11,81]))
-                        <li class="header">
-                            <a href="{{ url('/user/staff-create') }}">
-                                <i class="fa fa-plus text-red"></i> 添加员工
-                            </a>
-                        </li>
-                        @endif
-
-
-                        {{--业务管理--}}
-                        @if(in_array($me->user_type,[0,1,9,11,84,88]))
-                        <li class="header">业务</li>
-                        @endif
-
-                        @if(in_array($me->user_type,[0,1,9,11]))
-                        <li class="header _none">
-                            <a href="{{ url('/item/project-create') }}">
-                                <i class="fa fa-plus text-yellow"></i> 添加项目
-                            </a>
-                        </li>
-                        @endif
-
-                        @if(in_array($me->user_type,[0,1,9,11,84,88]))
-                        <li class="header">
-                            <a href="javascript:void(0);" class="item-create-modal-show"
-                                data-form-id="form-for-order-edit"
-                                data-modal-id="modal-for-order-edit"
-                                data-title="添加工单"
+                            <a href="javascript:void(0);" class="modal-show--for--driver-import"
+                               data-form-id="form--for--driver--import--by-excel"
+                               data-modal-id="modal--for--driver--import--by-excel"
+                               data-title="导入司机"
                             >
-                                <i class="fa fa-plus text-yellow"></i> 添加工单
+                                <i class="fa fa-file-excel-o text-yellow"></i> 导入司机
                             </a>
                         </li>
-                        @endif
-
-                        @if(env('APP_ENV') == 'local' && in_array($me->user_type,[0,1,9]))
-                        <li class="header _none">
-                            <a href="{{ url('/item/order-import') }}">
+                        <li class="header">
+                            <a href="javascript:void(0);" class="modal-show--for--car-import"
+                               data-form-id="form--for--car--import--by-excel"
+                               data-modal-id="modal--for--car--import--by-excel"
+                               data-title="导入车辆"
+                            >
+                                <i class="fa fa-file-excel-o text-yellow"></i> 导入车辆
+                            </a>
+                        </li>
+                        <li class="header">
+                            <a href="javascript:void(0);" class="modal-show--for--order-import"
+                               data-form-id="form--for--order--import--by-excel"
+                               data-modal-id="modal--for--order--import--by-excel"
+                               data-title="导入工单"
+                            >
                                 <i class="fa fa-file-excel-o text-yellow"></i> 导入工单
                             </a>
                         </li>

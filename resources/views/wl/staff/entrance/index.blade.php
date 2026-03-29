@@ -52,7 +52,7 @@
 
 <div class="component-container _none">
 
-    {{--部门--}}
+    {{--公司--}}
     @include(env('TEMPLATE_WL_STAFF').'component.module.company.company-list')
     {{--部门--}}
     @include(env('TEMPLATE_WL_STAFF').'component.module.department.department-list')
@@ -96,6 +96,9 @@
 </div>
 
 
+    {{--导入--}}
+
+
     {{--公司--}}
     @include(env('TEMPLATE_WL_STAFF').'component.module.company.company-edit')
     @include(env('TEMPLATE_WL_STAFF').'component.module.company.company--item-operation-record')
@@ -114,9 +117,11 @@
     @include(env('TEMPLATE_WL_STAFF').'component.module.motorcade.motorcade--item-operation-record')
     {{--车辆--}}
     @include(env('TEMPLATE_WL_STAFF').'component.module.car.car-edit')
+    @include(env('TEMPLATE_WL_STAFF').'component.module.car.car-import--by-excel')
     @include(env('TEMPLATE_WL_STAFF').'component.module.car.car--item-operation-record')
     {{--司机--}}
     @include(env('TEMPLATE_WL_STAFF').'component.module.driver.driver-edit')
+    @include(env('TEMPLATE_WL_STAFF').'component.module.driver.driver-import--by-excel')
     @include(env('TEMPLATE_WL_STAFF').'component.module.driver.driver--item-operation-record')
 
     {{--客户--}}
@@ -128,6 +133,7 @@
 
     {{--订单--}}
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order-edit')
+    @include(env('TEMPLATE_WL_STAFF').'component.module.order.order-import--by-excel')
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--item-operation-record')
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--item-follow-create')
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--item-journey-create')

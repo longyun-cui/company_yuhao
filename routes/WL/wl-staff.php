@@ -141,6 +141,7 @@ Route::group(['middleware' => ['wl.staff.login']], function () {
     Route::post('/o1/car/car-list/datatable-query', $controller.'@o1__car__list__datatable_query');
     Route::post('/o1/car/item-get', $controller.'@o1__car__item_get');
     Route::post('/o1/car/item-save', $controller.'@o1__car__item_save');
+    Route::post('/o1/car/import--save', $controller.'@o1__car__import__save');
     // 【车辆】删除 & 恢复 & 永久删除
     Route::post('/o1/car/item-delete', $controller.'@o1__car__item_delete');
     Route::post('/o1/car/item-restore', $controller.'@o1__car__item_restore');
@@ -156,6 +157,7 @@ Route::group(['middleware' => ['wl.staff.login']], function () {
     Route::post('/o1/driver/driver-list/datatable-query', $controller.'@o1__driver__list__datatable_query');
     Route::post('/o1/driver/item-get', $controller.'@o1__driver__item_get');
     Route::post('/o1/driver/item-save', $controller.'@o1__driver__item_save');
+    Route::post('/o1/driver/import--save', $controller.'@o1__driver__import__save');
     // 【司机】删除 & 恢复 & 永久删除
     Route::post('/o1/driver/item-delete', $controller.'@o1__driver__item_delete');
     Route::post('/o1/driver/item-restore', $controller.'@o1__driver__item_restore');
@@ -210,6 +212,7 @@ Route::group(['middleware' => ['wl.staff.login']], function () {
     // 【工单】操作
     Route::post('/o1/order/item-get', $controller.'@o1__order__item_get');
     Route::post('/o1/order/item-save', $controller.'@o1__order__item_save');
+    Route::post('/o1/order/import--save', $controller.'@o1__order__import__save');
     // 【工单】删除 & 恢复 & 永久删除
     Route::post('/o1/order/item-delete', $controller.'@o1__order__item_delete');
     Route::post('/o1/order/item-restore', $controller.'@o1__order__item_restore');

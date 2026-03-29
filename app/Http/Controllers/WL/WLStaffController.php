@@ -585,6 +585,11 @@ class WLStaffController extends Controller
     {
         return $this->car_repo->o1__car__item_save(request()->all());
     }
+    // 【车辆】导入
+    public function o1__car__import__save()
+    {
+        return $this->car_repo->o1__car__import__save(request()->all());
+    }
     // 【车辆】删除
     public function o1__car__item_delete()
     {
@@ -637,6 +642,11 @@ class WLStaffController extends Controller
     public function o1__driver__item_save()
     {
         return $this->driver_repo->o1__driver__item_save(request()->all());
+    }
+    // 【驾驶员】导入
+    public function o1__driver__import__save()
+    {
+        return $this->driver_repo->o1__driver__import__save(request()->all());
     }
     // 【驾驶员】删除
     public function o1__driver__item_delete()
@@ -795,6 +805,11 @@ class WLStaffController extends Controller
     public function o1__order__item_save()
     {
         return $this->order_repo->o1__order__item_save(request()->all());
+    }
+    // 【工单】导入
+    public function o1__order__import__save()
+    {
+        return $this->car_repo->o1__order__import__save(request()->all());
     }
 
 

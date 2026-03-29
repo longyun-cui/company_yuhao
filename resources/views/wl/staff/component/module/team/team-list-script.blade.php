@@ -80,7 +80,7 @@
                     else
                     {
                         form_reset("#"+$form_id);
-s
+
                         $modal.find('.box-title').html('编辑团队【'+$that.attr('data-id')+'】');
                         $modal.find('input[name="operate[type]"]').val('edit');
                         $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));

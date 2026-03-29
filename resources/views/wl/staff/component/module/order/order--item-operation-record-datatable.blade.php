@@ -7,6 +7,7 @@
             {
                 // 已经初始化
                 console.log('#datatable--for--order-item-operation-record-list // 已经初始化');
+                dt__order_item_operation_record.clear();
                 $(dt__order_item_operation_record).DataTable().destroy();
             }
             else

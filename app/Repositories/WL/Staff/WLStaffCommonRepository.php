@@ -372,17 +372,22 @@ class WLStaffCommonRepository {
             $query->where('name','like',"%$keyword%");
         }
 
-        if(!empty($post_data['car_type']))
+        if(!empty($post_data['car_category']))
         {
-            $query->where('car_type',$post_data['car_type']);
+            $query->where('car_category',$post_data['car_category']);
         }
+
+//        if(!empty($post_data['car_type']))
+//        {
+//            $query->where('car_type',$post_data['car_type']);
+//        }
 
         $list = $query->orderBy('id','asc')->get()->toArray();
 
 //        $unSpecified = ['id'=>0,'text'=>'[未指定]'];
 //        array_unshift($list,$unSpecified);
-        $unSpecified = ['id'=>-1,'text'=>'选择车辆'];
-        array_unshift($list,$unSpecified);
+//        $unSpecified = ['id'=>-1,'text'=>'选择车辆'];
+//        array_unshift($list,$unSpecified);
 
         return $list;
     }
@@ -392,21 +397,32 @@ class WLStaffCommonRepository {
         $this->get_me();
         $me = $this->me;
 
-        $query = WL_Common_Driver::select(['id','driver_name as text','driver_phone'])
+        $query = WL_Common_Driver::select(['id','driver_name','driver_phone','copilot_name','copilot_phone'])
             ->where(['item_status'=>1]);
 
         if(!empty($post_data['keyword']))
         {
             $keyword = "%{$post_data['keyword']}%";
-            $query->where('name','like',"%$keyword%");
+            $query->where('driver_name','like',"%$keyword%");
         }
 
-        $list = $query->orderBy('id','desc')->get()->toArray();
+        $list = $query->orderBy('id','desc')->get()
+            ->map(function ($item) {
+                $text = $item->driver_name;
+
+                if($item->driver_phone) $text .= ' ('.$item->driver_phone.')';
+                if($item->copilot_name) $text .= ' - '.$item->copilot_name;
+                if($item->copilot_phone) $text .= ' ('.$item->copilot_phone.')';
+
+                $item->text = $text;
+                return $item;
+            })
+            ->toArray();
 
 //        $unSpecified = ['id'=>0,'text'=>'[未指定]'];
 //        array_unshift($list,$unSpecified);
-        $unSpecified = ['id'=>-1,'text'=>'选择司机'];
-        array_unshift($list,$unSpecified);
+//        $unSpecified = ['id'=>-1,'text'=>'选择司机'];
+//        array_unshift($list,$unSpecified);
 
         return $list;
     }

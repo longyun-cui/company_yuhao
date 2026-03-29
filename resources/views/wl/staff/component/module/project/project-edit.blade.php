@@ -29,7 +29,7 @@
                             <button type="button" class="btn radio-btn radio-project-category">
                             <span class="radio">
                                 <label>
-                                    <input type="radio" name="project_category" value="1" checked="checked"> 长期
+                                    <input type="radio" name="project_category" value="1" checked="checked" data-default="default"> 长期
                                 </label>
                             </span>
                             </button>

@@ -272,6 +272,163 @@ class WLStaffCarRepository {
     }
 
 
+    // 【车辆】导入-数据
+    public function o1__car__import__save($post_data)
+    {
+        $messages = [
+            'operate.required' => 'operate.required',
+            'car_type.required' => '请选择导入类型！',
+        ];
+        $v = Validator::make($post_data, [
+            'operate' => 'required',
+            'car_type' => 'required',
+        ], $messages);
+        if ($v->fails())
+        {
+            $messages = $v->errors();
+            return response_error([],$messages->first());
+        }
+
+        $this->get_me();
+        $me = $this->me;
+
+        if(!in_array($me->staff_position,[0,1,9])) return response_error([],"你没有操作权限！");
+
+        $car_category = $post_data["car_category"];
+        $car_type = $post_data["car_type"];
+
+
+        // 附件
+        if(!empty($post_data["upload-file"]))
+        {
+
+//            $result = upload_storage($post_data["attachment"]);
+//            $result = upload_storage($post_data["attachment"], null, null, 'assign');
+            $result = upload_file_storage($post_data["upload-file"],null,'wl/unique/attachment','');
+            if($result["result"])
+            {
+//                $mine->attachment_name = $result["name"];
+//                $mine->attachment_src = $result["local"];
+//                $mine->save();
+            }
+            else throw new Exception("file--upload--fail");
+        }
+
+        $upload_file = storage_resource_path($result["local"]);
+
+        $data = Excel::load($upload_file, function($reader) {
+
+//            $reader->takeColumns(50);
+            $reader->limitColumns(30);
+
+//            $reader->takeRows(100);
+            $reader->limitRows(200);
+
+//            $reader->ignoreEmpty();
+
+//            $data = $reader->all();
+//            $data = $reader->toArray();
+
+        })->get();
+        $data = $data->toArray();
+
+
+        $item_data = [];
+
+        foreach($data as $key => $value)
+        {
+            $temp_date = [];
+//            $temp_date['id'] = $key;
+
+            $car_number = !empty($value['car_number']) ? (int)trim($value['car_number']) : 0;
+            $name = !empty($value['name']) ? trim($value['name']) : null;
+            $pre_name = !empty($value['pre_name']) ? trim($value['pre_name']) : null;
+            $sub_name = !empty($value['sub_name']) ? trim($value['sub_name']) : null;
+
+            $car_info_owner = !empty($value['car_info_owner']) ? trim($value['car_info_owner']) : null;
+            $car_info_type = !empty($value['car_info_type']) ? trim($value['car_info_type']) : null;
+            $car_info_brand = !empty($value['car_info_brand']) ? trim($value['car_info_brand']) : null;
+            $car_info_model = !empty($value['car_info_model']) ? trim($value['car_info_model']) : null;
+            $car_info_size = !empty($value['car_info_size']) ? trim($value['car_info_size']) : null;
+            $car_info_identification_number = !empty($value['car_info_identification_number']) ? trim($value['car_info_identification_number']) : null;
+            $car_info_engine_number = !empty($value['car_info_engine_number']) ? trim($value['car_info_engine_number']) : null;
+            $car_info_vehicle_axles_count = !empty($value['car_info_vehicle_axles_count']) ? trim($value['car_info_vehicle_axles_count']) : null;
+            $car_info_main_fuel_tank = !empty($value['car_info_main_fuel_tank']) ? trim($value['car_info_main_fuel_tank']) : null;
+            $car_info_total_mass = !empty($value['car_info_total_mass']) ? trim($value['car_info_total_mass']) : null;
+
+            $car_info_issue_date = !empty($value['car_info_issue_date']) ? trim($value['car_info_issue_date']) : null;
+            $car_info_registration_date = !empty($value['car_info_registration_date']) ? trim($value['car_info_registration_date']) : null;
+            $car_info_inspection_validity = !empty($value['car_info_inspection_validity']) ? trim($value['car_info_inspection_validity']) : null;
+            $car_info_transportation_license_validity = !empty($value['car_info_transportation_license_validity']) ? trim($value['car_info_transportation_license_validity']) : null;
+            $car_info_transportation_license_change_time = !empty($value['car_info_transportation_license_change_time']) ? trim($value['car_info_transportation_license_change_time']) : null;
+
+            $description = !empty($value['description']) ? trim($value['description']) : null;
+
+
+            if($name)
+            {
+                $temp_date['name'] = $name;
+                $temp_date['car_category'] = $car_category;
+                $temp_date['car_type'] = $car_type;
+            }
+            else continue;
+
+            if($car_number) $temp_date['car_number'] = $car_number;
+            if($pre_name) $temp_date['pre_name'] = $pre_name;
+            if($sub_name) $temp_date['sub_name'] = $sub_name;
+
+            if($car_info_owner) $temp_date['car_info_owner'] = $car_info_owner;
+            if($car_info_type) $temp_date['car_info_type'] = $car_info_type;
+            if($car_info_brand) $temp_date['car_info_brand'] = $car_info_brand;
+            if($car_info_model) $temp_date['car_info_model'] = $car_info_model;
+            if($car_info_size) $temp_date['car_info_size'] = $car_info_size;
+            if($car_info_identification_number) $temp_date['car_info_identification_number'] = $car_info_identification_number;
+            if($car_info_engine_number) $temp_date['car_info_engine_number'] = $car_info_engine_number;
+            if($car_info_vehicle_axles_count) $temp_date['car_info_vehicle_axles_count'] = $car_info_vehicle_axles_count;
+            if($car_info_main_fuel_tank) $temp_date['car_info_main_fuel_tank'] = $car_info_main_fuel_tank;
+            if($car_info_total_mass) $temp_date['car_info_total_mass'] = $car_info_total_mass;
+
+            if($car_info_issue_date) $temp_date['car_info_issue_date'] = $car_info_issue_date;
+            if($car_info_registration_date) $temp_date['car_info_registration_date'] = $car_info_registration_date;
+            if($car_info_inspection_validity) $temp_date['car_info_inspection_validity'] = $car_info_inspection_validity;
+            if($car_info_transportation_license_validity) $temp_date['car_info_transportation_license_validity'] = $car_info_transportation_license_validity;
+            if($car_info_transportation_license_change_time) $temp_date['car_info_transportation_license_change_time'] = $car_info_transportation_license_change_time;
+
+            if($description) $temp_date['description'] = $description;
+
+
+            $item_data[] = $temp_date;
+        }
+//        dd($item_data);
+
+
+        // 启动数据库事务
+        DB::beginTransaction();
+        try
+        {
+            foreach($item_data as $key => $value)
+            {
+                $item = new WL_Common_Car;
+
+                $bool = $item->fill($value)->save();
+                if(!$bool) throw new Exception("WL_Common_Driver--insert--fail");
+            }
+
+            DB::commit();
+            return response_success(['count'=>count($item_data)]);
+        }
+        catch (Exception $e)
+        {
+            DB::rollback();
+            $msg = '操作失败，请重试！';
+            $msg = $e->getMessage();
+//            exit($e->getMessage());
+            return response_fail([],$msg);
+        }
+
+    }
+
+
     // 【车辆】删除
     public function o1__car__item_delete($post_data)
     {

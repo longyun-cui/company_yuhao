@@ -30,7 +30,7 @@
                                 <button type="button" class="btn">
                                     <span class="radio">
                                         <label>
-                                            <input type="radio" name="car_type" value="1" checked="checked"> 车辆
+                                            <input type="radio" name="car_type" value="1" checked="checked"> 车(9.6)
                                         </label>
                                     </span>
                                 </button>
@@ -40,11 +40,21 @@
                                 <button type="button" class="btn">
                                     <span class="radio">
                                         <label>
-                                            <input type="radio" name="car_type" value="21"> 车挂
+                                            <input type="radio" name="car_type" value="11"> 车头
                                         </label>
                                     </span>
                                 </button>
                                 @endif
+
+                                    @if(in_array($me->user_type, [0,1,9,11]))
+                                        <button type="button" class="btn">
+                                    <span class="radio">
+                                        <label>
+                                            <input type="radio" name="car_type" value="21"> 挂
+                                        </label>
+                                    </span>
+                                        </button>
+                                    @endif
 
                             </div>
                         </div>
@@ -64,6 +74,15 @@
                             >
                                 <option data-id="0" value="0">选择车队</option>
                             </select>
+                        </div>
+                    </div>
+
+
+                    {{--车辆编号--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2">车辆编号</label>
+                        <div class="col-md-9 ">
+                            <input type="text" class="form-control" name="car_number" placeholder="车辆编号" value="">
                         </div>
                     </div>
 
@@ -142,7 +161,7 @@
 
 
                     {{--车挂--}}
-                    <div class="form-group" style="height:70px;">
+                    <div class="form-group">
                         <label class="control-label col-md-2"><sup class="text-red">*</sup> 默认车挂</label>
                         <div class="col-md-9 ">
                             <select class="form-control select2-reset select2--car"
@@ -151,6 +170,7 @@
                                     data-modal="#modal--for--car-item-edit"
                                     data-item-category=""
                                     data-item-type=""
+                                    data-car-category="21"
                                     data-car-type="21"
                             >
                                 <option data-id="0" value="0">选择车挂</option>
@@ -158,10 +178,10 @@
                         </div>
                     </div>
                     {{--驾驶员--}}
-                    <div class="form-group" style="height:70px;">
+                    <div class="form-group">
                         <label class="control-label col-md-2"><sup class="text-red">*</sup> 默认驾驶员</label>
                         <div class="col-md-9 ">
-                            <div class="col-sm-6 col-md-6 padding-0">
+                            <div class="col-sm-12 col-md-12 padding-0">
                                 <select class="form-control select2-reset select2--driver"
                                         name="driver_id"
                                         id="select2--driver--for--car-item-edit"
@@ -172,20 +192,19 @@
                                     <option data-id="0" value="0">选择主驾</option>
                                 </select>
                             </div>
-                            <div class="col-sm-6 col-md-6 padding-0">
-                                <select class="form-control select2-reset select2--driver"
-                                        name="copilot_id"
-                                        id="select2--copilot--for--car-item-edit"
-                                        data-modal="#modal--for--car-item-edit"
-                                        data-item-category=""
-                                        data-item-type=""
-                                >
-                                    <option data-id="0" value="0">选择副驾</option>
-                                </select>
-                            </div>
+{{--                            <div class="col-sm-6 col-md-6 padding-0">--}}
+{{--                                <select class="form-control select2-reset select2--driver"--}}
+{{--                                        name="copilot_id"--}}
+{{--                                        id="select2--copilot--for--car-item-edit"--}}
+{{--                                        data-modal="#modal--for--car-item-edit"--}}
+{{--                                        data-item-category=""--}}
+{{--                                        data-item-type=""--}}
+{{--                                >--}}
+{{--                                    <option data-id="0" value="0">选择副驾</option>--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
-
 
 
                     {{--ETC号--}}
@@ -259,6 +278,20 @@
                             <input type="text" class="form-control" name="car_info_engine_number" placeholder="发动机号" value="">
                         </div>
                     </div>
+                    {{--轴数--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2">轴数</label>
+                        <div class="col-md-9 ">
+                            <input type="text" class="form-control" name="car_info_vehicle_axles" placeholder="轴数" value="">
+                        </div>
+                    </div>
+                    {{--尺寸--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2">尺寸</label>
+                        <div class="col-md-9 ">
+                            <input type="text" class="form-control" name="car_info_size" placeholder="尺寸" value="">
+                        </div>
+                    </div>
                     {{--车头轴距--}}
                     <div class="form-group">
                         <label class="control-label col-md-2">车头轴距</label>
@@ -319,42 +352,42 @@
                     <div class="form-group">
                         <label class="control-label col-md-2">购买日期</label>
                         <div class="col-md-9 ">
-                            <input type="text" class="form-control date_picker" name="car_info_purchase_date" placeholder="购买日期" value="" readonly="readonly">
+                            <input type="text" class="form-control date-picker" name="car_info_purchase_date" placeholder="购买日期" value="" readonly="readonly">
                         </div>
                     </div>
                     {{--注册日期--}}
                     <div class="form-group">
                         <label class="control-label col-md-2">注册日期</label>
                         <div class="col-md-9 ">
-                            <input type="text" class="form-control date_picker" name="car_info_registration_date" placeholder="注册日期" value="" readonly="readonly">
+                            <input type="text" class="form-control date-picker" name="car_info_registration_date" placeholder="注册日期" value="" readonly="readonly">
                         </div>
                     </div>
                     {{--发证日期--}}
                     <div class="form-group">
                         <label class="control-label col-md-2">发证日期</label>
                         <div class="col-md-9 ">
-                            <input type="text" class="form-control date_picker" name="car_info_issue_date" placeholder="发证日期" value="" readonly="readonly">
+                            <input type="text" class="form-control date-picker" name="car_info_issue_date" placeholder="发证日期" value="" readonly="readonly">
                         </div>
                     </div>
                     {{--检验有效期--}}
                     <div class="form-group">
                         <label class="control-label col-md-2">检验有效期</label>
                         <div class="col-md-9 ">
-                            <input type="text" class="form-control date_picker" name="car_info_inspection_validity" placeholder="检验有效期" value="" readonly="readonly">
+                            <input type="text" class="form-control date-picker" name="car_info_inspection_validity" placeholder="检验有效期" value="" readonly="readonly">
                         </div>
                     </div>
                     {{--运输证-年检时间--}}
                     <div class="form-group">
                         <label class="control-label col-md-2">运输证-年检时间</label>
                         <div class="col-md-9 ">
-                            <input type="text" class="form-control date_picker" name="car_info_transportation_license_validity" placeholder="运输证-年检时间" value="" readonly="readonly">
+                            <input type="text" class="form-control date-picker" name="car_info_transportation_license_validity" placeholder="运输证-年检时间" value="" readonly="readonly">
                         </div>
                     </div>
                     {{--运输证-换证期--}}
                     <div class="form-group">
                         <label class="control-label col-md-2">运输证-换证期</label>
                         <div class="col-md-9 ">
-                            <input type="text" class="form-control date_picker" name="car_info_transportation_license_change_time" placeholder="运输证-换证期" value="" readonly="readonly">
+                            <input type="text" class="form-control date-picker" name="car_info_transportation_license_change_time" placeholder="运输证-换证期" value="" readonly="readonly">
                         </div>
                     </div>
 

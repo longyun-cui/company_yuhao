@@ -27,8 +27,19 @@ class WL_Common_Car extends Model
         'motorcade_id',
         'trailer_id',
 
+        'pre_name',
+        'sub_name',
+        'car_number',
+        'car_name',
+        'trailer_name',
+
         'driver_id',
         'copilot_id',
+
+        'driver_name',
+        'driver_phone',
+        'copilot_name',
+        'copilot_phone',
 
         'trailer_type',
         'trailer_length',
@@ -36,14 +47,15 @@ class WL_Common_Car extends Model
         'trailer_weight',
         'trailer_axis_count',
 
-        'car_info_type',
         'car_info_owner',
-        'car_info_function',
+        'car_info_type',
         'car_info_brand',
+        'car_info_function',
+        'car_info_size',
         'car_info_identification_number',
-
         'car_info_engine_number',
         'car_info_locomotive_wheelbase',
+        'car_info_vehicle_axles_count',
         'car_info_main_fuel_tank',
         'car_info_auxiliary_fuel_tank',
         'car_info_total_mass',

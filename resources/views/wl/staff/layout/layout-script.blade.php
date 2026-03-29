@@ -123,6 +123,18 @@
 
 
 
+        $(".upload-file--by--txt").fileinput({
+            allowedFileExtensions : [ 'txt' ],
+            showUpload: false
+        });
+        $(".upload-file--by--excel").fileinput({
+            allowedFileExtensions : [ 'xls', 'xlsx' ],
+            showUpload: false
+        });
+
+
+
+
 
         $('.select2-car').select2({
         // $(".main-content").on('select2', ".select2-car", function() {
@@ -456,6 +468,7 @@
                             _token: $('meta[name="_token"]').attr('content'),
                             item_category: this.data('item-category'),
                             item_type: this.data('item-type'),
+                            car_category: this.data('car-category'),
                             car_type: this.data('car-type'),
                             motorcade_id: this.data('motorcade-id'),
                             keyword: params.term,
@@ -554,7 +567,10 @@
                 escapeMarkup: function (markup) { return markup; },
                 dropdownParent: $dropdownParent,
                 minimumInputLength: 0,
-                theme: 'classic'
+                theme: 'classic',
+                placeholder: '请选择',
+                allowClear: true,
+                minimumResultsForSearch: 1 // 确保开启搜索（默认就是开启的）
             });
         });
 

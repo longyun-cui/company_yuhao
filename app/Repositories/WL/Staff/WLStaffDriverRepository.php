@@ -297,6 +297,111 @@ class WLStaffDriverRepository {
     }
 
 
+    // 【车辆】导入-数据
+    public function o1__driver__import__save($post_data)
+    {
+        $messages = [
+            'operate.required' => 'operate.required',
+        ];
+        $v = Validator::make($post_data, [
+            'operate' => 'required',
+        ], $messages);
+        if ($v->fails())
+        {
+            $messages = $v->errors();
+            return response_error([],$messages->first());
+        }
+
+        $this->get_me();
+        $me = $this->me;
+
+        // 判断权限
+        if(!in_array($me->staff_position,[0,1,9])) return response_error([],"你没有操作权限！");
+
+
+        // 上传文件
+        if(!empty($post_data["upload-file"]))
+        {
+//            $result = upload_storage($post_data["attachment"]);
+//            $result = upload_storage($post_data["attachment"], null, null, 'assign');
+            $result = upload_file_storage($post_data["upload-file"],null,'wl/unique/attachment','');
+            if($result["result"])
+            {
+//                $mine->attachment_name = $result["name"];
+//                $mine->attachment_src = $result["local"];
+//                $mine->save();
+            }
+            else throw new Exception("file--upload--fail");
+        }
+
+        $upload_file = storage_resource_path($result["local"]);
+
+        $data = Excel::load($upload_file, function($reader) {
+
+//            $reader->ignoreEmpty();
+
+            $reader->limitColumns(10);
+
+            $reader->limitRows(200);
+
+
+//            $data = $reader->all();
+//            $data = $reader->toArray();
+
+        })->get();
+        $data = $data->toArray();
+
+
+        $item_data = [];
+
+        foreach($data as $key => $value)
+        {
+            $temp_date = [];
+//            $temp_date['id'] = $key;
+
+            $driver_name = !empty($value['driver_name']) ? trim($value['driver_name']) : null;
+            $driver_phone = !empty($value['driver_name']) ? trim($value['driver_phone']) : null;
+            $copilot_name = !empty($value['copilot_name']) ? trim($value['copilot_name']) : null;
+            $copilot_phone = !empty($value['copilot_phone']) ? trim($value['copilot_phone']) : null;
+
+            if($driver_name) $temp_date['driver_name'] = $driver_name;
+            else continue;
+            if($driver_phone) $temp_date['driver_phone'] = $driver_phone;
+            if($copilot_name) $temp_date['copilot_name'] = $copilot_name;
+            if($copilot_phone) $temp_date['copilot_phone'] = $copilot_phone;
+
+            $item_data[] = $temp_date;
+        }
+//        dd($item_data);
+
+
+        // 启动数据库事务
+        DB::beginTransaction();
+        try
+        {
+            foreach($item_data as $key => $value)
+            {
+                $item = new WL_Common_Driver;
+
+                $bool = $item->fill($value)->save();
+                if(!$bool) throw new Exception("WL_Common_Driver--insert--fail");
+            }
+
+            DB::commit();
+            return response_success(['count'=>count($item_data)]);
+        }
+        catch (Exception $e)
+        {
+            DB::rollback();
+            $msg = '操作失败，请重试！';
+            $msg = $e->getMessage();
+//            exit($e->getMessage());
+            return response_fail([],$msg);
+        }
+
+    }
+
+
     // 【司机】删除
     public function o1__driver__item_delete($post_data)
     {

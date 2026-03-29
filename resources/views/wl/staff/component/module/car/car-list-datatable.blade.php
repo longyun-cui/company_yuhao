@@ -6,7 +6,7 @@
         let $tableSearch = $datatable_wrapper.find('.datatable-search-box');
 
         $($tableId).DataTable({
-            "aLengthMenu": [[10, 50, 100, 200, -1], ["10", "50", "100", "200", "全部"]],
+            "aLengthMenu": [[10, 50, 100, 200, 500], ["10", "50", "100", "200", "500"]],
             "processing": true,
             "serverSide": true,
             "searching": false,
@@ -90,24 +90,87 @@
                 {
                     "width": "60px",
                     "title": "类型",
-                    "data": 'car_type',
+                    "data": 'car_category',
                     "orderable": false,
                     render: function(data, type, row, meta) {
-                        if(data == 1) return '<i class="fa fa-circle text-blue"></i> 车';
+                        if(data == 1)
+                        {
+                            if(row.car_type == 1) return '<i class="fa fa-circle text-blue"></i> 车';
+                            else if(row.car_type == 11) return '<i class="fa fa-circle text-blue"></i> 车头';
+                            else return '<i class="fa fa-circle-o text-blue"></i> 车';
+                        }
                         else if(data == 21) return '<i class="fa fa-circle-o text-purple"></i> 挂';
                         else return "有误";
                     }
                 },
                 {
+                    "title": "车牌编号",
+                    "data": "car_number",
                     "className": "text-center",
-                    "width": "120px",
-                    "title": "车牌号",
-                    "data": "name",
+                    "width": "60px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
-                        return '<a class="car-control" data-id="'+row.id+'" data-title="'+data+'">'+data+'</a>';
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
+                {
+                    "title": "车牌号",
+                    "data": "name",
+                    "className": "text-center",
+                    "width": "120px",
+                    "orderable": false,
+                    render: function(data, type, row, meta) {
+                        var $name = data;
+                        if(row.pre_name) $name = data + ' (' + row.pre_name + ')';
+                        return '<a class="car-control" data-id="'+row.id+'" data-title="'+data+'">'+$name+'</a>';
+                    }
+                },
+                {
+                    "title": "特备",
+                    "data": "sub_name",
+                    "className": "text-center",
+                    "width": "120px",
+                    "orderable": false,
+                    render: function(data, type, row, meta) {
+                        if(!data) return '--';
+                        else return data;
+                    }
+                },
+                {
+                    "title": "备注",
+                    "data": "description",
+                    "className": "text-center",
+                    "width": "120px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).addClass('modal-show-for-info-text-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name','备注');
+                            $(nTd).attr('data-key','remark').attr('data-value',data);
+                            $(nTd).attr('data-column-name','备注');
+                            $(nTd).attr('data-text-type','textarea');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        return data;
+                        // if(data) return '<small class="btn-xs bg-yellow">查看</small>';
+                        // else return '';
+                    }
+                },
+                // {
+                //     "title": "挂号",
+                //     "data": "trailer_name",
+                //     "className": "text-center",
+                //     "width": "120px",
+                //     "orderable": false,
+                //     render: function(data, type, row, meta) {
+                //         return '<a class="car-control" data-id="'+row.id+'" data-title="'+data+'">'+data+'</a>';
+                //     }
+                // },
                 {
                     "title": "所属车队",
                     "data": 'motorcade_id',
@@ -118,6 +181,30 @@
                         else return '<a href="javascript:void(0);" class="text-black">' + row.motorcade_er.name + '</a>';
                     }
                 },
+                // {
+                //     "title": "主驾",
+                //     "data": "driver_name",
+                //     "className": "text-center",
+                //     "width": "160px",
+                //     "orderable": false,
+                //     render: function(data, type, row, meta) {
+                //         if(!data) return '--';
+                //         if(row.driver_phone) return data + '(' + row.driver_phone + ')';
+                //         else return data;
+                //     }
+                // },
+                // {
+                //     "title": "副驾",
+                //     "data": "copilot_name",
+                //     "className": "text-center",
+                //     "width": "160px",
+                //     "orderable": false,
+                //     render: function(data, type, row, meta) {
+                //         if(!data) return '--';
+                //         if(row.copilot_phone) return data + '(' + row.copilot_phone + ')';
+                //         else return data;
+                //     }
+                // },
                 // {
                 //     "className": "",
                 //     "width": "80px",
@@ -178,89 +265,25 @@
 //                         }
 //                     },
                 {
-                    "title": "类型",
-                    "data": "trailer_type",
                     "className": "text-center",
-                    "width": "60px",
+                    "width": "120px",
+                    "title": "车型",
+                    "data": "car_info_type",
                     "orderable": false,
-                    "sortable": true,
-                    "sorting": ['asc','desc'],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
 //                            if(row.is_published != 0)
                         {
-                            $(nTd).addClass('modal-show-for-info-select-set');
+                            $(nTd).addClass('modal-show-for-info-text-set');
                             $(nTd).attr('data-id',row.id).attr('data-name',row.name);
-                            $(nTd).attr('data-key','trailer_type').attr('data-value',data);
-                            $(nTd).attr('data-column-name','类型');
+                            $(nTd).attr('data-key','car_info_type').attr('data-value',data);
+                            $(nTd).attr('data-column-name','车型');
                             if(data) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
-                    }
-                },
-                {
-                    "title": "尺寸",
-                    "data": "trailer_length",
-                    "className": "text-center",
-                    "width": "60px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-//                            if(row.is_published != 0)
-                        {
-                            $(nTd).addClass('modal-show-for-info-select-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name',row.name);
-                            $(nTd).attr('data-key','trailer_length').attr('data-value',data);
-                            $(nTd).attr('data-column-name','尺寸');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        return data;
-                    }
-                },
-                {
-                    "title": "容积",
-                    "data": "trailer_volume",
-                    "className": "text-center",
-                    "width": "60px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-//                            if(row.is_published != 0)
-                        {
-                            $(nTd).addClass('modal-show-for-info-select-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name',row.name);
-                            $(nTd).attr('data-key','trailer_volume').attr('data-value',data);
-                            $(nTd).attr('data-column-name','容积');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        return data;
-                    }
-                },
-                {
-                    "title": "载重",
-                    "data": "trailer_weight",
-                    "className": "text-center",
-                    "width": "60px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-//                            if(row.is_published != 0)
-                        {
-                            $(nTd).addClass('modal-show-for-info-select-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name',row.name);
-                            $(nTd).attr('data-key','trailer_weight').attr('data-value',data);
-                            $(nTd).attr('data-column-name','载重');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        return data;
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
                 {
@@ -282,7 +305,7 @@
                     },
                     render: function(data, type, row, meta) {
                         if(data) return data;
-                        else return "";
+                        else return "--";
                     }
                 },
                 {
@@ -363,7 +386,8 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
                 {
@@ -385,7 +409,8 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
                 {
@@ -412,7 +437,7 @@
                 },
                 {
                     "className": "text-center",
-                    "width": "100px",
+                    "width": "120px",
                     "title": "车辆类型",
                     "data": "car_info_model",
                     "orderable": false,
@@ -421,19 +446,43 @@
                         {
                             $(nTd).addClass('modal-show-for-info-text-set');
                             $(nTd).attr('data-id',row.id).attr('data-name',row.name);
-                            $(nTd).attr('data-key','car_info_type').attr('data-value',data);
+                            $(nTd).attr('data-key','car_info_model').attr('data-value',data);
                             $(nTd).attr('data-column-name','车辆类型');
                             if(data) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
                 {
                     "className": "text-center",
-                    "width": "100px",
+                    "width": "60px",
+                    "title": "轴数",
+                    "data": "car_info_vehicle_axles_count",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+//                            if(row.is_published != 0)
+                        {
+                            $(nTd).addClass('modal-show-for-info-text-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name',row.name);
+                            $(nTd).attr('data-key','car_info_vehicle_axles_count').attr('data-value',data);
+                            $(nTd).attr('data-column-name','轴数');
+                            $(nTd).attr('data-text-type','text');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(!data) return '--';
+                        else return data;
+                    }
+                },
+                {
+                    "className": "text-center",
+                    "width": "120px",
                     "title": "所有人",
                     "data": "car_info_owner",
                     "orderable": false,
@@ -450,12 +499,13 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
                 {
                     "className": "text-center",
-                    "width": "100px",
+                    "width": "120px",
                     "title": "使用性质",
                     "data": "car_info_function",
                     "orderable": false,
@@ -472,12 +522,13 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
                 {
                     "className": "text-center",
-                    "width": "100px",
+                    "width": "120px",
                     "title": "品牌",
                     "data": "car_info_brand",
                     "orderable": false,
@@ -494,12 +545,13 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
                 {
                     "className": "text-center",
-                    "width": "100px",
+                    "width": "120px",
                     "title": "车辆识别代码",
                     "data": "car_info_identification_number",
                     "orderable": false,
@@ -516,12 +568,13 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
                 {
                     "className": "text-center",
-                    "width": "60px",
+                    "width": "100px",
                     "title": "发动机号",
                     "data": "car_info_engine_number",
                     "orderable": false,
@@ -538,7 +591,8 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
                 {
@@ -560,7 +614,8 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
                 {
@@ -582,7 +637,8 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
                 {
@@ -604,7 +660,8 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
                 {
@@ -626,7 +683,8 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
                 {
@@ -648,7 +706,8 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
                 {
@@ -670,7 +729,8 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
                 {
@@ -692,7 +752,8 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
                 {
@@ -714,7 +775,98 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        if(!data) return '--';
+                        else return data;
+                    }
+                },
+                {
+                    "title": "车挂类型",
+                    "data": "trailer_type",
+                    "className": "text-center",
+                    "width": "60px",
+                    "orderable": false,
+                    "sortable": true,
+                    "sorting": ['asc','desc'],
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+//                            if(row.is_published != 0)
+                        {
+                            $(nTd).addClass('modal-show-for-info-select-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name',row.name);
+                            $(nTd).attr('data-key','trailer_type').attr('data-value',data);
+                            $(nTd).attr('data-column-name','类型');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(!data) return '--';
+                        else return data;
+                    }
+                },
+                {
+                    "title": "车挂尺寸",
+                    "data": "trailer_length",
+                    "className": "text-center",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+//                            if(row.is_published != 0)
+                        {
+                            $(nTd).addClass('modal-show-for-info-select-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name',row.name);
+                            $(nTd).attr('data-key','trailer_length').attr('data-value',data);
+                            $(nTd).attr('data-column-name','尺寸');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(!data) return '--';
+                        else return data;
+                    }
+                },
+                {
+                    "title": "车挂容积",
+                    "data": "trailer_volume",
+                    "className": "text-center",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+//                            if(row.is_published != 0)
+                        {
+                            $(nTd).addClass('modal-show-for-info-select-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name',row.name);
+                            $(nTd).attr('data-key','trailer_volume').attr('data-value',data);
+                            $(nTd).attr('data-column-name','容积');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(!data) return '--';
+                        else return data;
+                    }
+                },
+                {
+                    "title": "车挂载重",
+                    "data": "trailer_weight",
+                    "className": "text-center",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+//                            if(row.is_published != 0)
+                        {
+                            $(nTd).addClass('modal-show-for-info-select-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name',row.name);
+                            $(nTd).attr('data-key','trailer_weight').attr('data-value',data);
+                            $(nTd).attr('data-column-name','载重');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
                 {
@@ -852,19 +1004,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        // return data;
-                        if(data)
-                        {
-                            var $date = new Date(data);
-                            var $year = $date.getFullYear();
-                            var $month = ('00'+($date.getMonth()+1)).slice(-2);
-                            var $day = ('00'+($date.getDate())).slice(-2);
-
-                            var $currentYear = new Date().getFullYear();
-                            if($year == $currentYear) return $month+'-'+$day;
-                            else return $year+'-'+$month+'-'+$day;
-                            return $year;
-                        }
+                        if(data) return data;
                         return '--';
                     }
                 },
@@ -939,10 +1079,10 @@
                     }
                 },
                 {
-                    "className": "text-center",
-                    "width": "80px",
                     "title": "运输证-年检",
                     "data": "car_info_transportation_license_validity",
+                    "className": "text-center",
+                    "width": "80px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
 //                            if(row.is_published != 0)
@@ -974,10 +1114,10 @@
                     }
                 },
                 {
-                    "className": "text-center",
-                    "width": "80px",
                     "title": "运输证-换证",
                     "data": "car_info_transportation_license_change_time",
+                    "className": "text-center",
+                    "width": "80px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
 //                            if(row.is_published != 0)
@@ -1009,34 +1149,10 @@
                     }
                 },
                 {
-                    "className": "text-center",
-                    "width": "",
-                    "title": "备注",
-                    "data": "remark",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1 && row.item_status != 97)
-                        {
-                            $(nTd).addClass('modal-show-for-info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','备注');
-                            $(nTd).attr('data-key','remark').attr('data-value',data);
-                            $(nTd).attr('data-column-name','备注');
-                            $(nTd).attr('data-text-type','textarea');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        return data;
-                        // if(data) return '<small class="btn-xs bg-yellow">查看</small>';
-                        // else return '';
-                    }
-                },
-                {
-                    "className": "text-center",
-                    "width": "60px",
                     "title": "创建者",
                     "data": "creator_id",
+                    "className": "text-center",
+                    "width": "60px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
                         return row.creator == null ? '未知' : '<a target="_blank" href="/user/'+row.creator.id+'">'+row.creator.username+'</a>';
