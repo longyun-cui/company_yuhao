@@ -24,11 +24,10 @@
                 "data": function (d) {
                     d._token = $('meta[name="_token"]').attr('content');
                     d.id = $('input[name="car-id"]').val();
-                    d.mobile = $('input[name="car-mobile"]').val();
-                    d.username = $('input[name="car-username"]').val();
-                    d.department_district = $tableSearch.find('select[name="car-department-district"]').val();
-                    d.user_type = $tableSearch.find('select[name="car-user-type"]').val();
-                    d.user_status = $tableSearch.find('select[name="car-user-status"]').val();
+                    d.name = $('input[name="car-name"]').val();
+                    d.car_category = $tableSearch.find('select[name="car-category"]').val();
+                    d.car_type = $tableSearch.find('select[name="car-type"]').val();
+                    d.item_status = $tableSearch.find('select[name="car-item-status"]').val();
                 },
             },
             "fixedColumns": {
@@ -1215,7 +1214,7 @@
                         }
 
                         var html =
-                            '<a class="btn btn-xs modal-show--for--car-item-edit" data-id="'+data+'">编辑</a>'+
+                            '<a class="btn btn-xs modal-show--for--car--item-edit" data-id="'+data+'">编辑</a>'+
                             $html_able+
                             $html_delete+
                             $html_operation_record+

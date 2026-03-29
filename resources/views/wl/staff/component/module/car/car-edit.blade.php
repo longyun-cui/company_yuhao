@@ -1,5 +1,5 @@
 {{--编辑-部门--}}
-<div class="modal fade modal-main-body modal-wrapper" id="modal--for--car-item-edit">
+<div class="modal fade modal-main-body modal-wrapper" id="modal--for--car--item-edit">
     <div class="modal-content col-md-8 col-md-offset-2 margin-top-24px margin-bottom-64px bg-white">
         <div class="box- box-info- form-container">
 
@@ -10,7 +10,7 @@
             </div>
 
 
-            <form action="" method="post" class="form-horizontal form-bordered" id="form--for--car-item-edit">
+            <form action="" method="post" class="form-horizontal form-bordered" id="form--for--car--item-edit">
                 <div class="box-body">
 
                     {{ csrf_field() }}
@@ -62,13 +62,13 @@
 
 
                     {{--车队--}}
-                    <div class="form-group" style="height:70px;">
+                    <div class="form-group">
                         <label class="control-label col-md-2"><sup class="text-red">*</sup> 所属车队</label>
                         <div class="col-md-9 ">
                             <select class="form-control select2-reset select2--motorcade"
                                     name="motorcade_id"
-                                    id="select2--motorcade--for--car-item-edit"
-                                    data-modal="#modal--for--car-item-edit"
+                                    id="select2--motorcade--for--car--item-edit"
+                                    data-modal="#modal--for--car--item-edit"
                                     data-item-category=""
                                     data-item-type=""
                             >
@@ -94,68 +94,19 @@
                         </div>
                     </div>
 
-                    {{--箱型--}}
+                    {{--原车牌号--}}
                     <div class="form-group">
-                        <label class="control-label col-md-2">箱型</label>
+                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 原车牌号</label>
                         <div class="col-md-9 ">
-                            <select class="form-control" name="trailer_type" id="">
-                                <option value="">选择箱型</option>
-                                <option value="直板">直板</option>
-                                <option value="高栏">高栏</option>
-                                <option value="平板">平板</option>
-                                <option value="冷藏">冷藏</option>
-                            </select>
+                            <input type="text" class="form-control" name="pre_name" placeholder="原车牌号" value="">
                         </div>
                     </div>
 
-                    {{--车挂尺寸--}}
+                    {{--特殊备注--}}
                     <div class="form-group">
-                        <label class="control-label col-md-2">车挂尺寸</label>
+                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 特殊备注</label>
                         <div class="col-md-9 ">
-                            <select class="form-control" name="trailer_length" id="">
-                                <option value="">选择车挂尺寸</option>
-                                <option value="9.6">9.6</option>
-                                <option value="12.5">12.5</option>
-                                <option value="15">15</option>
-                                <option value="16.5">16.5</option>
-                                <option value="17.5">17.5</option>
-                            </select>
-                        </div>
-                    </div>
-                    {{--承载方数--}}
-                    <div class="form-group">
-                        <label class="control-label col-md-2">承载方数</label>
-                        <div class="col-md-9 ">
-                            <select class="form-control" name="trailer_volume" id="">
-                                <option value="">选择承载方数</option>
-                                <option value="125">125</option>
-                                <option value="130">130</option>
-                                <option value="135">135</option>
-                            </select>
-                        </div>
-                    </div>
-                    {{--承载重量--}}
-                    <div class="form-group">
-                        <label class="control-label col-md-2">承载重量</label>
-                        <div class="col-md-9 ">
-                            <select class="form-control" name="trailer_weight" id="">
-                                <option value="">选择承载重量</option>
-                                <option value="13">13吨</option>
-                                <option value="20">20吨</option>
-                                <option value="25">25吨</option>
-                            </select>
-                        </div>
-                    </div>
-                    {{--轴数--}}
-                    <div class="form-group">
-                        <label class="control-label col-md-2">轴数</label>
-                        <div class="col-md-9 ">
-                            <select class="form-control" name="trailer_axis_count" id="">
-                                <option value="">选择轴数</option>
-                                <option value="1">1轴</option>
-                                <option value="2">2轴</option>
-                                <option value="3">3轴</option>
-                            </select>
+                            <input type="text" class="form-control" name="sub_name" placeholder="特殊备注" value="">
                         </div>
                     </div>
 
@@ -166,8 +117,8 @@
                         <div class="col-md-9 ">
                             <select class="form-control select2-reset select2--car"
                                     name="trailer_id"
-                                    id="select2--trailer--for--car-item-edit"
-                                    data-modal="#modal--for--car-item-edit"
+                                    id="select2--trailer--for--car--item-edit"
+                                    data-modal="#modal--for--car--item-edit"
                                     data-item-category=""
                                     data-item-type=""
                                     data-car-category="21"
@@ -184,19 +135,19 @@
                             <div class="col-sm-12 col-md-12 padding-0">
                                 <select class="form-control select2-reset select2--driver"
                                         name="driver_id"
-                                        id="select2--driver--for--car-item-edit"
-                                        data-modal="#modal--for--car-item-edit"
+                                        id="select2--driver--for--car--item-edit"
+                                        data-modal="#modal--for--car--item-edit"
                                         data-item-category=""
                                         data-item-type=""
                                 >
-                                    <option data-id="0" value="0">选择主驾</option>
+                                    <option data-id="0" value="0">选择驾驶员</option>
                                 </select>
                             </div>
 {{--                            <div class="col-sm-6 col-md-6 padding-0">--}}
 {{--                                <select class="form-control select2-reset select2--driver"--}}
 {{--                                        name="copilot_id"--}}
-{{--                                        id="select2--copilot--for--car-item-edit"--}}
-{{--                                        data-modal="#modal--for--car-item-edit"--}}
+{{--                                        id="select2--copilot--for--car--item-edit"--}}
+{{--                                        data-modal="#modal--for--car--item-edit"--}}
 {{--                                        data-item-category=""--}}
 {{--                                        data-item-type=""--}}
 {{--                                >--}}
@@ -391,6 +342,86 @@
                         </div>
                     </div>
 
+                    {{--箱型--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2">箱型</label>
+                        <div class="col-md-9 ">
+                            <select class="form-control modal--select2 select2-reset"
+                                    name="trailer_type"
+                                    data-modal="#modal--for--car--item-edit"
+                            >
+                                <option value="">选择箱型</option>
+                                <option value="直板">直板</option>
+                                <option value="高栏">高栏</option>
+                                <option value="平板">平板</option>
+                                <option value="冷藏">冷藏</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    {{--车挂尺寸--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2">车挂尺寸</label>
+                        <div class="col-md-9 ">
+                            <select class="form-control modal--select2 select2-reset"
+                                    name="trailer_length"
+                                    data-modal="#modal--for--car--item-edit"
+                            >
+                                <option value="">选择车挂尺寸</option>
+                                <option value="9.6">9.6</option>
+                                <option value="12.5">12.5</option>
+                                <option value="15">15</option>
+                                <option value="16.5">16.5</option>
+                                <option value="17.5">17.5</option>
+                            </select>
+                        </div>
+                    </div>
+                    {{--承载方数--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2">承载方数</label>
+                        <div class="col-md-9 ">
+                            <select class="form-control modal--select2 select2-reset"
+                                    name="trailer_volume"
+                                    data-modal="#modal--for--car--item-edit"
+                            >
+                                <option value="">选择承载方数</option>
+                                <option value="125">125</option>
+                                <option value="130">130</option>
+                                <option value="135">135</option>
+                            </select>
+                        </div>
+                    </div>
+                    {{--承载重量--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2">承载重量</label>
+                        <div class="col-md-9 ">
+                            <select class="form-control modal--select2 select2-reset"
+                                    name="trailer_weight"
+                                    data-modal="#modal--for--car--item-edit"
+                            >
+                                <option value="">选择承载重量</option>
+                                <option value="13">13吨</option>
+                                <option value="20">20吨</option>
+                                <option value="25">25吨</option>
+                            </select>
+                        </div>
+                    </div>
+                    {{--轴数--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2">轴数</label>
+                        <div class="col-md-9 ">
+                            <select class="form-control modal--select2 select2-reset"
+                                    name="trailer_axis_count"
+                                    data-modal="#modal--for--car--item-edit"
+                            >
+                                <option value="">选择轴数</option>
+                                <option value="1">1轴</option>
+                                <option value="2">2轴</option>
+                                <option value="3">3轴</option>
+                            </select>
+                        </div>
+                    </div>
+
 
                     {{--描述--}}
                     <div class="form-group">
@@ -408,7 +439,7 @@
             <div class="box-footer">
                 <div class="row">
                     <div class="col-md-9 col-md-offset-2">
-                        <button type="button" class="btn btn-success edit-submit" id="submit--for--car-item-edit">
+                        <button type="button" class="btn btn-success edit-submit" id="submit--for--car--item-edit">
                             <i class="fa fa-check"></i> 提交
                         </button>
                         <button type="button" class="btn btn-default edit-cancel">取消</button>

@@ -98,7 +98,7 @@
 
 
         // 【车辆】添加-显示
-        $(".main-wrapper").on('click', ".modal-show--for--car-item-create", function() {
+        $(".main-wrapper").on('click', ".modal-show--for--car--item-create", function() {
             var $that = $(this);
             var $form_id = $that.data('form-id');
             var $modal_id = $that.data('modal-id');
@@ -125,14 +125,14 @@
             });
         });
         // 【车辆】编辑-显示
-        $(".main-wrapper").on('click', ".modal-show--for--car-item-edit", function() {
+        $(".main-wrapper").on('click', ".modal-show--for--car--item-edit", function() {
             var $that = $(this);
             var $row = $that.parents('tr');
 
-            var $modal_id = 'modal--for--car-item-edit';
+            var $modal_id = 'modal--for--car--item-edit';
             var $modal = $("#"+$modal_id);
 
-            var $form_id = 'form--for--car-item-edit';
+            var $form_id = 'form--for--car--item-edit';
             var $form = $("#"+$form_id);
 
             var $data = new Object();
@@ -211,15 +211,20 @@
                         // $modal.find('select[name="driver_id"]').val($response.data.driver_id).trigger('change');
 
                         $modal.find('input[name="name"]').val($response.data.name);
+                        $modal.find('input[name="car_number"]').val($response.data.car_number);
+                        $modal.find('input[name="pre_name"]').val($response.data.pre_name);
+                        $modal.find('input[name="sub_name"]').val($response.data.sub_name);
+
                         $modal.find('input[name="linkman_name"]').val($response.data.linkman_name);
                         $modal.find('input[name="linkman_phone"]').val($response.data.linkman_phone);
                         $modal.find('input[name="linkman_address"]').val($response.data.linkman_address);
 
                         $modal.find('input[name="car_info_type"]').val($response.data.car_info_type);
                         $modal.find('input[name="car_info_owner"]').val($response.data.car_info_owner);
-                        $modal.find('input[name="car_info_function"]').val($response.data.car_info_function);
                         $modal.find('input[name="car_info_brand"]').val($response.data.car_info_brand);
-                        $modal.find('input[name="car_info_identification_number"]').val($response.data.car_info_identification_number);
+                        $modal.find('input[name="car_info_model"]').val($response.data.car_info_model);
+                        $modal.find('input[name="car_info_size"]').val($response.data.car_info_size);
+                        $modal.find('input[name="car_info_function"]').val($response.data.car_info_function);
 
                         $modal.find('select[name="trailer_type"]').val($response.data.trailer_type).trigger('change');
                         $modal.find('select[name="trailer_length"]').val($response.data.trailer_length).trigger('change');
@@ -227,7 +232,9 @@
                         $modal.find('select[name="trailer_weight"]').val($response.data.trailer_weight).trigger('change');
                         $modal.find('select[name="trailer_axis_count"]').val($response.data.trailer_axis_count).trigger('change');
 
+                        $modal.find('input[name="car_info_identification_number"]').val($response.data.car_info_identification_number);
                         $modal.find('input[name="car_info_engine_number"]').val($response.data.car_info_engine_number);
+                        $modal.find('input[name="car_info_vehicle_axles_count"]').val($response.data.car_info_vehicle_axles_count);
                         $modal.find('input[name="car_info_locomotive_wheelbase"]').val($response.data.car_info_locomotive_wheelbase);
                         $modal.find('input[name="car_info_main_fuel_tank"]').val($response.data.car_info_main_fuel_tank);
                         $modal.find('input[name="car_info_auxiliary_fuel_tank"]').val($response.data.car_info_auxiliary_fuel_tank);
@@ -267,16 +274,16 @@
 
         });
         // 【车辆】编辑-提交
-        $(".main-wrapper").on('click', "#submit--for--car-item-edit", function() {
+        $(".main-wrapper").on('click', "#submit--for--car--item-edit", function() {
             var $that = $(this);
 
             var $table_id = $that.data('datatable-list-id');
             var $table = $('#'+$table_id);
 
-            var $modal_id = 'modal--for--car-item-edit';
+            var $modal_id = 'modal--for--car--item-edit';
             var $modal = $("#"+$modal_id);
 
-            var $form_id = 'form--for--car-item-edit';
+            var $form_id = 'form--for--car--item-edit';
             var $form = $("#"+$form_id);
 
             var $index = layer.load(1, {
@@ -752,7 +759,7 @@
 
             Datatable__for__Car_Item_Operation_Record_List.init($id);
 
-            var $modal = $('#modal--for--car-item-operation-record-list');
+            var $modal = $('#modal--for--car--item-operation-record-list');
             $modal.find('.id-title').html('【'+$id+'】');
             $modal.modal('show');
         });

@@ -92,24 +92,13 @@ class WLStaffCarRepository {
         }
 
 
-        // 部门
-        if(!empty($post_data['department_id']))
+        // 车辆种类
+        if(!empty($post_data['car_category']))
         {
-            $department_id_int = intval($post_data['department_id']);
-            if(!in_array($department_id_int,[-1,0]))
+            $car_category_int = intval($post_data['car_category']);
+            if(!in_array($car_category_int,[-1,0]))
             {
-                $query->where('department_id', $department_id_int);
-            }
-        }
-
-
-        // 员工类型
-        if(!empty($post_data['staff_category']))
-        {
-            $staff_category_int = intval($post_data['staff_category']);
-            if(!in_array($staff_category_int,[-1,0]))
-            {
-                $query->where('staff_category', $staff_category_int);
+                $query->where('car_category', $car_category_int);
             }
         }
 
