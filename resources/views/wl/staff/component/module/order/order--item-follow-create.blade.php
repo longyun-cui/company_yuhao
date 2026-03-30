@@ -1,5 +1,5 @@
 {{--添加-跟进记录--}}
-<div class="modal fade modal-wrapper" id="modal--for--order-item-follow-create">
+<div class="modal fade modal-wrapper" id="modal--for--order--item-follow-create">
     <div class="col-md-6 col-md-offset-3 margin-top-32px margin-bottom-64px bg-white">
 
         <div class="box- box-info- form-container">
@@ -13,7 +13,7 @@
                 </div>
             </div>
 
-            <form action="" method="post" class="form-horizontal form-bordered " id="form--for--order-item-follow-create">
+            <form action="" method="post" class="form-horizontal form-bordered " id="form--for--order--item-follow-create">
                 <div class="box-body">
 
                     {{ csrf_field() }}
@@ -61,7 +61,7 @@
             <div class="box-footer">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <button type="button" class="btn btn-success" id="form-submit--for--order-item-follow-create">
+                        <button type="button" class="btn btn-success" id="form-submit--for--order--item-follow-create">
                             <i class="fa fa-check"></i> 提交
                         </button>
                         <button type="button" class="btn btn-default modal-cancel">取消</button>

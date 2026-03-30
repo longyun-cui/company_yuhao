@@ -2,18 +2,18 @@
     var Datatable__for__Order_Item_Journey_Record_List = function ($id) {
         var datatableAjax_order_item_journey_record = function ($id) {
 
-            var dt_order_item_journey_record = $('#datatable--for--order-item-journey-record-list');
+            var dt_order_item_journey_record = $('#datatable--for--order--item-journey-record-list');
             if($.fn.DataTable.isDataTable(dt_order_item_journey_record))
             {
                 // 已经初始化
-                console.log('#datatable--for--order-item-journey-record-list // 已经初始化');
+                console.log('#datatable--for--order--item-journey-record-list // 已经初始化');
                 $(dt_order_item_journey_record).DataTable().destroy();
                 dt_order_item_journey_record.DataTable().destroy();
             }
             else
             {
                 // 未初始化
-                console.log('#datatable--for--order-item-journey-record-list // 未初始化');
+                console.log('#datatable--for--order--item-journey-record-list // 未初始化');
             }
 
             var ajax_datatable_order_item_journey_record = dt_order_item_journey_record.DataTable({

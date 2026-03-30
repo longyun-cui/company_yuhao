@@ -1,5 +1,5 @@
 {{--添加-行程-信息--}}
-<div class="modal fade modal-wrapper" id="modal--for--order-item-journey-create">
+<div class="modal fade modal-wrapper" id="modal--for--order--item-journey-create">
     <div class="col-md-10 col-md-offset-1 margin-top-32px margin-bottom-64px bg-white">
 
         <div class="box- box-info- form-container">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
 
-                <table class='table table-striped table-bordered' id='datatable--for--order-item-journey-record-list'>
+                <table class='table table-striped table-bordered' id='datatable--for--order--item-journey-record-list'>
                     <thead>
                     <tr role='row' class='heading'>
                     </tr>
@@ -73,7 +73,7 @@
                 </div>
             </div>
 
-            <form action="" method="post" class="form-horizontal form-bordered " id="form--for--order-item-journey-create">
+            <form action="" method="post" class="form-horizontal form-bordered " id="form--for--order--item-journey-create">
                 <div class="box-body">
 
                     {{ csrf_field() }}
@@ -197,7 +197,7 @@
             <div class="box-footer">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <button type="button" class="btn btn-success" id="item-submit--for--order-item-journey-create"><i class="fa fa-check"></i> 提交</button>
+                        <button type="button" class="btn btn-success" id="item-submit--for--order--item-journey-create"><i class="fa fa-check"></i> 提交</button>
                         <button type="button" class="btn btn-default modal-cancel">取消</button>
                     </div>
                 </div>

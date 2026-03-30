@@ -1,5 +1,5 @@
 {{--添加-费用-信息--}}
-<div class="modal fade modal-wrapper" id="modal--for--order-item-fee-create">
+<div class="modal fade modal-wrapper" id="modal--for--order--item-fee-create">
     <div class="col-md-8 col-md-offset-2 margin-top-16px margin-bottom-64px bg-white">
 
         <div class="box- box-info- form-container">
@@ -25,17 +25,17 @@
                             <option value="-1">选择属性</option>
                         </select>
 
-                        <button type="button" class="form-control btn btn-flat btn-success filter-submit" id="filter-submit--for--order-item-fee-record">
+                        <button type="button" class="form-control btn btn-flat btn-success filter-submit" id="filter-submit--for--order--item-fee-record">
                             <i class="fa fa-search"></i> 搜索
                         </button>
-                        <button type="button" class="form-control btn btn-flat btn-default filter-cancel" id="filter-cancel--for--order-item-fee-record">
+                        <button type="button" class="form-control btn btn-flat btn-default filter-cancel" id="filter-cancel--for--order--item-fee-record">
                             <i class="fa fa-circle-o-notch"></i> 重置
                         </button>
 
                     </div>
                 </div>
 
-                <table class='table table-striped table-bordered' id='datatable--for--order-item-fee-record-list'>
+                <table class='table table-striped table-bordered' id='datatable--for--order--item-fee-record-list'>
                     <thead>
                     <tr role='row' class='heading'>
                     </tr>
@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            <form action="" method="post" class="form-horizontal form-bordered " id="form--for--order-item-fee-create">
+            <form action="" method="post" class="form-horizontal form-bordered " id="form--for--order--item-fee-create">
                 <div class="box-body">
 
                     {{ csrf_field() }}
@@ -216,7 +216,7 @@
             <div class="box-footer">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <button type="button" class="btn btn-success" id="item-submit--for--order-item-fee-create"><i class="fa fa-check"></i> 提交</button>
+                        <button type="button" class="btn btn-success" id="item-submit--for--order--item-fee-create"><i class="fa fa-check"></i> 提交</button>
                         <button type="button" class="btn btn-default modal-cancel">取消</button>
                     </div>
                 </div>

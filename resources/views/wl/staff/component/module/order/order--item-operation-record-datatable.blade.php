@@ -2,18 +2,18 @@
     var Datatable__for__Order_Item_Operation_Record_List = function ($id) {
         var datatableAjax__order_item_operation_record = function ($id) {
 
-            var dt__order_item_operation_record = $('#datatable--for--order-item-operation-record-list');
+            var dt__order_item_operation_record = $('#datatable--for--order--item-operation-record-list');
             if($.fn.DataTable.isDataTable(dt__order_item_operation_record))
             {
                 // 已经初始化
-                console.log('#datatable--for--order-item-operation-record-list // 已经初始化');
+                console.log('#datatable--for--order--item-operation-record-list // 已经初始化');
                 dt__order_item_operation_record.clear();
                 $(dt__order_item_operation_record).DataTable().destroy();
             }
             else
             {
                 // 未初始化
-                console.log('#datatable--for--order-item-operation-record-list // 未初始化');
+                console.log('#datatable--for--order--item-operation-record-list // 未初始化');
             }
 
             var ajax_datatable_order_operation_record = dt__order_item_operation_record.DataTable({
