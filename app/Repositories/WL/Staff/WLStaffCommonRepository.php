@@ -174,10 +174,10 @@ class WLStaffCommonRepository {
 
         $list = $query->orderBy('id','asc')->get()->toArray();
 
-//        $unSpecified = ['id'=>0,'text'=>'[未指定]'];
-//        array_unshift($list,$unSpecified);
-        $unSpecified = ['id'=>-1,'text'=>'[选择公司]'];
+        $unSpecified = ['id'=>0,'text'=>'选择公司'];
         array_unshift($list,$unSpecified);
+//        $unSpecified = ['id'=>-1,'text'=>'[全部公司]'];
+//        array_unshift($list,$unSpecified);
 
         return $list;
     }
@@ -208,10 +208,10 @@ class WLStaffCommonRepository {
 
         $list = $query->orderBy('id','asc')->get()->toArray();
 
-//        $unSpecified = ['id'=>0,'text'=>'[未指定]'];
-//        array_unshift($list,$unSpecified);
-        $unSpecified = ['id'=>-1,'text'=>'选择部门'];
+        $unSpecified = ['id'=>0,'text'=>'选择部门'];
         array_unshift($list,$unSpecified);
+//        $unSpecified = ['id'=>-1,'text'=>'[全部部门]'];
+//        array_unshift($list,$unSpecified);
 
         return $list;
     }
@@ -247,10 +247,10 @@ class WLStaffCommonRepository {
 
         $list = $query->orderBy('id','asc')->get()->toArray();
 
-//        $unSpecified = ['id'=>0,'text'=>'[未指定]'];
-//        array_unshift($list,$unSpecified);
-        $unSpecified = ['id'=>-1,'text'=>'选择团队'];
+        $unSpecified = ['id'=>0,'text'=>'选择团队'];
         array_unshift($list,$unSpecified);
+//        $unSpecified = ['id'=>-1,'text'=>'[全部团队]'];
+//        array_unshift($list,$unSpecified);
 
         return $list;
     }
@@ -306,10 +306,10 @@ class WLStaffCommonRepository {
 
         $list = $query->orderBy('id','asc')->get()->toArray();
 
-//        $unSpecified = ['id'=>0,'text'=>'[未指定]'];
-//        array_unshift($list,$unSpecified);
-        $unSpecified = ['id'=>-1,'text'=>'选择员工'];
+        $unSpecified = ['id'=>0,'text'=>'选择员工'];
         array_unshift($list,$unSpecified);
+//        $unSpecified = ['id'=>-1,'text'=>'[全部员工]'];
+//        array_unshift($list,$unSpecified);
 
         return $list;
     }
@@ -345,10 +345,10 @@ class WLStaffCommonRepository {
 
         $list = $query->orderBy('id','asc')->get()->toArray();
 
-//        $unSpecified = ['id'=>0,'text'=>'[未指定]'];
-//        array_unshift($list,$unSpecified);
-        $unSpecified = ['id'=>-1,'text'=>'选择团队'];
+        $unSpecified = ['id'=>0,'text'=>'选择车队'];
         array_unshift($list,$unSpecified);
+//        $unSpecified = ['id'=>-1,'text'=>'[全部车队]'];
+//        array_unshift($list,$unSpecified);
 
         return $list;
     }
@@ -384,9 +384,9 @@ class WLStaffCommonRepository {
 
         $list = $query->orderBy('id','asc')->get()->toArray();
 
-//        $unSpecified = ['id'=>0,'text'=>'[未指定]'];
-//        array_unshift($list,$unSpecified);
-//        $unSpecified = ['id'=>-1,'text'=>'选择车辆'];
+        $unSpecified = ['id'=>0,'text'=>'选择车辆'];
+        array_unshift($list,$unSpecified);
+//        $unSpecified = ['id'=>-1,'text'=>'[全部车辆]'];
 //        array_unshift($list,$unSpecified);
 
         return $list;
@@ -419,9 +419,9 @@ class WLStaffCommonRepository {
             })
             ->toArray();
 
-//        $unSpecified = ['id'=>0,'text'=>'[未指定]'];
-//        array_unshift($list,$unSpecified);
-//        $unSpecified = ['id'=>-1,'text'=>'选择司机'];
+        $unSpecified = ['id'=>0,'text'=>'选择司机'];
+        array_unshift($list,$unSpecified);
+//        $unSpecified = ['id'=>-1,'text'=>'[全部司机]'];
 //        array_unshift($list,$unSpecified);
 
         return $list;
@@ -457,10 +457,10 @@ class WLStaffCommonRepository {
 
         $list = $query->orderBy('id','asc')->get()->toArray();
 
-//        $unSpecified = ['id'=>0,'text'=>'[未指定]'];
-//        array_unshift($list,$unSpecified);
-        $unSpecified = ['id'=>-1,'text'=>'选择客户'];
+        $unSpecified = ['id'=>0,'text'=>'选择客户'];
         array_unshift($list,$unSpecified);
+//        $unSpecified = ['id'=>-1,'text'=>'[全部客户]'];
+//        array_unshift($list,$unSpecified);
 
         return $list;
     }
@@ -499,10 +499,10 @@ class WLStaffCommonRepository {
 
         $list = $query->orderBy('id','asc')->get()->toArray();
 
-//        $unSpecified = ['id'=>0,'text'=>'[未指定]'];
-//        array_unshift($list,$unSpecified);
-        $unSpecified = ['id'=>-1,'text'=>'选择项目'];
+        $unSpecified = ['id'=>0,'text'=>'选择项目'];
         array_unshift($list,$unSpecified);
+//        $unSpecified = ['id'=>-1,'text'=>'[全部项目]'];
+//        array_unshift($list,$unSpecified);
 
         return $list;
     }
