@@ -220,7 +220,10 @@
                 },
                 escapeMarkup: function (markup) { return markup; },
                 dropdownParent: $dropdownParent,
+                minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
+                placeholder: '请选择',
+                allowClear: true,
                 theme: 'classic'
             });
 
@@ -284,7 +287,10 @@
                 },
                 escapeMarkup: function (markup) { return markup; },
                 dropdownParent: $dropdownParent,
+                minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
+                placeholder: '请选择',
+                allowClear: true,
                 theme: 'classic'
             });
 
@@ -342,7 +348,10 @@
                 },
                 escapeMarkup: function (markup) { return markup; },
                 dropdownParent: $dropdownParent,
+                minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
+                placeholder: '请选择',
+                allowClear: true,
                 theme: 'classic'
             });
 
@@ -396,8 +405,10 @@
                     cache: true
                 },
                 escapeMarkup: function (markup) { return markup; },
-                dropdownParent: $dropdownParent,
+                minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
+                placeholder: '请选择',
+                allowClear: true,
                 theme: 'classic'
             });
         });
@@ -442,7 +453,10 @@
                 },
                 escapeMarkup: function (markup) { return markup; },
                 dropdownParent: $dropdownParent,
+                minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
+                placeholder: '请选择',
+                allowClear: true,
                 theme: 'classic'
             });
         });
@@ -519,7 +533,10 @@
                 },
                 escapeMarkup: function (markup) { return markup; },
                 dropdownParent: $dropdownParent,
+                minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
+                placeholder: '请选择',
+                allowClear: true,
                 theme: 'classic'
             });
         });
@@ -566,11 +583,11 @@
                 },
                 escapeMarkup: function (markup) { return markup; },
                 dropdownParent: $dropdownParent,
+                minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
-                theme: 'classic',
                 placeholder: '请选择',
                 allowClear: true,
-                minimumResultsForSearch: 1 // 确保开启搜索（默认就是开启的）
+                theme: 'classic'
             });
         });
 
@@ -614,7 +631,10 @@
                 },
                 escapeMarkup: function (markup) { return markup; },
                 dropdownParent: $dropdownParent,
+                minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
+                placeholder: '请选择',
+                allowClear: true,
                 theme: 'classic'
             });
         });
@@ -657,7 +677,10 @@
                 },
                 escapeMarkup: function (markup) { return markup; },
                 dropdownParent: $dropdownParent,
+                minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
+                placeholder: '请选择',
+                allowClear: true,
                 theme: 'classic'
             });
         });
