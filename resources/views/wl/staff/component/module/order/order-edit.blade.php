@@ -83,7 +83,7 @@
                     <div class="col-md-9 ">
                         <select class="form-control select2--project"
                                 name="project_id"
-                                id="select2--project--for-order-item-edit"
+                                id="select2--project--for--order--item-edit"
                                 data-modal="#modal--for--order--item-edit"
                         >
                             <option data-id="" value="">选择项目</option>
@@ -164,7 +164,7 @@
                         <div class="col-sm-6 col-md-6 padding-0">
                             <select class="form-control select2-reset select2--car"
                                     name="car_id"
-                                    id="select2--car--for-order-item-edit"
+                                    id="select2--car--for--order--item-edit"
                                     data-modal="#modal--for--order--item-edit"
                                     data-car-category="1"
 {{--                                    data-car-type="1"--}}
@@ -175,7 +175,7 @@
                         <div class="col-sm-6 col-md-6 padding-0">
                             <select class="form-control select2-reset select2--car"
                                     name="trailer_id"
-                                    id="select2--trailer--for-order-item-edit"
+                                    id="select2--trailer--for--order--item-edit"
                                     data-modal="#modal--for--order--item-edit"
                                     data-car-category="21"
                                     data-car-type="21"

@@ -267,7 +267,7 @@
 
 
         // 【工单】【添加工单】select2 选择项目
-        $('#select2--project--for-order-item-edit').on('select2:select', function(e) {
+        $('#select2--project--for--order--item-edit').on('select2:select', function(e) {
             $('input[name=transport_departure_place]').val(e.params.data.transport_departure_place);
             $('input[name=transport_destination_place]').val(e.params.data.transport_destination_place);
             // 距离
@@ -278,7 +278,7 @@
             $('input[name=freight_amount]').val(parseFloat(e.params.data.freight_amount));
         });
         // 【工单】【添加工单】select2 选择车辆
-        $('#select2--car--for-order-item-edit').on('select2:select', function(e) {
+        $('#select2--car--for--order--item-edit').on('select2:select', function(e) {
 
             console.log("用户选择了:", e.params.data); // 仅触发1次
             var $that = $(this);
