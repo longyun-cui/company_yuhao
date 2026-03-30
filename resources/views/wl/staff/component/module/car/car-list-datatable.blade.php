@@ -485,7 +485,7 @@
                 },
                 {
                     "className": "text-center",
-                    "width": "120px",
+                    "width": "160px",
                     "title": "所有人",
                     "data": "car_info_owner",
                     "orderable": false,
