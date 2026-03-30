@@ -3,7 +3,7 @@
 
 
         // 【工单】添加-显示
-        $(".main-wrapper").on('click', ".modal-show--for--order-item-create", function() {
+        $(".main-wrapper").on('click', ".modal-show--for--order--item-create", function() {
             var $that = $(this);
             var $form_id = $that.data('form-id');
             var $modal_id = $that.data('modal-id');
@@ -30,14 +30,14 @@
             });
         });
         // 【工单】编辑-显示
-        $(".main-content").on('click', ".modal-show--for--order-item-edit", function() {
+        $(".main-content").on('click', ".modal-show--for--order--item-edit", function() {
             var $that = $(this);
             var $row = $that.parents('tr');
 
-            var $modal_id = 'modal--for--order-item-edit';
+            var $modal_id = 'modal--for--order--item-edit';
             var $modal = $("#"+$modal_id);
 
-            var $form_id = 'form--for--order-item-edit';
+            var $form_id = 'form--for--order--item-edit';
             var $form = $("#"+$form_id);
 
             var $data = new Object();
@@ -193,16 +193,16 @@
 
         });
         // 【工单】编辑-提交
-        $(".main-content").on('click', "#submit--for--order-item-edit", function() {
+        $(".main-content").on('click', "#submit--for--order--item-edit", function() {
             var $that = $(this);
 
             var $table_id = $that.data('datatable-list-id');
             var $table = $('#'+$table_id);
 
-            var $modal_id = 'modal--for--order-item-edit';
+            var $modal_id = 'modal--for--order--item-edit';
             var $modal = $("#"+$modal_id);
 
-            var $form_id = 'form--for--order-item-edit';
+            var $form_id = 'form--for--order--item-edit';
             var $form = $("#"+$form_id);
 
             var $index = layer.load(1, {
@@ -308,16 +308,29 @@
                     else
                     {
                         // 挂 (select2)
+                        // $modal.find('select[name="trailer_id"]').val(null).trigger('change');
+                        select2FirstOptionSelected($modal.find('select[name="trailer_id"]'));
                         if($response.data.trailer_er)
                         {
                             var $trailer_option = new Option($response.data.trailer_er.name, $response.data.trailer_id, true, true);
                             $modal.find('select[name="trailer_id"]').append($trailer_option).trigger('change');
                         }
                         // 主驾 (select2)
+                        // $modal.find('select[name="driver_id"]').val(null).trigger('change');
+                        select2FirstOptionSelected($modal.find('select[name="driver_id"]'));
+                        $modal.find('input[name=driver_name]').val('');
+                        $modal.find('input[name=driver_phone]').val('');
+                        $modal.find('input[name=copilot_name]').val('');
+                        $modal.find('input[name=copilot_phone]').val('');
                         if($response.data.driver_er)
                         {
-                            var $driver_option = new Option($response.data.driver_er.driver_name, $response.data.driver_id, true, true);
+                            var $data_driver_er = $response.data.driver_er;
+                            var $driver_option = new Option($data_driver_er.driver_name, $response.data.driver_id, true, true);
                             $modal.find('select[name="driver_id"]').append($driver_option).trigger('change');
+                            $modal.find('input[name=driver_name]').val($response.data.driver_name);
+                            $modal.find('input[name=driver_phone]').val($response.data.driver_phone);
+                            $modal.find('input[name=copilot_name]').val($response.data.copilot_name);
+                            $modal.find('input[name=copilot_phone]').val(e.params.data.copilot_phone);
                         }
                         // 副驾 (select2)
                         if($response.data.copilot_er)
@@ -341,7 +354,7 @@
 
         });
         // 【工单】【添加工单】select2 选择主驾
-        $('#select2--driver--for--order-item-edit').on('select2:select', function(e) {
+        $('#select2--driver--for--order--item-edit').on('select2:select', function(e) {
             console.log("用户选择了:", e.params.data); // 仅触发1次
             var $that = $(this);
             var $modal = $that.parents('.modal-wrapper');
@@ -349,8 +362,10 @@
             var $that_name = $that.attr('name');
             if($that_name == 'driver_id')
             {
-                $modal.find('input[name=driver_name]').val(e.params.data.text);
+                $modal.find('input[name=driver_name]').val(e.params.data.driver_name);
                 $modal.find('input[name=driver_phone]').val(e.params.data.driver_phone);
+                $modal.find('input[name=copilot_name]').val(e.params.data.copilot_name);
+                $modal.find('input[name=copilot_phone]').val(e.params.data.copilot_phone);
             }
             else if($that_name == 'copilot_id')
             {
@@ -361,7 +376,7 @@
 
 
         // 【工单】【添加费用】费用类型
-        $(".main-wrapper").on('change', '#modal--for--order-item-fee-create input[name="fee-type"]', function() {
+        $(".main-wrapper").on('change', '#modal--for--order--item-fee-create input[name="fee-type"]', function() {
             var $that = $(this);
             var $modal = $that.parents('.modal-wrapper');
 
@@ -388,7 +403,7 @@
             }
         });
         // 【工单】【添加费用】记录类型
-        $(".main-wrapper").on('change', '#modal--for--order-item-fee-create input[name="fee-record-type"]', function() {
+        $(".main-wrapper").on('change', '#modal--for--order--item-fee-create input[name="fee-record-type"]', function() {
             var $that = $(this);
             var $modal = $that.parents('.modal-wrapper');
 
@@ -814,7 +829,7 @@
 
 
         // 【工单】操作记录
-        $(".main-content").off('click', ".modal-show--for--order-item-operation-record").on('click', ".modal-show--for--order-item-operation-record", function() {
+        $(".main-content").off('click', ".modal-show--for--order--item-operation-record").on('click', ".modal-show--for--order--item-operation-record", function() {
             var $that = $(this);
             var $id = $(this).data('id');
             var $datatable_wrapper = $that.closest('.datatable-wrapper');
@@ -823,10 +838,10 @@
 
             Datatable__for__Order_Item_Operation_Record_List.init($id);
 
-            $('#modal--for--order-item-operation-record-list').modal('show');
+            $('#modal--for--order--item-operation-record-list').modal('show');
         });
         // 【工单】操作记录
-        $(".main-content").off('click', ".modal-show--for--order-item-fee-record").on('click', ".modal-show--for--order-item-fee-record", function() {
+        $(".main-content").off('click', ".modal-show--for--order--item-fee-record").on('click', ".modal-show--for--order--item-fee-record", function() {
             var $that = $(this);
             var $id = $(this).data('id');
             var $datatable_wrapper = $that.closest('.datatable-wrapper');
@@ -842,7 +857,7 @@
 
 
         // 【工单】【跟进】显示
-        $(".main-wrapper").off('click', ".modal-show--for--order-item-follow-create").on('click', ".modal-show--for--order-item-follow-create", function() {
+        $(".main-wrapper").off('click', ".modal-show--for--order--item-follow-create").on('click', ".modal-show--for--order--item-follow-create", function() {
             var $that = $(this);
             var $id = $(this).data('id');
             var $row = $that.parents('tr');
@@ -855,9 +870,9 @@
             $datatable_wrapper.find('tr').removeClass('operating');
             $row.addClass('operating');
 
-            form_reset('#form--for--order-item-follow-create');
+            form_reset('#form--for--order--item-follow-create');
 
-            var $modal = $('#modal--for--order-item-follow-create');
+            var $modal = $('#modal--for--order--item-follow-create');
 
             $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));
             $modal.find('.id-title').html('【'+$id+'】');
@@ -869,7 +884,7 @@
             // });
         });
         // 【工单】【跟进】提交
-        $(".main-wrapper").off('click', "#form-submit--for--order-item-follow-create").on('click', "#form-submit--for--order-item-follow-create", function() {
+        $(".main-wrapper").off('click', "#form-submit--for--order--item-follow-create").on('click', "#form-submit--for--order--item-follow-create", function() {
             var $that = $(this);
             var $item_id = $that.data('item-id');
             var $table_id = $that.data('datatable-list-id');
@@ -911,8 +926,8 @@
                         // 重置输入框
                         form_reset('#form--for--order-follow-create');
 
-                        $('#modal--for--order-item-follow-create').modal('hide');
-                        // $('#modal--for--order-item-follow-create').modal('hide').on("hidden.bs.modal", function () {
+                        $('#modal--for--order--item-follow-create').modal('hide');
+                        // $('#modal--for--order--item-follow-create').modal('hide').on("hidden.bs.modal", function () {
                         //     $("body").addClass("modal-open");
                         // });
 
@@ -922,24 +937,24 @@
                 error: function(xhr, status, error, $form) {
                     // 请求失败时的回调
                     layer.closeAll('loading');
-                    console.log('#form-submit--for--order-item-follow-create.click.error');
+                    console.log('#form-submit--for--order--item-follow-create.click.error');
                     layer.msg('服务器错误！');
                 },
                 complete: function(xhr, status, $form) {
                     // 无论成功或失败都会执行的回调
                     layer.closeAll('loading');
-                    console.log('#form-submit--for--order-item-follow-create.click.complete');
+                    console.log('#form-submit--for--order--item-follow-create.click.complete');
                 }
 
 
             };
-            $("#form--for--order-item-follow-create").ajaxSubmit(options);
+            $("#form--for--order--item-follow-create").ajaxSubmit(options);
         });
 
 
 
         // 【工单】【行程】显示
-        $(".main-wrapper").off('click', ".modal-show--for--order-item-journey-create").on('click', ".modal-show--for--order-item-journey-create", function() {
+        $(".main-wrapper").off('click', ".modal-show--for--order--item-journey-create").on('click', ".modal-show--for--order--item-journey-create", function() {
             var $that = $(this);
             var $id = $(this).data('id');
             var $row = $that.parents('tr');
@@ -956,21 +971,21 @@
             $datatable_wrapper.find('tr').removeClass('operating');
             $row.addClass('operating');
 
-            form_reset('#form--for--order-item-journey-create');
+            form_reset('#form--for--order--item-journey-create');
 
 
-            var $modal = $('#modal--for--order-item-journey-create');
+            var $modal = $('#modal--for--order--item-journey-create');
             $modal.find('.id-title').html('【'+$id+'】');
 
-            $modal.find('#item-submit--for--order-item-journey-create').data('item-id',$id);
-            $modal.find('#item-submit--for--order-item-journey-create').data('datatable-list-id',$table_id);
+            $modal.find('#item-submit--for--order--item-journey-create').data('item-id',$id);
+            $modal.find('#item-submit--for--order--item-journey-create').data('datatable-list-id',$table_id);
             $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));
             $modal.find('.journey-create-order-id').html($id);
 
             $modal.modal('show');
         });
         // 【工单】【行程】提交
-        $(".main-wrapper").off('click', "#item-submit--for--order-item-journey-create").on('click', "#item-submit--for--order-item-journey-create", function() {
+        $(".main-wrapper").off('click', "#item-submit--for--order--item-journey-create").on('click', "#item-submit--for--order--item-journey-create", function() {
             var $that = $(this);
             var $item_id = $that.data('item-id');
             var $table_id = $that.data('datatable-list-id');
@@ -1010,14 +1025,14 @@
                         layer.msg($response.msg);
 
                         // 重置输入框
-                        form_reset('#form--for--order-item-journey-create');
+                        form_reset('#form--for--order--item-journey-create');
 
-                        // $('#modal--for--order-item-journey-create').modal('hide');
+                        // $('#modal--for--order--item-journey-create').modal('hide');
                         // $('#modal--for--order-trade-create').modal('hide').on("hidden.bs.modal", function () {
                         //     $("body").addClass("modal-open");
                         // });
 
-                        var $datatable_id = 'datatable--for--order-item-journey-record-list'
+                        var $datatable_id = 'datatable--for--order--item-journey-record-list'
                         $('#'+$datatable_id).DataTable().ajax.reload(null,false);
 
                         // var $order = $response.data.order;
@@ -1040,14 +1055,14 @@
 
 
             };
-            $("#form--for--order-item-journey-create").ajaxSubmit(options);
+            $("#form--for--order--item-journey-create").ajaxSubmit(options);
         });
 
 
 
 
         // 【工单】【费用】显示
-        $(".main-wrapper").off('click', ".modal-show--for--order-item-fee-create").on('click', ".modal-show--for--order-item-fee-create", function() {
+        $(".main-wrapper").off('click', ".modal-show--for--order--item-fee-create").on('click', ".modal-show--for--order--item-fee-create", function() {
             var $that = $(this);
             var $id = $(this).data('id');
             var $row = $that.parents('tr');
@@ -1062,20 +1077,20 @@
             $datatable_wrapper.find('tr').removeClass('operating');
             $row.addClass('operating');
 
-            form_reset('#form--for--order-item-fee-create');
+            form_reset('#form--for--order--item-fee-create');
 
-            var $modal = $('#modal--for--order-item-fee-create');
+            var $modal = $('#modal--for--order--item-fee-create');
             $modal.find('.id-title').html('【'+$id+'】');
 
-            $modal.find('#item-submit--for--order-item-fee-create').data('item-id',$id);
-            $modal.find('#item-submit--for--order-item-fee-create').data('datatable-list-id',$table_id);
+            $modal.find('#item-submit--for--order--item-fee-create').data('item-id',$id);
+            $modal.find('#item-submit--for--order--item-fee-create').data('datatable-list-id',$table_id);
             $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));
             $modal.find('.fee-create-order-id').html($id);
 
             $modal.modal('show');
         });
         // 【工单】【费用】提交
-        $(".main-wrapper").off('click', "#item-submit--for--order-item-fee-create").on('click', "#item-submit--for--order-item-fee-create", function() {
+        $(".main-wrapper").off('click', "#item-submit--for--order--item-fee-create").on('click', "#item-submit--for--order--item-fee-create", function() {
             var $that = $(this);
             var $item_id = $that.data('item-id');
             var $table_id = $that.data('datatable-list-id');
@@ -1114,9 +1129,9 @@
                         layer.msg($response.msg);
 
                         // 重置输入框
-                        form_reset('#form--for--order-item-fee-create');
+                        form_reset('#form--for--order--item-fee-create');
 
-                        $('#modal--for--order-item-fee-create').modal('hide');
+                        $('#modal--for--order--item-fee-create').modal('hide');
                         // $('#modal--for--order-trade-create').modal('hide').on("hidden.bs.modal", function () {
                         //     $("body").addClass("modal-open");
                         // });
@@ -1143,14 +1158,14 @@
 
 
             };
-            $("#form--for--order-item-fee-create").ajaxSubmit(options);
+            $("#form--for--order--item-fee-create").ajaxSubmit(options);
         });
 
 
 
 
         // 【工单】【成交】显示
-        $(".main-wrapper").off('click', ".item-modal-show--for--order-item-trade-create").on('click', ".item-modal-show--for--order-item-trade-create", function() {
+        $(".main-wrapper").off('click', ".item-modal-show--for--order--item-trade-create").on('click', ".item-modal-show--for--order--item-trade-create", function() {
             var $that = $(this);
             var $id = $(this).data('id');
             var $row = $that.parents('tr');
@@ -1174,7 +1189,7 @@
             $modal.modal('show');
         });
         // 【工单】【成交】提交
-        $(".main-wrapper").off('click', "#item-submit--for--order-item-trade-create").on('click', "#item-submit--for--order-item-trade-create", function() {
+        $(".main-wrapper").off('click', "#item-submit--for--order--item-trade-create").on('click', "#item-submit--for--order--item-trade-create", function() {
             var $that = $(this);
             var $table_id = $that.data('datatable-list-id');
 

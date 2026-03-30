@@ -43,7 +43,7 @@
 
 
         // 【选择车辆所属】
-        $("#form--for--order-item-edit").on('click', "input[name=car_owner_type]", function() {
+        $("#form--for--order--item-edit").on('click', "input[name=car_owner_type]", function() {
             // checkbox
 //            if($(this).is(':checked'))
 //            {

@@ -358,10 +358,10 @@ class WLStaffCommonRepository {
         $this->get_me();
         $me = $this->me;
 
-        $query = WL_Common_Car::select(['id','name as text','trailer_id','driver_id','copilot_id'])
+        $query = WL_Common_Car::select(['id','name as text','sub_name','trailer_id','driver_id','copilot_id'])
             ->with([
-//                'trailer_er'=>function($query) { $query->select('id','name'); },
-//                'driver_er'=>function($query) { $query->select('id','driver_name','driver_phone'); },
+                'trailer_er'=>function($query) { $query->select('id','name','sub_name'); },
+                'driver_er'=>function($query) { $query->select('id','driver_name','driver_phone','copilot_name','copilot_phone'); },
 //                'copilot_er'=>function($query) { $query->select('id','driver_name','driver_phone'); },
             ])
             ->where(['item_status'=>1]);

@@ -1,5 +1,5 @@
 {{--编辑-工单--}}
-<div class="modal fade modal-main-body modal-wrapper" id="modal--for--order-item-edit">
+<div class="modal fade modal-main-body modal-wrapper" id="modal--for--order--item-edit">
     <div class="modal-content col-md-10 col-md-offset-1 margin-top-16px margin-bottom-64px bg-white">
         <div class="box- box-info- form-container">
 
@@ -10,7 +10,7 @@
             </div>
 
 
-            <form action="" method="post" class="form-horizontal form-bordered" id="form--for--order-item-edit">
+            <form action="" method="post" class="form-horizontal form-bordered" id="form--for--order--item-edit">
             <div class="box-body">
 
                 {{ csrf_field() }}
@@ -84,7 +84,7 @@
                         <select class="form-control select2--project"
                                 name="project_id"
                                 id="select2--project--for-order-item-edit"
-                                data-modal="#modal--for--order-item-edit"
+                                data-modal="#modal--for--order--item-edit"
                         >
                             <option data-id="" value="">选择项目</option>
                         </select>
@@ -165,7 +165,7 @@
                             <select class="form-control select2-reset select2--car"
                                     name="car_id"
                                     id="select2--car--for-order-item-edit"
-                                    data-modal="#modal--for--order-item-edit"
+                                    data-modal="#modal--for--order--item-edit"
                                     data-car-category="1"
 {{--                                    data-car-type="1"--}}
                             >
@@ -176,7 +176,7 @@
                             <select class="form-control select2-reset select2--car"
                                     name="trailer_id"
                                     id="select2--trailer--for-order-item-edit"
-                                    data-modal="#modal--for--order-item-edit"
+                                    data-modal="#modal--for--order--item-edit"
                                     data-car-category="21"
                                     data-car-type="21"
                             >
@@ -192,8 +192,8 @@
                         <div class="col-sm-12 col-md-12 padding-0">
                             <select class="form-control select2-reset select2--driver"
                                     name="driver_id"
-                                    id="select2--driver--for--order-item-edit"
-                                    data-modal="#modal--for--order-item-edit"
+                                    id="select2--driver--for--order--item-edit"
+                                    data-modal="#modal--for--order--item-edit"
                             >
                                 <option value="0">选择驾驶员</option>
                             </select>
@@ -201,7 +201,7 @@
 {{--                        <div class="col-sm-6 col-md-6 padding-0">--}}
 {{--                            <select class="form-control select2-reset select2--driver"--}}
 {{--                                    name="copilot_id"--}}
-{{--                                    id="select2--copilot--for--order-item-edit"--}}
+{{--                                    id="select2--copilot--for--order--item-edit"--}}
 {{--                            >--}}
 {{--                                <option value="0">选择副驾</option>--}}
 {{--                            </select>--}}
@@ -340,7 +340,7 @@
             <div class="box-footer">
                 <div class="row">
                     <div class="col-md-9 col-md-offset-3">
-                        <button type="button" class="btn btn-success edit-submit" id="submit--for--order-item-edit">
+                        <button type="button" class="btn btn-success edit-submit" id="submit--for--order--item-edit">
                             <i class="fa fa-check"></i> 提交
                         </button>
                         <button type="button" class="btn btn-default edit-cancel">取消</button>
