@@ -1350,7 +1350,7 @@
                         var $html_verified = '';
                         var $html_follow = '';
                         var $html_fee = '';
-                        var $html_operation_record = '<a class="btn btn-xs bg-default modal-show--for--order-item-operation-record" data-id="'+data+'">记录</a>';
+                        var $html_operation_record = '<a class="btn btn-xs bg-default modal-show--for--order--item-operation-record" data-id="'+data+'">记录</a>';
                         var $html_fee_record = '<a class="btn btn-xs bg-default modal-show--for--order-fee-record" data-id="'+data+'">费用记录</a>';
 
 
@@ -1372,7 +1372,7 @@
                         {
                             $html_publish = '<a class="btn btn-xs bg-olive- order--item-publish-submit" data-id="'+data+'">发布</a>';
                             $html_edit = '<a class="btn btn-xs btn-primary item-edit-link" data-id="'+data+'">编辑</a>';
-                            $html_edit = '<a class="btn btn-xs btn-primary- modal-show--for--order-item-edit" data-id="'+data+'">编辑</a>';
+                            $html_edit = '<a class="btn btn-xs btn-primary- modal-show--for--order--item-edit" data-id="'+data+'">编辑</a>';
                             $html_verified = '<a class="btn btn-xs btn-default disabled">审核</a>';
                             $html_delete = '<a class="btn btn-xs bg-black- item-delete-submit" data-id="'+data+'">删除</a>';
                             $html_journey = '<a class="btn btn-xs btn-default disabled">行程</a>';
@@ -1383,9 +1383,9 @@
 //                                $html_travel = '<a class="btn btn-xs bg-olive item-modal-show--for--travel" data-id="'+data+'">行程</a>';
 //                             $html_finance = '<a class="btn btn-xs bg-orange item-modal-show--for--finance" data-id="'+data+'" data-etc="'+$car_etc+'">财务</a>';
 
-                            $html_follow = '<a class="btn btn-xs modal-show--for--order-item-follow-create" data-id="'+data+'">跟进</a>';
-                            $html_journey = '<a class="btn btn-xs modal-show--for--order-item-journey-create" data-id="'+data+'">行程</a>';
-                            $html_fee = '<a class="btn btn-xs modal-show--for--order-item-fee-create" data-id="'+data+'">费用</a>';
+                            $html_follow = '<a class="btn btn-xs modal-show--for--order--item-follow-create" data-id="'+data+'">跟进</a>';
+                            $html_journey = '<a class="btn btn-xs modal-show--for--order--item-journey-create" data-id="'+data+'">行程</a>';
+                            $html_fee = '<a class="btn btn-xs modal-show--for--order--item-fee-create" data-id="'+data+'">费用</a>';
 
 
                             if(row.is_completed == 1)
