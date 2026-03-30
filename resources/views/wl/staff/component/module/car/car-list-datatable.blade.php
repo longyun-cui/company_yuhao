@@ -171,6 +171,69 @@
                 //     }
                 // },
                 {
+                    "title": "默认车挂",
+                    "data": "trailer_id",
+                    "className": "text-center",
+                    "width": "120px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1 && row.item_status != 97)
+                        {
+                            $(nTd).addClass('modal-show-for-info-select2-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name','默认驾驶员');
+                            $(nTd).attr('data-key','driver_id').attr('data-value',data);
+                            if(row.driver_er == null) $(nTd).attr('data-option-name','未指定');
+                            else $(nTd).attr('data-option-name',row.driver_er.driver_name);
+                            $(nTd).attr('data-column-name','驾驶员');
+                            if(row.driver_id) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(row.trailer_er == null) return '--';
+                        else return '<a href="javascript:void(0);">'+row.trailer_er.name+'</a>';
+                    }
+                },
+                {
+                    "title": "默认驾驶员",
+                    "data": "driver_id",
+                    "className": "text-center",
+                    "width": "160px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1 && row.item_status != 97)
+                        {
+                            $(nTd).addClass('modal-show-for-info-select2-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name','默认驾驶员');
+                            $(nTd).attr('data-key','driver_id').attr('data-value',data);
+                            if(row.driver_er == null) $(nTd).attr('data-option-name','未指定');
+                            else $(nTd).attr('data-option-name',row.driver_er.driver_name);
+                            $(nTd).attr('data-column-name','驾驶员');
+                            if(row.driver_id) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(row.driver_er == null) return '--';
+                        else
+                        {
+                            var $driver_html = '';
+                            var $copilot_html = '';
+
+                            $driver_html = '<a href="javascript:void(0);">'+row.driver_er.driver_name+' '+row.driver_er.driver_phone+'</a>';
+                            if(row.driver_er.copilot_name)
+                            {
+                                $copilot_html = '<a href="javascript:void(0);">'+row.driver_er.copilot_name+' '+row.driver_er.copilot_phone+'</a>';
+                            }
+                            // if(row.copilot_er != null)
+                            // {
+                            //     $copilot_html = '<a href="javascript:void(0);">'+row.copilot_er.driver_name+' '+row.copilot_er.driver_phone+'</a>';
+                            // }
+                            return $driver_html+'<br>'+$copilot_html;
+                        }
+                    }
+                },
+                {
                     "title": "所属车队",
                     "data": 'motorcade_id',
                     "width": "120px",
@@ -305,69 +368,6 @@
                     render: function(data, type, row, meta) {
                         if(data) return data;
                         else return "--";
-                    }
-                },
-                {
-                    "title": "默认车挂",
-                    "data": "trailer_id",
-                    "className": "text-center",
-                    "width": "120px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1 && row.item_status != 97)
-                        {
-                            $(nTd).addClass('modal-show-for-info-select2-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','默认驾驶员');
-                            $(nTd).attr('data-key','driver_id').attr('data-value',data);
-                            if(row.driver_er == null) $(nTd).attr('data-option-name','未指定');
-                            else $(nTd).attr('data-option-name',row.driver_er.driver_name);
-                            $(nTd).attr('data-column-name','驾驶员');
-                            if(row.driver_id) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        if(row.trailer_er == null) return '--';
-                        else return '<a href="javascript:void(0);">'+row.trailer_er.name+'</a>';
-                    }
-                },
-                {
-                    "title": "默认驾驶员",
-                    "data": "driver_id",
-                    "className": "text-center",
-                    "width": "160px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1 && row.item_status != 97)
-                        {
-                            $(nTd).addClass('modal-show-for-info-select2-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','默认驾驶员');
-                            $(nTd).attr('data-key','driver_id').attr('data-value',data);
-                            if(row.driver_er == null) $(nTd).attr('data-option-name','未指定');
-                            else $(nTd).attr('data-option-name',row.driver_er.driver_name);
-                            $(nTd).attr('data-column-name','驾驶员');
-                            if(row.driver_id) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        if(row.driver_er == null) return '--';
-                        else
-                        {
-                            var $driver_html = '';
-                            var $copilot_html = '';
-
-                            $driver_html = '<a href="javascript:void(0);">'+row.driver_er.driver_name+' '+row.driver_er.driver_phone+'</a>';
-                            if(row.driver_er.copilot_name)
-                            {
-                                $copilot_html = '<a href="javascript:void(0);">'+row.driver_er.copilot_name+' '+row.driver_er.copilot_phone+'</a>';
-                            }
-                            // if(row.copilot_er != null)
-                            // {
-                            //     $copilot_html = '<a href="javascript:void(0);">'+row.copilot_er.driver_name+' '+row.copilot_er.driver_phone+'</a>';
-                            // }
-                            return $driver_html+'<br>'+$copilot_html;
-                        }
                     }
                 },
                 {
