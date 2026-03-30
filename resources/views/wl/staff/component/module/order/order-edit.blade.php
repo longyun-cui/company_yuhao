@@ -208,22 +208,9 @@
 {{--                        </div>--}}
                     </div>
                 </div>
-
-                {{--外请车--}}
-                <div class="form-group external-car" style="display:none;">
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 外请车</label>
-                    <div class="col-md-9 ">
-                        <div class="col-sm-6 col-md-6 padding-0" style="width:50%;">
-                            <input type="text" class="form-control" name="external_car" placeholder="车辆" value="" data-default="">
-                        </div>
-                        <div class="col-sm-6 col-md-6 padding-0" style="width:50%;">
-                            <input type="text" class="form-control" name="external_trailer" placeholder="车挂" value="" data-default="">
-                        </div>
-                    </div>
-                </div>
-                {{--外请司机--}}
-                <div class="form-group external-car" style="display:none;">
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 外请司机</label>
+                {{--驾驶员信息--}}
+                <div class="form-group">
+                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 驾驶员信息</label>
                     <div class="col-md-9 ">
                         <div class="col-sm-6 col-md-6 padding-0" style="width:50%;">
                             <input type="text" class="form-control" name="driver_name" placeholder="主驾" value="" data-default="">
@@ -236,6 +223,19 @@
                         </div>
                         <div class="col-sm-6 col-md-6 padding-0" style="width:50%;">
                             <input type="text" class="form-control" name="copilot_phone" placeholder="副驾电话" value="" data-default="">
+                        </div>
+                    </div>
+                </div>
+
+                {{--外请车--}}
+                <div class="form-group external-car" style="display:none;">
+                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 外请车</label>
+                    <div class="col-md-9 ">
+                        <div class="col-sm-6 col-md-6 padding-0" style="width:50%;">
+                            <input type="text" class="form-control" name="external_car" placeholder="车辆" value="" data-default="">
+                        </div>
+                        <div class="col-sm-6 col-md-6 padding-0" style="width:50%;">
+                            <input type="text" class="form-control" name="external_trailer" placeholder="车挂" value="" data-default="">
                         </div>
                     </div>
                 </div>
