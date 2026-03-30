@@ -358,7 +358,10 @@
                             var $copilot_html = '';
 
                             $driver_html = '<a href="javascript:void(0);">'+row.driver_er.driver_name+' '+row.driver_er.driver_phone+'</a>';
-                            $copilot_html = '<a href="javascript:void(0);">'+row.driver_er.copilot_name+' '+row.driver_er.copilot_phone+'</a>';
+                            if(row.driver_er.copilot_name)
+                            {
+                                $copilot_html = '<a href="javascript:void(0);">'+row.driver_er.copilot_name+' '+row.driver_er.copilot_phone+'</a>';
+                            }
                             // if(row.copilot_er != null)
                             // {
                             //     $copilot_html = '<a href="javascript:void(0);">'+row.copilot_er.driver_name+' '+row.copilot_er.driver_phone+'</a>';
