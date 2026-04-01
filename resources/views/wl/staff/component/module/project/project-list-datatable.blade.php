@@ -239,7 +239,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        var $data = data;
+                        var $data = parseFloat(data);
                         if($data) return $data;
                         else return '--';
                     }
