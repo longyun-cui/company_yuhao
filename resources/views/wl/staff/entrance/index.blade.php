@@ -139,6 +139,7 @@
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--item-journey-create')
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--item-fee-create')
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--item-fee-record')
+    @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--item-financial-accounting-set')
 
     {{--费用--}}
     @include(env('TEMPLATE_WL_STAFF').'component.fee.fee-edit')

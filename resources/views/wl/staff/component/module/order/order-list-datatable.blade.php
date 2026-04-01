@@ -845,8 +845,8 @@
                         $(nTd).attr('data-id',row.id).attr('data-name','运价');
                         $(nTd).attr('data-key','amount').attr('data-value',parseFloat(data));
                         $(nTd).attr('data-column-name','运价');
-                        $(nTd).addClass('color-red');
-                        $(nTd).addClass('color-red');
+                        $(nTd).addClass('color-blue');
+                        $(nTd).addClass('_bold');
 
                         if(row.is_completed != 1)
                         {
@@ -854,6 +854,58 @@
                             $(nTd).attr('data-text-type','text');
                             if(data) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "运费现金",
+                    "name": "financial_receipt_for_freight_cash",
+                    "data": "financial_receipt_for_freight_cash",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','运费现金');
+                        $(nTd).attr('data-key','financial_receipt_for_freight_cash');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-green');
+
+                        if(row.is_published != 0)
+                        {
+                            $(nTd).addClass('modal-show--for--order-finance');
+                            $(nTd).attr('data-type','all');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "运费油卡",
+                    "name": "financial_receipt_for_freight_oil_card",
+                    "data": "financial_receipt_for_freight_oil_card",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','运费油卡');
+                        $(nTd).attr('data-key','financial_receipt_for_freight_oil_card');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-green');
+
+                        if(row.is_published != 0)
+                        {
+                            $(nTd).addClass('modal-show--for--order-finance');
+                            $(nTd).attr('data-type','all');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -1212,7 +1264,7 @@
                     "title": "操作",
                     "data": 'id',
                     "className": "",
-                    "width": "200px",
+                    "width": "240px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
 
@@ -1227,6 +1279,7 @@
                         var $html_abandon = '';
                         var $html_completed = '';
                         var $html_verified = '';
+                        var $html_accounting = '<a class="btn btn-xs modal-show--for--order--item-financial-accounting-set" data-id="'+data+'">财务核对</a>';
                         var $html_follow = '';
                         var $html_fee = '';
                         var $html_operation_record = '<a class="btn btn-xs bg-default modal-show--for--order--item-operation-record" data-id="'+data+'">记录</a>';
@@ -1332,6 +1385,7 @@
                             // $html_able+
                             $html_edit+
                             $html_publish+
+                            $html_accounting+
                             // $html_detail+
                             $html_follow+
                             $html_travel+

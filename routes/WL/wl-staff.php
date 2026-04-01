@@ -233,6 +233,7 @@ Route::group(['middleware' => ['wl.staff.login']], function () {
     Route::post('/o1/order/item-journey-save', $controller.'@o1__order__item_journey_save');
     Route::post('/o1/order/item-fee-save', $controller.'@o1__order__item_fee_save');
     Route::post('/o1/order/item-trade-save', $controller.'@o1__order__item_trade_save');
+    Route::post('/o1/order/item-financial-accounting-save', $controller.'@o1__order__item_financial_accounting_save');
 
 
 

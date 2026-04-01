@@ -102,7 +102,7 @@ class WL_Common_Order extends Model
 
 
         'financial_receipt_for_freight_cash',
-        'financial_receipt_for_oil_card',
+        'financial_receipt_for_freight_oil_card',
         'financial_receipt_for_invoice_fee',
         'financial_receipt_for_invoice_amount',
         'financial_receipt_for_invoice_point',

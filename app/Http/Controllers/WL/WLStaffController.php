@@ -852,10 +852,15 @@ class WLStaffController extends Controller
     {
         return $this->order_repo->o1__order__item_fee_save(request()->all());
     }
-    // 【工单】【交费易】保存
+    // 【工单】【交易】保存
     public function o1__order__item_trade_save()
     {
         return $this->order_repo->o1__order__item_trade_save(request()->all());
+    }
+    // 【工单】【财务核算】保存
+    public function o1__order__item_financial_accounting_save()
+    {
+        return $this->order_repo->o1__order__item_financial_accounting_save(request()->all());
     }
 
 

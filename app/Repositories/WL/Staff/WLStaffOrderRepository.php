@@ -2680,6 +2680,148 @@ class WLStaffOrderRepository {
         }
 
     }
+    // 【工单】保存数据
+    public function o1__order__item_financial_accounting_save($post_data)
+    {
+        $messages = [
+            'operate.required' => 'operate.required.',
+//            'fee-title.required' => '请输入名目！',
+//            'fee-amount.required' => '请输入金额！',
+//            'fee-datetime.required' => '请输入时间！',
+//            'name.unique' => '该部门号已存在！',
+        ];
+        $v = Validator::make($post_data, [
+            'operate' => 'required',
+//            'fee-title' => 'required',
+//            'fee-amount' => 'required',
+//            'fee-datetime' => 'required',
+//            'name' => 'required|unique:dk_department,name',
+        ], $messages);
+        if ($v->fails())
+        {
+            $messages = $v->errors();
+            return response_error([],$messages->first());
+        }
+
+        $this->get_me();
+        $me = $this->me;
+
+        if(!in_array($me->user_type,[0,1,11,19])) return response_error([],"你没有操作权限！");
+
+
+        $operate = $post_data["operate"];
+        $operate_type = $operate["type"];
+        $operate_id = $operate['id'];
+
+
+        $order = WL_Common_Order::with([])->withTrashed()->find($operate_id);
+        if(!$order) return response_error([],"【订单】不存在警告，请刷新页面重试！");
+
+        $timestamp = time();
+        $datetime = date('Y-m-d H:i:s', $timestamp);
+
+
+        $order_update_date = [];
+        $operation_record_data = [];
+
+        // 操作
+        if(true)
+        {
+            $operation = [];
+            $operation['operation'] = 'item_financial_accounting_set';
+            $operation['field'] = '';
+            $operation['title'] = '操作';
+            $operation['before'] = '';
+            $operation['after'] = '财务核算';
+            $operation_record_data[] = $operation;
+        }
+        // 时间
+//        $accounting_datetime = $post_data['accounting-datetime'];
+//        if(!empty($accounting_datetime))
+//        {
+//            $operation = [];
+//            $operation['field'] = 'accounting_datetime';
+//            $operation['title'] = '时间';
+//            $operation['before'] = '';
+//            $operation['after'] = $accounting_datetime;
+//            $operation_record_data[] = $operation;
+//        }
+        // 运费现金
+        $accounting_freight_cash = (float)$post_data['accounting_freight_cash'];
+        if((float)$order->financial_receipt_for_freight_cash != $accounting_freight_cash)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_receipt_for_freight_cash';
+            $operation['title'] = '运费现金';
+            $operation['before'] = (float)$order->financial_receipt_for_freight_cash;
+            $operation['after'] = $accounting_freight_cash;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_receipt_for_freight_cash'] = $accounting_freight_cash;
+        }
+        // 运费油卡
+        $financial_receipt_for_freight_oil_card = (float)$post_data['accounting_freight_oil_card'];
+        if((float)$order->financial_receipt_for_oil_card != $financial_receipt_for_freight_oil_card)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_receipt_for_oil_card';
+            $operation['title'] = '运费油卡';
+            $operation['before'] = (float)$order->financial_receipt_for_freight_oil_card;
+            $operation['after'] = $financial_receipt_for_freight_oil_card;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_receipt_for_freight_oil_card'] = $financial_receipt_for_freight_oil_card;
+        }
+
+
+
+        $record_data["operate_category"] = 1;
+        $record_data["operate_type"] = 81;
+        $record_data["client_id"] = $order->client_id;
+        $record_data["project_id"] = $order->project_id;
+        $record_data["order_id"] = $operate_id;
+        $record_data["creator_id"] = $me->id;
+        $record_data["company_id"] = $me->company_id;
+        $record_data["department_id"] = $me->department_id;
+        $record_data["team_id"] = $me->team_id;
+//        $record_data["custom_date"] = $fee_datetime;
+//        $record_data["custom_datetime"] = $fee_datetime;
+        $record_data["content"] = json_encode($operation_record_data);
+
+
+
+
+        // 启动数据库事务
+        DB::beginTransaction();
+        try
+        {
+            $order = WL_Common_Order::lockForUpdate()->find($operate_id);
+            $bool_order = $order->fill($order_update_date)->save();
+            if(!$bool_order) throw new Exception("WL_Common_Order--update--fail");
+
+            $order_operation_record = new WL_Common_Order_Operation_Record;
+            $bool_oor = $order_operation_record->fill($record_data)->save();
+            if($bool_oor)
+            {
+                $order->last_operation_datetime = $datetime;
+                $order->last_operation_date = $datetime;
+            }
+            else throw new Exception("WL_Common_Order_Operation_Record--insert--fail");
+
+
+            DB::commit();
+            return response_success(['order'=>$order]);
+        }
+        catch (Exception $e)
+        {
+            DB::rollback();
+            $msg = '操作失败，请重试！';
+            $msg = $e->getMessage();
+//            exit($e->getMessage());
+            return response_fail([],$msg);
+        }
+
+    }
 
 
 

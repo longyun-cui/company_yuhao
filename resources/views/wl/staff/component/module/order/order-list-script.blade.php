@@ -375,6 +375,8 @@
         });
 
 
+
+
         // 【工单】【添加费用】费用类型
         $(".main-wrapper").on('change', '#modal--for--order--item-fee-create input[name="fee-type"]', function() {
             var $that = $(this);
@@ -1159,6 +1161,217 @@
 
             };
             $("#form--for--order--item-fee-create").ajaxSubmit(options);
+        });
+
+
+
+
+        // 【工单】【财务核算】显示
+        $(".main-wrapper").off('click', ".modal-show--for--order--item-financial-accounting-set").on('click', ".modal-show--for--order--item-financial-accounting-set", function() {
+            var $that = $(this);
+            var $id = $(this).data('id');
+            var $row = $that.parents('tr');
+            var $datatable_wrapper = $that.closest('.datatable-wrapper');
+            var $item_category = $datatable_wrapper.data('datatable-item-category');
+            var $table_id = $datatable_wrapper.find('table').filter('[id][id!=""]').attr("id");
+
+            Datatable__for__Order_Item_Fee_Record_List.init($id);
+
+            $('.datatable-wrapper').removeClass('operating');
+            $datatable_wrapper.addClass('operating');
+            $datatable_wrapper.find('tr').removeClass('operating');
+            $row.addClass('operating');
+
+            var $modal_id = 'modal--for--order--item-financial-accounting-set';
+            var $modal = $("#"+$modal_id);
+
+            var $form_id = 'form--for--order--item-financial-accounting-set';
+            var $form = $("#"+$form_id);
+
+
+            $modal.find('.id-title').html('【'+$id+'】');
+
+            $modal.find('#item-submit--for--order--item-financial-accounting-set').data('item-id',$id);
+            $modal.find('#item-submit--for--order--item-financial-accounting-set').data('datatable-list-id',$table_id);
+            $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));
+
+
+            var $data = new Object();
+
+            //
+            var $index = layer.load(1, {
+                shade: [0.3, '#fff'],
+                content: '<span class="loadtip">正在提交</span>',
+                success: function (layer) {
+                    layer.find('.layui-layer-content').css({
+                        'padding-top': '40px',
+                        'width': '100px',
+                    });
+                    layer.find('.loadtip').css({
+                        'font-size':'20px',
+                        'margin-left':'-18px'
+                    });
+                }
+            });
+
+            //
+            $.post(
+                "{{ url('/o1/order/item-get') }}",
+                {
+                    _token: $('meta[name="_token"]').attr('content'),
+                    operate: "item-get",
+                    item_type: "order",
+                    item_id: $that.data('id')
+                },
+                'json'
+            )
+                .done(function($response, status, jqXHR) {
+                    console.log('#'+$that.attr('id')+'.post.done.');
+
+                    $response = JSON.parse($response);
+                    if(!$response.success)
+                    {
+                        if($response.msg) layer.msg($response.msg);
+                    }
+                    else
+                    {
+                        form_reset("#"+$form_id);
+
+                        $modal.find('.box-title').html('编辑财务【'+$that.attr('data-id')+'】');
+                        $modal.find('input[name="operate[type]"]').val('edit');
+                        $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));
+
+                        $modal.find('input[name="accounting_freight_cash"]').val($response.data.financial_receipt_for_freight_cash);
+                        $modal.find('input[name="accounting_freight_oil_card"]').val($response.data.financial_receipt_for_freight_oil_card);
+
+                        $modal.find('input[name="accounting_invoice_amount"]').val($response.data.financial_receipt_for_invoice_amount);
+                        $modal.find('input[name="accounting_invoice_point"]').val($response.data.financial_receipt_for_invoice_point);
+
+                        $modal.find('input[name="accounting_oil_total"]').val($response.data.financial_fee_for_oil_total);
+                        $modal.find('input[name="accounting_oil_card"]').val($response.data.financial_fee_for_oil_card);
+                        $modal.find('input[name="accounting_oil_cash"]').val($response.data.financial_fee_for_oil_cash);
+                        $modal.find('input[name="accounting_oil_mileage"]').val($response.data.oil_mileage);
+                        $modal.find('input[name="accounting_oil_consumption"]').val($response.data.oil_consumption);
+                        $modal.find('input[name="accounting_oil_unit_price"]').val($response.data.oil_unit_price);
+
+                        $modal.find('input[name="accounting_toll_etc"]').val($response.data.financial_fee_for_toll_etc);
+                        $modal.find('input[name="accounting_toll_cash"]').val($response.data.financial_fee_for_toll_cash);
+
+                        $modal.find('input[name="accounting_parking"]').val($response.data.financial_fee_for_parking);
+
+                        $modal.find('input[name="accounting_salary"]').val($response.data.financial_fee_for_salary);
+                        $modal.find('input[name="accounting_bonus"]').val($response.data.financial_fee_for_bonus);
+
+                        $modal.find('input[name="accounting_information"]').val($response.data.financial_fee_for_information);
+                        $modal.find('input[name="accounting_administrative"]').val($response.data.financial_fee_for_administrative);
+
+                        $modal.find('input[name="accounting_repair"]').val($response.data.financial_fee_for_repair_cost);
+                        $modal.find('input[name="accounting_maintenance"]').val($response.data.financial_fee_for_maintenance_cost);
+                        $modal.find('input[name="accounting_inspection"]').val($response.data.financial_fee_for_inspection_cost);
+                        $modal.find('input[name="accounting_transfer"]').val($response.data.financial_fee_for_transfer_cost);
+                        $modal.find('input[name="accounting_insurance"]').val($response.data.financial_fee_for_insurance_cost);
+                        $modal.find('input[name="accounting_loan"]').val($response.data.financial_fee_for_loan_cost);
+
+                        $modal.find('input[name="accounting_others"]').val($response.data.financial_fee_for_others);
+
+
+
+                        var $datatable_wrapper = $that.closest('.datatable-wrapper');
+                        var $table_id = $datatable_wrapper.find('table').filter('[id][id!=""]').attr("id");
+                        $modal.find('.edit-submit').attr('data-datatable-list-id',$table_id);
+
+                        $modal.modal('show');
+                    }
+                })
+                .fail(function(jqXHR, status, error) {
+                    console.log('#'+$that.attr('id')+'.post.fail.');
+                    layer.msg('服务器错误！');
+
+                })
+                .always(function(jqXHR, status) {
+                    console.log('#'+$that.attr('id')+'.post.always.');
+                    layer.closeAll('loading');
+                });
+
+
+
+            $modal.modal('show');
+        });
+        // 【工单】【财务核算】提交
+        $(".main-wrapper").off('click', "#item-submit--for--order--item-financial-accounting-set").on('click', "#item-submit--for--order--item-financial-accounting-set", function() {
+            var $that = $(this);
+            var $item_id = $that.data('item-id');
+            var $table_id = $that.data('datatable-list-id');
+            var $row = $('#'+$table_id).find('[data-key="id"][data-value='+$item_id+']').parents('tr');
+
+            var $modal_id = 'modal--for--order--item-financial-accounting-set';
+            var $modal = $("#"+$modal_id);
+
+            var $form_id = 'form--for--order--item-financial-accounting-set';
+            var $form = $("#"+$form_id);
+
+            var $index = layer.load(1, {
+                shade: [0.3, '#fff'],
+                content: '<span class="loadtip">正在提交</span>',
+                success: function (layer) {
+                    layer.find('.layui-layer-content').css({
+                        'padding-top': '40px',
+                        'width': '100px',
+                    });
+                    layer.find('.loadtip').css({
+                        'font-size':'20px',
+                        'margin-left':'-18px'
+                    });
+                }
+            });
+
+            var options = {
+                url: "{{ url('/o1/order/item-financial-accounting-save') }}",
+                type: "post",
+                dataType: "json",
+                // target: "#div2",
+                // clearForm: true,
+                // restForm: true,
+                success: function ($response, status, xhr, $form) {
+                    // 请求成功时的回调
+                    if(!$response.success)
+                    {
+                        layer.msg($response.msg);
+                    }
+                    else
+                    {
+                        layer.msg($response.msg);
+
+                        // 重置输入框
+                        form_reset("#"+$form_id);
+
+                        $modal.modal('hide');
+                        // $('#modal--for--order-trade-create').modal('hide').on("hidden.bs.modal", function () {
+                        //     $("body").addClass("modal-open");
+                        // });
+
+                        // $('#'+$table_id).DataTable().ajax.reload(null,false);
+
+                        var $order = $response.data.order;
+                        console.log($row);
+                        console.log($order);
+                        // update_order_row($row,$order);
+                    }
+                },
+                error: function(xhr, status, error, $form) {
+                    // 请求失败时的回调
+                    console.log($(this).attr('id')+'.click.error');
+                    layer.msg('服务器错误！');
+                },
+                complete: function(xhr, status, $form) {
+                    // 无论成功或失败都会执行的回调
+                    layer.closeAll('loading');
+                    console.log($(this).attr('id')+'.click.complete');
+                }
+
+
+            };
+            $form.ajaxSubmit(options);
         });
 
 

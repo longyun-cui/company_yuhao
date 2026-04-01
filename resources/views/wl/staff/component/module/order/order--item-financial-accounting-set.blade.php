@@ -1,66 +1,7 @@
 {{--添加-行程-信息--}}
 <div class="modal fade modal-wrapper" id="modal--for--order--item-financial-accounting-set">
-    <div class="col-md-10 col-md-offset-1 margin-top-32px margin-bottom-64px bg-white">
+    <div class="col-md-8 col-md-offset-2 margin-top-32px margin-bottom-64px bg-white">
 
-        <div class="box- box-info- form-container">
-
-
-            <div class="box-header with-border margin-top-16px margin-bottom-16px">
-                <h3 class="box-title">行程记录</h3>
-                <div class="box-tools pull-right caption _none">
-                    <a href="javascript:void(0);">
-                        <button type="button" class="btn btn-success pull-right"><i class="fa fa-plus"></i> 添加记录</button>
-                    </a>
-                </div>
-            </div>
-
-            <div class="box-body datatable-body" id="">
-
-                <div class="row col-md-12 datatable-search-row _none">
-                    <div class="input-group">
-
-                        <input type="text" class="form-control form-filter filter-keyup" name="order-operation-keyword" placeholder="关键词" />
-
-                        <select class="form-control form-filter" name="order-operation-attribute" style="width:96px;">
-                            <option value="-1">选择属性</option>
-                        </select>
-
-                        <button type="button" class="form-control btn btn-flat btn-success filter-submit" id="filter-submit-for-order-operation-record">
-                            <i class="fa fa-search"></i> 搜索
-                        </button>
-                        <button type="button" class="form-control btn btn-flat btn-default filter-cancel" id="filter-cancel-for-order-operation-record">
-                            <i class="fa fa-circle-o-notch"></i> 重置
-                        </button>
-
-                    </div>
-                </div>
-
-                <table class='table table-striped table-bordered' id='datatable--for--order--item-journey-record-list'>
-                    <thead>
-                    <tr role='row' class='heading'>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <!-- datatable end -->
-            </div>
-
-            <div class="box-footer _none">
-                <div class="row" style="margin:16px 0;">
-                    <div class="col-md-offset-0 col-md-4 col-sm-8 col-xs-12">
-                        {{--<button type="button" class="btn btn-primary"><i class="fa fa-check"></i> 提交</button>--}}
-                        {{--<button type="button" onclick="history.go(-1);" class="btn btn-default">返回</button>--}}
-                        <div class="input-group">
-                            <span class="input-group-addon"><input type="checkbox" id="check-all"></span>
-                            <input type="text" class="form-control" name="bulk-detect-rank" id="bulk-detect-rank" placeholder="指定排名">
-                            <span class="input-group-addon btn btn-default" id="set-rank-bulk-submit"><i class="fa fa-check"></i>提交</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
 
         <div class="box- box-info- form-container">
 
@@ -78,96 +19,142 @@
 
                     {{ csrf_field() }}
                     <input readonly type="hidden" name="operate[type]" value="edit" data-default="edit">
-                    <input readonly type="hidden" name="operate[id]" value="0" data-default="0">
+                    <input readonly type="hidden" name="operate[id]">
                     <input readonly type="hidden" name="operate[item_category]" value="order" data-default="order">
                     <input readonly type="hidden" name="operate[item_type]" value="accounting" data-default="accounting">
 
-                    {{--应该时间--}}
+                    {{--运费--}}
                     <div class="form-group">
-                        <label class="control-label col-md-2">收款</label>
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 运费现金 & 运费油卡</label>
                         <div class="col-md-9 ">
-                            <div class="col-sm-4 col-md-4 padding-0">
-                                <input type="text" class="form-control form-filter" name="accounting" placeholder="出发地" />
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_freight_cash" placeholder="运费现金" />
                             </div>
-                            <div class="col-sm-4 col-md-4 padding-0">
-                                <input type="text" class="form-control form-filter" name="journey-stopover-place" placeholder="经停地" />
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_freight_oil_card" placeholder="运费油卡" />
                             </div>
-                            <div class="col-sm-4 col-md-4 padding-0">
-                                <input type="text" class="form-control form-filter" name="journey-destination-place" placeholder="目的地" />
+                        </div>
+                    </div>
+                    {{--开票--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 运费开票 & 开票点数</label>
+                        <div class="col-md-9 ">
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_invoice_amount" placeholder="运费开票" />
+                            </div>
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_invoice_point" placeholder="开票点数" />
                             </div>
                         </div>
                     </div>
                     {{--油费--}}
                     <div class="form-group">
-                        <label class="control-label col-md-2">油费</label>
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 总油费 & 油卡 & 现金</label>
                         <div class="col-md-9 ">
-                            <div class="col-sm-6 col-md-6 padding-0">
-                                <input type="text" class="form-control form-filter" name="accounting_financial_fee_for_oil_total" placeholder="距离" />
+                            <div class="col-sm-4 col-md-4 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_oil_total" placeholder="总油费" />
                             </div>
-                            <div class="col-sm-6 col-md-6 padding-0">
-                                <input type="text" class="form-control form-filter" name="journey-time-limitation" placeholder="时效" />
+                            <div class="col-sm-4 col-md-4 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_oil_card" placeholder="油卡" />
+                            </div>
+                            <div class="col-sm-4 col-md-4 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_oil_cash" placeholder="现金" />
+                            </div>
+                        </div>
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 公里数 & 油耗 & 单价</label>
+                        <div class="col-md-9 ">
+                            <div class="col-sm-4 col-md-4 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_oil_mileage" placeholder="公里数" />
+                            </div>
+                            <div class="col-sm-4 col-md-4 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_oil_consumption" placeholder="油耗" />
+                            </div>
+                            <div class="col-sm-4 col-md-4 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_oil_unit_price" placeholder="单价" />
                             </div>
                         </div>
                     </div>
-                    {{--应该时间--}}
+                    {{--过路费--}}
                     <div class="form-group">
-                        <label class="control-label col-md-2">计划时间</label>
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 过路费</label>
                         <div class="col-md-9 ">
                             <div class="col-sm-6 col-md-6 padding-0">
-                                <input type="text" class="form-control form-filter time-picker" name="journey-should-departure-datetime" placeholder="应出发时间" readonly="readonly" />
+                                <input type="text" class="form-control form-filter" name="accounting_toll_etc" placeholder="路费-ETC" />
                             </div>
                             <div class="col-sm-6 col-md-6 padding-0">
-                                <input type="text" class="form-control form-filter time-picker" name="journey-should-arrival-datetime" placeholder="应到达时间" readonly="readonly" />
+                                <input type="text" class="form-control form-filter" name="accounting_toll_cash" placeholder="路费-现金" />
                             </div>
                         </div>
                     </div>
-                    {{--实际时间--}}
+                    {{--停车费--}}
                     <div class="form-group">
-                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 实际时间</label>
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 停车费</label>
                         <div class="col-md-9 ">
-                            <div class="col-sm-6 col-md-6 padding-0">
-                                <input type="text" class="form-control form-filter time-picker" name="journey-actual-departure-datetime" placeholder="实际出发时间" readonly="readonly" />
-                            </div>
-                            <div class="col-sm-6 col-md-6 padding-0">
-                                <input type="text" class="form-control form-filter time-picker" name="journey-actual-arrival-datetime" placeholder="实际到达时间" readonly="readonly" />
-                            </div>
+                            <input type="text" class="form-control" name="accounting_parking" placeholder="停车费" value="">
                         </div>
                     </div>
-                    {{--名目--}}
-{{--                    <div class="form-group">--}}
-{{--                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 名目</label>--}}
-{{--                        <div class="col-md-9 ">--}}
-{{--                            <input type="text" class="form-control" name="journey-title" placeholder="请输入名目" value="" list="_journey_title">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <datalist id="_journey_title">--}}
-{{--                        <option value="油费" />--}}
-{{--                        <option value="过路费" />--}}
-{{--                        <option value="尿酸" />--}}
-{{--                        <option value="迪奥" />--}}
-{{--                        <option value="其他" />--}}
-{{--                    </datalist>--}}
-                    {{--实际里程--}}
+                    {{--费用--}}
                     <div class="form-group">
-                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 实际里程</label>
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 工资 & 奖金</label>
                         <div class="col-md-9 ">
-                            <input type="text" class="form-control" name="journey-actual-mileage" placeholder="请输如实际公里数" value="">
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_salary" placeholder="工资" />
+                            </div>
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_bonus" placeholder="奖金" />
+                            </div>
                         </div>
                     </div>
-{{--                    --}}{{--时效--}}
-{{--                    <div class="form-group">--}}
-{{--                        <label class="control-label col-md-2">时效</label>--}}
-{{--                        <div class="col-md-9 ">--}}
-{{--                            <input type="text" class="form-control" name="journey-time-limitation" placeholder="请输如时效" value="">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    {{--费用--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 维修费 & 保养费</label>
+                        <div class="col-md-9 ">
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_repair" placeholder="维修费" />
+                            </div>
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_maintenance" placeholder="保养费" />
+                            </div>
+                        </div>
+                    </div>
+                    {{--费用--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 审车费 & 过户费</label>
+                        <div class="col-md-9 ">
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_inspection" placeholder="审车费" />
+                            </div>
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_transfer" placeholder="过户费" />
+                            </div>
+                        </div>
+                    </div>
+                    {{--费用--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 保险费 & 贷款费用</label>
+                        <div class="col-md-9 ">
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_insurance" placeholder="保险费" />
+                            </div>
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_loan" placeholder="贷款费用" />
+                            </div>
+                        </div>
+                    </div>
+                    {{--其他费用--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 其他费用</label>
+                        <div class="col-md-9 ">
+                            <input type="text" class="form-control" name="accounting_others" placeholder="其他费用">
+                        </div>
+                    </div>
                     {{--备注--}}
-                    <div class="form-group">
-                        <label class="control-label col-md-2">备注</label>
-                        <div class="col-md-9 ">
-                            <textarea class="form-control" name="journey-description" rows="3" cols="100%"></textarea>
-                        </div>
-                    </div>
+{{--                    <div class="form-group">--}}
+{{--                        <label class="control-label col-md-3">备注</label>--}}
+{{--                        <div class="col-md-9 ">--}}
+{{--                            <textarea class="form-control" name="journey-description" rows="3" cols="100%"></textarea>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
 
                 </div>
@@ -176,7 +163,10 @@
             <div class="box-footer">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <button type="button" class="btn btn-success" id="item-submit--for--order--item-financial-accounting-set"><i class="fa fa-check"></i> 提交</button>
+                        <button type="button" class="btn btn-success"
+                                id="item-submit--for--order--item-financial-accounting-set">
+                            <i class="fa fa-check"></i> 提交
+                        </button>
                         <button type="button" class="btn btn-default modal-cancel">取消</button>
                     </div>
                 </div>
