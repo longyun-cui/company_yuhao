@@ -1,5 +1,5 @@
 {{--添加-行程-信息--}}
-<div class="modal fade modal-wrapper" id="modal--for--order--item-journey-create">
+<div class="modal fade modal-wrapper" id="modal--for--order--item-financial-accounting-set">
     <div class="col-md-10 col-md-offset-1 margin-top-32px margin-bottom-64px bg-white">
 
         <div class="box- box-info- form-container">
@@ -66,49 +66,28 @@
 
             <div class="box-header with-border margin-top-16px">
                 <h3 class="box-title">
-                    <span class="">添加【行程】</span>
+                    <span class="">财务核算</span>
                     <span class="id-title"></span>
                 </h3>
                 <div class="box-tools pull-right">
                 </div>
             </div>
 
-            <form action="" method="post" class="form-horizontal form-bordered " id="form--for--order--item-journey-create">
+            <form action="" method="post" class="form-horizontal form-bordered " id="form--for--order--item-financial-accounting-set">
                 <div class="box-body">
 
                     {{ csrf_field() }}
                     <input readonly type="hidden" name="operate[type]" value="edit" data-default="edit">
                     <input readonly type="hidden" name="operate[id]" value="0" data-default="0">
                     <input readonly type="hidden" name="operate[item_category]" value="order" data-default="order">
-                    <input readonly type="hidden" name="operate[item_type]" value="journey" data-default="journey">
+                    <input readonly type="hidden" name="operate[item_type]" value="accounting" data-default="accounting">
 
-                    {{--行程类型--}}
-                    <div class="form-group">
-                        <label class="control-label col-md-2">类型</label>
-                        <div class="col-md-8 control-label" style="text-align:left;">
-                            <button type="button" class="btn radio">
-                                <label>
-                                    <input type="radio" name="journey-type" value="1" checked="checked"> 运输
-                                </label>
-                            </button>
-                            <button type="button" class="btn radio">
-                                <label>
-                                    <input type="radio" name="journey-type" value="99"> 卸货
-                                </label>
-                            </button>
-                            <button type="button" class="btn radio">
-                                <label>
-                                    <input type="radio" name="journey-type" value="101"> 空放
-                                </label>
-                            </button>
-                        </div>
-                    </div>
                     {{--应该时间--}}
                     <div class="form-group">
-                        <label class="control-label col-md-2">地点</label>
+                        <label class="control-label col-md-2">收款</label>
                         <div class="col-md-9 ">
                             <div class="col-sm-4 col-md-4 padding-0">
-                                <input type="text" class="form-control form-filter" name="journey-departure-place" placeholder="出发地" />
+                                <input type="text" class="form-control form-filter" name="accounting" placeholder="出发地" />
                             </div>
                             <div class="col-sm-4 col-md-4 padding-0">
                                 <input type="text" class="form-control form-filter" name="journey-stopover-place" placeholder="经停地" />
@@ -118,12 +97,12 @@
                             </div>
                         </div>
                     </div>
-                    {{--距离&时效--}}
+                    {{--油费--}}
                     <div class="form-group">
-                        <label class="control-label col-md-2">距离&时效</label>
+                        <label class="control-label col-md-2">油费</label>
                         <div class="col-md-9 ">
                             <div class="col-sm-6 col-md-6 padding-0">
-                                <input type="text" class="form-control form-filter" name="journey-distance" placeholder="距离" />
+                                <input type="text" class="form-control form-filter" name="accounting_financial_fee_for_oil_total" placeholder="距离" />
                             </div>
                             <div class="col-sm-6 col-md-6 padding-0">
                                 <input type="text" class="form-control form-filter" name="journey-time-limitation" placeholder="时效" />
@@ -197,7 +176,7 @@
             <div class="box-footer">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <button type="button" class="btn btn-success" id="item-submit--for--order--item-journey-create"><i class="fa fa-check"></i> 提交</button>
+                        <button type="button" class="btn btn-success" id="item-submit--for--order--item-financial-accounting-set"><i class="fa fa-check"></i> 提交</button>
                         <button type="button" class="btn btn-default modal-cancel">取消</button>
                     </div>
                 </div>

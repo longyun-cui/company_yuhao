@@ -219,7 +219,7 @@
                     cache: true
                 },
                 escapeMarkup: function (markup) { return markup; },
-                dropdownParent: $dropdownParent,
+                dropdownParent: $dropdownParent.find('.modal-content'),
                 minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
                 placeholder: '请选择',
@@ -286,7 +286,7 @@
                     cache: true
                 },
                 escapeMarkup: function (markup) { return markup; },
-                dropdownParent: $dropdownParent,
+                dropdownParent: $dropdownParent.find('.modal-content'),
                 minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
                 placeholder: '请选择',
@@ -347,7 +347,7 @@
                     cache: true
                 },
                 escapeMarkup: function (markup) { return markup; },
-                dropdownParent: $dropdownParent,
+                dropdownParent: $dropdownParent.find('.modal-content'),
                 minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
                 placeholder: '请选择',
@@ -452,7 +452,7 @@
                     cache: true
                 },
                 escapeMarkup: function (markup) { return markup; },
-                dropdownParent: $dropdownParent,
+                dropdownParent: $dropdownParent.find('.modal-content'),
                 minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
                 placeholder: '请选择',
@@ -532,7 +532,7 @@
                     return data.text;
                 },
                 escapeMarkup: function (markup) { return markup; },
-                dropdownParent: $dropdownParent,
+                dropdownParent: $dropdownParent.find('.modal-content'),
                 minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
                 placeholder: '请选择',
@@ -582,7 +582,7 @@
                     cache: true
                 },
                 escapeMarkup: function (markup) { return markup; },
-                dropdownParent: $dropdownParent,
+                dropdownParent: $dropdownParent.find('.modal-content'),
                 minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
                 placeholder: '请选择',
@@ -630,7 +630,7 @@
                     cache: true
                 },
                 escapeMarkup: function (markup) { return markup; },
-                dropdownParent: $dropdownParent,
+                dropdownParent: $dropdownParent.find('.modal-content'),
                 minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
                 placeholder: '请选择',
@@ -676,7 +676,7 @@
                     cache: true
                 },
                 escapeMarkup: function (markup) { return markup; },
-                dropdownParent: $dropdownParent,
+                dropdownParent: $dropdownParent.find('.modal-content'),
                 minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
                 placeholder: '请选择',

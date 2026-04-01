@@ -102,20 +102,26 @@
                             <input type="text" class="form-control form-filter time-picker" name="fee-datetime" readonly="readonly" />
                         </div>
                     </div>
-                    {{--品牌--}}
+                    {{--名目--}}
                     <div class="form-group">
                         <label class="control-label col-md-2"><sup class="text-red">*</sup> 名目</label>
                         <div class="col-md-9 ">
                             <input type="text" class="form-control" name="fee-title" placeholder="请输入名目" value="" list="_fee_title">
                         </div>
                     </div>
-                    <datalist id="_fee_title">
-                        <option value="油费" />
-                        <option value="过路费" />
-                        <option value="尿酸" />
-                        <option value="迪奥" />
-                        <option value="其他" />
-                    </datalist>
+{{--                    <div class="form-group">--}}
+{{--                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 名目</label>--}}
+{{--                        <div class="col-md-9 ">--}}
+{{--                            <input type="text" class="form-control" name="fee-title" placeholder="请输入名目" value="" list="_fee_title">--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <datalist id="_fee_title">--}}
+{{--                        <option value="油费" />--}}
+{{--                        <option value="过路费" />--}}
+{{--                        <option value="尿酸" />--}}
+{{--                        <option value="迪奥" />--}}
+{{--                        <option value="其他" />--}}
+{{--                    </datalist>--}}
                     {{--金额--}}
                     <div class="form-group">
                         <label class="control-label col-md-2"><sup class="text-red">*</sup> 金额</label>

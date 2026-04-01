@@ -134,153 +134,153 @@
                         else return "有误";
                     }
                 },
-//                 {
-//                     "title": "订单状态",
-//                     "className": "",
-//                     "width": "80px",
-//                     "data": "id",
-//                     "orderable": false,
-//                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-//                         if(row.is_completed != 1)
-//                         {
-//                             $(nTd).addClass('modal-show--for--attachment');
-//                             $(nTd).attr('data-id',row.id).attr('data-name','附件');
-//                             $(nTd).attr('data-key','attachment_list').attr('data-value',row.attachment_list);
-//                             if(data) $(nTd).attr('data-operate-type','edit');
-//                             else $(nTd).attr('data-operate-type','add');
-//                         }
-//                     },
-//                     render: function(data, type, row, meta) {
-// //                            return data;
+                {
+                    "title": "订单状态",
+                    "className": "",
+                    "width": "80px",
+                    "data": "id",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).addClass('modal-show--for--attachment');
+                            $(nTd).attr('data-id',row.id).attr('data-name','附件');
+                            $(nTd).attr('data-key','attachment_list').attr('data-value',row.attachment_list);
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+//                            return data;
+
+                        if(row.deleted_at != null)
+                        {
+                            return '<small class="btn-xs bg-black">已删除</small>';
+                        }
+
+                        if(row.item_status == 97)
+                        {
+                            return '<small class="btn-xs bg-navy">已弃用</small>';
+                        }
+
+                        if(row.is_published == 0)
+                        {
+                            return '<small class="btn-xs bg-teal">未发布</small>';
+                        }
+                        else
+                        {
+                            if(row.is_completed == 1)
+                            {
+                                return '<small class="btn-xs bg-olive">已结束</small>';
+                            }
+                        }
+
+                        var $travel_status_html = '';
+                        var $travel_result_html = '';
+                        var $travel_result_time = '';
 //
-//                         if(row.deleted_at != null)
-//                         {
-//                             return '<small class="btn-xs bg-black">已删除</small>';
-//                         }
-//
-//                         if(row.item_status == 97)
-//                         {
-//                             return '<small class="btn-xs bg-navy">已弃用</small>';
-//                         }
-//
-//                         if(row.is_published == 0)
-//                         {
-//                             return '<small class="btn-xs bg-teal">未发布</small>';
-//                         }
-//                         else
-//                         {
-//                             if(row.is_completed == 1)
-//                             {
-//                                 return '<small class="btn-xs bg-olive">已结束</small>';
-//                             }
-//                         }
-//
-//                         var $travel_status_html = '';
-//                         var $travel_result_html = '';
-//                         var $travel_result_time = '';
-// //
-//                         if(row.travel_status == "待发车")
-//                         {
-//                             $travel_status_html = '<small class="btn-xs bg-yellow">待发车</small>';
-//                         }
-//                         else if(row.travel_status == "进行中")
-//                         {
-//                             $travel_status_html = '<small class="btn-xs bg-blue">进行中</small>';
-//                         }
-//                         else if(row.travel_status == "已到达")
-//                         {
-//                             if(row.travel_result == "待收款") $travel_status_html = '<small class="btn-xs bg-orange">待收款</small>';
-//                             if(row.travel_result == "已收款") $travel_status_html = '<small class="btn-xs bg-maroon">已收款</small>';
-//                             else $travel_status_html = '<small class="btn-xs bg-olive">已到达</small>';
-//                         }
-//                         else if(row.travel_status == "待收款")
-//                         {
-//                             $travel_status_html = '<small class="btn-xs bg-maroon">待收款</small>';
-//                         }
-//                         else if(row.travel_status == "已收款")
-//                         {
-//                             $travel_status_html = '<small class="btn-xs bg-purple">已收款</small>';
-//                         }
-//                         else if(row.travel_status == "已完成")
-//                         {
-//                             $travel_status_html = '<small class="btn-xs bg-olive">已完成</small>';
-//                         }
-// //
-// //
-// //                            if(row.travel_result == "正常")
-// //                            {
-// //                                $travel_result_html = '<small class="btn-xs bg-olive">正常</small>';
-// //                            }
-// //                            else if(row.travel_result == "超时")
-// //                            {
-// //                                $travel_result_html = '<small class="btn-xs bg-red">超时</small><br>';
-// //                                $travel_result_time = '<small class="btn-xs bg-gray">'+row.travel_result_time+'</small>';
-// //                            }
-// //                            else if(row.travel_result == "已超时")
-// //                            {
-// //                                $travel_result_html = '<small class="btn-xs btn-danger">已超时</small>';
-// //                            }
-// //
-//                         return $travel_status_html + $travel_result_html + $travel_result_time;
-//
-//                     }
-//                 },
-//                 {
-//                     "title": "状态",
-//                     "data": "id",
-//                     "className": "",
-//                     "width": "80px",
-//                     "orderable": false,
-//                     render: function(data, type, row, meta) {
-// //                            return data;
-//
-//                         if(row.deleted_at != null)
-//                         {
-//                             return '';
-//                         }
-//
-//                         if(row.is_published == 0)
-//                         {
-//                             return '';
-//                         }
+                        if(row.travel_status == "待发车")
+                        {
+                            $travel_status_html = '<small class="btn-xs bg-yellow">待发车</small>';
+                        }
+                        else if(row.travel_status == "进行中")
+                        {
+                            $travel_status_html = '<small class="btn-xs bg-blue">进行中</small>';
+                        }
+                        else if(row.travel_status == "已到达")
+                        {
+                            if(row.travel_result == "待收款") $travel_status_html = '<small class="btn-xs bg-orange">待收款</small>';
+                            if(row.travel_result == "已收款") $travel_status_html = '<small class="btn-xs bg-maroon">已收款</small>';
+                            else $travel_status_html = '<small class="btn-xs bg-olive">已到达</small>';
+                        }
+                        else if(row.travel_status == "待收款")
+                        {
+                            $travel_status_html = '<small class="btn-xs bg-maroon">待收款</small>';
+                        }
+                        else if(row.travel_status == "已收款")
+                        {
+                            $travel_status_html = '<small class="btn-xs bg-purple">已收款</small>';
+                        }
+                        else if(row.travel_status == "已完成")
+                        {
+                            $travel_status_html = '<small class="btn-xs bg-olive">已完成</small>';
+                        }
 //
 //
-//                         var $travel_status_html = '';
-//                         var $travel_result_html = '';
+//                            if(row.travel_result == "正常")
+//                            {
+//                                $travel_result_html = '<small class="btn-xs bg-olive">正常</small>';
+//                            }
+//                            else if(row.travel_result == "超时")
+//                            {
+//                                $travel_result_html = '<small class="btn-xs bg-red">超时</small><br>';
+//                                $travel_result_time = '<small class="btn-xs bg-gray">'+row.travel_result_time+'</small>';
+//                            }
+//                            else if(row.travel_result == "已超时")
+//                            {
+//                                $travel_result_html = '<small class="btn-xs btn-danger">已超时</small>';
+//                            }
 //
-//
-//
-//                         if(row.travel_result == "正常")
-//                         {
-//                             $travel_result_html = '<small class="btn-xs bg-olive">正常</small>';
-//                         }
-//                         else if(row.travel_result == "超时")
-//                         {
-//                             $travel_result_html = '<small class="btn-xs bg-red">超时</small><br>';
-//                         }
-//                         else if(row.travel_result == "发车超时")
-//                         {
-//                             $travel_result_html = '<small class="btn-xs btn-danger">发车超时</small>';
-//                         }
-//                         else if(row.travel_result == "待收款")
-//                         {
-//                             $travel_result_html = '<small class="btn-xs bg-orange">待收款</small>';
-//                         }
-//                         else if(row.travel_result == "已收款")
-//                         {
-//                             $travel_result_html = '<small class="btn-xs bg-blue">已收款</small>';
-//                         }
-//
-//
-//                         if(row.is_completed == 1)
-//                         {
-//                             $travel_result_html = '<small class="btn-xs bg-grey">已结束</small>';
-//                         }
-//
-//                         return $travel_status_html + $travel_result_html;
-//
-//                     }
-//                 },
+                        return $travel_status_html + $travel_result_html + $travel_result_time;
+
+                    }
+                },
+                {
+                    "title": "状态",
+                    "data": "id",
+                    "className": "",
+                    "width": "80px",
+                    "orderable": false,
+                    render: function(data, type, row, meta) {
+//                            return data;
+
+                        if(row.deleted_at != null)
+                        {
+                            return '';
+                        }
+
+                        if(row.is_published == 0)
+                        {
+                            return '';
+                        }
+
+
+                        var $travel_status_html = '';
+                        var $travel_result_html = '';
+
+
+
+                        if(row.travel_result == "正常")
+                        {
+                            $travel_result_html = '<small class="btn-xs bg-olive">正常</small>';
+                        }
+                        else if(row.travel_result == "超时")
+                        {
+                            $travel_result_html = '<small class="btn-xs bg-red">超时</small><br>';
+                        }
+                        else if(row.travel_result == "发车超时")
+                        {
+                            $travel_result_html = '<small class="btn-xs btn-danger">发车超时</small>';
+                        }
+                        else if(row.travel_result == "待收款")
+                        {
+                            $travel_result_html = '<small class="btn-xs bg-orange">待收款</small>';
+                        }
+                        else if(row.travel_result == "已收款")
+                        {
+                            $travel_result_html = '<small class="btn-xs bg-blue">已收款</small>';
+                        }
+
+
+                        if(row.is_completed == 1)
+                        {
+                            $travel_result_html = '<small class="btn-xs bg-grey">已结束</small>';
+                        }
+
+                        return $travel_status_html + $travel_result_html;
+
+                    }
+                },
                 {
                     "title": "派车日期",
                     "name": 'assign_date',
@@ -842,120 +842,36 @@
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        $(nTd).attr('data-id',row.id).attr('data-name','运价');
-                        $(nTd).attr('data-key','amount').attr('data-value',parseFloat(data));
-                        $(nTd).attr('data-column-name','运价');
-                        $(nTd).addClass('color-red');
-                        $(nTd).addClass('color-red');
-
                         if(row.is_completed != 1)
                         {
                             $(nTd).addClass('modal-show--for--info-text-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name','运价');
+                            $(nTd).attr('data-key','amount').attr('data-value',parseFloat(data));
+                            $(nTd).attr('data-column-name','运价');
                             $(nTd).attr('data-text-type','text');
                             if(data) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
                         }
                     },
                     render: function(data, type, row, meta) {
-                        var $data = parseFloat(data);
-                        if($data) return $data;
-                        else return '--';
+                        return parseFloat(data);
                     }
                 },
                 {
-                    "title": "油费",
-                    "name": "financial_fee_for_oil_total",
-                    "data": "financial_fee_for_oil_total",
-                    "className": "bg-fee",
-                    "width": "60px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        $(nTd).attr('data-id',row.id);
-                        $(nTd).attr('data-name','费用');
-                        $(nTd).attr('data-key','financial_fee_for_oil_total');
-                        $(nTd).attr('data-value',parseFloat(data));
-                        $(nTd).addClass('color-red');
-
-                        if(row.is_published != 0)
-                        {
-                            $(nTd).addClass('modal-show--for--order-finance');
-                            $(nTd).attr('data-type','all');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        var $data = parseFloat(data);
-                        if($data) return $data;
-                        else return '--';
-                    }
-                },
-                {
-                    "title": "过路费",
-                    "name": "financial_fee_for_toll_total",
-                    "data": "financial_fee_for_toll_total",
-                    "className": "bg-fee",
-                    "width": "60px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        $(nTd).attr('data-id',row.id);
-                        $(nTd).attr('data-name','费用');
-                        $(nTd).attr('data-key','financial_fee_for_toll_total');
-                        $(nTd).attr('data-value',parseFloat(data));
-                        $(nTd).addClass('color-red');
-
-                        if(row.is_published != 0)
-                        {
-                            $(nTd).addClass('modal-show--for--order-finance');
-                            $(nTd).attr('data-type','all');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        var $data = parseFloat(data);
-                        if($data) return $data;
-                        else return '--';
-                    }
-                },
-                {
-                    "title": "停车费",
-                    "name": "financial_fee_for_parking",
-                    "data": "financial_fee_for_parking",
-                    "className": "bg-fee",
-                    "width": "60px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        $(nTd).attr('data-id',row.id);
-                        $(nTd).attr('data-name','停车费');
-                        $(nTd).attr('data-key','financial_fee_for_parking');
-                        $(nTd).attr('data-value',parseFloat(data));
-                        $(nTd).addClass('color-red');
-
-                        if(row.is_published != 0)
-                        {
-                            $(nTd).addClass('modal-show--for--order-finance');
-                            $(nTd).attr('data-type','all');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        var $data = parseFloat(data);
-                        if($data) return $data;
-                        else return '--';
-                    }
-                },
-                {
-                    "title": "总费用",
+                    "title": "费用",
                     "name": "financial_expense_total",
                     "data": "financial_expense_total",
                     "className": "bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        $(nTd).attr('data-id',row.id).attr('data-name','费用');
-                        $(nTd).attr('data-key','financial_expense_total').attr('data-value',parseFloat(data));
-
                         if(row.is_published != 0)
                         {
                             // $(nTd).addClass('color-green');
                             $(nTd).addClass('modal-show--for--order-finance');
                             $(nTd).attr('data-type','all');
+                            $(nTd).attr('data-id',row.id).attr('data-name','费用');
+                            $(nTd).attr('data-key','financial_expense_total').attr('data-value',parseFloat(data));
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -970,15 +886,13 @@
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        $(nTd).attr('data-id',row.id);
-                        $(nTd).attr('data-name','费用');
-                        $(nTd).attr('data-key','financial_deduction_total');
-                        $(nTd).attr('data-value',parseFloat(data));
                         if(row.is_published != 0)
                         {
                             // $(nTd).addClass('color-green');
                             $(nTd).addClass('modal-show--for--order-finance');
                             $(nTd).attr('data-type','all');
+                            $(nTd).attr('data-id',row.id).attr('data-name','费用');
+                            $(nTd).attr('data-key','financial_deduction_total').attr('data-value',parseFloat(data));
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -993,18 +907,15 @@
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        var $income_should = parseFloat(row.freight_amount) - parseFloat(row.financial_deduction_total);
-
-                        $(nTd).attr('data-id',row.id);
-                        $(nTd).attr('data-name','应收款');
-                        $(nTd).attr('data-key','financial_income_should');
-                        $(nTd).attr('data-value',parseFloat($income_should));
-
                         if(row.is_published != 0)
                         {
+                            var $income_should = parseFloat(row.freight_amount) - parseFloat(row.financial_deduction_total);
+
                             // $(nTd).addClass('color-green');
                             $(nTd).addClass('item-modal-show--for--finance');
                             $(nTd).attr('data-type','all');
+                            $(nTd).attr('data-id',row.id).attr('data-name','应收款');
+                            $(nTd).attr('data-key','financial_income_should').attr('data-value',parseFloat($income_should));
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -1020,16 +931,13 @@
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        $(nTd).attr('data-id',row.id);
-                        $(nTd).attr('data-name','已收款');
-                        $(nTd).attr('data-key','financial_income_total');
-                        $(nTd).attr('data-value',parseFloat(data));
-
                         if(row.is_published != 0)
                         {
                             // $(nTd).addClass('color-green');
                             $(nTd).addClass('item-modal-show--for--finance');
                             $(nTd).attr('data-type','all');
+                            $(nTd).attr('data-id',row.id).attr('data-name','已收款');
+                            $(nTd).attr('data-key','financial_income_total').attr('data-value',parseFloat(data));
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -1153,6 +1061,219 @@
                     }
                 },
 
+
+                {
+                    "title": "应出发时间",
+                    "data": 'should_departure_time',
+                    "className": "order-info-time-edit bg-journey",
+                    "width": "100px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            var $time_value = '';
+                            if(data)
+                            {
+                                var $date = new Date(data*1000);
+                                var $year = $date.getFullYear();
+                                var $month = ('00'+($date.getMonth()+1)).slice(-2);
+                                var $day = ('00'+($date.getDate())).slice(-2);
+                                var $hour = ('00'+$date.getHours()).slice(-2);
+                                var $minute = ('00'+$date.getMinutes()).slice(-2);
+                                $time_value = $year+'-'+$month+'-'+$day+' '+$hour+':'+$minute;
+                            }
+
+                            $(nTd).addClass('modal-show--for--info-time-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name','应出发时间');
+                            $(nTd).attr('data-key','should_departure_time').attr('data-value',$time_value);
+                            $(nTd).attr('data-column-name','应出发时间');
+                            $(nTd).attr('data-time-type','datetime');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(!data) return '';
+
+                        var $time = new Date(data*1000);
+                        var $year = $time.getFullYear();
+                        var $month = ('00'+($time.getMonth()+1)).slice(-2);
+                        var $day = ('00'+($time.getDate())).slice(-2);
+                        var $hour = ('00'+$time.getHours()).slice(-2);
+                        var $minute = ('00'+$time.getMinutes()).slice(-2);
+                        var $second = ('00'+$time.getSeconds()).slice(-2);
+
+                        var $currentYear = new Date().getFullYear();
+                        if($year == $currentYear)
+                        {
+                            return '<a href="javascript:void(0);">'+$month+'-'+$day+'&nbsp;'+$hour+':'+$minute+'</a>'+'<br>';
+                        }
+                        else
+                        {
+                            return '<a href="javascript:void(0);">'+$year+'-'+$month+'-'+$day+'&nbsp;'+$hour+':'+$minute+'</a>'+'<br>';
+                        }
+                    }
+                },
+                {
+                    "title": "应到达时间",
+                    "data": 'should_arrival_time',
+                    "className": "bg-journey",
+                    "width": "100px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            var $time_value = '';
+                            if(data)
+                            {
+                                var $date = new Date(data*1000);
+                                var $year = $date.getFullYear();
+                                var $month = ('00'+($date.getMonth()+1)).slice(-2);
+                                var $day = ('00'+($date.getDate())).slice(-2);
+                                var $hour = ('00'+$date.getHours()).slice(-2);
+                                var $minute = ('00'+$date.getMinutes()).slice(-2);
+                                $time_value = $year+'-'+$month+'-'+$day+' '+$hour+':'+$minute;
+                            }
+
+                            $(nTd).addClass('modal-show--for--info-time-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name','应到达时间');
+                            $(nTd).attr('data-key','should_arrival_time').attr('data-value',$time_value);
+                            $(nTd).attr('data-column-name','应到达时间');
+                            $(nTd).attr('data-time-type','datetime');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(!data) return '';
+
+                        var $time = new Date(data*1000);
+                        var $year = $time.getFullYear();
+                        var $month = ('00'+($time.getMonth()+1)).slice(-2);
+                        var $day = ('00'+($time.getDate())).slice(-2);
+                        var $hour = ('00'+$time.getHours()).slice(-2);
+                        var $minute = ('00'+$time.getMinutes()).slice(-2);
+                        var $second = ('00'+$time.getSeconds()).slice(-2);
+
+                        var $currentYear = new Date().getFullYear();
+                        if($year == $currentYear)
+                        {
+                            return '<a href="javascript:void(0);">'+$month+'-'+$day+'&nbsp;'+$hour+':'+$minute+'</a>'+'<br>';
+                        }
+                        else
+                        {
+                            return '<a href="javascript:void(0);">'+$year+'-'+$month+'-'+$day+'&nbsp;'+$hour+':'+$minute+'</a>'+'<br>';
+                        }
+
+                    }
+                },
+                {
+                    "title": "实际出发",
+                    "data": 'actual_departure_time',
+                    "className": "bg-journey",
+                    "width": "100px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            var $time_value = '';
+                            if(data)
+                            {
+                                var $date = new Date(data*1000);
+                                var $year = $date.getFullYear();
+                                var $month = ('00'+($date.getMonth()+1)).slice(-2);
+                                var $day = ('00'+($date.getDate())).slice(-2);
+                                var $hour = ('00'+$date.getHours()).slice(-2);
+                                var $minute = ('00'+$date.getMinutes()).slice(-2);
+                                $time_value = $year+'-'+$month+'-'+$day+' '+$hour+':'+$minute;
+                            }
+
+                            $(nTd).addClass('modal-show--for--info-time-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name','实际出发时间');
+                            $(nTd).attr('data-key','actual_departure_time').attr('data-value',$time_value);
+                            $(nTd).attr('data-column-name','实际出发时间');
+                            $(nTd).attr('data-time-type','datetime');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(!data) return '';
+
+                        var $time = new Date(data*1000);
+                        var $year = $time.getFullYear();
+                        var $month = ('00'+($time.getMonth()+1)).slice(-2);
+                        var $day = ('00'+($time.getDate())).slice(-2);
+                        var $hour = ('00'+$time.getHours()).slice(-2);
+                        var $minute = ('00'+$time.getMinutes()).slice(-2);
+                        var $second = ('00'+$time.getSeconds()).slice(-2);
+
+                        var $currentYear = new Date().getFullYear();
+                        if($year == $currentYear)
+                        {
+                            return '<a href="javascript:void(0);">'+$month+'-'+$day+'&nbsp;'+$hour+':'+$minute+'</a>';
+                        }
+                        else
+                        {
+                            return '<a href="javascript:void(0);">'+$year+'-'+$month+'-'+$day+'&nbsp;'+$hour+':'+$minute+'</a>';
+                        }
+                    }
+                },
+                {
+                    "title": "实际到达",
+                    "data": 'actual_arrival_time',
+                    "className": "bg-journey",
+                    "width": "100px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            var $time_value = '';
+                            if(data)
+                            {
+                                var $date = new Date(data*1000);
+                                var $year = $date.getFullYear();
+                                var $month = ('00'+($date.getMonth()+1)).slice(-2);
+                                var $day = ('00'+($date.getDate())).slice(-2);
+                                var $hour = ('00'+$date.getHours()).slice(-2);
+                                var $minute = ('00'+$date.getMinutes()).slice(-2);
+                                $time_value = $year+'-'+$month+'-'+$day+' '+$hour+':'+$minute;
+                            }
+
+                            $(nTd).addClass('modal-show--for--info-time-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name','实际到达时间');
+                            $(nTd).attr('data-key','actual_arrival_time').attr('data-value',$time_value);
+                            $(nTd).attr('data-column-name','实际到达时间');
+                            $(nTd).attr('data-time-type','datetime');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(row.is_completed != 1)
+                        {
+                        }
+                        if(!data) return '';
+
+                        var $time = new Date(data*1000);
+                        var $year = $time.getFullYear();
+                        var $month = ('00'+($time.getMonth()+1)).slice(-2);
+                        var $day = ('00'+($time.getDate())).slice(-2);
+                        var $hour = ('00'+$time.getHours()).slice(-2);
+                        var $minute = ('00'+$time.getMinutes()).slice(-2);
+                        var $second = ('00'+$time.getSeconds()).slice(-2);
+
+                        var $currentYear = new Date().getFullYear();
+                        if($year == $currentYear)
+                        {
+                            return '<a href="javascript:void(0);">'+$month+'-'+$day+'&nbsp;'+$hour+':'+$minute+'</a>';
+                        }
+                        else
+                        {
+                            return '<a href="javascript:void(0);">'+$year+'-'+$month+'-'+$day+'&nbsp;'+$hour+':'+$minute+'</a>';
+                        }
+                    }
+                },
                 {
                     "title": "行程",
                     "data": "id",

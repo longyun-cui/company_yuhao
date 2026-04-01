@@ -66,6 +66,8 @@ class WL_Common_Order extends Model
 
         'trailer_type', 'trailer_length', 'trailer_volume', 'trailer_weight', 'trailer_axis_count',
 
+        'transport_journey',
+
         'transport_departure_place',
         'transport_destination_place',
         'transport_stopover_place',
@@ -76,6 +78,7 @@ class WL_Common_Order extends Model
         'transport_mileage',
         'transport_distance',
         'transport_time_limitation',
+
 
         'should_departure_time',
         'should_arrival_time',
@@ -90,11 +93,57 @@ class WL_Common_Order extends Model
 
 
         'financial_income_total',
-        'financial_income_to_be_confirm',
         'financial_expense_total',
-        'financial_expense_to_be_confirm',
         'financial_deduction_total',
         'financial_fine_total',
+
+        'financial_income_to_be_confirm',
+        'financial_expense_to_be_confirm',
+
+
+        'financial_receipt_for_freight_cash',
+        'financial_receipt_for_oil_card',
+        'financial_receipt_for_invoice_fee',
+        'financial_receipt_for_invoice_amount',
+        'financial_receipt_for_invoice_point',
+
+        'financial_deduction_for_time_limitation',
+        'financial_deduction_for_others',
+
+        'financial_fine_for_driver',
+        'financial_fine_for_assessment',
+        'financial_fine_for_others',
+
+        'oil_amount',
+        'oil_unit_price',
+        'oil_mileage',
+        'financial_fee_for_oil_total',
+        'financial_fee_for_oil_card',
+        'financial_fee_for_oil_cash',
+
+        'financial_fee_for_toll_total',
+        'financial_fee_for_toll_etc',
+        'financial_fee_for_toll_cash',
+
+        'financial_fee_for_parking',
+
+        'financial_fee_for_salary',
+        'financial_fee_for_bonus',
+
+        'financial_fee_for_information',
+        'financial_fee_for_administrative',
+        'financial_fee_for_customer_management',
+        'financial_fee_for_shipping_cost',
+        'financial_fee_for_urea_cost',
+        'financial_fee_for_repair_cost',
+        'financial_fee_for_maintenance_cost',
+        'financial_fee_for_inspection_cost',
+        'financial_fee_for_transfer_cost',
+        'financial_fee_for_insurance_cost',
+        'financial_fee_for_loan_cost',
+        'financial_fee_for_others',
+
+
 
 
         'settlement_period',
@@ -123,17 +172,51 @@ class WL_Common_Order extends Model
         'toll_main_cash', 'toll_east_cash', 'toll_south_cash',
         'oil_main_cost', 'oil_east_cost', 'oil_south_cost',
         'shipping_cost', 'urea_cost', 'salary_cost', 'others_cost',
-        'income_real_first_amount', 'income_real_first_time', 'income_real_final_amount', 'income_real_final_time', 'income_result',
-        'outside_car_price', 'outside_car_first_amount', 'outside_car_first_time', 'outside_car_final_amount', 'outside_car_final_time',
-        'income_total', 'expenditure_total', 'income_to_be_confirm', 'expenditure_to_be_confirm',
 
-        'empty_route', 'empty_route_type', 'empty_route_id', 'empty_route_temporary',
+
+        'income_real_first_amount',
+        'income_real_first_time',
+        'income_real_final_amount',
+        'income_real_final_time',
+        'income_result',
+
+        'outside_car_price',
+        'outside_car_first_amount',
+        'outside_car_first_time',
+        'outside_car_final_amount',
+        'outside_car_final_time',
+
+
+        'income_total',
+        'expenditure_total',
+        'income_to_be_confirm',
+        'expenditure_to_be_confirm',
+
+
+        'empty_route',
+        'empty_route_type',
+        'empty_route_id',
+        'empty_route_temporary',
         'empty_distance',
-        'empty_oil_price', 'empty_oil_amount',
-        'empty_refueling_pay_type', 'empty_refueling_charge', 'empty_toll_cash', 'empty_toll_ETC',
+        'empty_oil_price',
+        'empty_oil_amount',
+        'empty_refueling_pay_type',
+        'empty_refueling_charge',
+        'empty_toll_cash',
+        'empty_toll_ETC',
 
-        'receipt_status', 'receipt_need', 'receipt_address', 'GPS', 'is_delay',
-        'subordinate_company', 'order_number', 'payee_name', 'arrange_people', 'car_supply', 'car_managerial_people',
+
+        'receipt_status',
+        'receipt_need',
+        'receipt_address',
+        'GPS',
+        'is_delay',
+        'subordinate_company',
+        'order_number',
+        'payee_name',
+        'arrange_people',
+        'car_supply',
+        'car_managerial_people',
 
         'weight',
 
