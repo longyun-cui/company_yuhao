@@ -1241,11 +1241,11 @@
                         $modal.find('input[name="operate[type]"]').val('edit');
                         $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));
 
-                        $modal.find('input[name="accounting_freight_cash"]').val($response.data.financial_receipt_for_freight_cash);
-                        $modal.find('input[name="accounting_freight_oil_card"]').val($response.data.financial_receipt_for_freight_oil_card);
+                        $modal.find('input[name="accounting_freight_cash"]').val(parseFloat($response.data.financial_receipt_for_freight_cash));
+                        $modal.find('input[name="accounting_freight_oil_card"]').val(parseFloat($response.data.financial_receipt_for_freight_oil_card));
 
-                        $modal.find('input[name="accounting_invoice_amount"]').val($response.data.financial_receipt_for_invoice_amount);
-                        $modal.find('input[name="accounting_invoice_point"]').val($response.data.financial_receipt_for_invoice_point);
+                        $modal.find('input[name="accounting_invoice_amount"]').val(parseFloat($response.data.financial_receipt_for_invoice_amount));
+                        $modal.find('input[name="accounting_invoice_point"]').val(parseFloat($response.data.financial_receipt_for_invoice_point));
 
                         $modal.find('input[name="accounting_oil_total"]').val($response.data.financial_fee_for_oil_total);
                         $modal.find('input[name="accounting_oil_card"]').val($response.data.financial_fee_for_oil_card);
