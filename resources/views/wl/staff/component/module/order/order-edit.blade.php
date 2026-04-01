@@ -123,10 +123,10 @@
                             <input type="text" class="form-control" name="freight_amount" placeholder="金额" value="0" data-default="0">
                         </div>
                         <div class="col-sm-4 col-md-4 padding-0">
-                            <input type="text" class="form-control" name="oil_card_amount" placeholder="油卡" value="0" data-default="0">
+                            <input type="text" class="form-control" name="freight_oil_card_amount" placeholder="油卡" value="0" data-default="0">
                         </div>
                         <div class="col-sm-4 col-md-4 padding-0">
-                            <input type="text" class="form-control" name="information_fee" placeholder="信息费" value="0" data-default="0">
+                            <input type="text" class="form-control" name="financial_fee_for_information" placeholder="信息费" value="0" data-default="0">
                         </div>
                     </div>
                 </div>

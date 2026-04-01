@@ -2772,6 +2772,19 @@ class WLStaffOrderRepository {
 
             $order_update_date['financial_receipt_for_freight_oil_card'] = $financial_receipt_for_freight_oil_card;
         }
+        // 开票金额
+        $financial_receipt_for_invoice_amount = (float)$post_data['accounting_invoice_amount'];
+        if((float)$order->financial_receipt_for_invoice_amount != $financial_receipt_for_invoice_amount)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_receipt_for_invoice_amount';
+            $operation['title'] = '开票金额';
+            $operation['before'] = (float)$order->financial_receipt_for_invoice_amount;
+            $operation['after'] = $financial_receipt_for_invoice_amount;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_receipt_for_invoice_amount'] = $financial_receipt_for_invoice_amount;
+        }
 
 
 
