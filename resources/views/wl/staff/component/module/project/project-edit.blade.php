@@ -122,7 +122,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2"><sup class="text-red">*</sup> 运费</label>
                     <div class="col-md-8 ">
-                        <input type="text" class="form-control" name="freight_amount" placeholder="运费" value="">
+                        <input type="text" class="form-control" name="freight_amount" placeholder="运费" value="0" data-default="0">
                     </div>
                 </div>
 
@@ -144,10 +144,10 @@
                     <label class="control-label col-md-2"><sup class="text-red">*</sup> 距离 & 时效</label>
                     <div class="col-md-8 ">
                         <div class="col-sm-6 col-md-6 padding-0">
-                            <input type="text" class="form-control" name="transport_distance" placeholder="距离" value="0" data-default="">
+                            <input type="text" class="form-control" name="transport_distance" placeholder="距离" value="0" data-default="0">
                         </div>
                         <div class="col-sm-6 col-md-6 padding-0">
-                            <input type="text" class="form-control" name="transport_time_limitation" placeholder="时效" value="0" data-default="">
+                            <input type="text" class="form-control" name="transport_time_limitation" placeholder="时效" value="0" data-default="0">
                         </div>
                     </div>
                 </div>

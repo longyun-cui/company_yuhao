@@ -915,17 +915,18 @@
     {
         const $hours = Math.floor($totalMinutes / 60);
         const $minutes = $totalMinutes % 60;
-        let result = "";
+        let $result = '';
         if($hours > 0)
         {
-            if($minutes == 0) result += ($hours+'H');
-            else result += ($hours+'小时');
+            if($minutes == 0) $result += ($hours+'H');
+            else $result += ($hours+'小时');
         }
         if($minutes > 0)
         {
-            result += ($minutes+'分钟');
+            $result += ($minutes+'分钟');
         }
-        return result;
+        if($result == '') $result = 0;
+        return $result;
     }
 
 

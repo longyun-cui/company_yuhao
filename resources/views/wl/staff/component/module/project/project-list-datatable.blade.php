@@ -239,7 +239,9 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        var $data = data;
+                        if($data) return $data;
+                        else return '--';
                     }
                 },
                 {
@@ -267,7 +269,9 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        var $data = data;
+                        if($data) return $data;
+                        else return '--';
                     }
                 },
                 {
@@ -295,7 +299,9 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        var $data = data;
+                        if($data) return $data;
+                        else return '--';
                     }
                 },
                 {
@@ -305,7 +311,7 @@
                     "width": "80px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1 && row.item_status != 97)
+                        if(row.is_completed != 1)
                         {
                             $(nTd).attr('data-row-index',iRow);
 
@@ -321,7 +327,9 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return data;
+                        var $data = data;
+                        if($data) return $data;
+                        else return '--';
                     }
                 },
                 {
@@ -331,7 +339,7 @@
                     "width": "80px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1 && row.item_status != 97)
+                        if(row.is_completed != 1)
                         {
                             $(nTd).attr('data-row-index',iRow);
 
@@ -347,7 +355,9 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return convertMinutesToHoursAndMinutes(data);
+                        var $data = convertMinutesToHoursAndMinutes(data);
+                        if($data) return $data;
+                        else return '--';
                     }
                 },
                 {
