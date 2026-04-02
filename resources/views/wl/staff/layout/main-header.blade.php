@@ -212,7 +212,7 @@
                 </li>
 
                 <!-- 导入 -->
-                @if(in_array($me->user_type,[0,1,9,11]))
+                @if(in_array($me->staff_category,[0]))
                 <li class="dropdown tasks-menu add-menu _none-">
                     <!-- Menu toggle button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -221,7 +221,7 @@
                     <ul class="dropdown-menu">
 
                         {{--部门管理--}}
-                        @if(in_array($me->user_type,[0,1,9,11]))
+                        @if(in_array($me->user_type,[0]))
                         <li class="header">导入</li>
                         @endif
 
