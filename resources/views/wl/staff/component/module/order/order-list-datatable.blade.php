@@ -375,37 +375,37 @@
                         // else return $year+'-'+$month+'-'+$day;
                     }
                 },
-                {
-                    "title": "客户",
-                    "data": "client_id",
-                    "className": "",
-                    "width": "120px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1)
-                        {
-                            $(nTd).addClass('modal-show--for--info-select2-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','客户');
-                            $(nTd).attr('data-key','client_id').attr('data-value',data);
-                            if(row.client_er == null) $(nTd).attr('data-option-name','未指定');
-                            else {
-                                if(row.client_er.short_name) $(nTd).attr('data-option-name',row.client_er.name);
-                                else $(nTd).attr('data-option-name',row.client_er.name);
-                            }
-                            $(nTd).attr('data-column-name','客户');
-                            if(row.client_id) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        if(row.client_er)
-                        {
-                            // return '<a href="javascript:void(0);" class="text-black">'+row.client_er.name+'</a>';
-                            return '<a class="client-control" data-id="'+row.client_id+'" data-title="'+row.client_er.name+'">'+row.client_er.name+'</a>';
-                        }
-                        else return '未指定';
-                    }
-                },
+                // {
+                //     "title": "客户",
+                //     "data": "client_id",
+                //     "className": "",
+                //     "width": "120px",
+                //     "orderable": false,
+                //     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                //         if(row.is_completed != 1)
+                //         {
+                //             $(nTd).addClass('modal-show--for--info-select2-set');
+                //             $(nTd).attr('data-id',row.id).attr('data-name','客户');
+                //             $(nTd).attr('data-key','client_id').attr('data-value',data);
+                //             if(row.client_er == null) $(nTd).attr('data-option-name','未指定');
+                //             else {
+                //                 if(row.client_er.short_name) $(nTd).attr('data-option-name',row.client_er.name);
+                //                 else $(nTd).attr('data-option-name',row.client_er.name);
+                //             }
+                //             $(nTd).attr('data-column-name','客户');
+                //             if(row.client_id) $(nTd).attr('data-operate-type','edit');
+                //             else $(nTd).attr('data-operate-type','add');
+                //         }
+                //     },
+                //     render: function(data, type, row, meta) {
+                //         if(row.client_er)
+                //         {
+                //             // return '<a href="javascript:void(0);" class="text-black">'+row.client_er.name+'</a>';
+                //             return '<a class="client-control" data-id="'+row.client_id+'" data-title="'+row.client_er.name+'">'+row.client_er.name+'</a>';
+                //         }
+                //         else return '未指定';
+                //     }
+                // },
                 {
                     "title": "项目",
                     "data": "project_id",
@@ -435,6 +435,29 @@
                             return '<a class="project-control" data-id="'+row.project_id+'" data-title="'+row.project_er.name+'">'+row.project_er.name+'</a>';
                         }
                         else return '未指定';
+                    }
+                },
+                {
+                    "title": "任务编号",
+                    "name": "task_number",
+                    "data": "task_number",
+                    "className": "",
+                    "width": "160px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).addClass('modal-show--for--info-text-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name','任务编号');
+                            $(nTd).attr('data-key','task_number').attr('data-value',data);
+                            $(nTd).attr('data-column-name','任务编号');
+                            $(nTd).attr('data-text-type','text');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        return data;
                     }
                 },
                 {
@@ -1176,29 +1199,6 @@
                     }
                 },
 
-                {
-                    "title": "任务编号",
-                    "name": "task_number",
-                    "data": "task_number",
-                    "className": "",
-                    "width": "160px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1)
-                        {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','任务编号');
-                            $(nTd).attr('data-key','task_number').attr('data-value',data);
-                            $(nTd).attr('data-column-name','任务编号');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        return data;
-                    }
-                },
 
                 {
                     "title": "安排人",

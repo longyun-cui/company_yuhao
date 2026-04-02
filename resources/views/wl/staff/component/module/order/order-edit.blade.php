@@ -1,6 +1,6 @@
 {{--编辑-工单--}}
 <div class="modal fade modal-main-body modal-wrapper" id="modal--for--order--item-edit">
-    <div class="modal-content col-md-8 col-md-offset-2 margin-top-16px margin-bottom-64px bg-white">
+    <div class="modal-content col-md-7 col-md-offset-4 margin-top-64px margin-bottom-64px bg-white">
         <div class="box- box-info- form-container">
 
             <div class="box-header with-border margin-top-16px">
@@ -23,7 +23,7 @@
 
                 {{--自定义标题--}}
                 <div class="form-group _none">
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 自定义标题</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 自定义标题</label>
                     <div class="col-md-9 ">
                         <input type="text" class="form-control" name="title" placeholder="自定义订单标题" value="">
                     </div>
@@ -31,7 +31,7 @@
 
                 {{--派车日期 & 任务日期--}}
                 <div class="form-group" >
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 派车日期 & 任务日期</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 派车日期 & 任务日期</label>
                     <div class="col-md-9 ">
                         <div class="col-sm-6 col-md-6 padding-0">
                             <input type="text" class="form-control date-picker" name="assign_date" placeholder="派车日期" value="{{ date('Y-m-d') }}" data-default="{{ date('Y-m-d') }}" readonly="readonly">
@@ -44,7 +44,7 @@
 
                 {{--订单类型--}}
                 <div class="form-group form-category" style="height:70px;">
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 订单类型</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 订单类型</label>
                     <div class="col-md-9">
                         <div class="btn-group">
 
@@ -70,7 +70,7 @@
 
                 {{--客户--}}
 {{--                <div class="form-group">--}}
-{{--                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 客户</label>--}}
+{{--                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 客户</label>--}}
 {{--                    <div class="col-md-9 ">--}}
 {{--                        <select class="form-control select2--client" name="client_id" id="order-edit-select2-client-" style="width:100%;">--}}
 {{--                            <option data-id="-1" value="-1">选择客户</option>--}}
@@ -79,7 +79,7 @@
 {{--                </div>--}}
                 {{--项目--}}
                 <div class="form-group">
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 项目</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 项目</label>
                     <div class="col-md-9 ">
                         <select class="form-control select2--project"
                                 name="project_id"
@@ -92,7 +92,7 @@
                 </div>
                 {{--出发地 & 目的地--}}
                 <div class="form-group" >
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 出发地 & 目的地</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 出发地 & 目的地</label>
                     <div class="col-md-9 ">
                         <div class="col-sm-6 col-md-6 padding-0">
                             <input type="text" class="form-control" name="transport_departure_place" placeholder="出发地" value="" data-default="" list="_transport_departure_place_title">
@@ -113,7 +113,7 @@
                 </datalist>
                 {{--里程 & 时效--}}
                 <div class="form-group" >
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 里程 & 时效</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 里程 & 时效</label>
                     <div class="col-md-9 ">
                         <div class="col-sm-6 col-md-6 padding-0">
                             <input type="text" class="form-control" name="transport_distance" placeholder="里程" value="0" data-default="">
@@ -126,7 +126,7 @@
 
                 {{--运费 & 油卡 & 信息费--}}
                 <div class="form-group">
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 运费 & 油卡 & 信息费</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 运费 & 油卡 & 信息费</label>
                     <div class="col-md-9 ">
                         <div class="col-sm-4 col-md-4 padding-0">
                             <input type="text" class="form-control" name="freight_amount" placeholder="金额" value="0" data-default="0">
@@ -142,7 +142,7 @@
 
                 {{--任务编号--}}
                 <div class="form-group">
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 任务编号</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 任务编号</label>
                     <div class="col-md-9 ">
                         <input type="text" class="form-control" name="task_number" placeholder="任务编号" value="" data-default="">
                     </div>
@@ -150,7 +150,7 @@
 
                 {{--车辆所属--}}
                 <div class="form-group form-category" style="height:70px;">
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 车辆所属</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 车辆所属</label>
                     <div class="col-md-9">
                         <div class="btn-group">
 
@@ -176,7 +176,7 @@
 
                 {{--自有车辆--}}
                 <div class="form-group internal-car">
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 自有车辆</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 自有车辆</label>
                     <div class="col-md-9 ">
                         <div class="col-sm-6 col-md-6 padding-0">
                             <select class="form-control select2-reset select2--car"
@@ -204,7 +204,7 @@
                 </div>
                 {{--自家司机--}}
                 <div class="form-group internal-car">
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 自家司机</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 自家司机</label>
                     <div class="col-md-9 ">
                         <div class="col-sm-12 col-md-12 padding-0">
                             <select class="form-control select2-reset select2--driver"
@@ -227,7 +227,7 @@
                 </div>
                 {{--驾驶员信息--}}
                 <div class="form-group">
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 驾驶员信息</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 驾驶员信息</label>
                     <div class="col-md-9 ">
                         <div class="col-sm-6 col-md-6 padding-0" style="width:50%;">
                             <input type="text" class="form-control" name="driver_name" placeholder="主驾" value="" data-default="">
@@ -246,7 +246,7 @@
 
                 {{--外请车--}}
                 <div class="form-group external-car" style="display:none;">
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 外请车</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 外请车</label>
                     <div class="col-md-9 ">
                         <div class="col-sm-6 col-md-6 padding-0" style="width:50%;">
                             <input type="text" class="form-control" name="external_car" placeholder="车辆" value="" data-default="">
@@ -259,7 +259,7 @@
 
                 {{--班次--}}
 {{--                <div class="form-group">--}}
-{{--                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 班次</label>--}}
+{{--                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 班次</label>--}}
 {{--                    <div class="col-md-9 ">--}}
 {{--                        <select class="form-control modal-select2 select2-reset" name="field_2" id="" style="width:100%;">--}}
 {{--                            <option value="">选择班次</option>--}}
@@ -271,7 +271,7 @@
 
                 {{--安排人 & 收款人 & 车货源--}}
                 <div class="form-group">
-                    <label class="control-label col-md-2">安排人 & 收款人 & 车货源</label>
+                    <label class="control-label col-md-3">安排人 & 收款人 & 车货源</label>
                     <div class="col-md-9 ">
                         <div class="col-sm-4 col-md-4 padding-0">
                             <input type="text" class="form-control" name="arrange_people" placeholder="安排人" value="" data-default="">
@@ -287,21 +287,21 @@
 
                 {{--安排人--}}
 {{--                <div class="form-group">--}}
-{{--                    <label class="control-label col-md-2">安排人</label>--}}
+{{--                    <label class="control-label col-md-3">安排人</label>--}}
 {{--                    <div class="col-md-9 ">--}}
 {{--                        <input type="text" class="form-control" name="arrange_people" placeholder="安排人" value="" data-default="">--}}
 {{--                    </div>--}}
 {{--                </div>--}}
                 {{--收款人--}}
 {{--                <div class="form-group">--}}
-{{--                    <label class="control-label col-md-2">收款人</label>--}}
+{{--                    <label class="control-label col-md-3">收款人</label>--}}
 {{--                    <div class="col-md-9 ">--}}
 {{--                        <input type="text" class="form-control" name="payee_name" placeholder="收款人" value="" data-default="">--}}
 {{--                    </div>--}}
 {{--                </div>--}}
                 {{--车货源--}}
 {{--                <div class="form-group">--}}
-{{--                    <label class="control-label col-md-2">车货源</label>--}}
+{{--                    <label class="control-label col-md-3">车货源</label>--}}
 {{--                    <div class="col-md-9 ">--}}
 {{--                        <input type="text" class="form-control" name="car_supply" placeholder="车货源" value="" data-default="">--}}
 {{--                    </div>--}}
@@ -310,7 +310,7 @@
 
                 {{--备注--}}
                 <div class="form-group">
-                    <label class="control-label col-md-2">备注</label>
+                    <label class="control-label col-md-3">备注</label>
                     <div class="col-md-9 ">
                         {{--<input type="text" class="form-control" name="description" placeholder="描述" value="{{$data->description or ''}}">--}}
                         <textarea class="form-control" name="description" rows="3" cols="100%"></textarea>
@@ -319,7 +319,7 @@
 
                 {{--通话小结--}}
                 <div class="form-group _none">
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 通话小结</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 通话小结</label>
                     <div class="col-md-9 ">
                         <p>要求：准确，全面，丰富</p>
                         <p>范本：用户当前3颗后槽牙齿缺失，已经缺失半年，2颗下牙松动，之前没了解过种牙，好说话，要求下午3点前回电，同意医生助理联系</p>
@@ -329,7 +329,7 @@
 
                 {{--班次--}}
 {{--                <div class="form-group">--}}
-{{--                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 班次</label>--}}
+{{--                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 班次</label>--}}
 {{--                    <div class="col-md-9 ">--}}
 {{--                        <div class="col-sm-4 col-md-4 padding-0">--}}
 {{--                            <div class="btn-group">--}}
