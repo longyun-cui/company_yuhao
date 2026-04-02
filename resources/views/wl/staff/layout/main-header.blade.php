@@ -34,7 +34,7 @@
             <ul class="nav navbar-nav">
 
 
-                <li class="dropdown tasks-menu add-menu">
+                <li class="dropdown tasks-menu add-menu _none">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         统计 <span class="caret"></span>
                     </a>
@@ -191,7 +191,7 @@
                     </ul>
                 </li>
 
-                <li class="dropdown- notifications-alert">
+                <li class="dropdown- notifications-alert _none">
                     <a href="javascript:void(0);" class="modal-show--for--finance-item-create"
                        data-form-id="form--for--finance-item-edit"
                        data-modal-id="modal--for--finance-item-edit"
@@ -201,7 +201,7 @@
                     </a>
                 </li>
 
-                <li class="dropdown- notifications-alert">
+                <li class="dropdown- notifications-alert _none">
                     <a href="javascript:void(0);" class="modal-show--for--order--item-create"
                        data-form-id="form--for--order--item-edit"
                        data-modal-id="modal--for--order--item-edit"
@@ -211,7 +211,8 @@
                     </a>
                 </li>
 
-                <!-- Add Menu -->
+                <!-- 导入 -->
+                @if(in_array($me->user_type,[0,1,9,11]))
                 <li class="dropdown tasks-menu add-menu _none-">
                     <!-- Menu toggle button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -257,6 +258,9 @@
                         <li class="footer"><a href="#">See All Messages</a></li>
                     </ul>
                 </li>
+                @endif
+
+
 
                 <!-- Messages: style can be found in dropdown.less-->
                 <li class="dropdown messages-menu _none">
