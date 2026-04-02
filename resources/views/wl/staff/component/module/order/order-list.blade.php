@@ -20,7 +20,7 @@
 
             <div class="nav navbar-nav">
 
-                <div class="dropdown filter-menu" data-bs-auto-close="outside">
+                <div class="dropdown filter-menu _none" data-bs-auto-close="outside">
                     <button type="button" class="btn btn-default btn-filter dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-th-list"></i> 显示列
                     </button>
