@@ -406,12 +406,12 @@ class WLStaffOrderRepository {
                 'car_er'=>function($query) {
                     $query->select('id','name','driver_id')
                         ->with([
-                            'driver_er'=>function($query) { $query->select('id','driver_name','driver_phone'); },
+                            'driver_er'=>function($query) { $query->select('id','driver_name','driver_phone','copilot_name','copilot_phone'); },
                         ]);
                     },
                 'trailer_er'=>function($query) { $query->select('id','name'); },
-                'driver_er'=>function($query) { $query->select('id','driver_name','driver_phone'); },
-                'copilot_er'=>function($query) { $query->select('id','driver_name','driver_phone'); },
+                'driver_er'=>function($query) { $query->select('id','driver_name','driver_phone','copilot_name','copilot_phone'); },
+                'copilot_er'=>function($query) { $query->select('id','driver_name','driver_phone','copilot_name','copilot_phone'); },
             ])
             ->find($id);
         if(!$item) return response_error([],"不存在警告，请刷新页面重试！");
