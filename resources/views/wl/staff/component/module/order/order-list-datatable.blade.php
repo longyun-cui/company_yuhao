@@ -488,7 +488,7 @@
                     "title": "车挂",
                     "data": "trailer_id",
                     "className": "",
-                    "width": "100px",
+                    "width": "200px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
@@ -516,10 +516,16 @@
                         }
                     },
                     render: function(data, type, row, meta) {
+                        var trailer_text = '';
                         var trailer_html = '';
                         if(row.car_owner_type == 1)
                         {
-                            if(row.trailer_er != null) trailer_html = '<a href="javascript:void(0);" class="text-black">'+row.trailer_er.name+'</a>';
+                            if(row.trailer_er != null)
+                            {
+                                trailer_text = row.trailer_er.name;
+                                if(row.trailer_er.sub_name) trailer_text += ' ('+row.trailer_er.sub_name+')';
+                                trailer_html = '<a href="javascript:void(0);" class="text-black">'+trailer_text+'</a>';
+                            }
                         }
                         else
                         {

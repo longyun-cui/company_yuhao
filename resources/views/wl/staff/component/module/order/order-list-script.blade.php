@@ -311,7 +311,10 @@
                         select2FirstOptionSelected($modal.find('select[name="trailer_id"]'));
                         if($response.data.trailer_er)
                         {
-                            var $trailer_option = new Option($response.data.trailer_er.name, $response.data.trailer_id, true, true);
+                            var $data_trailer_er = $response.data.trailer_er;
+                            var $trailer_html = $data_trailer_er.name;
+                            if($data_trailer_er.sub_name) $trailer_html += ' ('+$data_trailer_er.sub_name+')';
+                            var $trailer_option = new Option($trailer_html, $response.data.trailer_id, true, true);
                             $modal.find('select[name="trailer_id"]').append($trailer_option).trigger('change');
                         }
                         // 主驾 (select2)

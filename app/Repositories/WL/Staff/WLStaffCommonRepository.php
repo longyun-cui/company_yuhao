@@ -413,7 +413,10 @@ class WLStaffCommonRepository {
         if(!empty($post_data['keyword']))
         {
             $keyword = "%{$post_data['keyword']}%";
-            $query->where('name','like',"%$keyword%");
+//            $query->where('name','like',"%$keyword%");
+            $query->where(function ($query) use($keyword) {
+                $query->where('name','like',"%$keyword%")->orWhere('sub_name','like',"%$keyword%");
+            });
         }
 
         if(!empty($post_data['car_category']))

@@ -174,10 +174,10 @@
                     "title": "默认车挂",
                     "data": "trailer_id",
                     "className": "text-center",
-                    "width": "160px",
+                    "width": "240px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1 && row.item_status != 97)
+                        if(row.is_completed != 1)
                         {
                             $(nTd).addClass('modal-show-for-info-select2-set');
                             $(nTd).attr('data-id',row.id).attr('data-name','默认驾驶员');
@@ -201,7 +201,7 @@
                     "width": "160px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1 && row.item_status != 97)
+                        if(row.is_completed != 1)
                         {
                             $(nTd).addClass('modal-show-for-info-select2-set');
                             $(nTd).attr('data-id',row.id).attr('data-name','默认驾驶员');
