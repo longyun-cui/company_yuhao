@@ -195,25 +195,45 @@
 
             {{--选择客户--}}
             @if(in_array($me->user_type,[0,1,9,11,61,66]))
-            <select class="search-filter form-filter filter-lg select2-client-c" name="order-client" data-staff-category-="1">
+            <select class="search-filter form-filter filter-lg select2-box-c select2--client-c-" name="order-client">
                 <option value="-1">选择客户</option>
+                @if(!empty($client_list) && count($client_list) > 0)
+                    @foreach($client_list as $v)
+                        <option value="{{ $v->id }}">{{ $v->name }}</option>
+                    @endforeach
+                @endif
             </select>
             @endif
 
             {{--选择项目--}}
-            <select class="search-filter form-filter filter-lg select2-project-c" name="order-project" data-project-category-="1">
+            <select class="search-filter form-filter filter-lg select2-box-c select2--project-c-" name="order-project">
                 <option value="-1">选择项目</option>
+                @if(!empty($project_list) && count($project_list) > 0)
+                    @foreach($project_list as $v)
+                        <option value="{{ $v->id }}">{{ $v->name }}</option>
+                    @endforeach
+                @endif
             </select>
 
 
             {{--选择车辆--}}
-            <select class="search-filter form-filter filter-lg select2--car" name="order-car" data-car-type="1">
+            <select class="search-filter form-filter filter-lg select2-box-c select2--car-c-" name="order-car" data-car-type="1">
                 <option value="-1">选择车辆</option>
+                @if(!empty($car_list) && count($car_list) > 0)
+                    @foreach($car_list as $v)
+                        <option value="{{ $v->id }}">{{ $v->name }}</option>
+                    @endforeach
+                @endif
             </select>
 
             {{--选择车挂--}}
-            <select class="search-filter form-filter filter-lg select2-car-c" name="order-trailer" data-car-type="21">
+            <select class="search-filter form-filter filter-lg select2-box-c select2--car-c-" name="order-trailer" data-car-type="21">
                 <option value="-1">选择车挂</option>
+                @if(!empty($trailer_list) && count($trailer_list) > 0)
+                    @foreach($trailer_list as $v)
+                        <option value="{{ $v->id }}">{{ $v->name }}</option>
+                    @endforeach
+                @endif
             </select>
 
 
@@ -267,7 +287,7 @@
     </div>
 
 
-    <div class="col-md-12 datatable-search-row">
+    <div class="col-md-12 datatable-search-row _none">
 
         <div class=" pull-left">
 
