@@ -349,6 +349,28 @@
                     }
                 },
                 {
+                    "className": "text-center",
+                    "width": "120px",
+                    "title": "尺寸",
+                    "data": "car_info_size",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+//                            if(row.is_published != 0)
+                        {
+                            $(nTd).addClass('modal-show-for-info-text-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name',row.name);
+                            $(nTd).attr('data-key','car_info_size').attr('data-value',data);
+                            $(nTd).attr('data-column-name','尺寸');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(!data) return '--';
+                        else return data;
+                    }
+                },
+                {
                     "title": "轴数",
                     "data": "trailer_axis_count",
                     "className": "text-center",
