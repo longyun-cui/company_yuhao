@@ -66,13 +66,13 @@ class WLStaffStaffRepository {
 
         $query = WL_Common_Staff::withTrashed()->select('*')
             ->with([
-                'creator'=>function($query) { $query->select(['id','username','true_name']); },
+                'creator'=>function($query) { $query->select(['id','name']); },
                 'company_er'=>function($query) { $query->select(['id','name']); },
                 'department_er'=>function($query) { $query->select(['id','name']); },
                 'team_er'=>function($query) { $query->select(['id','name']); },
                 'sub_team_er'=>function($query) { $query->select(['id','name']); },
                 'group_er'=>function($query) { $query->select(['id','name']); },
-                'leader'=>function($query) { $query->select(['id','username','true_name']); }
+                'leader'=>function($query) { $query->select(['id','name']); }
             ])
             ->whereIn('staff_category',[1,11,21,31,41,51,61,71,81,99]);
 
@@ -247,7 +247,6 @@ class WLStaffStaffRepository {
             $post_data["active"] = 1;
             $post_data["password"] = password_encode("12345678");
             $post_data["creator_id"] = $me->id;
-            $post_data['username'] = $post_data['true_name'];
         }
         else if($operate_type == 'edit') // 编辑
         {
@@ -798,7 +797,7 @@ class WLStaffStaffRepository {
         $id  = $post_data["id"];
         $query = WL_Staff_Record_Operation::select('*')
             ->with([
-                'creator'=>function($query) { $query->select(['id','username','true_name']); },
+                'creator'=>function($query) { $query->select(['id','name']); },
             ])
             ->where(['staff_id'=>$id]);
 
