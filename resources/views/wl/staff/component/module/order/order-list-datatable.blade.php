@@ -1177,6 +1177,30 @@
                 },
 
                 {
+                    "title": "任务编号",
+                    "name": "task_number",
+                    "data": "task_number",
+                    "className": "",
+                    "width": "160px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).addClass('modal-show--for--info-text-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name','任务编号');
+                            $(nTd).attr('data-key','task_number').attr('data-value',data);
+                            $(nTd).attr('data-column-name','任务编号');
+                            $(nTd).attr('data-text-type','text');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        return data;
+                    }
+                },
+
+                {
                     "title": "安排人",
                     "name": "arrange_people",
                     "data": "arrange_people",
