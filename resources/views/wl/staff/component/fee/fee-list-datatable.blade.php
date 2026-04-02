@@ -25,6 +25,7 @@
                     d._token = $('meta[name="_token"]').attr('content');
                     d.id = $('input[name="fee-id"]').val();
                     d.mobile = $('input[name="fee-mobile"]').val();
+                    d.name = $('input[name="fee-name"]').val();
                     d.username = $('input[name="fee-username"]').val();
                     d.department_district = $tableSearch.find('select[name="fee-department-district"]').val();
                     d.user_type = $tableSearch.find('select[name="fee-user-type"]').val();
