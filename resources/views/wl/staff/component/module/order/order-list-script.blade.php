@@ -186,6 +186,7 @@
                         //     $modal.find('select[name="copilot_id"]').append(new Option($response.data.copilot_er.driver_name, $response.data.copilot_id, true, true)).trigger('change');
                         // }
 
+                        $modal.find('input[name="external_car_price"]').val(parseFloat($response.data.external_car_price));
                         $modal.find('input[name="external_car"]').val($response.data.external_car);
                         $modal.find('input[name="external_trailer"]').val($response.data.external_trailer);
 

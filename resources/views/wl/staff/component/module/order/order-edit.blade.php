@@ -226,9 +226,12 @@
                     <label class="control-label col-md-3"><sup class="text-red">*</sup> 外请车</label>
                     <div class="col-md-9 ">
                         <div class="col-sm-6 col-md-6 padding-0" style="width:50%;">
+                            <input type="text" class="form-control" name="external_car_price" placeholder="请车价" value="0" data-default="0">
+                        </div>
+                        <div class="col-sm-3 col-md-3 padding-0" style="width:25%;">
                             <input type="text" class="form-control" name="external_car" placeholder="车辆" value="" data-default="">
                         </div>
-                        <div class="col-sm-6 col-md-6 padding-0" style="width:50%;">
+                        <div class="col-sm-3 col-md-3 padding-0" style="width:25%;">
                             <input type="text" class="form-control" name="external_trailer" placeholder="车挂" value="" data-default="">
                         </div>
                     </div>
