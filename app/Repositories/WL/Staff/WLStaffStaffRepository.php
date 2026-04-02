@@ -204,7 +204,7 @@ class WLStaffStaffRepository {
         $messages = [
             'operate.required' => '参数有误！',
             'login_number.required' => '请输入登录工号！',
-            'true_name.required' => '请输入用户名！',
+            'name.required' => '请输入姓名！',
             'company_id.required' => '请选择所属公司！',
 //            'mobile.unique' => '电话已存在！',
 //            'api_staffNo.required' => '请输入外呼系统坐席ID！',
@@ -214,7 +214,7 @@ class WLStaffStaffRepository {
         $v = Validator::make($post_data, [
             'operate' => 'required',
             'login_number' => 'required',
-            'true_name' => 'required',
+            'name' => 'required',
             'company_id' => 'required',
 //            'mobile' => 'required|unique:dk_user,mobile',
 //            'api_staffNo' => 'required|numeric|min:0',

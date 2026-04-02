@@ -406,7 +406,7 @@
                             </p>
                         </li>
                         <!-- Menu Body -->
-                        <li class="user-body">
+                        <li class="user-body _none">
                             <div class="row">
                                 <div class="col-xs-4 text-center">
                                     <a href="#">Followers</a>
