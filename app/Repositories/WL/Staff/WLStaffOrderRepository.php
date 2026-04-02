@@ -2151,14 +2151,16 @@ class WLStaffOrderRepository {
     {
         $messages = [
             'operate.required' => 'operate.required.',
-            'fee-title.required' => '请输入名目！',
+            'fee-type.required' => '请选择类型！',
+//            'fee-title.required' => '请输入名目！',
             'fee-amount.required' => '请输入金额！',
             'fee-datetime.required' => '请输入时间！',
 //            'name.unique' => '该部门号已存在！',
         ];
         $v = Validator::make($post_data, [
             'operate' => 'required',
-            'fee-title' => 'required',
+            'fee-type' => 'required',
+//            'fee-title' => 'required',
             'fee-amount' => 'required',
             'fee-datetime' => 'required',
 //            'name' => 'required|unique:dk_department,name',
@@ -2172,12 +2174,15 @@ class WLStaffOrderRepository {
         $this->get_me();
         $me = $this->me;
 
-        if(!in_array($me->user_type,[0,1,11,19])) return response_error([],"你没有操作权限！");
+//        if(!in_array($me->staff_category,[0,1,11,19])) return response_error([],"你没有操作权限！");
 
 
         $operate = $post_data["operate"];
         $operate_type = $operate["type"];
         $operate_id = $operate['id'];
+
+        $fee_type = $post_data['fee-type'];
+        if(!in_array($fee_type,[1,99,101,111])) return response_error([],"费用类型有误！");
 
 
         $order = WL_Common_Order::with([])->withTrashed()->find($operate_id);
@@ -2254,7 +2259,32 @@ class WLStaffOrderRepository {
             $operation_record_data[] = $operation;
         }
         // 名目
-        $fee_title = $post_data['fee-title'];
+//        $fee_title = $post_data['fee-title'];
+//        if(!empty($fee_title))
+//        {
+//            $operation = [];
+//            $operation['field'] = 'fee_title';
+//            $operation['title'] = '名目';
+//            $operation['before'] = '';
+//            $operation['after'] = $fee_title;
+//            $operation_record_data[] = $operation;
+//        }
+        if($fee_type == 1)
+        {
+            $fee_title = $post_data['fee-title-for-receipt'];
+        }
+        else if($fee_type == 99)
+        {
+            $fee_title = $post_data['fee-title-for-fee'];
+        }
+        else if($fee_type == 101)
+        {
+            $fee_title = $post_data['fee-title-for-deduction'];
+        }
+        else if($fee_type == 111)
+        {
+            $fee_title = $post_data['fee-title-for-fine'];
+        }
         if(!empty($fee_title))
         {
             $operation = [];
@@ -2264,6 +2294,7 @@ class WLStaffOrderRepository {
             $operation['after'] = $fee_title;
             $operation_record_data[] = $operation;
         }
+        else return response_error([],"【名目】不能为空！");
         // 说明
         $fee_description = $post_data['fee-description'];
         if(!empty($fee_description))

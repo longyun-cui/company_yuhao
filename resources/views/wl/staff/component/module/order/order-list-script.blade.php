@@ -377,52 +377,6 @@
 
 
 
-        // 【工单】【添加费用】费用类型
-        $(".main-wrapper").on('change', '#modal--for--order--item-fee-create input[name="fee-type"]', function() {
-            var $that = $(this);
-            var $modal = $that.parents('.modal-wrapper');
-
-            var $value = $(this).val();
-            if($value == 1)
-            {
-                $modal.find('input[name="fee-record-type"][value="1"]').prop('checked', true).trigger('change');
-                $modal.find('.fee-record-type-box').show();
-                $modal.find('.collection-box').show();
-                $modal.find('.advance-box').hide();
-            }
-            else if($value == 99)
-            {
-                $modal.find('input[name="fee-record-type"][value="1"]').prop('checked', true).trigger('change');
-                $modal.find('.fee-record-type-box').show();
-                $modal.find('.advance-box').show();
-                $modal.find('.collection-box').hide();
-            }
-            else
-            {
-                $modal.find('input[name="fee-record-type"][value="1"]').prop('checked', true).trigger('change');
-                $modal.find('.fee-record-type-box').hide();
-                $modal.find('.payment-show').hide();
-            }
-        });
-        // 【工单】【添加费用】记录类型
-        $(".main-wrapper").on('change', '#modal--for--order--item-fee-create input[name="fee-record-type"]', function() {
-            var $that = $(this);
-            var $modal = $that.parents('.modal-wrapper');
-
-            var $value = $(this).val();
-            if($value == 81)
-            {
-                $modal.find('.payment-show').show();
-            }
-            else
-            {
-                $modal.find('.payment-show').hide();
-            }
-        });
-
-
-
-
         // 【工单】删除
         $(".main-wrapper").off('click', ".order--item-delete-submit").on('click', ".order--item-delete-submit", function() {
             var $that = $(this);
@@ -1063,7 +1017,7 @@
 
 
 
-        // 【工单】【费用】显示
+        // 【工单】【添加费用】显示
         $(".main-wrapper").off('click', ".modal-show--for--order--item-fee-create").on('click', ".modal-show--for--order--item-fee-create", function() {
             var $that = $(this);
             var $id = $(this).data('id');
@@ -1091,7 +1045,7 @@
 
             $modal.modal('show');
         });
-        // 【工单】【费用】提交
+        // 【工单】【添加费用】提交
         $(".main-wrapper").off('click', "#item-submit--for--order--item-fee-create").on('click', "#item-submit--for--order--item-fee-create", function() {
             var $that = $(this);
             var $item_id = $that.data('item-id');
@@ -1161,6 +1115,74 @@
 
             };
             $("#form--for--order--item-fee-create").ajaxSubmit(options);
+        });
+
+
+        // 【工单】【添加费用】费用类型
+        $(".main-wrapper").on('change', '#modal--for--order--item-fee-create input[name="fee-type"]', function() {
+            var $that = $(this);
+            var $modal = $that.parents('.modal-wrapper');
+
+            var $value = $(this).val();
+            if($value == 1)
+            {
+                // 收款
+                $modal.find('input[name="fee-record-type"][value="1"]').prop('checked', true).trigger('change');
+                $modal.find('.fee-record-type-box').show();
+                $modal.find('.collection-box').show();
+                $modal.find('.advance-box').hide();
+                $modal.find('.fee-title-box').hide();
+                $modal.find('.receipt-box').show();
+            }
+            else if($value == 99)
+            {
+                // 费用
+                $modal.find('input[name="fee-record-type"][value="1"]').prop('checked', true).trigger('change');
+                $modal.find('.fee-record-type-box').show();
+                $modal.find('.advance-box').show();
+                $modal.find('.collection-box').hide();
+                $modal.find('.fee-title-box').hide();
+                $modal.find('.fee-box').show();
+            }
+            else if($value == 101)
+            {
+                // 订单扣款
+                $modal.find('input[name="fee-record-type"][value="1"]').prop('checked', true).trigger('change');
+                $modal.find('.fee-record-type-box').hide();
+                $modal.find('.payment-show').hide();
+                $modal.find('.fee-title-box').hide();
+                $modal.find('.deduction-box').show();
+            }
+            else if($value == 111)
+            {
+                // 员工罚款
+                $modal.find('input[name="fee-record-type"][value="1"]').prop('checked', true).trigger('change');
+                $modal.find('.fee-record-type-box').hide();
+                $modal.find('.payment-show').hide();
+                $modal.find('.fee-title-box').hide();
+                $modal.find('.fine-box').show();
+            }
+            else
+            {
+                $modal.find('input[name="fee-record-type"][value="1"]').prop('checked', true).trigger('change');
+                $modal.find('.fee-record-type-box').hide();
+                $modal.find('.payment-show').hide();
+            }
+        });
+        // 【工单】【添加费用】记录类型
+        $(".main-wrapper").on('change', '#modal--for--order--item-fee-create input[name="fee-record-type"]', function() {
+            var $that = $(this);
+            var $modal = $that.parents('.modal-wrapper');
+
+            var $value = $(this).val();
+            if($value == 81)
+            {
+                $modal.find('.payment-show').show();
+            }
+            else
+            {
+                $modal.find('.payment-show').hide();
+            }
         });
 
 

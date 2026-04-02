@@ -82,8 +82,8 @@
 
                         $modal.find('input[name="project_category"]').prop('checked', false);
                         $modal.find('input[name="project_category"][value="'+$response.data.project_category+'"]').prop('checked', true).trigger('change');
-                        $modal.find('.radio-project-category').hide();
-                        $modal.find('input[name="project_category"][value="'+$response.data.project_category+'"]').parents('.radio-project-category').show();
+                        // $modal.find('.radio-project-category').hide();
+                        // $modal.find('input[name="project_category"][value="'+$response.data.project_category+'"]').parents('.radio-project-category').show();
 
 
                         $modal.find('input[name="settlement_period"]').prop('checked', false);

@@ -81,10 +81,10 @@
                         $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));
 
                         $modal.find('input[name="name"]').val($response.data.name);
-                        $modal.find('input[name="department_category"]').prop('checked', false);
-                        $modal.find('input[name="department_category"][value="'+$response.data.department_category+'"]').prop('checked', true).trigger('change');
-                        $modal.find('.radio-department-category').hide();
-                        $modal.find('input[name="department_category"][value="'+$response.data.department_category+'"]').parents('.radio-department-category').show();
+                        // $modal.find('input[name="department_category"]').prop('checked', false);
+                        // $modal.find('input[name="department_category"][value="'+$response.data.department_category+'"]').prop('checked', true).trigger('change');
+                        // $modal.find('.radio-department-category').hide();
+                        // $modal.find('input[name="department_category"][value="'+$response.data.department_category+'"]').parents('.radio-department-category').show();
 
                         // 公司
                         if($response.data.company_er)

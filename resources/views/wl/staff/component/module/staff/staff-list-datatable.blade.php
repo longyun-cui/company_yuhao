@@ -99,26 +99,7 @@
                     "orderable": false,
                     render: function(data, type, row, meta) {
 //                            return '<a target="_blank" href="/user/'+data+'">'+row.true_name+'</a>';
-                        if(row.true_name) return row.true_name;
-                        else return '--';
-                    }
-                },
-                {
-                    "title": "用户名",
-                    "data": "id",
-                    "className": "",
-                    "width": "100px",
-                    "orderable": false,
-                    render: function(data, type, row, meta) {
-//                            return '<a target="_blank" href="/user/'+data+'">'+row.nickname+'</a>';
-                        if(row.username)
-                        {
-                            if(row.user_type == 88)
-                            {
-                                return '<a class="caller-control" data-id="'+row.id+'" data-title="'+data+'">'+data+' ('+row.id+')'+'</a>';
-                            }
-                            else return row.username;
-                        }
+                        if(row.name) return row.name;
                         else return '--';
                     }
                 },

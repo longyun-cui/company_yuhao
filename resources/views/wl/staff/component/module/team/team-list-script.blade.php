@@ -90,14 +90,14 @@
                         // 团队种类
                         $modal.find('input[name="team_category"]').prop('checked', false);
                         $modal.find('input[name="team_category"][value="'+$response.data.team_category+'"]').prop('checked', true).trigger('change');
-                        $modal.find('.radio-team-category').hide();
-                        $modal.find('input[name="team_category"][value="'+$response.data.team_category+'"]').parents('.radio-team-category').show();
+                        // $modal.find('.radio-team-category').hide();
+                        // $modal.find('input[name="team_category"][value="'+$response.data.team_category+'"]').parents('.radio-team-category').show();
 
                         // 团队类型
                         $modal.find('input[name="team_type"]').prop('checked', false);
                         $modal.find('input[name="team_type"][value="'+$response.data.team_type+'"]').prop('checked', true).trigger('change');
-                        $modal.find('.radio-team-type').hide();
-                        $modal.find('input[name="team_type"][value="'+$response.data.team_type+'"]').parents('.radio-team-type').show();
+                        // $modal.find('.radio-team-type').hide();
+                        // $modal.find('input[name="team_type"][value="'+$response.data.team_type+'"]').parents('.radio-team-type').show();
 
                         // 部门
                         if($response.data.department_er)

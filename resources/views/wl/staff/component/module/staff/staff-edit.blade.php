@@ -247,15 +247,9 @@
                 </div>
                 {{--真实姓名--}}
                 <div class="form-group">
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 真实姓名</label>
+                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 姓名</label>
                     <div class="col-md-9 ">
-                        <input type="text" class="form-control" name="true_name" placeholder="真实姓名" value="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-2">用户名</label>
-                    <div class="col-md-9 ">
-                        <input type="text" class="form-control" name="username" placeholder="用户名" value="">
+                        <input type="text" class="form-control" name="name" placeholder="姓名" value="">
                     </div>
                 </div>
                 {{--描述--}}
