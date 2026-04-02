@@ -332,11 +332,11 @@
                             $modal.find('input[name=copilot_phone]').val($data_driver_er.copilot_phone);
                         }
                         // 副驾 (select2)
-                        if($response.data.copilot_er)
-                        {
-                            var $copilot_option = new Option($response.data.copilot_er.driver_name, $response.data.copilot_id, true, true);
-                            $modal.find('select[name="copilot_id"]').append($copilot_option).trigger('change');
-                        }
+                        // if($response.data.copilot_er)
+                        // {
+                        //     var $copilot_option = new Option($response.data.copilot_er.driver_name, $response.data.copilot_id, true, true);
+                        //     $modal.find('select[name="copilot_id"]').append($copilot_option).trigger('change');
+                        // }
 
                     }
                 })
