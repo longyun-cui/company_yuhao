@@ -177,6 +177,7 @@
                     // 请求失败时的回调
                     console.log('#'+$that.attr('id')+'.form.ajaxSubmit.error.');
                     layer.closeAll('loading');
+                    layer.msg('服务器错误！');
                 },
                 complete: function(xhr, status, $form) {
                     // 无论成功或失败都会执行的回调
