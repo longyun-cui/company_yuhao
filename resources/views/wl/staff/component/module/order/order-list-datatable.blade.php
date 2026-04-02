@@ -1344,9 +1344,9 @@
                         var $html_abandon = '';
                         var $html_completed = '';
                         var $html_verified = '';
-                        var $html_accounting = '<a class="btn btn-xs modal-show--for--order--item-financial-accounting-set" data-id="'+data+'">财务核对</a>';
                         var $html_follow = '';
                         var $html_fee = '';
+                        var $html_accounting = '';
                         var $html_operation_record = '<a class="btn btn-xs bg-default modal-show--for--order--item-operation-record" data-id="'+data+'">记录</a>';
                         var $html_fee_record = '<a class="btn btn-xs bg-default modal-show--for--order-fee-record" data-id="'+data+'">费用记录</a>';
 
@@ -1383,6 +1383,7 @@
                             $html_follow = '<a class="btn btn-xs modal-show--for--order--item-follow-create" data-id="'+data+'">跟进</a>';
                             $html_journey = '<a class="btn btn-xs modal-show--for--order--item-journey-create" data-id="'+data+'">行程</a>';
                             $html_fee = '<a class="btn btn-xs modal-show--for--order--item-fee-create" data-id="'+data+'">费用</a>';
+                            $html_accounting = '<a class="btn btn-xs modal-show--for--order--item-financial-accounting-set" data-id="'+data+'">财务核对</a>';
 
 
                             if(row.is_completed == 1)
@@ -1450,12 +1451,12 @@
                             // $html_able+
                             $html_edit+
                             $html_publish+
-                            $html_accounting+
                             // $html_detail+
                             $html_follow+
                             $html_travel+
                             $html_journey+
                             $html_fee+
+                            $html_accounting+
                             // $html_fee_record+
                             // $html_finance+
                             // $html_record+
