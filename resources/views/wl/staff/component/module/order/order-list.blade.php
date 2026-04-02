@@ -15,7 +15,7 @@
         </div>
 
 
-        <div class="pull-right _none-">
+        <div class="pull-right _none">
 
 
             <div class="nav navbar-nav">
@@ -78,70 +78,6 @@
                             </div>
                         </div>
 
-                        {{--选择团队--}}
-                        @if(in_array($me->user_type,[0,1,9,11]))
-                        <div class="box-body">
-                            <label class="col-md-3">团队</label>
-                            <div class="col-md-9 filter-body">
-                                <select class="form-control form-filter select2-box" name="order-department-district[]" id="order-department-district" multiple="multiple">
-                                    <option value="-1">选择团队</option>
-                                </select>
-                            </div>
-                        </div>
-                        @endif
-
-                        {{--选择员工--}}
-                        @if(in_array($me->user_type,[0,1,9,11]))
-                        <div class="box-body">
-                            <label class="col-md-3">员工</label>
-                            <div class="col-md-9 filter-body">
-                                <select class="form-control form-filter select2-box select2--staff" name="order-staff">
-                                    <option value="-1">选择员工</option>
-                                </select>
-                            </div>
-                        </div>
-                        @endif
-
-                        {{--选择客户--}}
-                        @if(in_array($me->user_type,[0,1,9,11,61,66]))
-                        <div class="box-body">
-                            <label class="col-md-3">客户</label>
-                            <div class="col-md-9 filter-body">
-                                <select class="form-control form-filter select2-box select2--client" name="order-client">
-                                    <option value="-1">选择客户</option>
-                                </select>
-                            </div>
-                        </div>
-                        @endif
-
-                        {{--选择项目--}}
-                        <div class="box-body">
-                            <label class="col-md-3">项目</label>
-                            <div class="col-md-9 filter-body">
-                                <select class="form-control form-filter select2-box select2--project" name="order-project">
-                                </select>
-                            </div>
-                        </div>
-
-                        {{--审核状态--}}
-                        <div class="box-body">
-                            <label class="col-md-3">审核状态</label>
-                            <div class="col-md-9 filter-body">
-                                <select class="form-control form-filter select2-box" name="order-inspected-status">
-                                    <option value="-1">审核状态</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        {{--审核结果--}}
-                        <div class="box-body">
-                            <label class="col-md-3">审核结果</label>
-                            <div class="col-md-9 filter-body">
-                                <select class="form-control form-filter select2-box" name="order-inspected-result[]" multiple="multiple">
-                                    <option value="-1">审核结果</option>
-                                </select>
-                            </div>
-                        </div>
 
 
 
@@ -173,10 +109,10 @@
             <input type="text" class="search-filter form-filter filter-sm filter-keyup" name="order-id" placeholder="ID" value="" />
 
             {{--派车日期--}}
-            <input type="text" class="search-filter form-filter filter-md filter-keyup date-picker-c" name="order-assign_date" placeholder="派车日期" value="" readonly="readonly" />
+            <input type="text" class="search-filter form-filter filter-md filter-keyup date-picker-c" name="order-assign-date" placeholder="派车日期" value="" readonly="readonly" />
 
             {{--任务日期--}}
-            <input type="text" class="search-filter form-filter filter-md filter-keyup month-picker-c" name="order-task_date" placeholder="任务日期" value="" readonly="readonly" />
+            <input type="text" class="search-filter form-filter filter-md filter-keyup month-picker-c" name="order-task-date" placeholder="任务日期" value="" readonly="readonly" />
 
 
             {{--选择团队--}}

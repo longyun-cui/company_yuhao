@@ -137,6 +137,9 @@
                             $('.external-car').show();
                         }
 
+                        // 车型
+                        $modal.find('select[name="car_type"]').val($response.data.car_type).trigger('change');
+
                         // select2 车辆
                         if($response.data.car_er)
                         {

@@ -24,34 +24,27 @@
                 "dataType" : 'json',
                 "data": function (d) {
                     d._token = $('meta[name="_token"]').attr('content');
-                    d.item_category = 1;
                     d.id = $tableSearch.find('input[name="order-id"]').val();
                     d.remark = $tableSearch.find('input[name="order-remark"]').val();
                     d.description = $tableSearch.find('input[name="order-description"]').val();
-                    d.delivered_date = $tableSearch.find('input[name="order-delivered_date"]').val();
-                    d.assign = $tableSearch.find('input[name="order-assign"]').val();
-                    d.assign_start = $tableSearch.find('input[name="order-start"]').val();
-                    d.assign_ended = $tableSearch.find('input[name="order-ended"]').val();
+                    d.status = $tableSearch.find('select[name="order-status"]').val();
+                    d.assign_date = $tableSearch.find('input[name="order-assign-date"]').val();
+                    d.task_date = $tableSearch.find('input[name="order-task-date"]').val();
+                    d.date_start = $tableSearch.find('input[name="order-start"]').val();
+                    d.date_ended = $tableSearch.find('input[name="order-ended"]').val();
                     d.name = $tableSearch.find('input[name="order-name"]').val();
                     d.title = $tableSearch.find('input[name="order-title"]').val();
                     d.keyword = $tableSearch.find('input[name="order-keyword"]').val();
-                    d.department_district = $tableSearch.find('select[name="order-department-district[]"]').val();
                     d.staff = $tableSearch.find('select[name="order-staff"]').val();
-                    d.project = $tableSearch.find('select[name="order-project"]').val();
                     d.client = $tableSearch.find('select[name="order-client"]').val();
-                    d.status = $tableSearch.find('select[name="order-status"]').val();
-                    d.order_type = $tableSearch.find('select[name="order-type"]').val();
-                    d.client_name = $tableSearch.find('input[name="order-client-name"]').val();
-                    d.client_phone = $tableSearch.find('input[name="order-client-phone"]').val();
-                    d.is_wx = $tableSearch.find('select[name="order-is-wx"]').val();
-                    d.is_repeat = $tableSearch.find('select[name="order-is-repeat"]').val();
-                    d.created_type = $tableSearch.find('select[name="order-created-type"]').val();
+                    d.project = $tableSearch.find('select[name="order-project"]').val();
+                    d.car = $tableSearch.find('select[name="order-project"]').val();
+                    d.trailer = $tableSearch.find('select[name="order-trailer"]').val();
+                    d.car_type = $tableSearch.find('select[name="order-car-type"]').val();
                     d.inspected_status = $tableSearch.find('select[name="order-inspected-status"]').val();
                     d.inspected_result = $tableSearch.find('select[name="order-inspected-result[]"]').val();
                     d.delivered_status = $tableSearch.find('select[name="order-delivered-status"]').val();
                     d.delivered_result = $tableSearch.find('select[name="order-delivered-result[]"]').val();
-                    d.district_city = $tableSearch.find('select[name="order-city"]').val();
-                    d.district_district = $tableSearch.find('select[name="order-district[]"]').val();
                 },
             },
             "fixedColumns": {

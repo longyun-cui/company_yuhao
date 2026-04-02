@@ -202,6 +202,20 @@
                         </div>
                     </div>
                 </div>
+
+                {{--外请车--}}
+                <div class="form-group external-car" style="display:none;">
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 外请车</label>
+                    <div class="col-md-9 ">
+                        <div class="col-sm-6 col-md-6 padding-0" style="width:50%;">
+                            <input type="text" class="form-control" name="external_car" placeholder="车辆" value="" data-default="">
+                        </div>
+                        <div class="col-sm-6 col-md-6 padding-0" style="width:50%;">
+                            <input type="text" class="form-control" name="external_trailer" placeholder="车挂" value="" data-default="">
+                        </div>
+                    </div>
+                </div>
+
                 {{--自家司机--}}
                 <div class="form-group internal-car">
                     <label class="control-label col-md-3"><sup class="text-red">*</sup> 自家司机</label>
@@ -244,30 +258,21 @@
                     </div>
                 </div>
 
-                {{--外请车--}}
-                <div class="form-group external-car" style="display:none;">
-                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 外请车</label>
+                {{--班次--}}
+                <div class="form-group">
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 车型</label>
                     <div class="col-md-9 ">
-                        <div class="col-sm-6 col-md-6 padding-0" style="width:50%;">
-                            <input type="text" class="form-control" name="external_car" placeholder="车辆" value="" data-default="">
-                        </div>
-                        <div class="col-sm-6 col-md-6 padding-0" style="width:50%;">
-                            <input type="text" class="form-control" name="external_trailer" placeholder="车挂" value="" data-default="">
-                        </div>
+                        <select class="form-control modal-select2 select2-reset" name="car_type">
+                            <option value="">选择车型</option>
+                            <option value="7.6">7.6</option>
+                            <option value="9.6">9.6</option>
+                            <option value="12.5">12.5</option>
+                            <option value="16.5">16.5</option>
+                            <option value="150">150</option>
+                            <option value="180">180</option>
+                        </select>
                     </div>
                 </div>
-
-                {{--班次--}}
-{{--                <div class="form-group">--}}
-{{--                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 班次</label>--}}
-{{--                    <div class="col-md-9 ">--}}
-{{--                        <select class="form-control modal-select2 select2-reset" name="field_2" id="" style="width:100%;">--}}
-{{--                            <option value="">选择班次</option>--}}
-{{--                            <option value ="1">白班</option>--}}
-{{--                            <option value ="9">夜班</option>--}}
-{{--                        </select>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
 
                 {{--安排人 & 收款人 & 车货源--}}
                 <div class="form-group">

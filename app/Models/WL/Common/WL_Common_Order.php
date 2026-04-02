@@ -45,6 +45,8 @@ class WL_Common_Order extends Model
         'project_id',
 
         'car_owner_type',
+        'car_info',
+        'car_type',
         'car_id',
         'trailer_id',
         'container_id',

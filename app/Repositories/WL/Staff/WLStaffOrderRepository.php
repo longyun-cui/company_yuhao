@@ -213,16 +213,26 @@ class WLStaffOrderRepository {
             }
         }
 
-
-        // 工单种类 []
-        if(isset($post_data['item_category']))
+        // 车辆
+        if(isset($post_data['car']))
         {
-            $item_category_int = intval($post_data['item_category']);
-            if(!in_array($item_category_int,[-1,0]))
+            $car_int = intval($post_data['car']);
+            if(!in_array($car_int,[-1,0]))
             {
-                $query->where('item_category', $item_category_int);
+                $query->where('car_id', $car_int);
             }
         }
+
+        // 挂
+        if(isset($post_data['trailer']))
+        {
+            $trailer_int = intval($post_data['trailer']);
+            if(!in_array($trailer_int,[-1,0]))
+            {
+                $query->where('trailer_id', $trailer_int);
+            }
+        }
+
 
         // 工单类型 []
         if(isset($post_data['item_type']))
@@ -234,28 +244,6 @@ class WLStaffOrderRepository {
             }
         }
 
-
-        // 创建方式 [人工|导入|api]
-        if(isset($post_data['created_type']))
-        {
-            $created_type_int = intval($post_data['created_type']);
-            if(!in_array($created_type_int,[-1]))
-            {
-                $query->where('created_type', $created_type_int);
-            }
-        }
-
-
-
-        // 是否+V
-        if(!empty($post_data['is_wx']))
-        {
-            $is_wx_int = intval($post_data['is_wx']);
-            if(!in_array($is_wx_int,[-1]))
-            {
-                $query->where('is_wx', $is_wx_int);
-            }
-        }
 
         // 审核状态
         if(!empty($post_data['inspected_status']))
