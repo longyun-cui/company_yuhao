@@ -68,10 +68,10 @@ class WLStaffTeamRepository {
         $query = WL_Common_Team::select(['id','item_status','name','team_category','team_type','company_id','department_id','leader_id','remark','creator_id','created_at','updated_at','deleted_at'])
             ->withTrashed()
             ->with([
-                'creator'=>function($query) { $query->select(['id','username','true_name']); },
+                'creator'=>function($query) { $query->select(['id','name']); },
                 'company_er'=>function($query) { $query->select(['id','name']); },
                 'department_er'=>function($query) { $query->select(['id','name']); },
-                'leader'=>function($query) { $query->select(['id','username','true_name']); }
+                'leader'=>function($query) { $query->select(['id','name']); }
             ]);
 
 
@@ -178,7 +178,7 @@ class WLStaffTeamRepository {
 
         $item = WL_Common_Team::withTrashed()
             ->with([
-                'leader'=>function($query) { $query->select('id','username'); },
+                'leader'=>function($query) { $query->select('id','name'); },
                 'department_er'=>function($query) { $query->select('id','name'); }
             ])
             ->find($item_id);
@@ -721,7 +721,7 @@ class WLStaffTeamRepository {
         $id  = $post_data["id"];
         $query = WL_Staff_Record_Operation::select('*')
             ->with([
-                'creator'=>function($query) { $query->select(['id','username','true_name']); },
+                'creator'=>function($query) { $query->select(['id','name']); },
             ])
             ->where(['team_id'=>$id]);
 

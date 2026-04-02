@@ -107,7 +107,7 @@
                         if($response.data.leader)
                         {
                             // $modal.find('#select2-leader option[value="'+$response.data.leader_id+'"]').prop('selected', true);
-                            $modal.find('#team-edit-select2-leader').append(new Option($response.data.leader.username, $response.data.leader_id, true, true)).trigger('change');
+                            $modal.find('#team-edit-select2-leader').append(new Option($response.data.leader.name, $response.data.leader_id, true, true)).trigger('change');
                         }
 
 

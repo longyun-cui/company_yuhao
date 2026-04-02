@@ -100,7 +100,7 @@
                         if($response.data.leader)
                         {
                             // $modal.find('#select2-leader option[value="'+$response.data.leader_id+'"]').prop('selected', true);
-                            $modal.find('select[name="leader_id"]').append(new Option($response.data.leader.username, $response.data.leader_id, true, true)).trigger('change');
+                            $modal.find('select[name="leader_id"]').append(new Option($response.data.leader.name, $response.data.leader_id, true, true)).trigger('change');
                         }
 
                         var $datatable_wrapper = $that.closest('.datatable-wrapper');

@@ -67,7 +67,7 @@ class WLStaffProjectRepository{
         $query = WL_Common_Project::select('*')
             ->withTrashed()
             ->with([
-                'creator'=>function($query) { $query->select(['id','username']); },
+                'creator'=>function($query) { $query->select(['id','name']); },
                 'client_er'=>function($query) { $query->select(['id','name']); }
             ]);
 
@@ -151,7 +151,7 @@ class WLStaffProjectRepository{
         $item = WL_Common_Project::withTrashed()
             ->with([
                 'client_er'=>function($query) { $query->select(['id','name']); },
-//                'inspector_er'=>function($query) { $query->select(['id','username']); },
+//                'inspector_er'=>function($query) { $query->select(['id','name']); },
 //                'pivot_project_user',
 //                'pivot_project_team'
             ])
@@ -692,7 +692,7 @@ class WLStaffProjectRepository{
         $id  = $post_data["id"];
         $query = WL_Staff_Record_Operation::select('*')
             ->with([
-                'creator'=>function($query) { $query->select(['id','username','true_name']); },
+                'creator'=>function($query) { $query->select(['id','name']); },
             ])
             ->where(['project_id'=>$id]);
 

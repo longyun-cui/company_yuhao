@@ -25,6 +25,7 @@
                     d._token = $('meta[name="_token"]').attr('content');
                     d.id = $('input[name="driver-id"]').val();
                     d.mobile = $('input[name="driver-mobile"]').val();
+                    d.name = $('input[name="driver-name"]').val();
                     d.username = $('input[name="driver-username"]').val();
                     d.department_district = $tableSearch.find('select[name="driver-department-district"]').val();
                     d.user_type = $tableSearch.find('select[name="driver-user-type"]').val();
@@ -714,7 +715,7 @@
                     "orderable": false,
                     render: function(data, type, row, meta) {
                         // return data;
-                        if(row.creator) return row.creator.username;
+                        if(row.creator) return row.creator.name;
                         else return '--';
 
                     }

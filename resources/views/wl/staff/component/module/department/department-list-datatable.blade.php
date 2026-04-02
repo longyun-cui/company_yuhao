@@ -136,7 +136,7 @@
                 //             $(nTd).attr('data-key','leader_id').attr('data-value',data);
                 //             if(row.leader == null) $(nTd).attr('data-option-name','未指定');
                 //             else {
-                //                 $(nTd).attr('data-option-name',row.leader.username);
+                //                 $(nTd).attr('data-option-name',row.leader.name);
                 //             }
                 //             $(nTd).attr('data-column-name','负责人');
                 //             if(row.leader_id) $(nTd).attr('data-operate-type','edit');
@@ -155,7 +155,7 @@
                 //     },
                 //     render: function(data, type, row, meta) {
                 //         if(row.leader == null) return '--';
-                //         else return '<a href="javascript:void(0);">'+row.leader.username+' ('+row.leader.id+')'+'</a>';
+                //         else return '<a href="javascript:void(0);">'+row.leader.name+' ('+row.leader.id+')'+'</a>';
                 //     }
                 // },
                 {
@@ -199,7 +199,7 @@
                     "data": "creator_id",
                     "orderable": false,
                     render: function(data, type, row, meta) {
-                        return row.creator == null ? '未知' : row.creator.username;
+                        return row.creator == null ? '未知' : row.creator.name;
                     }
                 },
                 {

@@ -83,7 +83,7 @@ class WLStaffOrderRepository {
         $query = WL_Common_Order::select('*')
             ->with([
                 'creator',
-                'owner'=>function($query) { $query->select('id','username'); },
+                'owner'=>function($query) { $query->select('id','name'); },
                 'client_er'=>function($query) { $query->select('id','name'); },
                 'project_er'=>function($query) { $query->select('id','name'); },
                 'car_er'=>function($query) { $query->select('id','name'); },
@@ -400,7 +400,7 @@ class WLStaffOrderRepository {
 
         $item = WL_Common_Order::withTrashed()
             ->with([
-                'owner'=>function($query) { $query->select('id','username'); },
+                'owner'=>function($query) { $query->select('id','name'); },
                 'client_er'=>function($query) { $query->select('id','name'); },
                 'project_er'=>function($query) { $query->select('id','name'); },
                 'car_er'=>function($query) {
@@ -1605,7 +1605,7 @@ class WLStaffOrderRepository {
         $id  = $post_data["id"];
         $query = WL_Common_Order_Operation_Record::select('*')
             ->with([
-                'creator'=>function($query) { $query->select(['id','username','true_name']); },
+                'creator'=>function($query) { $query->select(['id','name']); },
             ])
             ->where(['order_id'=>$id]);
 //            ->where(['record_object'=>21,'operate_object'=>61,'item_id'=>$id]);
@@ -1653,7 +1653,7 @@ class WLStaffOrderRepository {
         $id  = $post_data["id"];
         $query = WL_Common_Transport_Journey::select('*')
             ->with([
-                'creator'=>function($query) { $query->select(['id','username','true_name']); },
+                'creator'=>function($query) { $query->select(['id','name']); },
             ])
 //            ->where('operate_type',88)
             ->where('order_id',$id);
@@ -1702,7 +1702,7 @@ class WLStaffOrderRepository {
         $id  = $post_data["id"];
         $query = WL_Common_Fee::select('*')
             ->with([
-                'creator'=>function($query) { $query->select(['id','username','true_name']); },
+                'creator'=>function($query) { $query->select(['id','name']); },
             ])
 //            ->where('operate_type',88)
             ->where('order_id',$id);

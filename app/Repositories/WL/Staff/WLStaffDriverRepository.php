@@ -845,7 +845,7 @@ class WLStaffDriverRepository {
         $id  = $post_data["id"];
         $query = WL_Staff_Record_Operation::select('*')
             ->with([
-                'creator'=>function($query) { $query->select(['id','username','true_name']); },
+                'creator'=>function($query) { $query->select(['id','name']); },
             ])
             ->where(['driver_id'=>$id]);
 

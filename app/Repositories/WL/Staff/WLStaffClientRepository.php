@@ -65,7 +65,7 @@ class WLStaffClientRepository {
 
         $query = WL_Common_Client::select('*')
             ->with([
-                'creator'=>function($query) { $query->select(['id','username']); }
+                'creator'=>function($query) { $query->select(['id','name']); }
             ])
             ->where('active',1)
             ->where('item_status',1);
@@ -261,7 +261,7 @@ class WLStaffClientRepository {
             'operate' => 'required',
             'client_category' => 'required',
             'name' => 'required',
-//            'name' => 'required|unique:dk_client,username',
+//            'name' => 'required|unique:dk_client,name',
             'client_admin_name' => 'required',
             'client_admin_mobile' => 'required',
         ], $messages);
@@ -891,7 +891,7 @@ class WLStaffClientRepository {
         $id  = $post_data["id"];
         $query = WL_Staff_Record_Operation::select('*')
             ->with([
-                'creator'=>function($query) { $query->select(['id','username','true_name']); },
+                'creator'=>function($query) { $query->select(['id','name']); },
             ])
             ->where(['client_id'=>$id]);
 

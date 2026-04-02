@@ -82,8 +82,7 @@
                         $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));
 
                         $modal.find('input[name="login_number"]').val($response.data.login_number);
-                        $modal.find('input[name="username"]').val($response.data.username);
-                        $modal.find('input[name="true_name"]').val($response.data.true_name);
+                        $modal.find('input[name="name"]').val($response.data.name);
 
                         $modal.find('input[name="staff_category"]').prop('checked', false);
                         $modal.find('input[name="staff_category"][value="'+$response.data.staff_category+'"]').prop('checked', true).trigger('change');

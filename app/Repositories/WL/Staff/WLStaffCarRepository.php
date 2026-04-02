@@ -63,7 +63,7 @@ class WLStaffCarRepository {
 
         $query = WL_Common_Car::withTrashed()->select('*')
             ->with([
-                'creator'=>function ($query) { $query->select('id','username'); },
+                'creator'=>function ($query) { $query->select('id','name'); },
                 'motorcade_er'=>function ($query) { $query->select('id','name'); },
                 'trailer_er'=>function ($query) { $query->select('id','name'); },
                 'driver_er'=>function ($query) { $query->select('id','driver_name','driver_phone','copilot_name','copilot_phone'); },
@@ -160,7 +160,7 @@ class WLStaffCarRepository {
 
         $item = WL_Common_Car::withTrashed()
             ->with([
-                'creator'=>function ($query) { $query->select('id','username'); },
+                'creator'=>function ($query) { $query->select('id','name'); },
                 'motorcade_er'=>function ($query) { $query->select('id','name'); },
                 'trailer_er'=>function ($query) { $query->select('id','name'); },
                 'driver_er'=>function ($query) { $query->select('id','driver_name','driver_phone'); },
@@ -861,7 +861,7 @@ class WLStaffCarRepository {
         $id  = $post_data["id"];
         $query = WL_Staff_Record_Operation::select('*')
             ->with([
-                'creator'=>function($query) { $query->select(['id','username','true_name']); },
+                'creator'=>function($query) { $query->select(['id','name']); },
             ])
             ->where(['car_id'=>$id]);
 

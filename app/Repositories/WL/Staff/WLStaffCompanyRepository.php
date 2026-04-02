@@ -67,8 +67,8 @@ class WLStaffCompanyRepository {
         $query = WL_Common_Company::select(['id','item_status','name','company_category','company_type','leader_id','superior_company_id','remark','creator_id','created_at','updated_at','deleted_at'])
             ->withTrashed()
             ->with([
-                'creator'=>function($query) { $query->select(['id','username','true_name']); },
-                'leader'=>function($query) { $query->select(['id','username','true_name']); },
+                'creator'=>function($query) { $query->select(['id','name']); },
+                'leader'=>function($query) { $query->select(['id','name']); },
                 'superior_company_er'=>function($query) { $query->select(['id','name']); }
             ]);
 
@@ -84,7 +84,6 @@ class WLStaffCompanyRepository {
         if(!empty($post_data['remark'])) $query->where('remark', 'like', "%{$post_data['remark']}%");
         if(!empty($post_data['description'])) $query->where('description', 'like', "%{$post_data['description']}%");
         if(!empty($post_data['keyword'])) $query->where('content', 'like', "%{$post_data['keyword']}%");
-        if(!empty($post_data['username'])) $query->where('username', 'like', "%{$post_data['username']}%");
         if(!empty($post_data['mobile'])) $query->where('mobile', $post_data['mobile']);
 
         // 状态 [|]
@@ -183,7 +182,7 @@ class WLStaffCompanyRepository {
 
         $item = WL_Common_Company::withTrashed()
             ->with([
-                'leader'=>function($query) { $query->select('id','username'); },
+                'leader'=>function($query) { $query->select('id','name'); },
                 'superior_company_er'=>function($query) { $query->select('id','name'); }
             ])
             ->find($id);
@@ -722,7 +721,7 @@ class WLStaffCompanyRepository {
         $id  = $post_data["id"];
         $query = WL_Staff_Record_Operation::select('*')
             ->with([
-                'creator'=>function($query) { $query->select(['id','username','true_name']); },
+                'creator'=>function($query) { $query->select(['id','name']); },
             ])
             ->where(['company_id'=>$id]);
 

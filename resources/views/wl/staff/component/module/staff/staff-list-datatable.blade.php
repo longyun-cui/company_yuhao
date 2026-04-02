@@ -25,6 +25,7 @@
                     d._token = $('meta[name="_token"]').attr('content');
                     d.id = $('input[name="staff-id"]').val();
                     d.mobile = $('input[name="staff-mobile"]').val();
+                    d.name = $('input[name="staff-name"]').val();
                     d.username = $('input[name="staff-username"]').val();
                     d.department_district = $tableSearch.find('select[name="staff-department-district"]').val();
                     d.staff_type = $tableSearch.find('select[name="staff-type"]').val();
@@ -201,7 +202,7 @@
                     render: function(data, type, row, meta) {
                         if(data == 0) return '未知';
                         // return row.creator.true_name;
-                        if(row.creator) return '<a href="javascript:void(0);">'+row.creator.username+'</a>';
+                        if(row.creator) return '<a href="javascript:void(0);">'+row.creator.name+'</a>';
                         else return '--';
                     }
                 },

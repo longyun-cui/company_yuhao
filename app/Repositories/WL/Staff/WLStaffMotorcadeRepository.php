@@ -67,8 +67,8 @@ class WLStaffMotorcadeRepository {
         $query = WL_Common_Motorcade::select(['id','item_status','name','motorcade_category','motorcade_type','leader_id','remark','creator_id','created_at','updated_at','deleted_at'])
             ->withTrashed()
             ->with([
-                'creator'=>function($query) { $query->select(['id','username','true_name']); },
-                'leader'=>function($query) { $query->select(['id','username','true_name']); }
+                'creator'=>function($query) { $query->select(['id','name']); },
+                'leader'=>function($query) { $query->select(['id','name']); }
             ]);
 
         if(in_array($me->staff_type,[41,81]))
@@ -83,7 +83,6 @@ class WLStaffMotorcadeRepository {
         if(!empty($post_data['remark'])) $query->where('remark', 'like', "%{$post_data['remark']}%");
         if(!empty($post_data['description'])) $query->where('description', 'like', "%{$post_data['description']}%");
         if(!empty($post_data['keyword'])) $query->where('content', 'like', "%{$post_data['keyword']}%");
-        if(!empty($post_data['username'])) $query->where('username', 'like', "%{$post_data['username']}%");
         if(!empty($post_data['mobile'])) $query->where('mobile', $post_data['mobile']);
 
         // 状态 [|]
@@ -182,7 +181,7 @@ class WLStaffMotorcadeRepository {
 
         $item = WL_Common_Motorcade::withTrashed()
             ->with([
-                'leader'=>function($query) { $query->select('id','username'); }
+                'leader'=>function($query) { $query->select('id','name'); }
             ])
             ->find($item_id);
         if(!$item) return response_error([],"不存在警告，请刷新页面重试！");
@@ -720,7 +719,7 @@ class WLStaffMotorcadeRepository {
         $id  = $post_data["id"];
         $query = WL_Staff_Record_Operation::select('*')
             ->with([
-                'creator'=>function($query) { $query->select(['id','username','true_name']); },
+                'creator'=>function($query) { $query->select(['id','name']); },
             ])
             ->where(['motorcade_id'=>$id]);
 
