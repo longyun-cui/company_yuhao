@@ -279,7 +279,7 @@
                     "name": 'assign_date',
                     "data": 'assign_date',
                     "className": "",
-                    "width": "100px",
+                    "width": "90px",
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -326,7 +326,7 @@
                     "name": 'task_date',
                     "data": 'task_date',
                     "className": "",
-                    "width": "100px",
+                    "width": "90px",
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -562,39 +562,45 @@
                         var $copilot_html = '';
 
 
-                        if(row.car_owner_type == 1)
-                        {
-                            // 主驾
-                            if(row.driver_er != null)
-                            {
-                                $driver_id = row.driver_id;
-                                $driver_name = row.driver_er.driver_name;
-                                $driver_phone = row.driver_er.driver_phone;
+                        // if(row.car_owner_type == 1)
+                        // {
+                        //     // 主驾
+                        //     if(row.driver_er != null)
+                        //     {
+                        //         $driver_id = row.driver_id;
+                        //         $driver_name = row.driver_er.driver_name;
+                        //         $driver_phone = row.driver_er.driver_phone;
+                        //
+                        //         $driver_text = $driver_name + ' (' +  $driver_phone + ')';
+                        //         $driver_html = '<a class="driver-control" data-id="'+$driver_id+'" data-title="'+$driver_name+'">'+$driver_text+'</a> <br>';
+                        //     }
+                        //     // 副驾
+                        //     if(row.copilot_er != null)
+                        //     {
+                        //         $copilot_id = row.copilot_id;
+                        //         $copilot_name = row.copilot_er.driver_name;
+                        //         $copilot_phone = row.copilot_er.driver_phone;
+                        //
+                        //         $copilot_text = $copilot_name + ' (' +  $copilot_phone + ')';
+                        //         $copilot_html = '<a class="driver-control" data-id="'+$copilot_id+'" data-title="'+$copilot_name+'">'+$copilot_text+'</a>';
+                        //     }
+                        // }
+                        // else
+                        // {
+                        //     // 主驾
+                        //     if(row.driver_phone) $driver_html = row.driver_name + ' (' +  row.driver_phone + ') <br>';
+                        //     else $driver_html = row.copilot_name;
+                        //     // 副驾
+                        //     if(row.copilot_phone) $copilot_html = row.copilot_name + ' (' +  row.copilot_phone + ')';
+                        //     else $copilot_html = row.copilot_name;
+                        // }
 
-                                $driver_text = $driver_name + ' (' +  $driver_phone + ')';
-                                $driver_html = '<a class="driver-control" data-id="'+$driver_id+'" data-title="'+$driver_name+'">'+$driver_text+'</a> <br>';
-                            }
-                            // 副驾
-                            if(row.copilot_er != null)
-                            {
-                                $copilot_id = row.copilot_id;
-                                $copilot_name = row.copilot_er.driver_name;
-                                $copilot_phone = row.copilot_er.driver_phone;
-
-                                $copilot_text = $copilot_name + ' (' +  $copilot_phone + ')';
-                                $copilot_html = '<a class="driver-control" data-id="'+$copilot_id+'" data-title="'+$copilot_name+'">'+$copilot_text+'</a>';
-                            }
-                        }
-                        else
-                        {
-                            // 主驾
-                            if(row.driver_phone) $driver_html = row.driver_name + ' (' +  row.driver_phone + ') <br>';
-                            else $driver_html = row.copilot_name;
-                            // 副驾
-                            if(row.copilot_phone) $copilot_html = row.copilot_name + ' (' +  row.copilot_phone + ')';
-                            else $copilot_html = row.copilot_name;
-                        }
-
+                        // 主驾
+                        if(row.driver_phone) $driver_html = row.driver_name + ' (' +  row.driver_phone + ') <br>';
+                        else $driver_html = row.copilot_name;
+                        // 副驾
+                        if(row.copilot_phone) $copilot_html = row.copilot_name + ' (' +  row.copilot_phone + ')';
+                        else $copilot_html = row.copilot_name;
 
                         return $driver_html + $copilot_html;
                     }
