@@ -326,10 +326,10 @@
                             var $data_driver_er = $response.data.driver_er;
                             var $driver_option = new Option($data_driver_er.driver_name, $response.data.driver_id, true, true);
                             $modal.find('select[name="driver_id"]').append($driver_option).trigger('change');
-                            $modal.find('input[name=driver_name]').val($response.data.driver_name);
-                            $modal.find('input[name=driver_phone]').val($response.data.driver_phone);
-                            $modal.find('input[name=copilot_name]').val($response.data.copilot_name);
-                            $modal.find('input[name=copilot_phone]').val(e.params.data.copilot_phone);
+                            $modal.find('input[name=driver_name]').val($data_driver_er.driver_name);
+                            $modal.find('input[name=driver_phone]').val($data_driver_er.driver_phone);
+                            $modal.find('input[name=copilot_name]').val($data_driver_er.copilot_name);
+                            $modal.find('input[name=copilot_phone]').val($data_driver_er.copilot_phone);
                         }
                         // 副驾 (select2)
                         if($response.data.copilot_er)
