@@ -131,6 +131,14 @@
                     </div>
                 </div>
 
+                {{--任务编号--}}
+                <div class="form-group">
+                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 任务编号</label>
+                    <div class="col-md-9 ">
+                        <input type="text" class="form-control" name="task_number" placeholder="任务编号" value="" data-default="">
+                    </div>
+                </div>
+
                 {{--车辆所属--}}
                 <div class="form-group form-category" style="height:70px;">
                     <label class="control-label col-md-2"><sup class="text-red">*</sup> 车辆所属</label>

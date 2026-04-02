@@ -87,6 +87,7 @@
 
                         $modal.find('input[name="assign_date"]').val($response.data.assign_date);
                         $modal.find('input[name="task_date"]').val($response.data.task_date);
+                        $modal.find('input[name="task_number"]').val($response.data.task_number);
 
                         // 订单类型
                         $modal.find('input[name="order_type"]').prop('checked', false);
@@ -118,8 +119,9 @@
 
                         // 运费 & 油卡 & 信息费
                         $modal.find('input[name="freight_amount"]').val(parseFloat($response.data.freight_amount));
-                        $modal.find('input[name="oil_card_amount"]').val(parseFloat($response.data.oil_card_amount));
-                        $modal.find('input[name="information_fee"]').val(parseFloat($response.data.information_fee));
+                        $modal.find('input[name="freight_oil_card_amount"]').val(parseFloat($response.data.freight_oil_card_amount));
+                        $modal.find('input[name="financial_fee_for_information"]').val(parseFloat($response.data.financial_fee_for_information));
+
 
                         // radio 车辆所属
                         $modal.find('input[name="car_owner_type"]').prop('checked', false);
@@ -143,19 +145,43 @@
                         // select2 车挂
                         if($response.data.trailer_er)
                         {
-                            $modal.find('select[name="trailer_id"]').append(new Option($response.data.trailer_er.name, $response.data.trailer_id, true, true)).trigger('change');
+                            var $data_trailer_er = $response.data.trailer_er;
+                            var $trailer_html = $data_trailer_er.name;
+                            if($data_trailer_er.sub_name) $trailer_html += ' ('+$data_trailer_er.sub_name+')';
+                            var $trailer_option = new Option($trailer_html, $response.data.trailer_id, true, true);
+                            $modal.find('select[name="trailer_id"]').append($trailer_option).trigger('change');
                         }
 
-                        // select2 车辆
+                        // select2 驾驶员
+                        $modal.find('input[name=driver_name]').val('');
+                        $modal.find('input[name=driver_phone]').val('');
+                        $modal.find('input[name=copilot_name]').val('');
+                        $modal.find('input[name=copilot_phone]').val('');
+                        // if($response.data.driver_er)
+                        // {
+                        //     $modal.find('select[name="driver_id"]').append(new Option($response.data.driver_er.driver_name, $response.data.driver_id, true, true)).trigger('change');
+                        // }
+                        select2FirstOptionSelected($modal.find('select[name="driver_id"]'));
                         if($response.data.driver_er)
                         {
-                            $modal.find('select[name="driver_id"]').append(new Option($response.data.driver_er.driver_name, $response.data.driver_id, true, true)).trigger('change');
+                            var $data_driver_er = $response.data.driver_er;
+                            var $driver_html = $data_driver_er.driver_name
+                                + '('+$data_driver_er.driver_phone+')'
+                                + ' - '
+                                + $data_driver_er.copilot_name
+                                + '('+$data_driver_er.copilot_phone+')';
+                            var $driver_option = new Option($driver_html, $response.data.driver_id, true, true);
+                            $modal.find('select[name="driver_id"]').append($driver_option).trigger('change');
                         }
-                        // select2 车挂
-                        if($response.data.copilot_er)
-                        {
-                            $modal.find('select[name="copilot_id"]').append(new Option($response.data.copilot_er.driver_name, $response.data.copilot_id, true, true)).trigger('change');
-                        }
+                        $modal.find('input[name=driver_name]').val($response.data.driver_name);
+                        $modal.find('input[name=driver_phone]').val($response.data.driver_phone);
+                        $modal.find('input[name=copilot_name]').val($response.data.copilot_name);
+                        $modal.find('input[name=copilot_phone]').val($response.data.copilot_phone);
+                        // select2 副驾
+                        // if($response.data.copilot_er)
+                        // {
+                        //     $modal.find('select[name="copilot_id"]').append(new Option($response.data.copilot_er.driver_name, $response.data.copilot_id, true, true)).trigger('change');
+                        // }
 
                         $modal.find('input[name="external_car"]').val($response.data.external_car);
                         $modal.find('input[name="external_trailer"]').val($response.data.external_trailer);

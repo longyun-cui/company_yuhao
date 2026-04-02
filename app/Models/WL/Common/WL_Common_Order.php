@@ -52,6 +52,7 @@ class WL_Common_Order extends Model
 
         'assign_date',
         'task_date',
+        'task_number',
 
         'external_car',
         'external_trailer',
