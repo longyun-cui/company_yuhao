@@ -95,13 +95,22 @@
                     <label class="control-label col-md-2"><sup class="text-red">*</sup> 出发地 & 目的地</label>
                     <div class="col-md-9 ">
                         <div class="col-sm-6 col-md-6 padding-0">
-                            <input type="text" class="form-control" name="transport_departure_place" placeholder="出发地" value="" data-default="">
+                            <input type="text" class="form-control" name="transport_departure_place" placeholder="出发地" value="" data-default="" list="_transport_departure_place_title">
                         </div>
                         <div class="col-sm-6 col-md-6 padding-0">
-                            <input type="text" class="form-control" name="transport_destination_place" placeholder="目的地" value="" data-default="">
+                            <input type="text" class="form-control" name="transport_destination_place" placeholder="目的地" value="" data-default="" list="_transport_destination_place_title">
                         </div>
                     </div>
                 </div>
+                <datalist id="_transport_departure_place_title">
+                    <option value="质检3号仓-菜鸟8号仓" />
+                    <option value="质检1号仓-菜鸟6号仓" />
+                    <option value="质检2号仓-菜鸟7号仓" />
+                </datalist>
+                <datalist id="_transport_destination_place_title">
+                    <option value="南大区（鹤山、高明）" />
+                    <option value="北大区（三水、芦苞、大旺）" />
+                </datalist>
                 {{--里程 & 时效--}}
                 <div class="form-group" >
                     <label class="control-label col-md-2"><sup class="text-red">*</sup> 里程 & 时效</label>
