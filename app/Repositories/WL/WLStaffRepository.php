@@ -109,6 +109,40 @@ class WLStaffRepository {
 //        dd($wl_common_department_list);
         $view_data['wl_common_department_list'] = $wl_common_department_list;
 
+
+
+        // 客户
+        $client_list = WL_Common_Client::select('id','name')
+            ->where('active',1)
+            ->where('item_status',1)
+            ->orderBy('id','asc')
+            ->get();
+        $view_data['client_list'] = $client_list;
+        // 项目
+        $project_list = WL_Common_Project::select('id','name')
+            ->where('active',1)
+            ->where('item_status',1)
+            ->orderBy('id','asc')
+            ->get();
+        $view_data['project_list'] = $project_list;
+        // 车辆
+        $car_list = WL_Common_Car::select('id','name')
+            ->where('active',1)
+            ->where('item_status',1)
+            ->where('car_category',1)
+            ->orderBy('id','asc')
+            ->get();
+        $view_data['car_list'] = $car_list;
+        // 挂
+        $trailer_list = WL_Common_Car::select('id','name')
+            ->where('active',1)
+            ->where('item_status',1)
+            ->where('car_category',21)
+            ->orderBy('id','asc')
+            ->get();
+        $view_data['trailer_list'] = $trailer_list;
+
+
         $view_blade = env('TEMPLATE_WL_STAFF').'entrance.index';
         return view($view_blade)->with($view_data);
     }
