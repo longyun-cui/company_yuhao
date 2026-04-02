@@ -38,7 +38,7 @@
                     d.staff = $tableSearch.find('select[name="order-staff"]').val();
                     d.client = $tableSearch.find('select[name="order-client"]').val();
                     d.project = $tableSearch.find('select[name="order-project"]').val();
-                    d.car = $tableSearch.find('select[name="order-project"]').val();
+                    d.car = $tableSearch.find('select[name="order-car"]').val();
                     d.trailer = $tableSearch.find('select[name="order-trailer"]').val();
                     d.car_type = $tableSearch.find('select[name="order-car-type"]').val();
                     d.inspected_status = $tableSearch.find('select[name="order-inspected-status"]').val();
