@@ -27,7 +27,6 @@
                     d.mobile = $('input[name="driver-mobile"]').val();
                     d.name = $('input[name="driver-name"]').val();
                     d.username = $('input[name="driver-username"]').val();
-                    d.department_district = $tableSearch.find('select[name="driver-department-district"]').val();
                     d.user_type = $tableSearch.find('select[name="driver-user-type"]').val();
                     d.user_status = $tableSearch.find('select[name="driver-user-status"]').val();
                 },

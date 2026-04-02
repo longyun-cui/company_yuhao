@@ -19,17 +19,43 @@
                     <input readonly type="hidden" class="form-control" name="operate[item_type]" value="driver" data-default="driver">
 
 
+                    {{--驾驶员类型--}}
+                    <div class="form-group form-category">
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 驾驶员类型</label>
+                        <div class="col-md-9">
+                            <div class="btn-group">
+
+                                <button type="button" class="btn radio-btn">
+                                <span class="radio">
+                                    <label>
+                                        <input type="radio" name="driver_type" value="1" checked="checked"> 主驾
+                                    </label>
+                                </span>
+                                </button>
+
+                                <button type="button" class="btn radio-btn">
+                                <span class="radio">
+                                    <label>
+                                        <input type="radio" name="driver_type" value="11"> 副驾
+                                    </label>
+                                </span>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+
                     {{--主驾 姓名 & 手机号--}}
                     <div class="form-group">
                         <label class="control-label col-md-2"><sup class="text-red">*</sup> 主驾信息</label>
                         <div class="col-md-10 ">
-                            <div class="col-sm-4 col-md-4 padding-0">
+                            <div class="col-sm-4 col-md-3 padding-0">
                                 <input type="text" class="form-control" name="driver_name" placeholder="主驾姓名" value="">
                             </div>
-                            <div class="col-sm-4 col-md-4 padding-0">
+                            <div class="col-sm-4 col-md-3 padding-0">
                                 <input type="text" class="form-control" name="driver_phone" placeholder="主驾手机号" value="">
                             </div>
-                            <div class="col-sm-4 col-md-4 padding-0">
+                            <div class="col-sm-4 col-md-6 padding-0">
                                 <input type="text" class="form-control" name="driver_ID" placeholder="主驾身份证号" value="">
                             </div>
                         </div>
@@ -43,13 +69,16 @@
 {{--                    </div>--}}
                     {{--主驾-职称&入职时间--}}
                     <div class="form-group">
-                        <label class="control-label col-md-2">主驾-职称&入职时间</label>
+                        <label class="control-label col-md-2">主驾-职称&入职&离职</label>
                         <div class="col-md-10 ">
-                            <div class="col-sm-6 col-md-6 padding-0">
+                            <div class="col-sm-4 col-md-4 padding-0">
                                 <input type="text" class="form-control" name="driver_title" placeholder="主驾职称" value="">
                             </div>
-                            <div class="col-sm-6 col-md-6 padding-0">
+                            <div class="col-sm-4 col-md-4 padding-0">
                                 <input type="text" class="form-control date-picker" name="driver_entry_date" placeholder="主驾入职时间" value="" readonly="readonly">
+                            </div>
+                            <div class="col-sm-4 col-md-4 padding-0">
+                                <input type="text" class="form-control date-picker" name="driver_leave_date" placeholder="主驾离职时间" value="" readonly="readonly">
                             </div>
                         </div>
                     </div>
@@ -97,11 +126,14 @@
                     <div class="form-group">
                         <label class="control-label col-md-2">副驾-职称&入职时间</label>
                         <div class="col-md-10 ">
-                            <div class="col-sm-6 col-md-6 padding-0">
+                            <div class="col-sm-4 col-md-4 padding-0">
                                 <input type="text" class="form-control" name="copilot_title" placeholder="副驾职称" value="">
                             </div>
-                            <div class="col-sm-6 col-md-6 padding-0">
+                            <div class="col-sm-4 col-md-4 padding-0">
                                 <input type="text" class="form-control date-picker" name="copilot_entry_date" placeholder="副驾入职时间" value="" readonly="readonly">
+                            </div>
+                            <div class="col-sm-4 col-md-4 padding-0">
+                                <input type="text" class="form-control date-picker" name="copilot_leave_date" placeholder="副驾离职时间" value="" readonly="readonly">
                             </div>
                         </div>
                     </div>

@@ -435,7 +435,8 @@
                     "data": "car_id",
                     "className": "",
                     "width": "100px",
-                    "orderable": false,
+                    "orderable": true,
+                    "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
                         {

@@ -182,6 +182,7 @@
 
                         $modal.find('input[name="driver_title"]').val($response.data.driver_title);
                         $modal.find('input[name="driver_entry_date"]').val($response.data.driver_entry_date);
+                        $modal.find('input[name="driver_leave_date"]').val($response.data.driver_leave_date);
 
                         $modal.find('input[name="driver_emergency_contact_name"]').val($response.data.driver_emergency_contact_name);
                         $modal.find('input[name="driver_emergency_contact_phone"]').val($response.data.driver_emergency_contact_phone);
@@ -192,6 +193,7 @@
 
                         $modal.find('input[name="copilot_title"]').val($response.data.copilot_title);
                         $modal.find('input[name="copilot_entry_date"]').val($response.data.copilot_entry_date);
+                        $modal.find('input[name="copilot_leave_date"]').val($response.data.copilot_leave_date);
 
                         $modal.find('input[name="copilot_emergency_contact_name"]').val($response.data.copilot_emergency_contact_name);
                         $modal.find('input[name="copilot_emergency_contact_phone"]').val($response.data.copilot_emergency_contact_phone);
