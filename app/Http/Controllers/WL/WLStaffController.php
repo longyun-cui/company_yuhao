@@ -147,6 +147,11 @@ class WLStaffController extends Controller
 
 
 
+    // 【个人账号】修改密码
+    public function o1__my_account__password_change__save()
+    {
+        return $this->common_repo->o1__my_account__password_change__save(request()->all());
+    }
 
 
 

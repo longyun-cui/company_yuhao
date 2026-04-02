@@ -112,6 +112,50 @@ class WLStaffCommonRepository {
 
 
 
+    // 【账号】修改密码-保存数据
+    public function o1__my_account__password_change__save($post_data)
+    {
+        $messages = [
+            'password_pre.required' => '请输入旧密码',
+            'password_new.required' => '请输入新密码',
+            'password_confirm.required' => '请输入确认密码',
+        ];
+        $v = Validator::make($post_data, [
+            'password_pre' => 'required',
+            'password_new' => 'required',
+            'password_confirm' => 'required'
+        ], $messages);
+        if ($v->fails())
+        {
+            $messages = $v->errors();
+            return response_error([],$messages->first());
+        }
+
+        $password_pre = request()->get('password_pre');
+        $password_new = request()->get('password_new');
+        $password_confirm = request()->get('password_confirm');
+
+        if($password_new == $password_confirm)
+        {
+            $this->get_me();
+            $me = $this->me;
+            if(password_check($password_pre,$me->password))
+            {
+                $me->password = password_encode($password_new);
+                $bool = $me->save();
+                if($bool) return response_success([], '密码修改成功！');
+                else return response_fail([], '密码修改失败！');
+            }
+            else
+            {
+                return response_fail([], '原密码有误！');
+            }
+        }
+        else return response_error([],'两次密码输入不一致！');
+    }
+
+
+
 
     /*
      * select2

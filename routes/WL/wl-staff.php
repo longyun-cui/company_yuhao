@@ -28,6 +28,8 @@ Route::group(['middleware' => ['wl.staff.login']], function () {
     /*
      * 个人信息管理
      */
+    Route::post('/o1/my-account/edit', $controller.'@o1__my_account__edit');
+    Route::post('/o1/my-account/password-change/save', $controller.'@o1__my_account__password_change__save');
 
 
 

@@ -427,7 +427,14 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{ url('/my-account/my-profile-info-index') }}" class="btn btn-default btn-flat">个人资料</a>
+{{--                                <a href="{{ url('/my-account/my-profile-info-index') }}" class="btn btn-default btn-flat">个人资料</a>--}}
+                                <a type="button" onclick="" class="btn btn-default modal-show--for--my-account--password-change"
+                                   data-form-id="form--for--my-account--password-change"
+                                   data-modal-id="modal--for--my-account--password-change"
+                                   data-title="修改密码"
+                                >
+                                    <i class="fa- fa-plus--"></i> 修改密码
+                                </a>
                             </div>
                             <div class="pull-right">
                                 <a href="{{ url('/logout') }}" class="btn btn-default btn-flat">退出</a>

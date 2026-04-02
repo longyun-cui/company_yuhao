@@ -96,6 +96,10 @@
 </div>
 
 
+    {{--账号--}}
+    @include(env('TEMPLATE_WL_STAFF').'component.my-account.my-account--password-change')
+
+
     {{--导入--}}
 
 
@@ -167,6 +171,10 @@
     <script src="{{ asset('/resource/component/js/echarts-5.4.1.min.js') }}"></script>
 @endsection
 @section('custom-script')
+
+
+    {{--账号--}}
+    @include(env('TEMPLATE_WL_STAFF').'component.my-account.my-account-script')
 
 
     {{--公司--}}
