@@ -9,7 +9,7 @@
 
 
             {{--公司列表--}}
-            @if(in_array($me->staff_type,[0,1,9,11]))
+            @if(in_array($me->staff_category,[0,1,9]))
             <li class="treeview">
                 <a class="tab-control datatable-control"
                    data-type="create"
@@ -31,7 +31,7 @@
             </li>
             @endif
             {{--部门列表--}}
-            @if(in_array($me->staff_type,[0,1,9,11]))
+            @if(in_array($me->staff_category,[0,1,9]))
             <li class="treeview">
                 <a class="tab-control datatable-control"
                    data-type="create"
@@ -53,29 +53,29 @@
             </li>
             @endif
             {{--团队列表--}}
-            @if(in_array($me->staff_type,[0,1,9,11]))
-                <li class="treeview">
-                    <a class="tab-control datatable-control"
-                       data-type="create"
-                       data-unique="y"
-                       data-id="team-list"
-                       data-title='团队列表'
-                       data-content='<i class="fa fa-sitemap text-white"></i> 团队列表'
-                       data-icon='<i class="fa fa-sitemap text-blue"></i>'
+            @if(in_array($me->staff_category,[0,1,9]))
+            <li class="treeview">
+                <a class="tab-control datatable-control"
+                   data-type="create"
+                   data-unique="y"
+                   data-id="team-list"
+                   data-title='团队列表'
+                   data-content='<i class="fa fa-sitemap text-white"></i> 团队列表'
+                   data-icon='<i class="fa fa-sitemap text-blue"></i>'
 
-                       data-datatable-type="create"
-                       data-datatable-unique="y"
-                       data-datatable-id="datatable-team-list"
-                       data-datatable-target="team-list"
-                       data-datatable-clone-object="team-list-clone"
-                    >
-                        <i class="fa fa-sitemap text-white"></i>
-                        <span>团队列表</span>
-                    </a>
-                </li>
+                   data-datatable-type="create"
+                   data-datatable-unique="y"
+                   data-datatable-id="datatable-team-list"
+                   data-datatable-target="team-list"
+                   data-datatable-clone-object="team-list-clone"
+                >
+                    <i class="fa fa-sitemap text-white"></i>
+                    <span>团队列表</span>
+                </a>
+            </li>
             @endif
             {{--员工列表--}}
-            @if(in_array($me->staff_type,[0,1,9,11,81,84]))
+            @if(in_array($me->staff_category,[0,1,9]))
             <li class="treeview">
                 <a class="tab-control datatable-control"
                    data-type="create"
@@ -101,7 +101,7 @@
 
 
             {{--车队列表--}}
-            @if(in_array($me->staff_type,[0,1,9,11]))
+            @if(in_array($me->staff_category,[0,1,9]))
             <li class="treeview">
                 <a class="tab-control datatable-control"
                    data-type="create"
@@ -123,7 +123,7 @@
             </li>
             @endif
             {{--车辆列表--}}
-            @if(in_array($me->staff_type,[0,1,9,11]))
+            @if(in_array($me->staff_category,[0,1,9]))
             <li class="treeview">
                 <a class="tab-control datatable-control"
                    data-type="create"
@@ -145,7 +145,7 @@
             </li>
             @endif
             {{--司机列表--}}
-            @if(in_array($me->staff_type,[0,1,9,11]))
+            @if(in_array($me->staff_category,[0,1,9]))
             <li class="treeview">
                 <a class="tab-control datatable-control"
                    data-type="create"
@@ -170,7 +170,7 @@
             
             
             {{--客户列表--}}
-            @if(in_array($me->staff_type,[0,1,9,11,61]))
+            @if(in_array($me->staff_category,[0,1,9]))
             <li class="treeview _none-">
                 <a class="tab-control datatable-control"
                    data-type="create"
@@ -194,7 +194,7 @@
 
 
             {{--项目列表--}}
-            @if(in_array($me->staff_type,[0,1,9,11,41,61,71,81]))
+            @if(in_array($me->staff_category,[0,1,9]))
             <li class="treeview _none-">
                 <a class="tab-control datatable-control"
                    data-type="create"
@@ -241,6 +241,7 @@
                 </a>
             </li>
             {{--费用列表--}}
+            @if(in_array($me->staff_position,[0,1,9,11,41,61,71,81,99]))
             <li class="treeview">
                 <a class="tab-control datatable-control"
                    data-type="create"
@@ -260,7 +261,9 @@
                     <span>费用列表</span>
                 </a>
             </li>
+            @endif
             {{--财务列表--}}
+            @if(in_array($me->staff_position,[0,1,9,11,41,61,71,81,99]))
             <li class="treeview">
                 <a class="tab-control datatable-control"
                    data-type="create"
@@ -280,10 +283,11 @@
                     <span>财务列表</span>
                 </a>
             </li>
+            @endif
 
 
 
-            <li class="treeview _none-">
+            <li class="treeview _none">
                 <a class="tab-control datatable-control"
                    data-type="create"
                    data-unique="y"
@@ -308,8 +312,8 @@
 
 
             {{--交付日报--}}
-            @if(in_array($me->staff_type,[0,1,9,11,81,84]))
-            <li class="treeview">
+            @if(in_array($me->staff_position,[0,1,9,11,41]))
+            <li class="treeview _none">
                 <a class="tab-control datatable-control"
                    data-type="create"
                    data-unique="y"
@@ -332,7 +336,7 @@
             </li>
             @endif
             {{--成交记录--}}
-            @if(in_array($me->staff_type,[0,1,9,11,81,84,88]))
+            @if(in_array($me->staff_position,[0,1,9,11,81,84,88]))
             @endif
 
 
