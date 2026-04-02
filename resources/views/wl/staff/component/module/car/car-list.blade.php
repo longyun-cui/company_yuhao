@@ -27,8 +27,7 @@
 
 
             <input type="text" class="search-filter form-filter filter-keyup" name="car-id" placeholder="ID" />
-            <input type="text" class="search-filter form-filter filter-keyup" name="car-mobile" placeholder="工号" />
-            <input type="text" class="search-filter form-filter filter-keyup" name="car-username" placeholder="名称" />
+            <input type="text" class="search-filter form-filter filter-keyup" name="car-name" placeholder="车牌" />
 
             @if(in_array($me->user_type,[0,1,9,11]))
             <select class="search-filter form-filter filter-md select2-box-c" name="car-category">

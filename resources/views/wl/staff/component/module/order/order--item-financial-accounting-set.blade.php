@@ -149,12 +149,12 @@
                         </div>
                     </div>
                     {{--备注--}}
-{{--                    <div class="form-group">--}}
-{{--                        <label class="control-label col-md-3">备注</label>--}}
-{{--                        <div class="col-md-9 ">--}}
-{{--                            <textarea class="form-control" name="journey-description" rows="3" cols="100%"></textarea>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-3">备注</label>
+                        <div class="col-md-9 ">
+                            <textarea class="form-control" name="accounting_description" rows="3" cols="100%"></textarea>
+                        </div>
+                    </div>
 
 
                 </div>

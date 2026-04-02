@@ -1332,6 +1332,7 @@
                         $modal.find('input[name="accounting_loan"]').val($response.data.financial_fee_for_loan_cost);
 
                         $modal.find('input[name="accounting_others"]').val($response.data.financial_fee_for_others);
+                        $modal.find('input[name="accounting_description"]').val($response.data.financial_description);
 
 
 
