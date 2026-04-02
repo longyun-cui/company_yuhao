@@ -108,21 +108,30 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(data == 1)
+                        // if(data == 1)
+                        // {
+                        //     return '<small class="btn-xs bg-green">自有</small>';
+                        // }
+                        // else if(data == 11)
+                        // {
+                        //     return '<small class="btn-xs bg-teal">空单</small>';
+                        // }
+                        // else if(data == 41)
+                        // {
+                        //     return '<small class="btn-xs bg-blue">外配·配货</small>';
+                        // }
+                        // else if(data == 61)
+                        // {
+                        //     return '<small class="btn-xs bg-purple">外请·调车</small>';
+                        // }
+                        // else return "有误";
+                        if(row.car_owner_type == 1)
                         {
                             return '<small class="btn-xs bg-green">自有</small>';
                         }
-                        else if(data == 11)
+                        else if(row.car_owner_type == 11)
                         {
-                            return '<small class="btn-xs bg-teal">空单</small>';
-                        }
-                        else if(data == 41)
-                        {
-                            return '<small class="btn-xs bg-blue">外配·配货</small>';
-                        }
-                        else if(data == 61)
-                        {
-                            return '<small class="btn-xs bg-purple">外请·调车</small>';
+                            return '<small class="btn-xs bg-purple">外请</small>';
                         }
                         else return "有误";
                     }
