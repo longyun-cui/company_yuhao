@@ -57,7 +57,7 @@
             "fixedColumns": {
 
                 @if($me->department_district_id == 0)
-                "leftColumns": "@if($is_mobile_equipment) 1 @else 5 @endif",
+                "leftColumns": "@if($is_mobile_equipment) 1 @else 6 @endif",
                 "rightColumns": "@if($is_mobile_equipment) 0 @else 1 @endif",
                 @else
                 "leftColumns": "@if($is_mobile_equipment) 1 @else 4 @endif",
