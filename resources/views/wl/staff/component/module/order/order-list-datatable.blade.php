@@ -98,9 +98,9 @@
                     }
                 },
                 {
-                    "title": "订单类型",
+                    "title": "类型",
                     "className": "",
-                    "width": "80px",
+                    "width": "60px",
                     "data": "order_type",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
