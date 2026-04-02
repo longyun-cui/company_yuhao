@@ -697,6 +697,29 @@
                 //     }
                 // },
 
+                {
+                    "title": "车型",
+                    "name": "car_type",
+                    "data": "car_type",
+                    "className": "",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).addClass('modal-show--for--info-text-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name','车型');
+                            $(nTd).attr('data-key','car_type').attr('data-value',data);
+                            $(nTd).attr('data-column-name','车型');
+                            $(nTd).attr('data-text-type','text');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        return data;
+                    }
+                },
 
                 {
                     "title": "任务编号",
@@ -1289,7 +1312,7 @@
 
                 {
                     "title": "备注",
-                    "data": "remark",
+                    "data": "description",
                     "className": "text-left",
                     "width": "",
                     "orderable": false,
@@ -1298,7 +1321,7 @@
                         {
                             $(nTd).addClass('modal-show--for--info-text-set');
                             $(nTd).attr('data-id',row.id).attr('data-name','备注');
-                            $(nTd).attr('data-key','remark').attr('data-value',data);
+                            $(nTd).attr('data-key','description').attr('data-value',data);
                             $(nTd).attr('data-column-name','备注');
                             $(nTd).attr('data-text-type','textarea');
                             if(data) $(nTd).attr('data-operate-type','edit');

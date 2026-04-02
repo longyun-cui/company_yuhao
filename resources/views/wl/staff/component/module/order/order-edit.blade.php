@@ -1,6 +1,6 @@
 {{--编辑-工单--}}
 <div class="modal fade modal-main-body modal-wrapper" id="modal--for--order--item-edit">
-    <div class="modal-content col-md-8 col-md-offset-4 margin-top-16px margin-bottom-64px bg-white" style="margin-top:480px-;">
+    <div class="modal-content col-md-8 col-md-offset-4 margin-top-16px margin-bottom-64px bg-white">
         <div class="box- box-info- form-container">
 
             <div class="box-header with-border margin-top-16px">
@@ -43,7 +43,7 @@
                 </div>
 
                 {{--订单类型--}}
-                <div class="form-group form-category" style="height:70px;">
+                <div class="form-group form-category">
                     <label class="control-label col-md-3"><sup class="text-red">*</sup> 订单类型</label>
                     <div class="col-md-9">
                         <div class="btn-group">
@@ -149,7 +149,7 @@
                 </div>
 
                 {{--车辆所属--}}
-                <div class="form-group form-category" style="height:70px;">
+                <div class="form-group form-category">
                     <label class="control-label col-md-3"><sup class="text-red">*</sup> 车辆所属</label>
                     <div class="col-md-9">
                         <div class="btn-group">
@@ -171,6 +171,24 @@
                             </button>
 
                         </div>
+                    </div>
+                </div>
+
+                {{--车型--}}
+                <div class="form-group">
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 车型</label>
+                    <div class="col-md-9 ">
+                        <select class="form-control modal--select2 select2-reset"
+                                name="car_type"
+                                data-modal="#modal--for--order--item-edit"
+                        >
+                            <option value="">选择车型</option>
+                            @if(!empty(config('wl.common-config.car_type')))
+                                @foreach(config('wl.common-config.car_type') as $k => $v)
+                                    <option value ="{{ $v }}">{{ $v }}</option>
+                                @endforeach
+                            @endif
+                        </select>
                     </div>
                 </div>
 
@@ -258,22 +276,6 @@
                     </div>
                 </div>
 
-                {{--班次--}}
-                <div class="form-group">
-                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 车型</label>
-                    <div class="col-md-9 ">
-                        <select class="form-control modal-select2 select2-reset" name="car_type">
-                            <option value="">选择车型</option>
-                            <option value="7.6">7.6</option>
-                            <option value="9.6">9.6</option>
-                            <option value="12.5">12.5</option>
-                            <option value="16.5">16.5</option>
-                            <option value="150">150</option>
-                            <option value="180">180</option>
-                        </select>
-                    </div>
-                </div>
-
                 {{--安排人 & 收款人 & 车货源--}}
                 <div class="form-group">
                     <label class="control-label col-md-3">安排人 & 收款人 & 车货源</label>
@@ -290,28 +292,6 @@
                     </div>
                 </div>
 
-                {{--安排人--}}
-{{--                <div class="form-group">--}}
-{{--                    <label class="control-label col-md-3">安排人</label>--}}
-{{--                    <div class="col-md-9 ">--}}
-{{--                        <input type="text" class="form-control" name="arrange_people" placeholder="安排人" value="" data-default="">--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-                {{--收款人--}}
-{{--                <div class="form-group">--}}
-{{--                    <label class="control-label col-md-3">收款人</label>--}}
-{{--                    <div class="col-md-9 ">--}}
-{{--                        <input type="text" class="form-control" name="payee_name" placeholder="收款人" value="" data-default="">--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-                {{--车货源--}}
-{{--                <div class="form-group">--}}
-{{--                    <label class="control-label col-md-3">车货源</label>--}}
-{{--                    <div class="col-md-9 ">--}}
-{{--                        <input type="text" class="form-control" name="car_supply" placeholder="车货源" value="" data-default="">--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
 
                 {{--备注--}}
                 <div class="form-group">
@@ -322,38 +302,7 @@
                     </div>
                 </div>
 
-                {{--通话小结--}}
-                <div class="form-group _none">
-                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 通话小结</label>
-                    <div class="col-md-9 ">
-                        <p>要求：准确，全面，丰富</p>
-                        <p>范本：用户当前3颗后槽牙齿缺失，已经缺失半年，2颗下牙松动，之前没了解过种牙，好说话，要求下午3点前回电，同意医生助理联系</p>
-                    </div>
-                </div>
 
-
-                {{--班次--}}
-{{--                <div class="form-group">--}}
-{{--                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 班次</label>--}}
-{{--                    <div class="col-md-9 ">--}}
-{{--                        <div class="col-sm-4 col-md-4 padding-0">--}}
-{{--                            <div class="btn-group">--}}
-
-{{--                                <button type="button" class="btn">--}}
-{{--                                    <span class="radio">--}}
-{{--                                        <label><input type="radio" name="field_2" value="1" checked="checked"> 白班</label>--}}
-{{--                                    </span>--}}
-{{--                                </button>--}}
-{{--                                <button type="button" class="btn">--}}
-{{--                                    <span class="radio">--}}
-{{--                                        <label><input type="radio" name="field_2" value="9"> 夜班</label>--}}
-{{--                                    </span>--}}
-{{--                                </button>--}}
-
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
 
             </div>
             </form>

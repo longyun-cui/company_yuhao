@@ -134,6 +134,24 @@
 
 
 
+        // 通用
+        $('.modal--select2').each(function() {
+            var $that = $(this);
+
+            var $dropdownParent = $(document.body);
+            var $modalSelector = $that.data('modal');
+            if ($modalSelector)
+            {
+                $dropdownParent = $($modalSelector);
+            }
+
+            $that.select2({
+                dropdownParent: $dropdownParent.find('.modal-content'),
+                minimumInputLength: 0,
+                theme: 'classic'
+            });
+        });
+
 
 
         $('.select2-car').select2({
