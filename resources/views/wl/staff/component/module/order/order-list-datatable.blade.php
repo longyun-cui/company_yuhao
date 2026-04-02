@@ -842,8 +842,10 @@
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        $(nTd).attr('data-id',row.id).attr('data-name','运价');
-                        $(nTd).attr('data-key','amount').attr('data-value',parseFloat(data));
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','运价');
+                        $(nTd).attr('data-key','freight_amount');
+                        $(nTd).attr('data-value',parseFloat(data));
                         $(nTd).attr('data-column-name','运价');
                         $(nTd).addClass('color-blue');
                         $(nTd).addClass('_bold');
@@ -863,23 +865,26 @@
                     }
                 },
                 {
-                    "title": "运费现金",
-                    "name": "financial_receipt_for_freight_cash",
-                    "data": "financial_receipt_for_freight_cash",
+                    "title": "油卡",
+                    "data": "freight_oil_card_amount",
                     "className": "bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         $(nTd).attr('data-id',row.id);
-                        $(nTd).attr('data-name','运费现金');
-                        $(nTd).attr('data-key','financial_receipt_for_freight_cash');
+                        $(nTd).attr('data-name','油卡');
+                        $(nTd).attr('data-key','freight_oil_card_amount');
                         $(nTd).attr('data-value',parseFloat(data));
-                        $(nTd).addClass('color-green');
+                        $(nTd).attr('data-column-name','运价');
+                        $(nTd).addClass('color-blue');
+                        $(nTd).addClass('_bold');
 
-                        if(row.is_published != 0)
+                        if(row.is_completed != 1)
                         {
-                            $(nTd).addClass('modal-show--for--order-finance');
-                            $(nTd).attr('data-type','all');
+                            $(nTd).addClass('modal-show--for--info-text-set');
+                            $(nTd).attr('data-text-type','text');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -888,110 +893,136 @@
                         else return '--';
                     }
                 },
-                {
-                    "title": "运费油卡",
-                    "name": "financial_receipt_for_freight_oil_card",
-                    "data": "financial_receipt_for_freight_oil_card",
-                    "className": "bg-fee",
-                    "width": "60px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        $(nTd).attr('data-id',row.id);
-                        $(nTd).attr('data-name','运费油卡');
-                        $(nTd).attr('data-key','financial_receipt_for_freight_oil_card');
-                        $(nTd).attr('data-value',parseFloat(data));
-                        $(nTd).addClass('color-green');
-
-                        if(row.is_published != 0)
-                        {
-                            $(nTd).addClass('modal-show--for--order-finance');
-                            $(nTd).attr('data-type','all');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        var $data = parseFloat(data);
-                        if($data) return $data;
-                        else return '--';
-                    }
-                },
-                {
-                    "title": "油费",
-                    "name": "financial_fee_for_oil_total",
-                    "data": "financial_fee_for_oil_total",
-                    "className": "bg-fee",
-                    "width": "60px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        $(nTd).attr('data-id',row.id);
-                        $(nTd).attr('data-name','费用');
-                        $(nTd).attr('data-key','financial_fee_for_oil_total');
-                        $(nTd).attr('data-value',parseFloat(data));
-                        $(nTd).addClass('color-red');
-
-                        if(row.is_published != 0)
-                        {
-                            $(nTd).addClass('modal-show--for--order-finance');
-                            $(nTd).attr('data-type','all');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        var $data = parseFloat(data);
-                        if($data) return $data;
-                        else return '--';
-                    }
-                },
-                {
-                    "title": "过路费",
-                    "name": "financial_fee_for_toll_total",
-                    "data": "financial_fee_for_toll_total",
-                    "className": "bg-fee",
-                    "width": "60px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        $(nTd).attr('data-id',row.id);
-                        $(nTd).attr('data-name','费用');
-                        $(nTd).attr('data-key','financial_fee_for_toll_total');
-                        $(nTd).attr('data-value',parseFloat(data));
-                        $(nTd).addClass('color-red');
-
-                        if(row.is_published != 0)
-                        {
-                            $(nTd).addClass('modal-show--for--order-finance');
-                            $(nTd).attr('data-type','all');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        var $data = parseFloat(data);
-                        if($data) return $data;
-                        else return '--';
-                    }
-                },
-                {
-                    "title": "停车费",
-                    "name": "financial_fee_for_parking",
-                    "data": "financial_fee_for_parking",
-                    "className": "bg-fee",
-                    "width": "60px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        $(nTd).attr('data-id',row.id);
-                        $(nTd).attr('data-name','停车费');
-                        $(nTd).attr('data-key','financial_fee_for_parking');
-                        $(nTd).attr('data-value',parseFloat(data));
-                        $(nTd).addClass('color-red');
-
-                        if(row.is_published != 0)
-                        {
-                            $(nTd).addClass('modal-show--for--order-finance');
-                            $(nTd).attr('data-type','all');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        var $data = parseFloat(data);
-                        if($data) return $data;
-                        else return '--';
-                    }
-                },
+                // {
+                //     "title": "运费现金",
+                //     "name": "financial_receipt_for_freight_cash",
+                //     "data": "financial_receipt_for_freight_cash",
+                //     "className": "bg-fee",
+                //     "width": "60px",
+                //     "orderable": false,
+                //     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                //         $(nTd).attr('data-id',row.id);
+                //         $(nTd).attr('data-name','运费现金');
+                //         $(nTd).attr('data-key','financial_receipt_for_freight_cash');
+                //         $(nTd).attr('data-value',parseFloat(data));
+                //         $(nTd).addClass('color-green');
+                //
+                //         if(row.is_published != 0)
+                //         {
+                //             $(nTd).addClass('modal-show--for--order-finance');
+                //             $(nTd).attr('data-type','all');
+                //         }
+                //     },
+                //     render: function(data, type, row, meta) {
+                //         var $data = parseFloat(data);
+                //         if($data) return $data;
+                //         else return '--';
+                //     }
+                // },
+                // {
+                //     "title": "运费油卡",
+                //     "name": "financial_receipt_for_freight_oil_card",
+                //     "data": "financial_receipt_for_freight_oil_card",
+                //     "className": "bg-fee",
+                //     "width": "60px",
+                //     "orderable": false,
+                //     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                //         $(nTd).attr('data-id',row.id);
+                //         $(nTd).attr('data-name','运费油卡');
+                //         $(nTd).attr('data-key','financial_receipt_for_freight_oil_card');
+                //         $(nTd).attr('data-value',parseFloat(data));
+                //         $(nTd).addClass('color-green');
+                //
+                //         if(row.is_published != 0)
+                //         {
+                //             $(nTd).addClass('modal-show--for--order-finance');
+                //             $(nTd).attr('data-type','all');
+                //         }
+                //     },
+                //     render: function(data, type, row, meta) {
+                //         var $data = parseFloat(data);
+                //         if($data) return $data;
+                //         else return '--';
+                //     }
+                // },
+                // {
+                //     "title": "油费",
+                //     "name": "financial_fee_for_oil_total",
+                //     "data": "financial_fee_for_oil_total",
+                //     "className": "bg-fee",
+                //     "width": "60px",
+                //     "orderable": false,
+                //     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                //         $(nTd).attr('data-id',row.id);
+                //         $(nTd).attr('data-name','费用');
+                //         $(nTd).attr('data-key','financial_fee_for_oil_total');
+                //         $(nTd).attr('data-value',parseFloat(data));
+                //         $(nTd).addClass('color-red');
+                //
+                //         if(row.is_published != 0)
+                //         {
+                //             $(nTd).addClass('modal-show--for--order-finance');
+                //             $(nTd).attr('data-type','all');
+                //         }
+                //     },
+                //     render: function(data, type, row, meta) {
+                //         var $data = parseFloat(data);
+                //         if($data) return $data;
+                //         else return '--';
+                //     }
+                // },
+                // {
+                //     "title": "过路费",
+                //     "name": "financial_fee_for_toll_total",
+                //     "data": "financial_fee_for_toll_total",
+                //     "className": "bg-fee",
+                //     "width": "60px",
+                //     "orderable": false,
+                //     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                //         $(nTd).attr('data-id',row.id);
+                //         $(nTd).attr('data-name','费用');
+                //         $(nTd).attr('data-key','financial_fee_for_toll_total');
+                //         $(nTd).attr('data-value',parseFloat(data));
+                //         $(nTd).addClass('color-red');
+                //
+                //         if(row.is_published != 0)
+                //         {
+                //             $(nTd).addClass('modal-show--for--order-finance');
+                //             $(nTd).attr('data-type','all');
+                //         }
+                //     },
+                //     render: function(data, type, row, meta) {
+                //         var $data = parseFloat(data);
+                //         if($data) return $data;
+                //         else return '--';
+                //     }
+                // },
+                // {
+                //     "title": "停车费",
+                //     "name": "financial_fee_for_parking",
+                //     "data": "financial_fee_for_parking",
+                //     "className": "bg-fee",
+                //     "width": "60px",
+                //     "orderable": false,
+                //     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                //         $(nTd).attr('data-id',row.id);
+                //         $(nTd).attr('data-name','停车费');
+                //         $(nTd).attr('data-key','financial_fee_for_parking');
+                //         $(nTd).attr('data-value',parseFloat(data));
+                //         $(nTd).addClass('color-red');
+                //
+                //         if(row.is_published != 0)
+                //         {
+                //             $(nTd).addClass('modal-show--for--order-finance');
+                //             $(nTd).attr('data-type','all');
+                //         }
+                //     },
+                //     render: function(data, type, row, meta) {
+                //         var $data = parseFloat(data);
+                //         if($data) return $data;
+                //         else return '--';
+                //     }
+                // },
                 {
                     "title": "总费用",
                     "name": "financial_expense_total",
