@@ -482,7 +482,7 @@
                     "title": "车挂",
                     "data": "trailer_id",
                     "className": "",
-                    "width": "200px",
+                    "width": "120px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
@@ -795,52 +795,6 @@
                     },
                     render: function(data, type, row, meta) {
                         return data == null ? '--' : data;
-                    }
-                },
-                {
-                    "title": "距离(km)",
-                    "name": "transport_distance",
-                    "data": "transport_distance",
-                    "className": "bg-route",
-                    "width": "60px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1)
-                        {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','距离');
-                            $(nTd).attr('data-key','transport_distance').attr('data-value',data);
-                            $(nTd).attr('data-column-name','距离');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        if(!data) return '';
-                        else return data;
-                    }
-                },
-                {
-                    "title": "时效(H)",
-                    "data": "transport_time_limitation",
-                    "className": "",
-                    "width": "60px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1)
-                        {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','时效');
-                            $(nTd).attr('data-key','time_limitation_prescribed').attr('data-value',data);
-                            $(nTd).attr('data-column-name','时效');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        return convertMinutesToHoursAndMinutes(data);
                     }
                 },
 
@@ -1271,6 +1225,52 @@
                     },
                     render: function(data, type, row, meta) {
                         return data;
+                    }
+                },
+                {
+                    "title": "距离(km)",
+                    "name": "transport_distance",
+                    "data": "transport_distance",
+                    "className": "bg-route",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).addClass('modal-show--for--info-text-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name','距离');
+                            $(nTd).attr('data-key','transport_distance').attr('data-value',data);
+                            $(nTd).attr('data-column-name','距离');
+                            $(nTd).attr('data-text-type','text');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(!data) return '';
+                        else return data;
+                    }
+                },
+                {
+                    "title": "时效(H)",
+                    "data": "transport_time_limitation",
+                    "className": "",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).addClass('modal-show--for--info-text-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name','时效');
+                            $(nTd).attr('data-key','time_limitation_prescribed').attr('data-value',data);
+                            $(nTd).attr('data-column-name','时效');
+                            $(nTd).attr('data-text-type','text');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        return convertMinutesToHoursAndMinutes(data);
                     }
                 },
                 {
