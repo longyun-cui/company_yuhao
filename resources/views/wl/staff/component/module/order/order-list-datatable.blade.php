@@ -1042,7 +1042,9 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return parseFloat(data);
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
                     }
                 },
                 {
@@ -1065,7 +1067,9 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return parseFloat(data);
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
                     }
                 },
                 {
