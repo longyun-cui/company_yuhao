@@ -402,7 +402,7 @@ class WLStaffCommonRepository {
         $this->get_me();
         $me = $this->me;
 
-        $query = WL_Common_Car::select(['id','name as text','sub_name','trailer_id','driver_id','copilot_id'])
+        $query = WL_Common_Car::select(['id','name','sub_name','trailer_id','driver_id','copilot_id'])
             ->with([
                 'trailer_er'=>function($query) { $query->select('id','name','sub_name'); },
                 'driver_er'=>function($query) { $query->select('id','driver_name','driver_phone','copilot_name','copilot_phone'); },
@@ -426,7 +426,15 @@ class WLStaffCommonRepository {
 //            $query->where('car_type',$post_data['car_type']);
 //        }
 
-        $list = $query->orderBy('id','asc')->get()->toArray();
+        $list = $query->orderBy('id','asc')->get()
+            ->map(function ($item) {
+                $text = $item->name;
+
+                if($item->sub_name) $text .= ' ('.$item->sub_name.')';
+
+                $item->text = $text;
+                return $item;
+            })->toArray();
 
         $unSpecified = ['id'=>0,'text'=>'选择车辆'];
         array_unshift($list,$unSpecified);

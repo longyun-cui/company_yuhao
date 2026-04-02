@@ -174,7 +174,7 @@
                     "title": "默认车挂",
                     "data": "trailer_id",
                     "className": "text-center",
-                    "width": "120px",
+                    "width": "160px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1 && row.item_status != 97)
@@ -191,7 +191,7 @@
                     },
                     render: function(data, type, row, meta) {
                         if(row.trailer_er == null) return '--';
-                        else return '<a href="javascript:void(0);">'+row.trailer_er.name+'</a>';
+                        else return '<a href="javascript:void(0);">'+row.trailer_er.name+' ('+row.trailer_er.sub_name+')'+'</a>';
                     }
                 },
                 {
