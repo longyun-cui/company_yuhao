@@ -122,6 +122,9 @@
                         $modal.find('input[name="freight_oil_card_amount"]').val(parseFloat($response.data.freight_oil_card_amount));
                         $modal.find('input[name="financial_fee_for_information"]').val(parseFloat($response.data.financial_fee_for_information));
 
+                        $modal.find('input[name="financial_receipt_for_invoice_amount"]').val(parseFloat($response.data.financial_receipt_for_invoice_amount));
+                        $modal.find('input[name="financial_receipt_for_invoice_point"]').val(parseFloat($response.data.financial_receipt_for_invoice_point));
+
 
                         // radio 车辆所属
                         $modal.find('input[name="car_owner_type"]').prop('checked', false);

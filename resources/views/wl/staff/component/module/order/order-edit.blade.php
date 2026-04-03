@@ -140,6 +140,19 @@
                     </div>
                 </div>
 
+                {{--信息费--}}
+                <div class="form-group">
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 开票</label>
+                    <div class="col-md-9 ">
+                        <div class="col-sm-6 col-md-6 padding-0">
+                            <input type="text" class="form-control" name="financial_receipt_for_invoice_amount" placeholder="开票金额" value="0" data-default="0">
+                        </div>
+                        <div class="col-sm-6 col-md-6 padding-0">
+                            <input type="text" class="form-control" name="financial_receipt_for_invoice_point" placeholder="开票点" value="0.00" data-default="0.00">
+                        </div>
+                    </div>
+                </div>
+
                 {{--任务编号--}}
                 <div class="form-group">
                     <label class="control-label col-md-3"><sup class="text-red">*</sup> 任务编号</label>

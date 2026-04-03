@@ -914,6 +914,64 @@
                     }
                 },
                 {
+                    "title": "开票金额",
+                    "data": "financial_receipt_for_invoice_amount",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','开票金额');
+                        $(nTd).attr('data-key','financial_receipt_for_invoice_amount');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).attr('data-column-name','开票金额');
+                        $(nTd).addClass('color-blue');
+                        $(nTd).addClass('_bold');
+
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).addClass('modal-show--for--info-text-set');
+                            $(nTd).attr('data-text-type','text');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "票点",
+                    "data": "financial_receipt_for_invoice_point",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','票点');
+                        $(nTd).attr('data-key','financial_receipt_for_invoice_point');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).attr('data-column-name','票点');
+                        $(nTd).addClass('color-blue');
+                        $(nTd).addClass('_bold');
+
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).addClass('modal-show--for--info-text-set');
+                            $(nTd).attr('data-text-type','text');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
                     "title": "请车价",
                     "data": "external_car_price",
                     "className": "bg-fee",
