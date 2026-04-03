@@ -414,7 +414,7 @@
                     "title": "项目",
                     "data": "project_id",
                     "className": "",
-                    "width": "100px",
+                    "width": "80px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
