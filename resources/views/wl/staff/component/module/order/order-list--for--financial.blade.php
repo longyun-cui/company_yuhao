@@ -31,16 +31,16 @@
 {{--            @endif--}}
 
             {{--选择客户--}}
-            @if(in_array($me->user_type,[0,1,9,11,61,66]))
-            <select class="search-filter form-filter filter-lg select2-box-c select2--client-c-" name="order-client">
-                <option value="-1">选择客户</option>
-                @if(!empty($client_list) && count($client_list) > 0)
-                    @foreach($client_list as $v)
-                        <option value="{{ $v->id }}">{{ $v->name }}</option>
-                    @endforeach
-                @endif
-            </select>
-            @endif
+{{--            @if(in_array($me->user_type,[0,1,9,11,61,66]))--}}
+{{--            <select class="search-filter form-filter filter-lg select2-box-c select2--client-c-" name="order-client">--}}
+{{--                <option value="-1">选择客户</option>--}}
+{{--                @if(!empty($client_list) && count($client_list) > 0)--}}
+{{--                    @foreach($client_list as $v)--}}
+{{--                        <option value="{{ $v->id }}">{{ $v->name }}</option>--}}
+{{--                    @endforeach--}}
+{{--                @endif--}}
+{{--            </select>--}}
+{{--            @endif--}}
 
             {{--选择项目--}}
             <select class="search-filter form-filter filter-lg select2-box-c select2--project-c-" name="order-project">
