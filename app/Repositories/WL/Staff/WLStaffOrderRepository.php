@@ -156,6 +156,8 @@ class WLStaffOrderRepository {
         if(!empty($post_data['tag'])) $query->where('tag', 'like', "%{$post_data['tag']}%");
 
         if(!empty($post_data['assign'])) $query->where('assign_date', $post_data['assign']);
+        if(!empty($post_data['assign_date'])) $query->where('assign_date', $post_data['assign_date']);
+        if(!empty($post_data['task_date'])) $query->where('assign_date', $post_data['task_date']);
         if(!empty($post_data['assign_start'])) $query->where('assign_date', '>=', $post_data['assign_start']);
         if(!empty($post_data['assign_ended'])) $query->where('assign_date', '<=', $post_data['assign_ended']);
 

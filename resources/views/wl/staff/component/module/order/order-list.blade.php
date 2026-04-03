@@ -58,7 +58,7 @@
                         <div class="box-body">
                             <label class="col-md-3">ID</label>
                             <div class="col-md-9 filter-body">
-                                <input type="text" class="form-control form-filter filter-keyup" name="order-id" placeholder="ID" value="" />
+                                <input type="text" class="form-control form-filter filter-keyup" name="order-id-" placeholder="ID" value="" />
                             </div>
                         </div>
 
@@ -66,7 +66,7 @@
                         <div class="box-body">
                             <label class="col-md-3">派车日期</label>
                             <div class="col-md-9 filter-body">
-                                <input type="text" class="form-control form-filter filter-keyup date-picker-c" name="order-assign-date" placeholder="指派日期" value="" readonly="readonly" />
+                                <input type="text" class="form-control form-filter filter-keyup date-picker-c" name="order-assign-date-" placeholder="指派日期" value="" readonly="readonly" />
                             </div>
                         </div>
 
@@ -74,7 +74,7 @@
                         <div class="box-body">
                             <label class="col-md-3">任务日期</label>
                             <div class="col-md-9 filter-body">
-                                <input type="text" class="form-control form-filter filter-keyup date-picker-c" name="order-task-date" placeholder="任务日期" value="" readonly="readonly" />
+                                <input type="text" class="form-control form-filter filter-keyup date-picker-c" name="order-task-date-" placeholder="任务日期" value="" readonly="readonly" />
                             </div>
                         </div>
 
