@@ -1054,6 +1054,106 @@
                     }
                 },
                 {
+                    "title": "公里数",
+                    "name": "oil_mileage",
+                    "data": "oil_mileage",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','公里数');
+                        $(nTd).attr('data-key','oil_mileage');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "油耗",
+                    "name": "oil_consumption",
+                    "data": "oil_consumption",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','油耗');
+                        $(nTd).attr('data-key','oil_consumption');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "油价",
+                    "name": "oil_unit_price",
+                    "data": "oil_unit_price",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','油价');
+                        $(nTd).attr('data-key','oil_unit_price');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "油费-油卡",
+                    "name": "financial_fee_for_oil_card",
+                    "data": "financial_fee_for_oil_card",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','油费-油卡');
+                        $(nTd).attr('data-key','financial_fee_for_oil_card');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "油费-现金",
+                    "name": "financial_fee_for_oil_cash",
+                    "data": "financial_fee_for_oil_cash",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','油费-现金');
+                        $(nTd).attr('data-key','financial_fee_for_oil_cash');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
                     "title": "油费",
                     "name": "financial_fee_for_oil_total",
                     "data": "financial_fee_for_oil_total",
@@ -1184,6 +1284,126 @@
                         $(nTd).attr('data-id',row.id);
                         $(nTd).attr('data-name','管理费');
                         $(nTd).attr('data-key','financial_fee_for_administrative');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "维修费",
+                    "name": "financial_fee_for_repair_cost",
+                    "data": "financial_fee_for_repair_cost",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','维修费');
+                        $(nTd).attr('data-key','financial_fee_for_repair_cost');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "保养费",
+                    "name": "financial_fee_for_maintenance_cost",
+                    "data": "financial_fee_for_maintenance_cost",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','保养费');
+                        $(nTd).attr('data-key','financial_fee_for_maintenance_cost');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "审核费",
+                    "name": "financial_fee_for_inspection_cost",
+                    "data": "financial_fee_for_inspection_cost",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','审核费');
+                        $(nTd).attr('data-key','financial_fee_for_inspection_cost');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "过户费",
+                    "name": "financial_fee_for_transfer_cost",
+                    "data": "financial_fee_for_transfer_cost",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','过户费');
+                        $(nTd).attr('data-key','financial_fee_for_transfer_cost');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "保险费",
+                    "name": "financial_fee_for_insurance_cost",
+                    "data": "financial_fee_for_insurance_cost",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','保险费');
+                        $(nTd).attr('data-key','financial_fee_for_insurance_cost');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "贷款费用",
+                    "name": "financial_fee_for_loan_cost",
+                    "data": "financial_fee_for_loan_cost",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','贷款费用');
+                        $(nTd).attr('data-key','financial_fee_for_loan_cost');
                         $(nTd).attr('data-value',parseFloat(data));
                         $(nTd).addClass('color-red');
                     },
