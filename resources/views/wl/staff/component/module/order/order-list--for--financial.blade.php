@@ -13,7 +13,7 @@
             <input type="text" class="search-filter form-filter filter-md filter-keyup date-picker-c" name="order-assign-date" placeholder="派车日期" value="" readonly="readonly" />
 
             {{--任务日期--}}
-            <input type="text" class="search-filter form-filter filter-md filter-keyup month-picker-c" name="order-task-date" placeholder="任务日期" value="" readonly="readonly" />
+            <input type="text" class="search-filter form-filter filter-md filter-keyup date-picker-c" name="order-task-date" placeholder="任务日期" value="" readonly="readonly" />
 
 
             {{--选择团队--}}
