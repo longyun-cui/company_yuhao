@@ -41,6 +41,7 @@
                     d.car = $tableSearch.find('select[name="order-car"]').val();
                     d.trailer = $tableSearch.find('select[name="order-trailer"]').val();
                     d.car_type = $tableSearch.find('select[name="order-car-type"]').val();
+                    d.car_owner_type = $tableSearch.find('select[name="order-car-owner-type"]').val();
                     d.inspected_status = $tableSearch.find('select[name="order-inspected-status"]').val();
                     d.inspected_result = $tableSearch.find('select[name="order-inspected-result[]"]').val();
                     d.delivered_status = $tableSearch.find('select[name="order-delivered-status"]').val();

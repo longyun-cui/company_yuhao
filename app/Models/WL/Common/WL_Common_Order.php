@@ -146,6 +146,7 @@ class WL_Common_Order extends Model
         'financial_fee_for_insurance_cost',
         'financial_fee_for_loan_cost',
         'financial_fee_for_others',
+        'financial_description',
 
 
 

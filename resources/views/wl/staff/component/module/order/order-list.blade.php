@@ -172,6 +172,23 @@
                 @endif
             </select>
 
+            {{--选择车辆所有人--}}
+            <select class="search-filter form-filter filter-lg select2-box-c" name="order-car-owner-type">
+                <option value="-1">选择车辆所有人</option>
+                <option value="1">自有</option>
+                <option value="11">外请</option>
+            </select>
+
+            {{--选择车型--}}
+            <select class="search-filter form-filter filter-lg select2-box-c" name="order-car-type">
+                <option value="">选择车型</option>
+                @if(!empty(config('wl.common-config.car_type')))
+                    @foreach(config('wl.common-config.car_type') as $k => $v)
+                        <option value="{{ $v }}">{{ $v }}</option>
+                    @endforeach
+                @endif
+            </select>
+
 
 
 

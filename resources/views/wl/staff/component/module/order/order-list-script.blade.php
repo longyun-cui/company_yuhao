@@ -1306,32 +1306,32 @@
                         $modal.find('input[name="accounting_invoice_amount"]').val(parseFloat($response.data.financial_receipt_for_invoice_amount));
                         $modal.find('input[name="accounting_invoice_point"]').val(parseFloat($response.data.financial_receipt_for_invoice_point));
 
-                        $modal.find('input[name="accounting_oil_total"]').val($response.data.financial_fee_for_oil_total);
-                        $modal.find('input[name="accounting_oil_card"]').val($response.data.financial_fee_for_oil_card);
-                        $modal.find('input[name="accounting_oil_cash"]').val($response.data.financial_fee_for_oil_cash);
-                        $modal.find('input[name="accounting_oil_mileage"]').val($response.data.oil_mileage);
-                        $modal.find('input[name="accounting_oil_consumption"]').val($response.data.oil_consumption);
-                        $modal.find('input[name="accounting_oil_unit_price"]').val($response.data.oil_unit_price);
+                        $modal.find('input[name="accounting_oil_total"]').val(parseFloat($response.data.financial_fee_for_oil_total));
+                        $modal.find('input[name="accounting_oil_card"]').val(parseFloat($response.data.financial_fee_for_oil_card));
+                        $modal.find('input[name="accounting_oil_cash"]').val(parseFloat($response.data.financial_fee_for_oil_cash));
+                        $modal.find('input[name="accounting_oil_mileage"]').val(parseFloat($response.data.oil_mileage));
+                        $modal.find('input[name="accounting_oil_consumption"]').val(parseFloat($response.data.oil_consumption));
+                        $modal.find('input[name="accounting_oil_unit_price"]').val(parseFloat($response.data.oil_unit_price));
 
-                        $modal.find('input[name="accounting_toll_etc"]').val($response.data.financial_fee_for_toll_etc);
-                        $modal.find('input[name="accounting_toll_cash"]').val($response.data.financial_fee_for_toll_cash);
+                        $modal.find('input[name="accounting_toll_etc"]').val(parseFloat($response.data.financial_fee_for_toll_etc));
+                        $modal.find('input[name="accounting_toll_cash"]').val(parseFloat($response.data.financial_fee_for_toll_cash));
 
-                        $modal.find('input[name="accounting_parking"]').val($response.data.financial_fee_for_parking);
+                        $modal.find('input[name="accounting_parking"]').val(parseFloat($response.data.financial_fee_for_parking));
 
-                        $modal.find('input[name="accounting_salary"]').val($response.data.financial_fee_for_salary);
-                        $modal.find('input[name="accounting_bonus"]').val($response.data.financial_fee_for_bonus);
+                        $modal.find('input[name="accounting_salary"]').val(parseFloat($response.data.financial_fee_for_salary));
+                        $modal.find('input[name="accounting_bonus"]').val(parseFloat($response.data.financial_fee_for_bonus));
 
-                        $modal.find('input[name="accounting_information"]').val($response.data.financial_fee_for_information);
-                        $modal.find('input[name="accounting_administrative"]').val($response.data.financial_fee_for_administrative);
+                        $modal.find('input[name="accounting_information"]').val(parseFloat($response.data.financial_fee_for_information));
+                        $modal.find('input[name="accounting_administrative"]').val(parseFloat($response.data.financial_fee_for_administrative));
 
-                        $modal.find('input[name="accounting_repair"]').val($response.data.financial_fee_for_repair_cost);
-                        $modal.find('input[name="accounting_maintenance"]').val($response.data.financial_fee_for_maintenance_cost);
-                        $modal.find('input[name="accounting_inspection"]').val($response.data.financial_fee_for_inspection_cost);
-                        $modal.find('input[name="accounting_transfer"]').val($response.data.financial_fee_for_transfer_cost);
-                        $modal.find('input[name="accounting_insurance"]').val($response.data.financial_fee_for_insurance_cost);
-                        $modal.find('input[name="accounting_loan"]').val($response.data.financial_fee_for_loan_cost);
+                        $modal.find('input[name="accounting_repair"]').val(parseFloat($response.data.financial_fee_for_repair_cost));
+                        $modal.find('input[name="accounting_maintenance"]').val(parseFloat($response.data.financial_fee_for_maintenance_cost));
+                        $modal.find('input[name="accounting_inspection"]').val(parseFloat($response.data.financial_fee_for_inspection_cost));
+                        $modal.find('input[name="accounting_transfer"]').val(parseFloat($response.data.financial_fee_for_transfer_cost));
+                        $modal.find('input[name="accounting_insurance"]').val(parseFloat($response.data.financial_fee_for_insurance_cost));
+                        $modal.find('input[name="accounting_loan"]').val(parseFloat($response.data.financial_fee_for_loan_cost));
 
-                        $modal.find('input[name="accounting_others"]').val($response.data.financial_fee_for_others);
+                        $modal.find('input[name="accounting_others"]').val(parseFloat($response.data.financial_fee_for_others));
                         $modal.find('input[name="accounting_description"]').val($response.data.financial_description);
 
 

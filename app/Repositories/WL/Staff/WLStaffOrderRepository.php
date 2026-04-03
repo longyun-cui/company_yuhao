@@ -233,6 +233,19 @@ class WLStaffOrderRepository {
             }
         }
 
+        // 车辆所有人
+        if(isset($post_data['car_owner_type']))
+        {
+            $car_owner_type_int = intval($post_data['car_owner_type']);
+            if(!in_array($car_owner_type_int,[-1,0]))
+            {
+                $query->where('car_owner_type', $car_owner_type_int);
+            }
+        }
+
+        // 车型
+        if(!empty($post_data['car_type'])) $query->where('car_type', $post_data['car_type']);
+
 
         // 工单类型 []
         if(isset($post_data['item_type']))
