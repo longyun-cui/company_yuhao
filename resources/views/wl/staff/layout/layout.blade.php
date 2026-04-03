@@ -85,7 +85,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     {{--<link rel="stylesheet" href="https://cdn.bootcss.com/select2/4.0.5/css/select2.min.css">--}}
     <link rel="stylesheet" href="{{ asset('/lib/css/select2-4.0.5.min.css') }}">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+{{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">--}}
 
 
     <link rel="stylesheet" href="{{ asset('/resource/common/css/common.css') }}" media="all" />
@@ -210,8 +210,8 @@ desired effect
 {{--<script src="{{ asset('/resource/component/js/echarts-3.7.2.min.js') }}"></script>--}}
 <script src="{{ asset('/resource/component/js/echarts-5.4.1.min.js') }}"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/zh.js"></script>
+{{--<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>--}}
+{{--<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/zh.js"></script>--}}
 
 
 {{--layout-script--}}
