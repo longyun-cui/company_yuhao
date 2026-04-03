@@ -2,7 +2,7 @@
     // 设置中文
     moment.locale('zh-cn');
 
-    var $wl_common_department_list = {!! json_encode($wl_common_department_list, JSON_HEX_TAG)!!};
+    {{--var $wl_common_department_list = {!! json_encode($wl_common_department_list, JSON_HEX_TAG)!!};--}}
     // console.log($wl_common_department_list);
 
 
