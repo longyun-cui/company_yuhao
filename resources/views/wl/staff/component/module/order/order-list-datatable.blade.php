@@ -6,16 +6,17 @@
         let $tableSearch = $datatable_wrapper.find('.datatable-search-box');
 
         $($tableId).DataTable({
-            "aLengthMenu": [[10, 50, 200], ["10", "50", "200"]],
+            "aLengthMenu": [[50, 200], ["50", "200"]],
             "processing": true,
             "serverSide": true,
             "searching": true,
             "pagingType": "simple_numbers",
-            "sDom": '<"dataTables_length_box"l> <"dataTables_info_box"i> <"dataTables_paginate_box"p> <t> <"dataTables_length_box"l> <"dataTables_info_box"i> <"dataTables_paginate_box"p>',
+            "sDom": '<"dataTables_length_box"l> <"dataTables_info_box"i> <"dataTables_paginate_box"p> <t>',
             "order": [],
             "orderCellsTop": true,
             "scrollX": true,
 //                "scrollY": true,
+            "scrollY": ($(document).height() - 298)+"px",
             "scrollCollapse": true,
             "showRefresh": true,
             "ajax": {

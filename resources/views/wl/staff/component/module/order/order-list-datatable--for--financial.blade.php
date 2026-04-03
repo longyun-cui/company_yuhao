@@ -16,6 +16,7 @@
             "orderCellsTop": true,
             "scrollX": true,
 //                "scrollY": true,
+            "scrollY": ($(document).height() - 298)+"px",
             "scrollCollapse": true,
             "showRefresh": true,
             "ajax": {
