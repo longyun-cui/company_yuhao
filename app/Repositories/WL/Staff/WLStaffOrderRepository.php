@@ -464,7 +464,6 @@ class WLStaffOrderRepository {
         if($operate_type == 'create') // 添加 ( $id==0，添加一个新用户 )
         {
             $mine = new WL_Common_Order;
-            $post_data["item_category"] = 1;
             $post_data["active"] = 1;
             $post_data["creator_id"] = $me->id;
         }
@@ -517,6 +516,28 @@ class WLStaffOrderRepository {
             if(!$copilot) return response_error([],"选择【副驾】不存在，刷新页面重试！");
         }
 
+
+        if($operate_type == 'create') // 添加 ( $id==0，添加一个新用户 )
+        {
+            $repeat = WL_Common_Order::select('*')
+                ->where('project_id',$post_data['project_id'])
+                ->where('car_id',$post_data['car_id'])
+                ->where('task_date',$post_data['task_date'])
+                ->first();
+            if($repeat) return response_error([],"该订单已存在！！");
+
+        }
+
+
+        $msg = '';
+        $assigned = WL_Common_Order::select('*')
+            ->where('car_id',$post_data['car_id'])
+            ->where('task_date',$post_data['task_date'])
+            ->get();
+        if(count($assigned) > 0)
+        {
+            $msg = '该车辆【'.$car->name.'】【'.$post_data['task_date'].'】已安排任务';
+        }
 
 
         if($post_data['car_owner_type'] == 1)
@@ -590,7 +611,7 @@ class WLStaffOrderRepository {
             else throw new Exception("WL_Common_Order--insert--fail");
 
             DB::commit();
-            return response_success(['id'=>$mine->id]);
+            return response_success(['id'=>$mine->id],$msg);
         }
         catch (Exception $e)
         {
