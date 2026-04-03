@@ -226,7 +226,7 @@
                    data-type="create"
                    data-unique="y"
                    data-id="order-list"
-                   data-title='订单'
+                   data-title='订单列表'
                    data-content='<i class="fa fa-file-text text-orange"></i> 订单列表'
                    data-icon='<i class="fa fa-file-text text-orange"></i>'
 
@@ -238,6 +238,26 @@
                 >
                     <i class="fa fa-file-text text-orange"></i>
                     <span>订单列表</span>
+                </a>
+            </li>
+            {{--工单列表--}}
+            <li class="treeview _none-">
+                <a class="tab-control datatable-control"
+                   data-type="create"
+                   data-unique="y"
+                   data-id="order-list--for--financial"
+                   data-title='订单(财务)'
+                   data-content='<i class="fa fa-file-text text-red"></i> 订单列表(财务)'
+                   data-icon='<i class="fa fa-file-text text-red"></i>'
+
+                   data-datatable-type="create"
+                   data-datatable-unique="y"
+                   data-datatable-id="datatable-order-list--for--financial"
+                   data-datatable-target="order-list--for--financial"
+                   data-datatable-clone-object="order-list--for--financial-clone"
+                >
+                    <i class="fa fa-file-text text-red"></i>
+                    <span>订单列表(财务)</span>
                 </a>
             </li>
             {{--费用列表--}}

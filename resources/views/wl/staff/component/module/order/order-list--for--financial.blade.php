@@ -1,0 +1,186 @@
+<div class="row datatable-body datatable-wrapper order-list--for--financial-clone" data-datatable-item-category="order" data-item-name="工单">
+
+
+    <div class="col-md-12 datatable-search-row datatable-search-box">
+
+
+        <div class="pull-right _none-">
+
+            {{--ID--}}
+            <input type="text" class="search-filter form-filter filter-sm filter-keyup" name="order-id" placeholder="ID" value="" />
+
+            {{--派车日期--}}
+            <input type="text" class="search-filter form-filter filter-md filter-keyup date-picker-c" name="order-assign-date" placeholder="派车日期" value="" readonly="readonly" />
+
+            {{--任务日期--}}
+            <input type="text" class="search-filter form-filter filter-md filter-keyup month-picker-c" name="order-task-date" placeholder="任务日期" value="" readonly="readonly" />
+
+
+            {{--选择团队--}}
+{{--            @if(in_array($me->user_type,[0,1,9,11,61,66,71,77]))--}}
+{{--            <select class="search-filter form-filter filter-lg select2-team-c" name="order-team">--}}
+{{--                <option value="-1">选择团队</option>--}}
+{{--            </select>--}}
+{{--            @endif--}}
+
+            {{--选择员工--}}
+{{--            @if(in_array($me->user_type,[0,1,9,11,41,81,84]))--}}
+{{--            <select class="search-filter form-filter filter-lg select2-staff-c" name="order-staff">--}}
+{{--                <option value="-1">选择员工</option>--}}
+{{--            </select>--}}
+{{--            @endif--}}
+
+            {{--选择客户--}}
+            @if(in_array($me->user_type,[0,1,9,11,61,66]))
+            <select class="search-filter form-filter filter-lg select2-box-c select2--client-c-" name="order-client">
+                <option value="-1">选择客户</option>
+                @if(!empty($client_list) && count($client_list) > 0)
+                    @foreach($client_list as $v)
+                        <option value="{{ $v->id }}">{{ $v->name }}</option>
+                    @endforeach
+                @endif
+            </select>
+            @endif
+
+            {{--选择项目--}}
+            <select class="search-filter form-filter filter-lg select2-box-c select2--project-c-" name="order-project">
+                <option value="-1">选择项目</option>
+                @if(!empty($project_list) && count($project_list) > 0)
+                    @foreach($project_list as $v)
+                        <option value="{{ $v->id }}">{{ $v->name }}</option>
+                    @endforeach
+                @endif
+            </select>
+
+
+            {{--选择车辆--}}
+            <select class="search-filter form-filter filter-lg select2-box-c select2--car-c-" name="order-car" data-car-type="1">
+                <option value="-1">选择车辆</option>
+                @if(!empty($car_list) && count($car_list) > 0)
+                    @foreach($car_list as $v)
+                        <option value="{{ $v->id }}">{{ $v->name }}</option>
+                    @endforeach
+                @endif
+            </select>
+
+            {{--选择车挂--}}
+            <select class="search-filter form-filter filter-lg select2-box-c select2--car-c-" name="order-trailer" data-car-type="21">
+                <option value="-1">选择车挂</option>
+                @if(!empty($trailer_list) && count($trailer_list) > 0)
+                    @foreach($trailer_list as $v)
+                        <option value="{{ $v->id }}">{{ $v->name }}</option>
+                    @endforeach
+                @endif
+            </select>
+
+            {{--选择车辆所有人--}}
+            <select class="search-filter form-filter filter-lg select2-box-c" name="order-car-owner-type">
+                <option value="-1">选择车辆所有人</option>
+                <option value="1">自有</option>
+                <option value="11">外请</option>
+            </select>
+
+            {{--选择车型--}}
+            <select class="search-filter form-filter filter-lg select2-box-c" name="order-car-type">
+                <option value="">选择车型</option>
+                @if(!empty(config('wl.common-config.car_type')))
+                    @foreach(config('wl.common-config.car_type') as $k => $v)
+                        <option value="{{ $v }}">{{ $v }}</option>
+                    @endforeach
+                @endif
+            </select>
+
+
+
+
+            <button type="button" class="btn btn-default btn-filter filter-submit pull-right-">
+                <i class="fa fa-search"></i> 搜索
+            </button>
+
+            <button type="button" class="btn btn-default btn-filter filter-empty pull-right-">
+                <i class="fa fa-remove"></i> 清空
+            </button>
+
+            <button type="button" class="btn btn-default btn-filter filter-refresh pull-right-">
+                <i class="fa fa-circle-o-notch"></i> 刷新
+            </button>
+
+            <button type="button" class="btn btn-default btn-filter filter-cancel pull-right-">
+                <i class="fa fa-undo"></i> 重置
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="col-md-12 datatable-body">
+        <div class="box box-success box-solid-" style="box-shadow:0 0;">
+
+            <div class="box-header with-border- _none" style="margin-top:16px;padding-top:8px;">
+                <h3 class="box-title comprehensive-month-title">订单统计</h3>
+            </div>
+            <div class="box-body no-padding">
+                <div class="tableArea full table-order" style="margin-top:8px;">
+                    <table class='table table-striped table-bordered table-hover order-column' id="datatable-order-list">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="col-md-12 datatable-search-row _none">
+
+        <div class=" pull-left">
+
+            {{--<button type="button" onclick="" class="btn btn-success btn-filter item-create-show"><i class="fa fa-plus"></i> 添加</button>--}}
+            {{--<button type="button" onclick="" class="btn btn-default btn-filter"><i class="fa fa-play"></i> 启用</button>--}}
+            {{--<button type="button" onclick="" class="btn btn-default btn-filter"><i class="fa fa-stop"></i> 禁用</button>--}}
+
+
+            <button class="btn btn-default btn-filter">
+                <input type="checkbox" class="check-review-all">
+            </button>
+
+
+            <button type="button" onclick="" class="btn btn-default btn-filter bulk-submit-for-order-export" id="" data-item-category="1">
+                <i class="fa fa-download"></i> 批量导出
+            </button>
+            {{--<button type="button" onclick="" class="btn btn-default btn-filter"><i class="fa fa-trash-o"></i> 批量删除</button>--}}
+
+
+            @if(in_array($me->user_type,[0,1,9,11,61,66,71,77]))
+
+                {{--交付项目--}}
+                <select class="search-filter form-filter filter-lg select2-box-c- select2-project-c" data-item-category="1" name="bulk-operate-delivered-project">
+                    <option value="-1">选择交付项目</option>
+                    {{--@foreach($project_list as $v)--}}
+                    {{--<option value="{{ $v->id }}">{{ $v->name }}</option>--}}
+                    {{--@endforeach--}}
+                </select>
+
+
+                {{--交付说明--}}
+                <input type="text" class="search-filter filter-lg form-filter" name="bulk-operate-delivered-description" placeholder="交付说明">
+
+
+                <button type="button" class="btn btn-default btn-filter" id="bulk-submit-for-delivered">
+                    <i class="fa fa-share"></i> 批量交付
+                </button>
+
+            @endif
+
+        </div>
+
+    </div>
+
+</div>

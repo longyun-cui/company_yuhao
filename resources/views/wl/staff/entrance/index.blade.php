@@ -74,6 +74,7 @@
     @include(env('TEMPLATE_WL_STAFF').'component.module.project.project-list')
     {{--订单--}}
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order-list')
+    @include(env('TEMPLATE_WL_STAFF').'component.module.order.order-list--for--financial')
 
     {{--费用--}}
     @include(env('TEMPLATE_WL_STAFF').'component.fee.fee-list')
@@ -231,6 +232,7 @@
     {{--订单--}}
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order-edit-script')
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order-list-datatable')
+    @include(env('TEMPLATE_WL_STAFF').'component.module.order.order-list-datatable--for--financial')
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order-list-script')
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--item-operation-record-datatable')
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--item-journey-record-datatable')

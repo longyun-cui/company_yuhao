@@ -1,5 +1,5 @@
 <script>
-    function Datatable__for__Order_List__Financail($tableId)
+    function Datatable__for__Order_List__Financial($tableId)
     {
         let $that = $($tableId);
         let $datatable_wrapper = $that.parents('.datatable-wrapper');
@@ -1113,6 +1113,86 @@
                     }
                 },
                 {
+                    "title": "工资",
+                    "name": "financial_fee_for_salary",
+                    "data": "financial_fee_for_salary",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','工资');
+                        $(nTd).attr('data-key','financial_fee_for_salary');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "奖金",
+                    "name": "financial_fee_for_bonus",
+                    "data": "financial_fee_for_bonus",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','奖金');
+                        $(nTd).attr('data-key','financial_fee_for_bonus');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "信息费",
+                    "name": "financial_fee_for_information",
+                    "data": "financial_fee_for_information",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','信息费');
+                        $(nTd).attr('data-key','financial_fee_for_information');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "管理费",
+                    "name": "financial_fee_for_administrative",
+                    "data": "financial_fee_for_administrative",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','管理费');
+                        $(nTd).attr('data-key','financial_fee_for_administrative');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
                     "title": "总费用",
                     "name": "financial_expense_total",
                     "data": "financial_expense_total",
@@ -1120,15 +1200,10 @@
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        $(nTd).attr('data-id',row.id).attr('data-name','费用');
-                        $(nTd).attr('data-key','financial_expense_total').attr('data-value',parseFloat(data));
-
-                        if(row.is_published != 0)
-                        {
-                            // $(nTd).addClass('color-green');
-                            $(nTd).addClass('modal-show--for--order-finance');
-                            $(nTd).attr('data-type','all');
-                        }
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','费用');
+                        $(nTd).attr('data-key','financial_expense_total');
+                        $(nTd).attr('data-value',parseFloat(data));
                     },
                     render: function(data, type, row, meta) {
                         var $data = parseFloat(data);
@@ -1148,12 +1223,6 @@
                         $(nTd).attr('data-name','费用');
                         $(nTd).attr('data-key','financial_deduction_total');
                         $(nTd).attr('data-value',parseFloat(data));
-                        if(row.is_published != 0)
-                        {
-                            // $(nTd).addClass('color-green');
-                            $(nTd).addClass('modal-show--for--order-finance');
-                            $(nTd).attr('data-type','all');
-                        }
                     },
                     render: function(data, type, row, meta) {
                         var $data = parseFloat(data);
@@ -1377,26 +1446,6 @@
                 },
 
                 {
-                    "title": "行程",
-                    "data": "id",
-                    "className": "bg-journey",
-                    "width": "200px",
-                    "orderable": false,
-                    render: function(data, type, row, meta) {
-                        var $journey_time = '';
-                        var $travel_departure_overtime_time = '';
-                        var $travel_arrival_overtime_time = '';
-
-                        if(row.travel_journey_time) $journey_time = '<small class="btn-xs bg-gray">行程 '+row.travel_journey_time+'</small><br>';
-                        if(row.travel_departure_overtime_time) $travel_departure_overtime_time = '<small class="btn-xs bg-red">发车超时 '+row.travel_departure_overtime_time+'</small><br>';
-                        if(row.travel_arrival_overtime_time) $travel_arrival_overtime_time = '<small class="btn-xs bg-red">到达超时 '+row.travel_arrival_overtime_time+'</small><br>';
-
-                        return $journey_time + $travel_departure_overtime_time + $travel_arrival_overtime_time;
-                    }
-                },
-
-
-                {
                     "title": "备注",
                     "data": "description",
                     "className": "text-left",
@@ -1435,7 +1484,7 @@
                     "title": "操作",
                     "data": 'id',
                     "className": "",
-                    "width": "240px",
+                    "width": "200px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
 
@@ -1457,118 +1506,17 @@
                         var $html_fee_record = '<a class="btn btn-xs bg-default modal-show--for--order-fee-record" data-id="'+data+'">费用记录</a>';
 
 
-
-                        var $car_etc = '';
-                        if(row.car_er != null) var $car_etc = row.car_er.ETC_account;
-
-                        if(row.item_status == 1)
-                        {
-                            $html_able = '<a class="btn btn-xs btn-danger item-admin-disable-submit" data-id="'+data+'">禁用</a>';
-                        }
-                        else
-                        {
-                            $html_able = '<a class="btn btn-xs btn-success item-admin-enable-submit" data-id="'+data+'">启用</a>';
-                        }
-
-//                            if(row.is_me == 1 && row.item_active == 0)
-                        if(row.is_published == 0)
-                        {
-                            $html_publish = '<a class="btn btn-xs bg-olive- order--item-publish-submit" data-id="'+data+'">发布</a>';
-                            $html_edit = '<a class="btn btn-xs btn-primary item-edit-link" data-id="'+data+'">编辑</a>';
-                            $html_edit = '<a class="btn btn-xs btn-primary- modal-show--for--order--item-edit" data-id="'+data+'">编辑</a>';
-                            $html_verified = '<a class="btn btn-xs btn-default disabled">审核</a>';
-                            $html_delete = '<a class="btn btn-xs bg-black- item-delete-submit" data-id="'+data+'">删除</a>';
-                            $html_journey = '<a class="btn btn-xs btn-default disabled">行程</a>';
-                        }
-                        else
-                        {
-                            $html_detail = '<a class="btn btn-xs bg-primary item-modal-show--for--detail" data-id="'+data+'">详情</a>';
-//                                $html_travel = '<a class="btn btn-xs bg-olive item-modal-show--for--travel" data-id="'+data+'">行程</a>';
-//                             $html_finance = '<a class="btn btn-xs bg-orange item-modal-show--for--finance" data-id="'+data+'" data-etc="'+$car_etc+'">财务</a>';
-
-                            $html_follow = '<a class="btn btn-xs modal-show--for--order--item-follow-create" data-id="'+data+'">跟进</a>';
-                            $html_journey = '<a class="btn btn-xs modal-show--for--order--item-journey-create" data-id="'+data+'">行程</a>';
-                            $html_fee = '<a class="btn btn-xs modal-show--for--order--item-fee-create" data-id="'+data+'">费用</a>';
-                            $html_accounting = '<a class="btn btn-xs modal-show--for--order--item-financial-accounting-set" data-id="'+data+'">财务核对</a>';
+                        $html_journey = '<a class="btn btn-xs modal-show--for--order--item-journey-create" data-id="'+data+'">行程</a>';
+                        $html_fee = '<a class="btn btn-xs modal-show--for--order--item-fee-create" data-id="'+data+'">费用</a>';
+                        $html_accounting = '<a class="btn btn-xs modal-show--for--order--item-financial-accounting-set" data-id="'+data+'">财务核对</a>';
 
 
-                            if(row.is_completed == 1)
-                            {
-                                $html_completed = '<a class="btn btn-xs btn-default disabled">完成</a>';
-                                $html_abandon = '<a class="btn btn-xs btn-default disabled">弃用</a>';
-                            }
-                            else
-                            {
-                                var $to_be_collected = parseFloat(row.amount) + parseFloat(row.oil_card_amount) - parseFloat(row.time_limitation_deduction) - parseFloat(row.income_total);
-                                if($to_be_collected > 0)
-                                {
-                                    $html_completed = '<a class="btn btn-xs btn-default disabled">完成</a>';
-                                }
-                                else $html_completed = '<a class="btn btn-xs bg-blue- item-complete-submit" data-id="'+data+'">完成</a>';
-
-                                if(row.item_status == 97)
-                                {
-                                    // $html_abandon = '<a class="btn btn-xs btn-default disabled">弃用</a>';
-                                    $html_abandon = '<a class="btn btn-xs bg-teal item-reuse-submit" data-id="'+data+'">复用</a>';
-                                }
-                                else $html_abandon = '<a class="btn btn-xs bg-gray item-abandon-submit" data-id="'+data+'">弃用</a>';
-                            }
-
-                            // 审核
-                            if(row.verifier_id == 0)
-                            {
-                                $html_verified = '<a class="btn btn-xs bg-teal item-verify-submit" data-id="'+data+'">审核</a>';
-                            }
-                            else
-                            {
-                                $html_verified = '<a class="btn btn-xs bg-aqua-gradient disabled">已审</a>';
-                            }
-
-                        }
-
-
-
-//                            if(row.deleted_at == null)
-//                            {
-//                                $html_delete = '<a class="btn btn-xs bg-black item-admin-delete-submit" data-id="'+data+'">删除</a>';
-//                            }
-//                            else
-//                            {
-//                                $html_delete = '<a class="btn btn-xs bg-grey item-admin-restore-submit" data-id="'+data+'">恢复</a>';
-//                            }
-
-                        var $more_html =
-                            '<div class="btn-group">'+
-                            '<button type="button" class="btn btn-xs btn-success-" style="padding:2px 8px; margin-right:0;">操作</button>'+
-                            '<button type="button" class="btn btn-xs btn-success- dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="padding:2px 6px; margin-left:-1px;">'+
-                            '<span class="caret"></span>'+
-                            '<span class="sr-only">Toggle Dropdown</span>'+
-                            '</button>'+
-                            '<ul class="dropdown-menu" role="menu">'+
-                            '<li><a href="#">Action</a></li>'+
-                            '<li><a href="#">删除</a></li>'+
-                            '<li><a href="#">弃用</a></li>'+
-                            '<li class="divider"></li>'+
-                            '<li><a href="#">Separate</a></li>'+
-                            '</ul>'+
-                            '</div>';
 
                         var $html =
-                            // $html_able+
-                            $html_edit+
-                            $html_publish+
-                            // $html_detail+
                             $html_follow+
-                            $html_travel+
                             $html_journey+
                             $html_fee+
                             $html_accounting+
-                            // $html_fee_record+
-                            // $html_finance+
-                            // $html_record+
-                            // $html_verified+
-                            $html_completed+
-                            $html_delete+
                             $html_operation_record+
                             // $html_abandon+
                             '';

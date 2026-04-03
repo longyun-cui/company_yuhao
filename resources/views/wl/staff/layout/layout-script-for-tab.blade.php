@@ -200,6 +200,10 @@
                 {
                     Datatable__for__Order_List('#'+$config.id);
                 }
+                else if($id == "datatable-order-list--for--financial")
+                {
+                    Datatable__for__Order_List__Financial('#'+$config.id);
+                }
                 else if($id == "datatable-fee-list")
                 {
                     Datatable__for__Fee_List('#'+$config.id);

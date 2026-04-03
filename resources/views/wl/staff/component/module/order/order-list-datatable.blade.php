@@ -924,9 +924,6 @@
                         $(nTd).attr('data-name','开票金额');
                         $(nTd).attr('data-key','financial_receipt_for_invoice_amount');
                         $(nTd).attr('data-value',parseFloat(data));
-                        $(nTd).attr('data-column-name','开票金额');
-                        $(nTd).addClass('color-blue');
-                        $(nTd).addClass('_bold');
 
                         if(row.is_completed != 1)
                         {
@@ -954,8 +951,6 @@
                         $(nTd).attr('data-key','financial_receipt_for_invoice_point');
                         $(nTd).attr('data-value',parseFloat(data));
                         $(nTd).attr('data-column-name','票点');
-                        $(nTd).addClass('color-blue');
-                        $(nTd).addClass('_bold');
 
                         if(row.is_completed != 1)
                         {
@@ -983,7 +978,7 @@
                         $(nTd).attr('data-key','external_car_price');
                         $(nTd).attr('data-value',parseFloat(data));
                         $(nTd).attr('data-column-name','请车价');
-                        $(nTd).addClass('color-blue');
+                        $(nTd).addClass('color-red');
                         $(nTd).addClass('_bold');
 
                         if(row.is_completed != 1)
@@ -1138,8 +1133,12 @@
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        $(nTd).attr('data-id',row.id).attr('data-name','费用');
-                        $(nTd).attr('data-key','financial_expense_total').attr('data-value',parseFloat(data));
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','费用');
+                        $(nTd).attr('data-key','financial_expense_total');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                        $(nTd).addClass('_bold');
 
                         if(row.is_published != 0)
                         {
@@ -1166,6 +1165,9 @@
                         $(nTd).attr('data-name','费用');
                         $(nTd).attr('data-key','financial_deduction_total');
                         $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-orange');
+                        $(nTd).addClass('_bold');
+
                         if(row.is_published != 0)
                         {
                             // $(nTd).addClass('color-green');
@@ -1193,6 +1195,8 @@
                         $(nTd).attr('data-name','应收款');
                         $(nTd).attr('data-key','financial_income_should');
                         $(nTd).attr('data-value',parseFloat($income_should));
+                        $(nTd).addClass('color-blue');
+                        $(nTd).addClass('_bold');
 
                         if(row.is_published != 0)
                         {
@@ -1218,6 +1222,8 @@
                         $(nTd).attr('data-name','已收款');
                         $(nTd).attr('data-key','financial_income_total');
                         $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-green');
+                        $(nTd).addClass('_bold');
 
                         if(row.is_published != 0)
                         {
@@ -1238,6 +1244,13 @@
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','待收款');
+                        $(nTd).attr('data-key','financial_income_pending');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                        $(nTd).addClass('_bold');
+
                         if(row.is_published != 0)
                         {
                             var $income_pending = parseFloat(row.freight_amount) - parseFloat(row.financial_deduction_total) - parseFloat(row.financial_income_total);
@@ -1261,6 +1274,13 @@
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','待收款');
+                        $(nTd).attr('data-key','financial_income_pending');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                        $(nTd).addClass('_bold');
+
                         if(row.is_published != 0)
                         {
                             var $profit = parseFloat(row.freight_amount) - parseFloat(row.financial_deduction_total) - parseFloat(row.financial_expense_total);
