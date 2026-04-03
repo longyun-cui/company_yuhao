@@ -2793,10 +2793,10 @@ class WLStaffOrderRepository {
         }
         // 运费油卡
         $financial_receipt_for_freight_oil_card = (float)$post_data['accounting_freight_oil_card'];
-        if((float)$order->financial_receipt_for_oil_card != $financial_receipt_for_freight_oil_card)
+        if((float)$order->financial_receipt_for_freight_oil_card != $financial_receipt_for_freight_oil_card)
         {
             $operation = [];
-            $operation['field'] = 'financial_receipt_for_oil_card';
+            $operation['field'] = 'financial_receipt_for_freight_oil_card';
             $operation['title'] = '运费油卡';
             $operation['before'] = (float)$order->financial_receipt_for_freight_oil_card;
             $operation['after'] = $financial_receipt_for_freight_oil_card;
@@ -3066,7 +3066,7 @@ class WLStaffOrderRepository {
         }
         // 费用备注
         $financial_description = trim($post_data['accounting_description']);
-        if(trim($order->financial_description) != $financial_description)
+        if((empty($order->financial_description) && !empty($financial_description)) || (!empty($order->financial_description) && (trim($order->financial_description) != $financial_description)))
         {
             $operation = [];
             $operation['field'] = 'financial_description';
