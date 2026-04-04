@@ -155,7 +155,7 @@
 
                 {{--任务编号--}}
                 <div class="form-group">
-                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 任务编号</label>
+                    <label class="control-label col-md-3">任务编号</label>
                     <div class="col-md-9 ">
                         <input type="text" class="form-control" name="task_number" placeholder="任务编号" value="" data-default="">
                     </div>

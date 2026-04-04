@@ -610,6 +610,18 @@ class WLStaffOrderRepository {
 
             $mine_data = $post_data;
             unset($mine_data['operate']);
+            if($car_owner_type == 1)
+            {
+                $mine_data['external_car_price'] = 0;
+                $mine_data['external_car'] = null;
+                $mine_data['external_trailer'] = null;
+            }
+            else if($car_owner_type == 11)
+            {
+                $mine_data['car_id'] = 0;
+                $mine_data['trailer_id'] = 0;
+                $mine_data['driver_id'] = 0;
+            }
 
             $mine_data['company_id'] = $me->company_id;
             $mine_data['department_id'] = $me->department_id;
