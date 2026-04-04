@@ -100,7 +100,7 @@
                 //     }
                 // },
                 {
-                    "title": getDateOffset(2)+"(后天)",
+                    "title": getDateOffset(2)+"<br>(后天)",
                     "data": "order_b",
                     "className": "bg-delivered",
                     "width": "80px",
@@ -119,7 +119,7 @@
                     }
                 },
                 {
-                    "title": getDateOffset(1)+"(明天)",
+                    "title": getDateOffset(1)+"<br>(明天)",
                     "data": "order_a",
                     "className": "bg-delivered",
                     "width": "80px",
@@ -138,7 +138,7 @@
                     }
                 },
                 {
-                    "title": getDateOffset(0)+"(今天)",
+                    "title": getDateOffset(0)+"<br>(今天)",
                     "data": "order_0",
                     "className": "bg-delivered _bold text-green",
                     "width": "80px",
@@ -157,7 +157,7 @@
                     }
                 },
                 {
-                    "title": getDateOffset(-1)+"(昨天)",
+                    "title": getDateOffset(-1)+"<br>(昨天)",
                     "data": "order_1",
                     "className": "bg-delivered",
                     "width": "80px",
@@ -176,7 +176,7 @@
                     }
                 },
                 {
-                    "title": getDateOffset(-2)+"(前天)",
+                    "title": getDateOffset(-2)+"<br>(前天)",
                     "data": "order_2",
                     "className": "bg-delivered",
                     "width": "80px",
