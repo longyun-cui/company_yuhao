@@ -519,23 +519,46 @@ class WLStaffOrderRepository {
         }
 
 
+        $car_owner_type = $post_data['car_owner_type'];
+
         if($operate_type == 'create') // 添加 ( $id==0，添加一个新用户 )
         {
-            $repeat = WL_Common_Order::select('*')
-                ->where('project_id',$post_data['project_id'])
-                ->where('car_id',$post_data['car_id'])
-                ->where('task_date',$post_data['task_date'])
-                ->first();
-            if($repeat) return response_error([],"该订单已存在！！");
-
+            if($car_owner_type == 1)
+            {
+                $repeated = WL_Common_Order::select('*')
+                    ->where('project_id',$post_data['project_id'])
+                    ->where('car_id',$post_data['car_id'])
+                    ->where('task_date',$post_data['task_date'])
+                    ->first();
+                if($repeated) return response_error([],"该订单已存在！！");
+            }
+            else if($car_owner_type == 11)
+            {
+                $repeated = WL_Common_Order::select('*')
+                    ->where('project_id',$post_data['project_id'])
+                    ->where('external_car',$post_data['external_car'])
+                    ->where('task_date',$post_data['task_date'])
+                    ->first();
+                if($repeated) return response_error([],"该订单已存在！！");
+            }
         }
 
-
+        $assigned = 0;
         $msg = '';
-        $assigned = WL_Common_Order::select('*')
-            ->where('car_id',$post_data['car_id'])
-            ->where('task_date',$post_data['task_date'])
-            ->get();
+        if($car_owner_type == 1)
+        {
+            $assigned = WL_Common_Order::select('*')
+                ->where('car_id',$post_data['car_id'])
+                ->where('task_date',$post_data['task_date'])
+                ->get();
+        }
+        else if($car_owner_type == 11)
+        {
+            $assigned = WL_Common_Order::select('*')
+                ->where('external_car',$post_data['external_car'])
+                ->where('task_date',$post_data['task_date'])
+                ->get();
+        }
         if(count($assigned) > 0)
         {
             $msg = '该车辆【'.$car->name.'】【'.$post_data['task_date'].'】已安排任务';

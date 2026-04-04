@@ -16,6 +16,11 @@
             "sDom": '<t>',
             "order": [],
             "orderCellsTop": true,
+            "scrollX": true,
+//                "scrollY": true,
+            "scrollY": ($(document).height() - 298)+"px",
+            "scrollCollapse": true,
+            "showRefresh": true,
             "ajax": {
                 'url': "{{ url('/o1/car/statistic/statistic-task-recent') }}",
                 "type": 'POST',
@@ -109,7 +114,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '--';
+                        if(!data) return '';
                         return data;
                     }
                 },
@@ -128,7 +133,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '--';
+                        if(!data) return '';
                         return data;
                     }
                 },
@@ -147,7 +152,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '--';
+                        if(!data) return '';
                         return data;
                     }
                 },
@@ -166,7 +171,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '--';
+                        if(!data) return '';
                         return data;
                     }
                 },
@@ -185,7 +190,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '--';
+                        if(!data) return '';
                         return data;
                     }
                 },
@@ -204,7 +209,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '--';
+                        if(!data) return '';
                         return data;
                     }
                 },
@@ -223,7 +228,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '--';
+                        if(!data) return '';
                         return data;
                     }
                 },
@@ -242,7 +247,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '--';
+                        if(!data) return '';
                         return data;
                     }
                 },
@@ -261,7 +266,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '--';
+                        if(!data) return '';
                         return data;
                     }
                 },
@@ -280,7 +285,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '--';
+                        if(!data) return '';
                         return data;
                     }
                 },
@@ -299,7 +304,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '--';
+                        if(!data) return '';
                         return data;
                     }
                 },
@@ -318,7 +323,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '--';
+                        if(!data) return '';
                         return data;
                     }
                 },
@@ -337,7 +342,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '--';
+                        if(!data) return '';
                         return data;
                     }
                 },
@@ -356,7 +361,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '--';
+                        if(!data) return '';
                         return data;
                     }
                 },
@@ -375,7 +380,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '--';
+                        if(!data) return '';
                         return data;
                     }
                 },
@@ -394,7 +399,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '--';
+                        if(!data) return '';
                         return data;
                     }
                 },
@@ -413,7 +418,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '--';
+                        if(!data) return '';
                         return data;
                     }
                 }
