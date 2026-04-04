@@ -216,6 +216,10 @@
                 {
                     Datatable_Statistic_Order_Daily('#'+$config.id, $config.chart_id);
                 }
+                else if($id == "datatable--car--statistic--task-recent")
+                {
+                    Datatable_Statistic__Car__Task_Recent('#'+$config.id, $config.chart_id);
+                }
             }
 
 

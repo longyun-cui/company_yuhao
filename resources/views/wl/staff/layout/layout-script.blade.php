@@ -503,6 +503,7 @@
                             car_category: this.data('car-category'),
                             car_type: this.data('car-type'),
                             motorcade_id: this.data('motorcade-id'),
+                            with: this.data('with'),
                             keyword: params.term,
                             page: params.page
                         };
@@ -1133,6 +1134,21 @@
         var d = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate();
         return y + "-" + m + "-" + d;
     };
+
+    // 获取相对日期
+    function getDateOffset(days = 0)
+    {
+        const today = new Date();
+        const targetDate = new Date(today);
+        targetDate.setDate(today.getDate() + days);
+
+        const year = targetDate.getFullYear();
+        const month = String(targetDate.getMonth() + 1).padStart(2, '0');
+        const day = String(targetDate.getDate()).padStart(2, '0');
+        const currentYear = today.getFullYear();
+
+        return year === currentYear ? `${month}-${day}` : `${year}-${month}-${day}`;
+    }
 
 
     // console.log($(window).height());  // 浏览器当前窗口可视区域高度

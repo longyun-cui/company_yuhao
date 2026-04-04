@@ -429,6 +429,16 @@ class WLStaffCommonRepository {
 //            $query->where('car_type',$post_data['car_type']);
 //        }
 
+        if(!empty($post_data['with']))
+        {
+            if($post_data['with'] == 'order')
+            {
+                $query->with([
+                    'order_list'=>function($query) { $query->select('*')->orderBy('task_date','desc')->limit(3); }
+                ]);
+            }
+        }
+
         $list = $query->orderBy('id','asc')->get()
             ->map(function ($item) {
                 $text = $item->name;

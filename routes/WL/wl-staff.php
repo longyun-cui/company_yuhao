@@ -153,6 +153,8 @@ Route::group(['middleware' => ['wl.staff.login']], function () {
     Route::post('/o1/car/item-disable', $controller.'@o1__car__item_disable');
     // 【车辆】操作记录
     Route::post('/o1/car/item-operation-record-list/datatable-query', $controller.'@o1__car__item_operation_record_list__datatable_query');
+    // 【车辆】统计
+    Route::post('/o1/car/statistic/statistic-task-recent', $controller.'@o1__car__statistic__task_recent');
 
 
     // 【司机】

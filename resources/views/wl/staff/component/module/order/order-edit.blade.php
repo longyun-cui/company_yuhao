@@ -216,6 +216,7 @@
                                     data-modal="#modal--for--order--item-edit"
                                     data-car-category="1"
 {{--                                    data-car-type="1"--}}
+                                    data-with="order"
                             >
                                 <option value="0">选择车辆</option>
                             </select>
