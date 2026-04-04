@@ -213,6 +213,7 @@ Route::group(['middleware' => ['wl.staff.login']], function () {
 
     // 【工单】列表
     Route::post('/o1/order/order-list/datatable-query', $controller.'@o1__order__list__datatable_query');
+    Route::post('/o1/order/order-duplicate-list/datatable-query', $controller.'@o1__order__duplicate__list__datatable_query');
     // 【工单】操作
     Route::post('/o1/order/item-get', $controller.'@o1__order__item_get');
     Route::post('/o1/order/item-save', $controller.'@o1__order__item_save');

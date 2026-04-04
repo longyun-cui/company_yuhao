@@ -248,17 +248,37 @@
                    data-unique="y"
                    data-id="order-list"
                    data-title='订单列表'
-                   data-content='<i class="fa fa-file-text text-orange"></i> 订单列表'
-                   data-icon='<i class="fa fa-file-text text-orange"></i>'
+                   data-content='<i class="fa fa-file-text text-green"></i> 订单列表'
+                   data-icon='<i class="fa fa-file-text text-green"></i>'
 
                    data-datatable-type="create"
                    data-datatable-unique="y"
                    data-datatable-id="datatable-order-list"
                    data-datatable-target="order-list"
-                   data-datatable-clone-object="order-list-clone"
+                   data-datatable-clone-object="order-list--clone"
+                >
+                    <i class="fa fa-file-text text-green"></i>
+                    <span>订单列表</span>
+                </a>
+            </li>
+            {{--工单列表--}}
+            <li class="treeview _none-">
+                <a class="tab-control datatable-control"
+                   data-type="create"
+                   data-unique="y"
+                   data-id="order-list--for--duplicate"
+                   data-title='重复订单'
+                   data-content='<i class="fa fa-file-text text-orange"></i> 重复订单'
+                   data-icon='<i class="fa fa-file-text text-orange"></i>'
+
+                   data-datatable-type="create"
+                   data-datatable-unique="y"
+                   data-datatable-id="datatable-order-list--for--duplicate"
+                   data-datatable-target="order-list--for--duplicate"
+                   data-datatable-clone-object="order-list--for--duplicate--clone"
                 >
                     <i class="fa fa-file-text text-orange"></i>
-                    <span>订单列表</span>
+                    <span>重复订单</span>
                 </a>
             </li>
             {{--工单列表--}}
@@ -275,7 +295,7 @@
                    data-datatable-unique="y"
                    data-datatable-id="datatable-order-list--for--financial"
                    data-datatable-target="order-list--for--financial"
-                   data-datatable-clone-object="order-list--for--financial-clone"
+                   data-datatable-clone-object="order-list--for--financial--clone"
                 >
                     <i class="fa fa-file-text text-red"></i>
                     <span>订单列表(财务)</span>

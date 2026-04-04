@@ -373,6 +373,92 @@ class WLStaffOrderRepository {
 
         return datatable_response($list, $draw, $total);
     }
+    // 【工单】返回-列表-数据
+    public function o1__order__duplicate__list__datatable_query($post_data)
+    {
+        $this->get_me();
+        $me = $this->me;
+
+
+        $duplicate_list_1 = WL_Common_Order::select('wl__common__order.*')
+            ->with([
+                'creator',
+                'owner'=>function($query) { $query->select('id','name'); },
+                'client_er'=>function($query) { $query->select('id','name'); },
+                'project_er'=>function($query) { $query->select('id','name'); },
+                'car_er'=>function($query) { $query->select('id','name'); },
+                'trailer_er'=>function($query) { $query->select('id','name','sub_name'); },
+                'driver_er'=>function($query) { $query->select('id','driver_name','driver_phone'); },
+                'copilot_er'=>function($query) { $query->select('id','driver_name','driver_phone'); }
+            ])
+            ->join(DB::raw('(
+                    SELECT car_id, task_date
+                    FROM `wl__common__order`
+                    WHERE `car_owner_type` = 1 and `car_id` > 0 
+                    GROUP BY car_id, task_date
+                    HAVING COUNT(*) > 1
+                ) as dup'), function($join) {
+                $join->on('wl__common__order.car_id', '=', 'dup.car_id')
+                    ->on('wl__common__order.task_date', '=', 'dup.task_date');
+            })
+            ->orderBy('task_date')
+            ->orderBy('car_id')
+            ->get();
+
+        $duplicate_list_2 = WL_Common_Order::select('wl__common__order.*')
+            ->with([
+                'creator',
+                'owner'=>function($query) { $query->select('id','name'); },
+                'client_er'=>function($query) { $query->select('id','name'); },
+                'project_er'=>function($query) { $query->select('id','name'); },
+                'car_er'=>function($query) { $query->select('id','name'); },
+                'trailer_er'=>function($query) { $query->select('id','name','sub_name'); },
+                'driver_er'=>function($query) { $query->select('id','driver_name','driver_phone'); },
+                'copilot_er'=>function($query) { $query->select('id','driver_name','driver_phone'); }
+            ])
+            ->join(DB::raw('(
+                    SELECT external_car, task_date
+                    FROM `wl__common__order`
+                    WHERE `car_owner_type` = 11
+                    GROUP BY external_car, task_date
+                    HAVING COUNT(*) > 1
+                ) as dup'), function($join) {
+                $join->on('wl__common__order.external_car', '=', 'dup.external_car')
+                    ->on('wl__common__order.task_date', '=', 'dup.task_date');
+            })
+            ->orderBy('task_date')
+            ->orderBy('external_car')
+            ->get();
+
+        $duplicate_list_merged = $duplicate_list_1->merge($duplicate_list_2);
+
+
+        $total = $duplicate_list_merged->count();
+
+        $draw  = isset($post_data['draw']) ? $post_data['draw'] : 1;
+
+
+        foreach ($duplicate_list_merged as $k => $v)
+        {
+//            $list[$k]->encode_id = encode($v->id);
+
+            if($v->creator_id == $me->id)
+            {
+                $duplicate_list_merged[$k]->is_me = 1;
+                $v->is_me = 1;
+            }
+            else
+            {
+                $duplicate_list_merged[$k]->is_me = 0;
+                $v->is_me = 0;
+            }
+        }
+//        dd($list->toArray());
+
+        return datatable_response($duplicate_list_merged, $draw, $total);
+    }
+
+
     // 【工单】获取 GET
     public function o1__order__item_get($post_data)
     {

@@ -806,6 +806,11 @@ class WLStaffController extends Controller
     {
         return $this->order_repo->o1__order__list__datatable_query(request()->all());
     }
+    // 【工单】datatable
+    public function o1__order__duplicate__list__datatable_query()
+    {
+        return $this->order_repo->o1__order__duplicate__list__datatable_query(request()->all());
+    }
     // 【工单】获取
     public function o1__order__item_get()
     {

@@ -200,6 +200,10 @@
                 {
                     Datatable__for__Order_List('#'+$config.id);
                 }
+                else if($id == "datatable-order-list--for--duplicate")
+                {
+                    Datatable__for__Order_List__Duplicate('#'+$config.id);
+                }
                 else if($id == "datatable-order-list--for--financial")
                 {
                     Datatable__for__Order_List__Financial('#'+$config.id);
