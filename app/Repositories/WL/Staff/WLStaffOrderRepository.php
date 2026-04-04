@@ -551,6 +551,10 @@ class WLStaffOrderRepository {
                 ->where('car_id',$post_data['car_id'])
                 ->where('task_date',$post_data['task_date'])
                 ->get();
+            if(count($assigned) > 0)
+            {
+                $msg = '该车辆【'.$car->name.'】【'.$post_data['task_date'].'】已安排任务！';
+            }
         }
         else if($car_owner_type == 11)
         {
@@ -558,10 +562,10 @@ class WLStaffOrderRepository {
                 ->where('external_car',$post_data['external_car'])
                 ->where('task_date',$post_data['task_date'])
                 ->get();
-        }
-        if(count($assigned) > 0)
-        {
-            $msg = '该车辆【'.$car->name.'】【'.$post_data['task_date'].'】已安排任务';
+            if(count($assigned) > 0)
+            {
+                $msg = '该【外请】车辆【'.$post_data['external_car'].'】【'.$post_data['task_date'].'】已安排任务，！';
+            }
         }
 
 
