@@ -1490,21 +1490,6 @@
                         var $html_fee = '';
                         var $html_accounting = '';
                         var $html_operation_record = '<a class="btn btn-xs bg-default modal-show--for--order--item-operation-record" data-id="'+data+'">记录</a>';
-                        var $html_fee_record = '<a class="btn btn-xs bg-default modal-show--for--order-fee-record" data-id="'+data+'">费用记录</a>';
-
-
-
-                        var $car_etc = '';
-                        if(row.car_er != null) var $car_etc = row.car_er.ETC_account;
-
-                        if(row.item_status == 1)
-                        {
-                            $html_able = '<a class="btn btn-xs btn-danger item-admin-disable-submit" data-id="'+data+'">禁用</a>';
-                        }
-                        else
-                        {
-                            $html_able = '<a class="btn btn-xs btn-success item-admin-enable-submit" data-id="'+data+'">启用</a>';
-                        }
 
 //                            if(row.is_me == 1 && row.item_active == 0)
                         if(row.is_published == 0)
@@ -1512,20 +1497,11 @@
                             $html_publish = '<a class="btn btn-xs bg-olive- order--item-publish-submit" data-id="'+data+'">发布</a>';
                             $html_edit = '<a class="btn btn-xs btn-primary item-edit-link" data-id="'+data+'">编辑</a>';
                             $html_edit = '<a class="btn btn-xs btn-primary- modal-show--for--order--item-edit" data-id="'+data+'">编辑</a>';
-                            $html_verified = '<a class="btn btn-xs btn-default disabled">审核</a>';
-                            $html_delete = '<a class="btn btn-xs bg-black- item-delete-submit" data-id="'+data+'">删除</a>';
-                            $html_journey = '<a class="btn btn-xs btn-default disabled">行程</a>';
+                            $html_delete = '<a class="btn btn-xs bg-black- order--item-delete-submit" data-id="'+data+'">删除</a>';
                         }
                         else
                         {
                             $html_detail = '<a class="btn btn-xs bg-primary item-modal-show--for--detail" data-id="'+data+'">详情</a>';
-//                                $html_travel = '<a class="btn btn-xs bg-olive item-modal-show--for--travel" data-id="'+data+'">行程</a>';
-//                             $html_finance = '<a class="btn btn-xs bg-orange item-modal-show--for--finance" data-id="'+data+'" data-etc="'+$car_etc+'">财务</a>';
-
-                            $html_follow = '<a class="btn btn-xs modal-show--for--order--item-follow-create" data-id="'+data+'">跟进</a>';
-                            $html_journey = '<a class="btn btn-xs modal-show--for--order--item-journey-create" data-id="'+data+'">行程</a>';
-                            $html_fee = '<a class="btn btn-xs modal-show--for--order--item-fee-create" data-id="'+data+'">费用</a>';
-                            $html_accounting = '<a class="btn btn-xs modal-show--for--order--item-financial-accounting-set" data-id="'+data+'">财务核对</a>';
 
 
                             if(row.is_completed == 1)
@@ -1542,67 +1518,17 @@
                                 }
                                 else $html_completed = '<a class="btn btn-xs bg-blue- item-complete-submit" data-id="'+data+'">完成</a>';
 
-                                if(row.item_status == 97)
-                                {
-                                    // $html_abandon = '<a class="btn btn-xs btn-default disabled">弃用</a>';
-                                    $html_abandon = '<a class="btn btn-xs bg-teal item-reuse-submit" data-id="'+data+'">复用</a>';
-                                }
-                                else $html_abandon = '<a class="btn btn-xs bg-gray item-abandon-submit" data-id="'+data+'">弃用</a>';
-                            }
-
-                            // 审核
-                            if(row.verifier_id == 0)
-                            {
-                                $html_verified = '<a class="btn btn-xs bg-teal item-verify-submit" data-id="'+data+'">审核</a>';
-                            }
-                            else
-                            {
-                                $html_verified = '<a class="btn btn-xs bg-aqua-gradient disabled">已审</a>';
                             }
 
                         }
 
 
 
-//                            if(row.deleted_at == null)
-//                            {
-//                                $html_delete = '<a class="btn btn-xs bg-black item-admin-delete-submit" data-id="'+data+'">删除</a>';
-//                            }
-//                            else
-//                            {
-//                                $html_delete = '<a class="btn btn-xs bg-grey item-admin-restore-submit" data-id="'+data+'">恢复</a>';
-//                            }
-
-                        var $more_html =
-                            '<div class="btn-group">'+
-                            '<button type="button" class="btn btn-xs btn-success-" style="padding:2px 8px; margin-right:0;">操作</button>'+
-                            '<button type="button" class="btn btn-xs btn-success- dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="padding:2px 6px; margin-left:-1px;">'+
-                            '<span class="caret"></span>'+
-                            '<span class="sr-only">Toggle Dropdown</span>'+
-                            '</button>'+
-                            '<ul class="dropdown-menu" role="menu">'+
-                            '<li><a href="#">Action</a></li>'+
-                            '<li><a href="#">删除</a></li>'+
-                            '<li><a href="#">弃用</a></li>'+
-                            '<li class="divider"></li>'+
-                            '<li><a href="#">Separate</a></li>'+
-                            '</ul>'+
-                            '</div>';
-
                         var $html =
                             // $html_able+
                             $html_edit+
                             $html_publish+
                             // $html_detail+
-                            $html_follow+
-                            $html_travel+
-                            $html_journey+
-                            $html_fee+
-                            $html_accounting+
-                            // $html_fee_record+
-                            // $html_finance+
-                            // $html_record+
-                            // $html_verified+
                             $html_completed+
                             $html_delete+
                             $html_operation_record+

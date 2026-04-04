@@ -1516,7 +1516,7 @@
                             $html_edit = '<a class="btn btn-xs btn-primary item-edit-link" data-id="'+data+'">编辑</a>';
                             $html_edit = '<a class="btn btn-xs btn-primary- modal-show--for--order--item-edit" data-id="'+data+'">编辑</a>';
                             $html_verified = '<a class="btn btn-xs btn-default disabled">审核</a>';
-                            $html_delete = '<a class="btn btn-xs bg-black- item-delete-submit" data-id="'+data+'">删除</a>';
+                            $html_delete = '<a class="btn btn-xs bg-black- order--item-delete-submit" data-id="'+data+'">删除</a>';
                             $html_journey = '<a class="btn btn-xs btn-default disabled">行程</a>';
                         }
                         else

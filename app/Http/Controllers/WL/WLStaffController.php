@@ -828,6 +828,13 @@ class WLStaffController extends Controller
     }
 
 
+    // 【工单】删除
+    public function o1__order__item_delete()
+    {
+        return $this->order_repo->o1__order__item_delete(request()->all());
+    }
+
+
     // 【工单】操作
     public function o1__order__item_publish()
     {
