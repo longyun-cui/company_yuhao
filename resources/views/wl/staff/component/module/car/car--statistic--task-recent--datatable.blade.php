@@ -81,7 +81,7 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return '<a class="caller-control" data-id="'+row.id+'" data-title="'+data+'">'+data+' ('+row.id+')'+'</a>';
+                        return '<a class="caller-control" data-id="'+row.id+'" data-title="'+data+'">'+data+' ('+row.car_number+')'+'</a>';
                     }
                 },
                 // {

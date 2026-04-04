@@ -972,7 +972,7 @@ class WLStaffCarRepository {
 
 
 
-        $query = WL_Common_Car::select(['id','item_status','name'])
+        $query = WL_Common_Car::select(['id','item_status','name','sub_name','car_number'])
             ->with([
             ])
             ->where('active',1)
