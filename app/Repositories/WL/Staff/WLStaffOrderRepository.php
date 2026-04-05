@@ -394,7 +394,7 @@ class WLStaffOrderRepository {
             ->join(DB::raw('(
                     SELECT car_id, task_date
                     FROM `wl__common__order`
-                    WHERE `car_owner_type` = 1 and `car_id` > 0 
+                    WHERE `car_owner_type` = 1 and `car_id` > 0 and `deleted_at` is null 
                     GROUP BY car_id, task_date
                     HAVING COUNT(*) > 1
                 ) as dup'), function($join) {
@@ -419,7 +419,7 @@ class WLStaffOrderRepository {
             ->join(DB::raw('(
                     SELECT external_car, task_date
                     FROM `wl__common__order`
-                    WHERE `car_owner_type` = 11
+                    WHERE `car_owner_type` = 11 and `deleted_at` is null 
                     GROUP BY external_car, task_date
                     HAVING COUNT(*) > 1
                 ) as dup'), function($join) {
