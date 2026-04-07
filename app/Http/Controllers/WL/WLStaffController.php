@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\WL;
 
-use App\Repositories\WL\Staff\WLStaffFinanceRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -11,6 +10,7 @@ use App\Models\WL\Common\WL_Common_Staff;
 use App\Repositories\WL\WLStaffRepository;
 
 use App\Repositories\WL\Staff\WLStaffCommonRepository;
+use App\Repositories\WL\Staff\WLStaffApiRepository;
 
 use App\Repositories\WL\Staff\WLStaffCompanyRepository;
 use App\Repositories\WL\Staff\WLStaffDepartmentRepository;
@@ -27,6 +27,8 @@ use App\Repositories\WL\Staff\WLStaffProjectRepository;
 use App\Repositories\WL\Staff\WLStaffOrderRepository;
 
 use App\Repositories\WL\Staff\WLStaffFeeRepository;
+use App\Repositories\WL\Staff\WLStaffFinanceRepository;
+
 
 use Response, Auth, Validator, DB, Exception, Cache, Blade, Carbon, DateTime;
 use QrCode, Excel;
@@ -37,6 +39,7 @@ class WLStaffController extends Controller
     private $repo;
 
     private $common_repo;
+    private $api_repo;
 
     private $company_repo;
     private $department_repo;
@@ -60,6 +63,7 @@ class WLStaffController extends Controller
         $this->repo = new WLStaffRepository;
 
         $this->common_repo = new WLStaffCommonRepository;
+        $this->api_repo = new WLStaffApiRepository;
 
         $this->company_repo = new WLStaffCompanyRepository;
         $this->department_repo = new WLStaffDepartmentRepository;
@@ -141,6 +145,15 @@ class WLStaffController extends Controller
     public function view_staff_404()
     {
         return $this->repo->view_staff_404();
+    }
+
+
+
+
+    // 返回404视图
+    public function o1__api__g7__request__test()
+    {
+        return $this->api_repo->o1__api__g7__request__test();
     }
 
 

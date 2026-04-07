@@ -25,6 +25,11 @@ Route::group(['middleware' => ['wl.staff.login']], function () {
     Route::get('/404', $controller.'@view_staff_404');
 
 
+
+
+    Route::get('/o1/api/g7/request/test', $controller.'@o1__api__g7__request__test');
+
+
     /*
      * 个人信息管理
      */

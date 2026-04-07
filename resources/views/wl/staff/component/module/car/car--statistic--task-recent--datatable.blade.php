@@ -109,13 +109,14 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(data)
                         {
-                            $(nTd).addClass('_bold');
-                            $(nTd).addClass('text-red');
+                            $(nTd).addClass('_bold-');
+                            $(nTd).addClass('text-red-');
                         }
                     },
                     render: function(data, type, row, meta) {
                         if(!data) return '';
-                        return data;
+                        // return data;
+                        return row.departure_b + '<br> ↓ <br>' + row.destination_b;
                     }
                 },
                 {
@@ -128,13 +129,14 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(data)
                         {
-                            $(nTd).addClass('_bold');
-                            $(nTd).addClass('text-red');
+                            $(nTd).addClass('_bold-');
+                            $(nTd).addClass('text-red-');
                         }
                     },
                     render: function(data, type, row, meta) {
                         if(!data) return '';
-                        return data;
+                        // return data;
+                        return row.departure_a + '<br> ↓ <br>' + row.destination_a;
                     }
                 },
                 {
@@ -148,12 +150,13 @@
                         if(data)
                         {
                             $(nTd).addClass('_bold');
-                            $(nTd).addClass('text-red');
+                            $(nTd).addClass('text-red-');
                         }
                     },
                     render: function(data, type, row, meta) {
                         if(!data) return '';
-                        return data;
+                        // return data;
+                        return row.departure_0 + '<br> ↓ <br>' + row.destination_0;
                     }
                 },
                 {
@@ -166,13 +169,14 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(data)
                         {
-                            $(nTd).addClass('_bold');
-                            $(nTd).addClass('text-red');
+                            $(nTd).addClass('_bold-');
+                            $(nTd).addClass('text-red-');
                         }
                     },
                     render: function(data, type, row, meta) {
                         if(!data) return '';
-                        return data;
+                        // return data;
+                        return row.departure_1 + '<br> ↓ <br>' + row.destination_1;
                     }
                 },
                 {
@@ -185,13 +189,14 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(data)
                         {
-                            $(nTd).addClass('_bold');
-                            $(nTd).addClass('text-red');
+                            $(nTd).addClass('_bold-');
+                            $(nTd).addClass('text-red-');
                         }
                     },
                     render: function(data, type, row, meta) {
                         if(!data) return '';
-                        return data;
+                        // return data;
+                        return row.departure_2 + '<br> ↓ <br>' + row.destination_2;
                     }
                 },
                 {
@@ -204,13 +209,14 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(data)
                         {
-                            $(nTd).addClass('_bold');
-                            $(nTd).addClass('text-red');
+                            $(nTd).addClass('_bold-');
+                            $(nTd).addClass('text-red-');
                         }
                     },
                     render: function(data, type, row, meta) {
                         if(!data) return '';
-                        return data;
+                        // return data;
+                        return row.departure_3 + '<br> ↓ <br>' + row.destination_3;
                     }
                 },
                 {
@@ -223,13 +229,14 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(data)
                         {
-                            $(nTd).addClass('_bold');
-                            $(nTd).addClass('text-red');
+                            $(nTd).addClass('_bold-');
+                            $(nTd).addClass('text-red-');
                         }
                     },
                     render: function(data, type, row, meta) {
                         if(!data) return '';
-                        return data;
+                        // return data;
+                        return row.departure_4 + '<br> ↓ <br>' + row.destination_4;
                     }
                 },
                 {
@@ -242,13 +249,14 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(data)
                         {
-                            $(nTd).addClass('_bold');
-                            $(nTd).addClass('text-red');
+                            $(nTd).addClass('_bold-');
+                            $(nTd).addClass('text-red-');
                         }
                     },
                     render: function(data, type, row, meta) {
                         if(!data) return '';
-                        return data;
+                        // return data;
+                        return row.departure_5 + '<br> ↓ <br>' + row.destination_5;
                     }
                 },
                 {
@@ -261,13 +269,14 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(data)
                         {
-                            $(nTd).addClass('_bold');
-                            $(nTd).addClass('text-red');
+                            $(nTd).addClass('_bold-');
+                            $(nTd).addClass('text-red-');
                         }
                     },
                     render: function(data, type, row, meta) {
                         if(!data) return '';
-                        return data;
+                        // return data;
+                        return row.departure_6 + '<br> ↓ <br>' + row.destination_6;
                     }
                 },
                 {
@@ -280,13 +289,14 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(data)
                         {
-                            $(nTd).addClass('_bold');
-                            $(nTd).addClass('text-red');
+                            $(nTd).addClass('_bold-');
+                            $(nTd).addClass('text-red-');
                         }
                     },
                     render: function(data, type, row, meta) {
                         if(!data) return '';
-                        return data;
+                        // return data;
+                        return row.departure_7 + '<br> ↓ <br>' + row.destination_7;
                     }
                 },
                 {
@@ -299,13 +309,14 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(data)
                         {
-                            $(nTd).addClass('_bold');
-                            $(nTd).addClass('text-red');
+                            $(nTd).addClass('_bold-');
+                            $(nTd).addClass('text-red-');
                         }
                     },
                     render: function(data, type, row, meta) {
                         if(!data) return '';
-                        return data;
+                        // return data;
+                        return row.departure_8 + '<br> ↓ <br>' + row.destination_8;
                     }
                 },
                 {
@@ -318,13 +329,14 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(data)
                         {
-                            $(nTd).addClass('_bold');
-                            $(nTd).addClass('text-red');
+                            $(nTd).addClass('_bold-');
+                            $(nTd).addClass('text-red-');
                         }
                     },
                     render: function(data, type, row, meta) {
                         if(!data) return '';
-                        return data;
+                        // return data;
+                        return row.departure_9 + '<br> ↓ <br>' + row.destination_9;
                     }
                 },
                 {
@@ -337,13 +349,14 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(data)
                         {
-                            $(nTd).addClass('_bold');
-                            $(nTd).addClass('text-red');
+                            $(nTd).addClass('_bold-');
+                            $(nTd).addClass('text-red-');
                         }
                     },
                     render: function(data, type, row, meta) {
                         if(!data) return '';
-                        return data;
+                        // return data;
+                        return row.departure_10 + '<br> ↓ <br>' + row.destination_10;
                     }
                 },
                 {
@@ -356,13 +369,14 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(data)
                         {
-                            $(nTd).addClass('_bold');
-                            $(nTd).addClass('text-red');
+                            $(nTd).addClass('_bold-');
+                            $(nTd).addClass('text-red-');
                         }
                     },
                     render: function(data, type, row, meta) {
                         if(!data) return '';
-                        return data;
+                        // return data;
+                        return row.departure_11 + '<br> ↓ <br>' + row.destination_11;
                     }
                 },
                 {
@@ -375,13 +389,14 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(data)
                         {
-                            $(nTd).addClass('_bold');
-                            $(nTd).addClass('text-red');
+                            $(nTd).addClass('_bold-');
+                            $(nTd).addClass('text-red-');
                         }
                     },
                     render: function(data, type, row, meta) {
                         if(!data) return '';
-                        return data;
+                        // return data;
+                        return row.departure_12 + '<br> ↓ <br>' + row.destination_12;
                     }
                 },
                 {
@@ -394,13 +409,14 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(data)
                         {
-                            $(nTd).addClass('_bold');
-                            $(nTd).addClass('text-red');
+                            $(nTd).addClass('_bold-');
+                            $(nTd).addClass('text-red-');
                         }
                     },
                     render: function(data, type, row, meta) {
                         if(!data) return '';
-                        return data;
+                        // return data;
+                        return row.departure_13 + '<br> ↓ <br>' + row.destination_13;
                     }
                 },
                 {
@@ -413,13 +429,14 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(data)
                         {
-                            $(nTd).addClass('_bold');
-                            $(nTd).addClass('text-red');
+                            $(nTd).addClass('_bold-');
+                            $(nTd).addClass('text-red-');
                         }
                     },
                     render: function(data, type, row, meta) {
                         if(!data) return '';
-                        return data;
+                        // return data;
+                        return row.departure_14 + '<br> ↓ <br>' + row.destination_14;
                     }
                 }
 
