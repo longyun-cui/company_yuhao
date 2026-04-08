@@ -8,7 +8,7 @@ class WL_API__G7_Received extends Model
 {
     use SoftDeletes;
     //
-    protected $table = "wl_api__g7__received";
+    protected $table = "wl__api__g7__received";
     protected $fillable = [
         'active', 'status',
         'category', 'type', 'form',

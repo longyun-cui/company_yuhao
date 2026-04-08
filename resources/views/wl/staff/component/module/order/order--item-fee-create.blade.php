@@ -1,6 +1,6 @@
 {{--添加-费用-信息--}}
 <div class="modal fade modal-wrapper" id="modal--for--order--item-fee-create">
-    <div class="col-md-8 col-md-offset-2 margin-top-16px margin-bottom-64px bg-white">
+    <div class="modal-content col-md-8 col-md-offset-2 margin-top-16px margin-bottom-64px bg-white">
 
         <div class="box- box-info- form-container">
 
