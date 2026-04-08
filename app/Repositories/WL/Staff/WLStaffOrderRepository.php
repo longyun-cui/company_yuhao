@@ -153,6 +153,7 @@ class WLStaffOrderRepository {
         if(!empty($post_data['description'])) $query->where('description', 'like', "%{$post_data['description']}%");
         if(!empty($post_data['keyword'])) $query->where('content', 'like', "%{$post_data['keyword']}%");
         if(!empty($post_data['remark'])) $query->where('remark', 'like', "%{$post_data['remark']}%");
+        if(!empty($post_data['external_car'])) $query->where('external_car', 'like', "%{$post_data['external_car']}%");
         if(!empty($post_data['tag'])) $query->where('tag', 'like', "%{$post_data['tag']}%");
 
         if(!empty($post_data['assign'])) $query->where('assign_date', $post_data['assign']);

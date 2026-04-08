@@ -43,6 +43,7 @@
                     d.trailer = $tableSearch.find('select[name="order-trailer"]').val();
                     d.car_type = $tableSearch.find('select[name="order-car-type"]').val();
                     d.car_owner_type = $tableSearch.find('select[name="order-car-owner-type"]').val();
+                    d.external_car = $tableSearch.find('input[name="order-external-car"]').val();
                     d.draw = (new Date().getTime());
                 },
             },

@@ -179,6 +179,9 @@
                 <option value="11">外请</option>
             </select>
 
+            {{--外请车--}}
+            <input type="text" class="search-filter form-filter filter-sm filter-keyup" name="order-external-car" placeholder="外请车" value="" />
+
             {{--选择车型--}}
             <select class="search-filter form-filter filter-lg select2-box-c" name="order-car-type">
                 <option value="">选择车型</option>
