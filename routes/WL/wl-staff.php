@@ -28,6 +28,7 @@ Route::group(['middleware' => ['wl.staff.login']], function () {
 
 
     Route::get('/o1/api/g7/request/test', $controller.'@o1__api__g7__request__test');
+    Route::match(['get','post'], '/o1/api/g7/receive/test', $controller.'@o1__api__g7__receive__test');
 
 
     /*

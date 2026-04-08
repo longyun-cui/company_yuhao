@@ -1727,7 +1727,6 @@
                         var $html_fee_record = '<a class="btn btn-xs bg-default modal-show--for--order-fee-record" data-id="'+data+'">费用记录</a>';
 
 
-                        $html_journey = '<a class="btn btn-xs modal-show--for--order--item-journey-create" data-id="'+data+'">行程</a>';
                         $html_fee = '<a class="btn btn-xs modal-show--for--order--item-fee-create" data-id="'+data+'">费用</a>';
                         $html_accounting = '<a class="btn btn-xs modal-show--for--order--item-financial-accounting-set" data-id="'+data+'">财务核对</a>';
 
@@ -1735,7 +1734,6 @@
 
                         var $html =
                             $html_follow+
-                            $html_journey+
                             $html_fee+
                             $html_accounting+
                             $html_operation_record+

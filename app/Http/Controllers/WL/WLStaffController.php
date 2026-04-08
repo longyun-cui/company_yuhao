@@ -155,6 +155,10 @@ class WLStaffController extends Controller
     {
         return $this->api_repo->o1__api__g7__request__test();
     }
+    public function o1__api__g7__receive__test()
+    {
+        return $this->api_repo->o1__api__g7__receive__test(request()->all());
+    }
 
 
 
