@@ -151,7 +151,7 @@
                 </div>
                 {{--开票--}}
                 <div class="form-group">
-                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 开票 (支)</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 开票金额 & 票点 (支)</label>
                     <div class="col-md-9 ">
                         <div class="col-sm-6 col-md-6 padding-0">
                             <input type="text" class="form-control" name="financial_receipt_for_invoice_amount" placeholder="开票金额" value="0" data-default="0">
