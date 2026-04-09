@@ -256,23 +256,30 @@
                 <div class="form-group internal-car">
                     <label class="control-label col-md-3"><sup class="text-red">*</sup> 自家司机</label>
                     <div class="col-md-9 ">
-                        <div class="col-sm-12 col-md-12 padding-0">
+                        <div class="col-sm-6 col-md-6 padding-0">
                             <select class="form-control select2-reset select2--driver"
                                     name="driver_id"
                                     id="select2--driver--for--order--item-edit"
                                     data-modal="#modal--for--order--item-edit"
+                                    data-item-category=""
+                                    data-item-type=""
+                                    data-driver-type="1"
                             >
-                                <option value="0">选择驾驶员</option>
+                                <option value="0">选择主驾</option>
                             </select>
                         </div>
-{{--                        <div class="col-sm-6 col-md-6 padding-0">--}}
-{{--                            <select class="form-control select2-reset select2--driver"--}}
-{{--                                    name="copilot_id"--}}
-{{--                                    id="select2--copilot--for--order--item-edit"--}}
-{{--                            >--}}
-{{--                                <option value="0">选择副驾</option>--}}
-{{--                            </select>--}}
-{{--                        </div>--}}
+                        <div class="col-sm-6 col-md-6 padding-0">
+                            <select class="form-control select2-reset select2--driver"
+                                    name="copilot_id"
+                                    id="select2--copilot--for--order--item-edit"
+                                    data-modal="#modal--for--order--item-edit"
+                                    data-item-category=""
+                                    data-item-type=""
+                                    data-driver-type="11"
+                            >
+                                <option value="0">选择副驾</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 {{--驾驶员信息--}}
