@@ -84,7 +84,28 @@
                     }
                 },
                 {
-                    "title": "主驾姓名",
+                    "title": "类型",
+                    "width": "80px",
+                    "data": "driver_type",
+                    "orderable": false,
+                    render: function(data, type, row, meta) {
+
+                        if(data == 1)
+                        {
+                            return '<i class="fa fa-circle text-green"></i> 主驾';
+                        }
+                        else if(data == 11)
+                        {
+                            return '<i class="fa fa-circle-o text-blue"></i> 副驾';
+                        }
+                        else
+                        {
+                            return '<i class="fa fa-circle text-black"></i> 有误';
+                        }
+                    }
+                },
+                {
+                    "title": "驾驶员姓名",
                     "data": "driver_name",
                     "className": "_bold",
                     "width": "80px",
@@ -93,7 +114,7 @@
                         if(row.user_status != 97)
                         {
                             $(nTd).addClass('modal-show-for-info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','主驾姓名');
+                            $(nTd).attr('data-id',row.id).attr('data-name','驾驶员姓名');
                             $(nTd).attr('data-key','driver_name').attr('data-value',data);
                             $(nTd).attr('data-column-name','主驾姓名');
                             $(nTd).attr('data-text-type','text');
@@ -110,16 +131,16 @@
                     }
                 },
                 {
+                    "title": "驾驶员电话",
+                    "data": "driver_phone",
                     "className": "_bold",
                     "width": "100px",
-                    "title": "主驾电话",
-                    "data": "driver_phone",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.user_status != 97)
                         {
                             $(nTd).addClass('modal-show-for-info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','主驾电话');
+                            $(nTd).attr('data-id',row.id).attr('data-name','驾驶员电话');
                             $(nTd).attr('data-key','driver_phone').attr('data-value',data);
                             $(nTd).attr('data-column-name','主驾电话');
                             $(nTd).attr('data-text-type','text');
@@ -133,10 +154,10 @@
                     }
                 },
                 {
-                    "className": "",
-                    "width": "120px",
                     "title": "身份证号",
                     "data": "driver_ID",
+                    "className": "",
+                    "width": "120px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.user_status != 97)
@@ -156,10 +177,10 @@
                     }
                 },
                 {
+                    "title": "驾驶员职称",
+                    "data": "driver_title",
                     "className": "",
                     "width": "80px",
-                    "title": "主驾职称",
-                    "data": "driver_title",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.user_status != 97)

@@ -21,7 +21,7 @@
 
                     {{--驾驶员类型--}}
                     <div class="form-group form-category">
-                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 驾驶员类型</label>
+                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 类型</label>
                         <div class="col-md-9">
                             <div class="btn-group">
 
@@ -101,20 +101,20 @@
 
 
                     {{--副驾-姓名&手机号--}}
-                    <div class="form-group">
-                        <label class="control-label col-md-2">副驾-基本信息</label>
-                        <div class="col-md-10 ">
-                            <div class="col-sm-3 col-md-3 padding-0">
-                                <input type="text" class="form-control" name="copilot_name" placeholder="副驾姓名" value="">
-                            </div>
-                            <div class="col-sm-3 col-md-3 padding-0">
-                                <input type="text" class="form-control" name="copilot_phone" placeholder="副驾电话" value="">
-                            </div>
-                            <div class="col-sm-6 col-md-6 padding-0">
-                                <input type="text" class="form-control" name="copilot_ID" placeholder="副驾身份证号" value="">
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div class="form-group">--}}
+{{--                        <label class="control-label col-md-2">副驾-基本信息</label>--}}
+{{--                        <div class="col-md-10 ">--}}
+{{--                            <div class="col-sm-3 col-md-3 padding-0">--}}
+{{--                                <input type="text" class="form-control" name="copilot_name" placeholder="副驾姓名" value="">--}}
+{{--                            </div>--}}
+{{--                            <div class="col-sm-3 col-md-3 padding-0">--}}
+{{--                                <input type="text" class="form-control" name="copilot_phone" placeholder="副驾电话" value="">--}}
+{{--                            </div>--}}
+{{--                            <div class="col-sm-6 col-md-6 padding-0">--}}
+{{--                                <input type="text" class="form-control" name="copilot_ID" placeholder="副驾身份证号" value="">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     {{--副驾-身份证号--}}
 {{--                    <div class="form-group">--}}
 {{--                        <label class="control-label col-md-2">副驾-身份证号</label>--}}
@@ -123,32 +123,32 @@
 {{--                        </div>--}}
 {{--                    </div>--}}
                     {{--副驾-职称&入职时间--}}
-                    <div class="form-group">
-                        <label class="control-label col-md-2">副驾-职称&入职时间</label>
-                        <div class="col-md-10 ">
-                            <div class="col-sm-4 col-md-4 padding-0">
-                                <input type="text" class="form-control" name="copilot_title" placeholder="副驾职称" value="">
-                            </div>
-                            <div class="col-sm-4 col-md-4 padding-0">
-                                <input type="text" class="form-control date-picker" name="copilot_entry_date" placeholder="副驾入职时间" value="" readonly="readonly">
-                            </div>
-                            <div class="col-sm-4 col-md-4 padding-0">
-                                <input type="text" class="form-control date-picker" name="copilot_leave_date" placeholder="副驾离职时间" value="" readonly="readonly">
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div class="form-group">--}}
+{{--                        <label class="control-label col-md-2">副驾-职称&入职时间</label>--}}
+{{--                        <div class="col-md-10 ">--}}
+{{--                            <div class="col-sm-4 col-md-4 padding-0">--}}
+{{--                                <input type="text" class="form-control" name="copilot_title" placeholder="副驾职称" value="">--}}
+{{--                            </div>--}}
+{{--                            <div class="col-sm-4 col-md-4 padding-0">--}}
+{{--                                <input type="text" class="form-control date-picker" name="copilot_entry_date" placeholder="副驾入职时间" value="" readonly="readonly">--}}
+{{--                            </div>--}}
+{{--                            <div class="col-sm-4 col-md-4 padding-0">--}}
+{{--                                <input type="text" class="form-control date-picker" name="copilot_leave_date" placeholder="副驾离职时间" value="" readonly="readonly">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     {{--副驾-紧急联系人&电话--}}
-                    <div class="form-group">
-                        <label class="control-label col-md-2">副驾-紧急联系人&电话</label>
-                        <div class="col-md-10 ">
-                            <div class="col-sm-6 col-md-6 padding-0">
-                                <input type="text" class="form-control" name="copilot_emergency_contact_name" placeholder="副驾紧急联系人" value="">
-                            </div>
-                            <div class="col-sm-6 col-md-6 padding-0">
-                                <input type="text" class="form-control" name="copilot_emergency_contact_phone" placeholder="副驾紧急联系电话" value="">
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div class="form-group">--}}
+{{--                        <label class="control-label col-md-2">副驾-紧急联系人&电话</label>--}}
+{{--                        <div class="col-md-10 ">--}}
+{{--                            <div class="col-sm-6 col-md-6 padding-0">--}}
+{{--                                <input type="text" class="form-control" name="copilot_emergency_contact_name" placeholder="副驾紧急联系人" value="">--}}
+{{--                            </div>--}}
+{{--                            <div class="col-sm-6 col-md-6 padding-0">--}}
+{{--                                <input type="text" class="form-control" name="copilot_emergency_contact_phone" placeholder="副驾紧急联系电话" value="">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
 
                     {{--描述--}}
@@ -340,62 +340,6 @@
                         </div>
                     </div>
 
-
-                    {{--单图上传--}}
-                    <div class="form-group _none">
-                        <label class="control-label col-md-2">头像</label>
-                        <div class="col-md-10 fileinput-group">
-
-                            <div class="fileinput fileinput-new" data-provides="fileinput">
-                                <div class="fileinput-new thumbnail">
-                                    @if(!empty($data->image_src))
-                                        <a class="lightcase-image" data-rel="lightcase" href="{{ url(env('DOMAIN_CDN').'/'.$data->image_src) }}">
-                                            <img src="{{ url(env('DOMAIN_CDN').'/'.$$data->image_src) }}" alt="" />
-                                        </a>
-                                    @endif
-                                </div>
-                                <div class="fileinput-preview fileinput-exists thumbnail">
-                                </div>
-                                <div class="btn-tool-group">
-                                <span class="btn-file">
-                                    <button class="btn btn-sm btn-primary fileinput-new">选择图片</button>
-                                    <button class="btn btn-sm btn-warning fileinput-exists">更改</button>
-                                    <input type="file" name="image_src_" />
-                                </span>
-                                    <span class="">
-                                    <button class="btn btn-sm btn-danger fileinput-exists" data-dismiss="fileinput">移除</button>
-                                </span>
-                                </div>
-                            </div>
-                            <div id="titleImageError" style="color: #a94442"></div>
-
-                        </div>
-                    </div>
-
-                    {{--启用--}}
-                    <div class="form-group form-type _none">
-                        <label class="control-label col-md-2">启用</label>
-                        <div class="col-md-10 ">
-                            <div class="btn-group">
-
-                                <button type="button" class="btn">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="active" value="0" checked="checked"> 暂不启用
-                                        </label>
-                                    </div>
-                                </button>
-                                <button type="button" class="btn">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="active" value="1"> 启用
-                                        </label>
-                                    </div>
-                                </button>
-
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
             </form>
