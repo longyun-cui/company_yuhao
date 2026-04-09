@@ -176,7 +176,8 @@
                         $modal.find('input[name="operate[type]"]').val('edit');
                         $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));
 
-                        $modal.find('select[name="driver_type"]').val($response.data.driver_type).trigger('change');
+                        $modal.find('input[name="driver_type"]').prop('checked', false);
+                        $modal.find('input[name="driver_type"][value="'+$response.data.driver_type+'"]').prop('checked', true).trigger('change');
 
                         $modal.find('input[name="driver_name"]').val($response.data.driver_name);
                         $modal.find('input[name="driver_phone"]').val($response.data.driver_phone);
