@@ -47,16 +47,16 @@
 
                     {{--主驾 姓名 & 手机号--}}
                     <div class="form-group">
-                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 主驾信息</label>
+                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 驾驶员信息</label>
                         <div class="col-md-10 ">
                             <div class="col-sm-4 col-md-3 padding-0">
-                                <input type="text" class="form-control" name="driver_name" placeholder="主驾姓名" value="">
+                                <input type="text" class="form-control" name="driver_name" placeholder="姓名" value="">
                             </div>
                             <div class="col-sm-4 col-md-3 padding-0">
-                                <input type="text" class="form-control" name="driver_phone" placeholder="主驾手机号" value="">
+                                <input type="text" class="form-control" name="driver_phone" placeholder="手机号" value="">
                             </div>
                             <div class="col-sm-4 col-md-6 padding-0">
-                                <input type="text" class="form-control" name="driver_ID" placeholder="主驾身份证号" value="">
+                                <input type="text" class="form-control" name="driver_ID" placeholder="身份证号" value="">
                             </div>
                         </div>
                     </div>
@@ -84,13 +84,13 @@
                     </div>
                     {{--主驾-紧急联系人&电话--}}
                     <div class="form-group">
-                        <label class="control-label col-md-2">主驾-紧急联系人</label>
+                        <label class="control-label col-md-2">紧急联系人</label>
                         <div class="col-md-10 ">
                             <div class="col-sm-6 col-md-6 padding-0">
-                                <input type="text" class="form-control" name="driver_emergency_contact_name" placeholder="主驾紧急联系人" value="">
+                                <input type="text" class="form-control" name="driver_emergency_contact_name" placeholder="紧急联系人" value="">
                             </div>
                             <div class="col-sm-6 col-md-6 padding-0">
-                                <input type="text" class="form-control" name="driver_emergency_contact_phone" placeholder="主驾紧急联系电话" value="">
+                                <input type="text" class="form-control" name="driver_emergency_contact_phone" placeholder="紧急联系电话" value="">
                             </div>
                         </div>
                     </div>
