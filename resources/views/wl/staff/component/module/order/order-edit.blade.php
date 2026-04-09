@@ -127,7 +127,7 @@
 
                 {{--运费 & 油卡 & 信息费--}}
                 <div class="form-group">
-                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 运费 & 油卡</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 运费 & 油卡 (客收)</label>
                     <div class="col-md-9 ">
                         <div class="col-sm-6 col-md-6 padding-0">
                             <input type="text" class="form-control" name="freight_amount" placeholder="金额" value="0" data-default="0">
@@ -139,7 +139,7 @@
                 </div>
                 {{--共建车费 & 信息费--}}
                 <div class="form-group">
-                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 共建车费 & 信息费</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 共建车费 & 信息费 (支)</label>
                     <div class="col-md-9 ">
                         <div class="col-sm-6 col-md-6 padding-0">
                             <input type="text" class="form-control" name="cooperative_vehicle_amount" placeholder="共建车费" value="0" data-default="0">
@@ -151,7 +151,7 @@
                 </div>
                 {{--开票--}}
                 <div class="form-group">
-                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 开票</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 开票 (支)</label>
                     <div class="col-md-9 ">
                         <div class="col-sm-6 col-md-6 padding-0">
                             <input type="text" class="form-control" name="financial_receipt_for_invoice_amount" placeholder="开票金额" value="0" data-default="0">
