@@ -68,7 +68,7 @@
                 {
                     "title": "状态",
                     "data": "item_status",
-                    "width": "80px",
+                    "width": "60px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
                         if(row.deleted_at != null)
@@ -103,7 +103,7 @@
                     }
                 },
                 {
-                    "title": "车牌编号",
+                    "title": "车编号",
                     "data": "car_number",
                     "className": "text-center",
                     "width": "60px",
@@ -123,6 +123,28 @@
                         var $name = data;
                         if(row.pre_name) $name = data + ' (' + row.pre_name + ')';
                         return '<a class="car-control" data-id="'+row.id+'" data-title="'+data+'">'+$name+'</a>';
+                    }
+                },
+                {
+                    "title": "车型",
+                    "data": "car_info_type",
+                    "className": "text-center",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+//                            if(row.is_published != 0)
+                        {
+                            $(nTd).addClass('modal-show-for-info-text-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name',row.name);
+                            $(nTd).attr('data-key','car_info_type').attr('data-value',data);
+                            $(nTd).attr('data-column-name','车型');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(!data) return '--';
+                        else return data;
                     }
                 },
                 {
@@ -198,7 +220,7 @@
                     "title": "默认主驾",
                     "data": "driver_id",
                     "className": "text-center",
-                    "width": "160px",
+                    "width": "150px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
@@ -237,7 +259,7 @@
                     "title": "默认副驾",
                     "data": "copilot_id",
                     "className": "text-center",
-                    "width": "160px",
+                    "width": "150px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
@@ -363,32 +385,10 @@
 //                         }
 //                     },
                 {
-                    "className": "text-center",
-                    "width": "120px",
-                    "title": "车型",
-                    "data": "car_info_type",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-//                            if(row.is_published != 0)
-                        {
-                            $(nTd).addClass('modal-show-for-info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name',row.name);
-                            $(nTd).attr('data-key','car_info_type').attr('data-value',data);
-                            $(nTd).attr('data-column-name','车型');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        if(!data) return '--';
-                        else return data;
-                    }
-                },
-                {
-                    "className": "text-center",
-                    "width": "120px",
                     "title": "尺寸",
                     "data": "car_info_size",
+                    "className": "text-center",
+                    "width": "120px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
 //                            if(row.is_published != 0)
