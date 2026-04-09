@@ -209,7 +209,8 @@ Route::group(['middleware' => ['wl.staff.login']], function () {
     Route::post('/o1/project/item-disable', $controller.'@o1__project__item_disable');
     // 【项目】操作记录
     Route::post('/o1/project/item-operation-record-list/datatable-query', $controller.'@o1__project__item_operation_record_list__datatable_query');
-
+    // 【项目】统计
+    Route::post('/o1/project/statistic/statistic-task-recent', $controller.'@o1__project__statistic__task_recent');
 
 
 

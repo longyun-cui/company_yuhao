@@ -224,6 +224,27 @@
                     <a class="tab-control datatable-control"
                        data-type="create"
                        data-unique="y"
+                       data-id="project--statistic--task-recent"
+                       data-title='项目近期订单'
+                       data-content='<i class="fa fa-cube text-green"></i> 项目近期订单'
+                       data-icon='<i class="fa fa-cube text-green"></i>'
+
+                       data-datatable-type="create"
+                       data-datatable-unique="y"
+                       data-datatable-id="datatable--project--statistic--task-recent"
+                       data-datatable-target="project--statistic--task-recent"
+                       data-datatable-clone-object="project--statistic--task-recent--clone"
+                    >
+                        <i class="fa fa-cube text-green"></i>
+                        <span>项目近期订单</span>
+                    </a>
+                </li>
+            @endif
+            @if(in_array($me->staff_category,[0,1,9,81]))
+                <li class="treeview">
+                    <a class="tab-control datatable-control"
+                       data-type="create"
+                       data-unique="y"
                        data-id="car--statistic--task-recent"
                        data-title='车辆最近订单'
                        data-content='<i class="fa fa-car text-green"></i> 车辆近期订单'

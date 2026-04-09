@@ -224,6 +224,10 @@
                 {
                     Datatable_Statistic__Car__Task_Recent('#'+$config.id, $config.chart_id);
                 }
+                else if($id == "datatable--project--statistic--task-recent")
+                {
+                    Datatable_Statistic__Project__Task_Recent('#'+$config.id, $config.chart_id);
+                }
             }
 
 

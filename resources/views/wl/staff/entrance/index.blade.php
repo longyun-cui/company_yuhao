@@ -73,6 +73,7 @@
     @include(env('TEMPLATE_WL_STAFF').'component.module.client.client-list')
     {{--项目--}}
     @include(env('TEMPLATE_WL_STAFF').'component.module.project.project-list')
+    @include(env('TEMPLATE_WL_STAFF').'component.module.project.project--statistic--task-recent')
     {{--订单--}}
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order-list')
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order-list--for--duplicate')
@@ -230,6 +231,7 @@
     @include(env('TEMPLATE_WL_STAFF').'component.module.project.project-list-datatable')
     @include(env('TEMPLATE_WL_STAFF').'component.module.project.project-list-script')
     @include(env('TEMPLATE_WL_STAFF').'component.module.project.project--item-operation-record-datatable')
+    @include(env('TEMPLATE_WL_STAFF').'component.module.project.project--statistic--task-recent--datatable')
 
 
     {{--订单--}}

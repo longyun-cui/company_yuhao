@@ -807,6 +807,11 @@ class WLStaffController extends Controller
     {
         return $this->project_repo->o1__project__item_operation_record_list__datatable_query(request()->all());
     }
+    // 【项目】统计
+    public function o1__project__statistic__task_recent()
+    {
+        return $this->project_repo->o1__project__statistic__task_recent(request()->all());
+    }
 
 
 

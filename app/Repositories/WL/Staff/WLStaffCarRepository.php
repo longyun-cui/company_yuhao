@@ -1243,7 +1243,14 @@ class WLStaffCarRepository {
             }
             else
             {
-//                $list[$k]->order_7 = 0;
+                $list[$k]->order_14 = 0;
+                $list[$k]->order_13 = 0;
+                $list[$k]->order_12 = 0;
+                $list[$k]->order_11 = 0;
+                $list[$k]->order_10 = 0;
+                $list[$k]->order_9 = 0;
+                $list[$k]->order_8 = 0;
+                $list[$k]->order_7 = 0;
                 $list[$k]->order_6 = 0;
                 $list[$k]->order_5 = 0;
                 $list[$k]->order_4 = 0;
@@ -1251,6 +1258,9 @@ class WLStaffCarRepository {
                 $list[$k]->order_2 = 0;
                 $list[$k]->order_1 = 0;
                 $list[$k]->order_0 = 0;
+                $list[$k]->order_a = 0;
+                $list[$k]->order_b = 0;
+                $list[$k]->order_c = 0;
             }
         }
 //        dd($list->toArray());
