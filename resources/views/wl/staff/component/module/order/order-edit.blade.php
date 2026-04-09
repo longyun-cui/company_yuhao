@@ -1,6 +1,7 @@
 {{--编辑-工单--}}
 <div class="modal fade modal-main-body modal-wrapper" id="modal--for--order--item-edit">
-    <div class="modal-content col-md-8 col-md-offset-4 margin-top-16px margin-bottom-64px bg-white">
+    <div class="modal-content col-md-6 col-md-offset-4- margin-top-16px margin-bottom-64px margin-right-32px bg-white"
+    style="float:right;">
         <div class="box- box-info- form-container">
 
             <div class="box-header with-border margin-top-16px">
