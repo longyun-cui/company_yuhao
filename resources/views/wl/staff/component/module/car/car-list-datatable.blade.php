@@ -195,7 +195,7 @@
                     }
                 },
                 {
-                    "title": "默认驾驶员",
+                    "title": "默认主驾",
                     "data": "driver_id",
                     "className": "text-center",
                     "width": "160px",
@@ -230,6 +230,42 @@
                             //     $copilot_html = '<a href="javascript:void(0);">'+row.copilot_er.driver_name+' '+row.copilot_er.driver_phone+'</a>';
                             // }
                             return $driver_html+'<br>'+$copilot_html;
+                        }
+                    }
+                },
+                {
+                    "title": "默认副驾",
+                    "data": "copilot_id",
+                    "className": "text-center",
+                    "width": "160px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).addClass('modal-show-for-info-select2-set');
+
+                            $(nTd).attr('data-id',row.id);
+                            $(nTd).attr('data-name','默认副驾');
+                            $(nTd).attr('data-key','copilot_id');
+                            $(nTd).attr('data-value',data);
+
+                            if(row.driver_er == null) $(nTd).attr('data-option-name','未指定');
+                            else $(nTd).attr('data-option-name',row.driver_er.driver_name);
+
+                            $(nTd).attr('data-column-name','默认副驾');
+
+                            if(row.driver_id) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(row.copilot_er == null) return '--';
+                        else
+                        {
+                            var $copilot_html = '';
+
+                            $copilot_html = '<a href="javascript:void(0);">'+row.copilot_er.driver_name+' '+row.copilot_er.driver_phone+'</a>';
+                            return $copilot_html;
                         }
                     }
                 },

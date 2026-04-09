@@ -406,7 +406,7 @@ class WLStaffCommonRepository {
             ->with([
                 'trailer_er'=>function($query) { $query->select('id','name','sub_name'); },
                 'driver_er'=>function($query) { $query->select('id','driver_name','driver_phone','copilot_name','copilot_phone'); },
-//                'copilot_er'=>function($query) { $query->select('id','driver_name','driver_phone'); },
+                'copilot_er'=>function($query) { $query->select('id','driver_name','driver_phone'); },
             ])
             ->where(['item_status'=>1]);
 
@@ -434,7 +434,7 @@ class WLStaffCommonRepository {
             if($post_data['with'] == 'order')
             {
                 $query->with([
-                    'order_list'=>function($query) { $query->select('*')->orderBy('task_date','desc')->limit(3); }
+                    'order_list'=>function($query) { $query->select('*')->orderBy('task_date','desc')->limit(5); }
                 ]);
             }
         }
@@ -469,6 +469,11 @@ class WLStaffCommonRepository {
         {
             $keyword = "%{$post_data['keyword']}%";
             $query->where('driver_name','like',"%$keyword%");
+        }
+
+        if(!empty($post_data['driver_type']))
+        {
+            $query->where('driver_type',$post_data['driver_type']);
         }
 
         $list = $query->orderBy('id','desc')->get()

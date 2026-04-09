@@ -132,28 +132,30 @@
                     <div class="form-group">
                         <label class="control-label col-md-2"><sup class="text-red">*</sup> 默认驾驶员</label>
                         <div class="col-md-9 ">
-                            <div class="col-sm-12 col-md-12 padding-0">
+                            <div class="col-sm-6 col-md-6 padding-0">
                                 <select class="form-control select2-reset select2--driver"
                                         name="driver_id"
                                         id="select2--driver--for--car--item-edit"
                                         data-modal="#modal--for--car--item-edit"
                                         data-item-category=""
                                         data-item-type=""
+                                        data-driver-type="1"
                                 >
                                     <option data-id="0" value="0">选择驾驶员</option>
                                 </select>
                             </div>
-{{--                            <div class="col-sm-6 col-md-6 padding-0">--}}
-{{--                                <select class="form-control select2-reset select2--driver"--}}
-{{--                                        name="copilot_id"--}}
-{{--                                        id="select2--copilot--for--car--item-edit"--}}
-{{--                                        data-modal="#modal--for--car--item-edit"--}}
-{{--                                        data-item-category=""--}}
-{{--                                        data-item-type=""--}}
-{{--                                >--}}
-{{--                                    <option data-id="0" value="0">选择副驾</option>--}}
-{{--                                </select>--}}
-{{--                            </div>--}}
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <select class="form-control select2-reset select2--driver"
+                                        name="copilot_id"
+                                        id="select2--copilot--for--car--item-edit"
+                                        data-modal="#modal--for--car--item-edit"
+                                        data-item-category=""
+                                        data-item-type=""
+                                        data-driver-type="11"
+                                >
+                                    <option data-id="0" value="0">选择副驾</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 

@@ -69,16 +69,16 @@
 {{--                    </div>--}}
                     {{--主驾-职称&入职时间--}}
                     <div class="form-group">
-                        <label class="control-label col-md-2">主驾-职称&入职&离职</label>
+                        <label class="control-label col-md-2">入职 & 离职 & 职称</label>
                         <div class="col-md-10 ">
-                            <div class="col-sm-4 col-md-4 padding-0">
-                                <input type="text" class="form-control" name="driver_title" placeholder="主驾职称" value="">
+                            <div class="col-sm-3 col-md-3 padding-0">
+                                <input type="text" class="form-control date-picker" name="driver_entry_date" placeholder="入职时间" value="" readonly="readonly">
                             </div>
-                            <div class="col-sm-4 col-md-4 padding-0">
-                                <input type="text" class="form-control date-picker" name="driver_entry_date" placeholder="主驾入职时间" value="" readonly="readonly">
+                            <div class="col-sm-3 col-md-3 padding-0">
+                                <input type="text" class="form-control date-picker" name="driver_leave_date" placeholder="离职时间" value="" readonly="readonly">
                             </div>
-                            <div class="col-sm-4 col-md-4 padding-0">
-                                <input type="text" class="form-control date-picker" name="driver_leave_date" placeholder="主驾离职时间" value="" readonly="readonly">
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control" name="driver_title" placeholder="职称" value="">
                             </div>
                         </div>
                     </div>
@@ -101,20 +101,20 @@
 
 
                     {{--副驾-姓名&手机号--}}
-{{--                    <div class="form-group">--}}
-{{--                        <label class="control-label col-md-2">副驾-基本信息</label>--}}
-{{--                        <div class="col-md-10 ">--}}
-{{--                            <div class="col-sm-3 col-md-3 padding-0">--}}
-{{--                                <input type="text" class="form-control" name="copilot_name" placeholder="副驾姓名" value="">--}}
-{{--                            </div>--}}
-{{--                            <div class="col-sm-3 col-md-3 padding-0">--}}
-{{--                                <input type="text" class="form-control" name="copilot_phone" placeholder="副驾电话" value="">--}}
-{{--                            </div>--}}
-{{--                            <div class="col-sm-6 col-md-6 padding-0">--}}
-{{--                                <input type="text" class="form-control" name="copilot_ID" placeholder="副驾身份证号" value="">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2">副驾-基本信息</label>
+                        <div class="col-md-10 ">
+                            <div class="col-sm-3 col-md-3 padding-0">
+                                <input type="text" class="form-control" name="copilot_name" placeholder="副驾姓名" value="">
+                            </div>
+                            <div class="col-sm-3 col-md-3 padding-0">
+                                <input type="text" class="form-control" name="copilot_phone" placeholder="副驾电话" value="">
+                            </div>
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control" name="copilot_ID" placeholder="副驾身份证号" value="">
+                            </div>
+                        </div>
+                    </div>
                     {{--副驾-身份证号--}}
 {{--                    <div class="form-group">--}}
 {{--                        <label class="control-label col-md-2">副驾-身份证号</label>--}}
@@ -123,32 +123,32 @@
 {{--                        </div>--}}
 {{--                    </div>--}}
                     {{--副驾-职称&入职时间--}}
-{{--                    <div class="form-group">--}}
-{{--                        <label class="control-label col-md-2">副驾-职称&入职时间</label>--}}
-{{--                        <div class="col-md-10 ">--}}
-{{--                            <div class="col-sm-4 col-md-4 padding-0">--}}
-{{--                                <input type="text" class="form-control" name="copilot_title" placeholder="副驾职称" value="">--}}
-{{--                            </div>--}}
-{{--                            <div class="col-sm-4 col-md-4 padding-0">--}}
-{{--                                <input type="text" class="form-control date-picker" name="copilot_entry_date" placeholder="副驾入职时间" value="" readonly="readonly">--}}
-{{--                            </div>--}}
-{{--                            <div class="col-sm-4 col-md-4 padding-0">--}}
-{{--                                <input type="text" class="form-control date-picker" name="copilot_leave_date" placeholder="副驾离职时间" value="" readonly="readonly">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2">副驾-职称&入职时间</label>
+                        <div class="col-md-10 ">
+                            <div class="col-sm-3 col-md-3 padding-0">
+                                <input type="text" class="form-control date-picker" name="copilot_entry_date" placeholder="副驾入职时间" value="" readonly="readonly">
+                            </div>
+                            <div class="col-sm-3 col-md-3 padding-0">
+                                <input type="text" class="form-control date-picker" name="copilot_leave_date" placeholder="副驾离职时间" value="" readonly="readonly">
+                            </div>
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control" name="copilot_title" placeholder="副驾职称" value="">
+                            </div>
+                        </div>
+                    </div>
                     {{--副驾-紧急联系人&电话--}}
-{{--                    <div class="form-group">--}}
-{{--                        <label class="control-label col-md-2">副驾-紧急联系人&电话</label>--}}
-{{--                        <div class="col-md-10 ">--}}
-{{--                            <div class="col-sm-6 col-md-6 padding-0">--}}
-{{--                                <input type="text" class="form-control" name="copilot_emergency_contact_name" placeholder="副驾紧急联系人" value="">--}}
-{{--                            </div>--}}
-{{--                            <div class="col-sm-6 col-md-6 padding-0">--}}
-{{--                                <input type="text" class="form-control" name="copilot_emergency_contact_phone" placeholder="副驾紧急联系电话" value="">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2">副驾-紧急联系人&电话</label>
+                        <div class="col-md-10 ">
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control" name="copilot_emergency_contact_name" placeholder="副驾紧急联系人" value="">
+                            </div>
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control" name="copilot_emergency_contact_phone" placeholder="副驾紧急联系电话" value="">
+                            </div>
+                        </div>
+                    </div>
 
 
                     {{--描述--}}

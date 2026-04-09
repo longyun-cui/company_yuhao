@@ -65,7 +65,7 @@ class WLStaffDriverRepository {
 
         $query = WL_Common_Driver::withTrashed()->select('*')
             ->with([
-                'creator'=>function ($query) { $query->select('id','username'); }
+                'creator'=>function ($query) { $query->select('id','name'); }
             ]);
 //            ->whereIn('staff_category',[11,21,31,81]);
 
@@ -87,9 +87,15 @@ class WLStaffDriverRepository {
                 $query->where('item_status', $item_status_int);
             }
         }
-        else
+
+        // 状态 [|]
+        if(!empty($post_data['driver_type']))
         {
-//            $query->where('item_status', 1);
+            $driver_type_int = intval($post_data['driver_type']);
+            if(!in_array($driver_type_int,[-1,0]))
+            {
+                $query->where('driver_type', $driver_type_int);
+            }
         }
 
 

@@ -581,6 +581,7 @@
                             _token: $('meta[name="_token"]').attr('content'),
                             item_category: this.data('item-category'),
                             item_type: this.data('item-type'),
+                            driver_type: this.data('driver-type'),
                             company_id: this.data('company-id'),
                             department_id: this.data('department-id'),
                             team_id: this.data('team-id'),

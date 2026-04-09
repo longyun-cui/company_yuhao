@@ -23,12 +23,11 @@
                 "dataType" : 'json',
                 "data": function (d) {
                     d._token = $('meta[name="_token"]').attr('content');
-                    d.id = $('input[name="driver-id"]').val();
-                    d.mobile = $('input[name="driver-mobile"]').val();
-                    d.name = $('input[name="driver-name"]').val();
-                    d.username = $('input[name="driver-username"]').val();
-                    d.user_type = $tableSearch.find('select[name="driver-user-type"]').val();
-                    d.user_status = $tableSearch.find('select[name="driver-user-status"]').val();
+                    d.id = $tableSearch.find('input[name="driver-id"]').val();
+                    d.mobile = $tableSearch.find('input[name="driver-mobile"]').val();
+                    d.name = $tableSearch.find('input[name="driver-name"]').val();
+                    d.driver_type = $tableSearch.find('select[name="driver-type"]').val();
+                    d.item_status = $tableSearch.find('select[name="driver-item-status"]').val();
                 },
             },
             "fixedColumns": {
