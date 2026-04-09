@@ -127,21 +127,29 @@
 
                 {{--运费 & 油卡 & 信息费--}}
                 <div class="form-group">
-                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 运费 & 油卡 & 信息费</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 运费 & 油卡</label>
                     <div class="col-md-9 ">
-                        <div class="col-sm-4 col-md-4 padding-0">
+                        <div class="col-sm-6 col-md-6 padding-0">
                             <input type="text" class="form-control" name="freight_amount" placeholder="金额" value="0" data-default="0">
                         </div>
-                        <div class="col-sm-4 col-md-4 padding-0">
+                        <div class="col-sm-6 col-md-6 padding-0">
                             <input type="text" class="form-control" name="freight_oil_card_amount" placeholder="油卡" value="0" data-default="0">
                         </div>
-                        <div class="col-sm-4 col-md-4 padding-0">
+                    </div>
+                </div>
+                {{--共建车费 & 信息费--}}
+                <div class="form-group">
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 共建车费 & 信息费</label>
+                    <div class="col-md-9 ">
+                        <div class="col-sm-6 col-md-6 padding-0">
+                            <input type="text" class="form-control" name="cooperative_vehicle_amount" placeholder="共建车费" value="0" data-default="0">
+                        </div>
+                        <div class="col-sm-6 col-md-6 padding-0">
                             <input type="text" class="form-control" name="financial_fee_for_information" placeholder="信息费" value="0" data-default="0">
                         </div>
                     </div>
                 </div>
-
-                {{--信息费--}}
+                {{--开票--}}
                 <div class="form-group">
                     <label class="control-label col-md-3"><sup class="text-red">*</sup> 开票</label>
                     <div class="col-md-9 ">

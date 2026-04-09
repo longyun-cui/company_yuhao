@@ -154,6 +154,7 @@ class WL_Common_Order extends Model
         'settlement_period',
         'freight_amount',
         'freight_oil_card_amount',
+        'cooperative_vehicle_amount',
         'oil_card_amount',
         'deposit_amount',
 

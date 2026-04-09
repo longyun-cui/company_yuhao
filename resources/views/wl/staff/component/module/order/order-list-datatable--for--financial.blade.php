@@ -974,6 +974,35 @@
                     }
                 },
                 {
+                    "title": "共建车费",
+                    "data": "cooperative_vehicle_amount",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','共建车费');
+                        $(nTd).attr('data-key','cooperative_vehicle_amount');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).attr('data-column-name','共建车费');
+                        $(nTd).addClass('color-red');
+                        $(nTd).addClass('_bold');
+
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).addClass('modal-show--for--info-text-set');
+                            $(nTd).attr('data-text-type','text');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
                     "title": "请车价",
                     "data": "external_car_price",
                     "className": "bg-fee",

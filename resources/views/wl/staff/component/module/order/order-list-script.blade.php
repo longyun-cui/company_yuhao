@@ -117,9 +117,10 @@
                         var $transport_time_limitation = parseFloat(($response.data.transport_time_limitation / 60).toFixed(2));
                         $modal.find('input[name="transport_time_limitation"]').val($transport_time_limitation);
 
-                        // 运费 & 油卡 & 信息费
+                        // 运费 & 油卡 & 共建车费 & 信息费
                         $modal.find('input[name="freight_amount"]').val(parseFloat($response.data.freight_amount));
                         $modal.find('input[name="freight_oil_card_amount"]').val(parseFloat($response.data.freight_oil_card_amount));
+                        $modal.find('input[name="cooperative_vehicle_amount"]').val(parseFloat($response.data.cooperative_vehicle_amount));
                         $modal.find('input[name="financial_fee_for_information"]').val(parseFloat($response.data.financial_fee_for_information));
 
                         $modal.find('input[name="financial_receipt_for_invoice_amount"]').val(parseFloat($response.data.financial_receipt_for_invoice_amount));
