@@ -163,31 +163,40 @@
                         $modal.find('input[name=driver_phone]').val('');
                         $modal.find('input[name=copilot_name]').val('');
                         $modal.find('input[name=copilot_phone]').val('');
-                        // if($response.data.driver_er)
-                        // {
-                        //     $modal.find('select[name="driver_id"]').append(new Option($response.data.driver_er.driver_name, $response.data.driver_id, true, true)).trigger('change');
-                        // }
+                        // select2 主驾
                         select2FirstOptionSelected($modal.find('select[name="driver_id"]'));
                         if($response.data.driver_er)
                         {
+                            //     $modal.find('select[name="driver_id"]').append(new Option($response.data.driver_er.driver_name, $response.data.driver_id, true, true)).trigger('change');
+
                             var $data_driver_er = $response.data.driver_er;
-                            var $driver_html = $data_driver_er.driver_name
-                                + '('+$data_driver_er.driver_phone+')'
-                                + ' - '
-                                + $data_driver_er.copilot_name
-                                + '('+$data_driver_er.copilot_phone+')';
+                            // var $driver_html = $data_driver_er.driver_name
+                            //     + '('+$data_driver_er.driver_phone+')'
+                            //     + ' - '
+                            //     + $data_driver_er.copilot_name
+                            //     + '('+$data_driver_er.copilot_phone+')';
+                            var $driver_html = $data_driver_er.driver_name + '('+$data_driver_er.driver_phone+')';
                             var $driver_option = new Option($driver_html, $response.data.driver_id, true, true);
                             $modal.find('select[name="driver_id"]').append($driver_option).trigger('change');
                         }
+
+                        // select2 副驾
+                        select2FirstOptionSelected($modal.find('select[name="copilot_id"]'));
+                        if($response.data.copilot_er)
+                        {
+                            // $modal.find('select[name="copilot_id"]').append(new Option($response.data.copilot_er.driver_name, $response.data.copilot_id, true, true)).trigger('change');
+
+                            var $data_copilot_er = $response.data.copilot_er;
+                            var $copilot_html = $data_copilot_er.driver_name + '('+$data_copilot_er.driver_phone+')';
+                            var $copilot_option = new Option($copilot_html, $response.data.copilot_id, true, true);
+                            $modal.find('select[name="copilot_id"]').append($copilot_option).trigger('change');
+                        }
+
                         $modal.find('input[name=driver_name]').val($response.data.driver_name);
                         $modal.find('input[name=driver_phone]').val($response.data.driver_phone);
                         $modal.find('input[name=copilot_name]').val($response.data.copilot_name);
                         $modal.find('input[name=copilot_phone]').val($response.data.copilot_phone);
-                        // select2 副驾
-                        // if($response.data.copilot_er)
-                        // {
-                        //     $modal.find('select[name="copilot_id"]').append(new Option($response.data.copilot_er.driver_name, $response.data.copilot_id, true, true)).trigger('change');
-                        // }
+
 
                         $modal.find('input[name="external_car_price"]').val(parseFloat($response.data.external_car_price));
                         $modal.find('input[name="external_car"]').val($response.data.external_car);

@@ -637,6 +637,9 @@ class WLStaffOrderRepository {
             $assigned = WL_Common_Order::select('*')
                 ->where('car_id',$post_data['car_id'])
                 ->where('task_date',$post_data['task_date'])
+                ->when(($operate_type == 'edit'), function ($query) use ($operate_id) {
+                    return $query->where('id', '!=', $operate_id);
+                })
                 ->get();
             if(count($assigned) > 0)
             {
@@ -648,6 +651,9 @@ class WLStaffOrderRepository {
             $assigned = WL_Common_Order::select('*')
                 ->where('external_car',$post_data['external_car'])
                 ->where('task_date',$post_data['task_date'])
+                ->when(($operate_type == 'edit'), function ($query) use ($operate_id) {
+                    return $query->where('id', '!=', $operate_id);
+                })
                 ->get();
             if(count($assigned) > 0)
             {
