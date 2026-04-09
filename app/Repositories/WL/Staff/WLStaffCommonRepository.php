@@ -481,8 +481,8 @@ class WLStaffCommonRepository {
                 $text = $item->driver_name;
 
                 if($item->driver_phone) $text .= ' ('.$item->driver_phone.')';
-                if($item->copilot_name) $text .= ' - '.$item->copilot_name;
-                if($item->copilot_phone) $text .= ' ('.$item->copilot_phone.')';
+//                if($item->copilot_name) $text .= ' - '.$item->copilot_name;
+//                if($item->copilot_phone) $text .= ' ('.$item->copilot_phone.')';
 
                 $item->text = $text;
                 return $item;

@@ -311,8 +311,10 @@
             $('input[name=transport_time_limitation]').val($transport_time_limitation);
             $('input[name=freight_amount]').val(parseFloat(e.params.data.freight_amount));
         });
+
+
         // 【工单】【添加工单】select2 选择车辆
-        $('#select2--car--for--order--item-edit-2').on('select2:select', function(e) {
+        $('#select2--car--for--order--item-edit').on('select2:select', function(e) {
 
             console.log("用户选择了:", e.params.data); // 仅触发1次
             var $that = $(this);
@@ -334,36 +336,46 @@
                 var $trailer_option = new Option($trailer_html, $data.trailer_id, true, true);
                 $modal.find('select[name="trailer_id"]').append($trailer_option).trigger('change');
             }
-            // 主驾 (select2)
-            // $modal.find('select[name="driver_id"]').val(null).trigger('change');
-            select2FirstOptionSelected($modal.find('select[name="driver_id"]'));
+
+
+            // 驾驶员
             $modal.find('input[name=driver_name]').val('');
             $modal.find('input[name=driver_phone]').val('');
             $modal.find('input[name=copilot_name]').val('');
             $modal.find('input[name=copilot_phone]').val('');
+
+
+            // 主驾 (select2)
+            // $modal.find('select[name="driver_id"]').val(null).trigger('change');
+            select2FirstOptionSelected($modal.find('select[name="driver_id"]'));
             if($data.driver_er)
             {
-                var $data_driver_er = $data.driver_er;
-                var $driver_html = $data_driver_er.driver_name + '('+$data_driver_er.driver_phone+')';
+                var $driver_er = $data.driver_er;
+                var $driver_html = $driver_er.driver_name + '('+$driver_er.driver_phone+')';
 
                 var $driver_option = new Option($driver_html, $data.driver_id, true, true);
                 $modal.find('select[name="driver_id"]').append($driver_option).trigger('change');
 
-                $modal.find('input[name=driver_name]').val($data_driver_er.driver_name);
-                $modal.find('input[name=driver_phone]').val($data_driver_er.driver_phone);
-                $modal.find('input[name=copilot_name]').val($data_driver_er.copilot_name);
-                $modal.find('input[name=copilot_phone]').val($data_driver_er.copilot_phone);
+                $modal.find('input[name=driver_name]').val($driver_er.driver_name);
+                $modal.find('input[name=driver_phone]').val($driver_er.driver_phone);
             }
             // 副驾 (select2)
+            select2FirstOptionSelected($modal.find('select[name="copilot_id"]'));
             if($data.copilot_er)
             {
-                var $copilot_option = new Option($data.copilot_er.driver_name, $data.copilot_id, true, true);
+                var $copilot_er = $data.copilot_er;
+                var $copilot_html = $copilot_er.driver_name + '('+$copilot_er.driver_phone+')';
+
+                var $copilot_option = new Option($copilot_html, $data.copilot_id, true, true);
                 $modal.find('select[name="copilot_id"]').append($copilot_option).trigger('change');
+
+                $modal.find('input[name=copilot_name]').val($copilot_er.driver_name);
+                $modal.find('input[name=copilot_phone]').val($copilot_er.driver_phone);
             }
 
         });
-        // 【工单】【添加工单】select2 选择车辆
-        $('#select2--car--for--order--item-edit').on('select2:select', function(e) {
+        //
+        $('#select2--car--for--order--item-edit-2').on('select2:select', function(e) {
 
             console.log("用户选择了:", e.params.data); // 仅触发1次
             var $that = $(this);
@@ -417,7 +429,7 @@
             // }
 
         });
-        // 【工单】【添加工单】select2 选择车辆
+        //
         $('#select2--car--for--order--item-edit-1').on('select2:select', function(e) {
 
             console.log("用户选择了:", e.params.data); // 仅触发1次
@@ -501,8 +513,28 @@
 
 
         });
+
+
         // 【工单】【添加工单】select2 选择主驾
         $('#select2--driver--for--order--item-edit').on('select2:select', function(e) {
+            console.log("用户选择了:", e.params.data); // 仅触发1次
+            var $that = $(this);
+            var $modal = $that.parents('.modal-wrapper');
+
+            var $that_name = $that.attr('name');
+            if($that_name == 'driver_id')
+            {
+                $modal.find('input[name=driver_name]').val(e.params.data.driver_name);
+                $modal.find('input[name=driver_phone]').val(e.params.data.driver_phone);
+            }
+            else if($that_name == 'copilot_id')
+            {
+                $modal.find('input[name=copilot_name]').val(e.params.data.text);
+                $modal.find('input[name=copilot_phone]').val(e.params.data.driver_phone);
+            }
+        });
+        //
+        $('#select2--driver--for--order--item-edit-1').on('select2:select', function(e) {
             console.log("用户选择了:", e.params.data); // 仅触发1次
             var $that = $(this);
             var $modal = $that.parents('.modal-wrapper');
@@ -521,6 +553,8 @@
                 $modal.find('input[name=copilot_phone]').val(e.params.data.driver_phone);
             }
         });
+
+
         // 【工单】【添加工单】select2 选择副驾
         $('#select2--copilot--for--order--item-edit').on('select2:select', function(e) {
             console.log("用户选择了:", e.params.data); // 仅触发1次
