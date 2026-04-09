@@ -94,7 +94,7 @@
                     render: function(data, type, row, meta) {
                         if(data == 1)
                         {
-                            if(row.car_type == 1) return '<i class="fa fa-circle text-blue"></i> 车';
+                            if(row.car_type == 1) return '<i class="fa fa-circle text-green"></i> 车';
                             else if(row.car_type == 11) return '<i class="fa fa-circle text-blue"></i> 车头';
                             else return '<i class="fa fa-circle-o text-blue"></i> 车';
                         }
