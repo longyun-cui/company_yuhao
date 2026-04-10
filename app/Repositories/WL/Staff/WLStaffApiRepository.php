@@ -60,85 +60,123 @@ class WLStaffApiRepository {
     // 【车辆】返回-列表-数据
     public function o1__api__g7__request__test()
     {
-        $HTTP_Verb = 'POST';
 
-        //content即Http请求body部分，返回的事件数据以json的方式存在
-        $content = '{"plate_nums":["沪GC2705","沪GA1516"],"fields":["loc"],"addr_required":true}';
-        $data['plate_nums'] = ["沪GC2705","沪GA1516"];
-        $data['fields'] = ["loc"];
-        $data['addr_required'] = true;
-//        $content = json_encode($data);
-
-        //对content进行md5计算后的结果
-        $content_MD5 = strtolower(md5($content));
-
+        $request_url = 'https://openapi.g7.com.cn/v1/device/truck/current_info/batch';
+        $request_url = 'https://openapi.huoyunren.com/v1/device/truck/current_info/batch';
+        $path = '/v1/device/truck/current_info/batch';
         $Content_Type = 'application/json; charset=UTF-8';
-
-        $Timestamp = time() * 1000;
-
-        $url = 'http://staff.lookwit.cn/o1/api/g7/receive';
-        $uri = '/o1/api/g7/receive';
+        $HTTP_Verb = 'POST';
 
         //AccessId和Secret由G7分配，是对G7对数据访问权限的控制方式，请妥善保管，不要泄漏给第三方
         $AccessId = 'vtv4ly';
-        $AccessId = 'x4raay';
         $Secret = '7kj7gpuaxgwklzodxerbnghvbbxywpax';
-        $Secret = '0eeubxr9p6bbvcphyf0yyver75xznbrz';
 
-        $StringToSign = $HTTP_Verb . '\n' . '' . '\n' . $Content_Type . '\n' . $Timestamp . '\n' . $uri;
+
+//        date_default_timezone_set('UTC');
+        date_default_timezone_set('PRC');
+        $Timestamp = strval(time() * 1000);
+
+
+        //content即Http请求body部分，返回的事件数据以json的方式存在
+//        $content = '{"plate_nums":["沪GC2705","沪GA1516"],"fields":["loc"],"addr_required":true}';
+        $data['plate_nums'] = ["沪GC2705","沪GA1516"];
+        $data['fields'] = ["loc"];
+        $data['addr_required'] = true;
+        $content = json_encode($data);
+        $bodys = array();
+        $bodys[''] = $content;
+//        $content = http_build_query($data);
+        echo $content;
+        echo '<br>';
+
+        //对content进行md5计算后的结果
+        $content_MD5 = base64_encode(md5($content, true));
+//        $content_MD5 = base64_encode(md5(http_build_query($bodys), true));
+        echo $content_MD5;
+        echo '<br>';
+
+
+
+//        $url = 'http://staff.lookwit.cn/o1/api/g7/receive';
+
+        $StringToSign = $HTTP_Verb . '\n' . $content_MD5 . '\n' . $Content_Type . '\n' . $Timestamp . '\n' . $path;
         if (!mb_check_encoding($StringToSign, 'UTF-8'))
         {
             $StringToSign = mb_convert_encoding($StringToSign, 'UTF-8');
         }
-        $Signature = base64_encode(hash_hmac('sha1', $StringToSign, $Secret, true));
+        echo $StringToSign;
+        echo '<br>';
+        $Signature = base64_encode(hash_hmac('sha256', $StringToSign, $Secret, true));
+        echo $Signature;
+        echo '<br>';
 
-        $Authorization = 'g7ac ' . $Timestamp . ' ' . $AccessId . ':' . $Signature;
+        $Authorization = 'g7ac ' . $AccessId . ':' . $Signature;
+        echo $Authorization;
+        echo '<br>';
 
-        $return['content'] = $content;
-        $return['content_MD5'] = $content_MD5;
-        $return['Timestamp'] = $Timestamp;
-        $return['Content_Type'] = $Content_Type;
         $return['AccessId'] = $AccessId;
         $return['Secret'] = $Secret;
+        $return['Timestamp'] = $Timestamp;
+        $return['content'] = $content;
+        $return['content_MD5'] = $content_MD5;
+        $return['Content_Type'] = $Content_Type;
         $return['StringToSign'] = $StringToSign;
         $return['Signature'] = $Signature;
         $return['Authorization'] = $Authorization;
 
 //        dd($return);
 
-        $request_url = 'http://openapi.huoyunren.com/v1/device/truck/current_info/batch';
-        $request_url = 'demo.dsp.chinawayltd.com/altair/rest//v1/device/truck/current_info/batch';
-        $request_data = $content;
-//        dd($request_data);
-
-        $HTTP_HEADER = [];
-        $HTTP_HEADER['Content-Type'] = "application/json; charset=UTF-8";
-        $HTTP_HEADER['X-G7-OpenAPI-Timestamp'] = $Timestamp;
-        $HTTP_HEADER['Authorization'] = $Authorization;
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $request_url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Content-Type: application/json; charset=UTF-8",
+        $headers = array(
+            "Content-Type: {$Content_Type}",
+            "Content-MD5: {$content_MD5}",
             "X-G7-OpenAPI-Timestamp: {$Timestamp}",
             "Authorization: {$Authorization}"
-            )
         );
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true); // post数据
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $request_data); // post的变量
-        $request_result = curl_exec($ch);
+//        dd($headers);
 
 
-        if(curl_errno($ch))
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($curl, CURLOPT_URL, $request_url);
+//        curl_setopt($curl, CURLOPT_USERAGENT, "alpha_client");
+        curl_setopt($curl, CURLOPT_HEADER, true);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_FAILONERROR, false);
+        curl_setopt($curl, CURLOPT_POST, true); // post数据
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $content); // post的变量
+
+
+        curl_setopt($curl, CURLOPT_TIMEOUT, 80000);
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 30000);
+
+//        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+//        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        $request_result = curl_exec($curl);
+        dd($request_result);
+//        dd(json_decode($request_result));
+
+
+//        $curl = curl_init();
+//        curl_setopt($curl, CURLOPT_HTTPHEADER, $headerArray);
+//        curl_setopt($curl, CURLOPT_HEADER, true);
+//
+//        if (0 === strpos($host, HttpSchema::HTTPS))
+//        {
+//            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+//            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+//        }
+//        return $curl;
+
+
+        if(curl_errno($curl))
         {
-            curl_close($ch);
+            curl_close($curl);
             return response_error([],"请求失败！");
         }
         else
         {
-            curl_close($ch);
+            curl_close($curl);
 
             $result = json_decode($request_result);
             dd($result);
