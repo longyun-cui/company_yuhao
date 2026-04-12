@@ -46,7 +46,7 @@
             <select class="search-filter form-filter filter-lg select2-box-c" name="order-car-owner-type">
                 <option value="-1">选择车辆类型</option>
                 <option value="1">自有</option>
-                <option value="9">自有</option>
+                <option value="9">共建</option>
                 <option value="11">外请</option>
             </select>
 
