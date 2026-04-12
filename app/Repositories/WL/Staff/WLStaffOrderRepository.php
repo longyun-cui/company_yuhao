@@ -716,11 +716,11 @@ class WLStaffOrderRepository {
             }
 
             // 指派日期
-            if(!empty($post_data['assign_date']))
-            {
-                $post_data['assign_date'] = strtotime($post_data['assign_date']);
-            }
-//            else $post_data['assign_date'] = 0;
+//            if(!empty($post_data['assign_time']))
+//            {
+//                $post_data['assign_time'] = strtotime($post_data['assign_time']);
+//            }
+//            else $post_data['assign_time'] = 0;
 
 
 
