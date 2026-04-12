@@ -16,6 +16,7 @@
             "orderCellsTop": true,
             "scrollX": true,
 //                "scrollY": true,
+            "scrollY": ($(document).height() - 298)+"px",
             "scrollCollapse": true,
             "ajax": {
                 'url': "{{ url('/o1/car/car-list/datatable-query') }}",

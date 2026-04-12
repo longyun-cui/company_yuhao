@@ -98,9 +98,6 @@
                 </div>
             </div>
 
-            <div class="box-header">
-            </div>
-
         </div>
     </div>
 

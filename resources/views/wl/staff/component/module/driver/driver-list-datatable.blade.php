@@ -6,7 +6,7 @@
         let $tableSearch = $datatable_wrapper.find('.datatable-search-box');
 
         $($tableId).DataTable({
-            "aLengthMenu": [[100, 200, 500], ["100", "200", "500"]],
+            "aLengthMenu": [[200, 500], ["200", "500"]],
             "processing": true,
             "serverSide": true,
             "searching": false,
@@ -16,6 +16,7 @@
             "orderCellsTop": true,
             "scrollX": true,
 //                "scrollY": true,
+            "scrollY": ($(document).height() - 298)+"px",
             "scrollCollapse": true,
             "ajax": {
                 'url': "{{ url('/o1/driver/driver-list/datatable-query') }}",
