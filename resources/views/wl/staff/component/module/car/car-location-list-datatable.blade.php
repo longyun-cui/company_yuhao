@@ -110,28 +110,6 @@
                     "className": "text-center",
                     "width": "60px",
                     "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-//                            if(row.is_published != 0)
-                        {
-                            $(nTd).addClass('modal-show-for-info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name',row.name);
-                            $(nTd).attr('data-key','car_info_type').attr('data-value',data);
-                            $(nTd).attr('data-column-name','车型');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        if(!data) return '--';
-                        else return data;
-                    }
-                },
-                {
-                    "title": "特备",
-                    "data": "sub_name",
-                    "className": "text-center",
-                    "width": "120px",
-                    "orderable": false,
                     render: function(data, type, row, meta) {
                         if(!data) return '--';
                         else return data;
@@ -143,19 +121,6 @@
                     "className": "text-center",
                     "width": "240px",
                     "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1)
-                        {
-                            $(nTd).addClass('modal-show-for-info-select2-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','默认驾驶员');
-                            $(nTd).attr('data-key','driver_id').attr('data-value',data);
-                            if(row.driver_er == null) $(nTd).attr('data-option-name','未指定');
-                            else $(nTd).attr('data-option-name',row.driver_er.driver_name);
-                            $(nTd).attr('data-column-name','驾驶员');
-                            if(row.driver_id) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
                     render: function(data, type, row, meta) {
                         if(row.trailer_er == null) return '--';
                         else return '<a href="javascript:void(0);">'+row.trailer_er.name+' ('+row.trailer_er.sub_name+')'+'</a>';
@@ -167,19 +132,6 @@
                     "className": "text-center",
                     "width": "150px",
                     "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1)
-                        {
-                            $(nTd).addClass('modal-show-for-info-select2-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','默认驾驶员');
-                            $(nTd).attr('data-key','driver_id').attr('data-value',data);
-                            if(row.driver_er == null) $(nTd).attr('data-option-name','未指定');
-                            else $(nTd).attr('data-option-name',row.driver_er.driver_name);
-                            $(nTd).attr('data-column-name','驾驶员');
-                            if(row.driver_id) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
                     render: function(data, type, row, meta) {
                         if(row.driver_er == null) return '--';
                         else
@@ -206,25 +158,6 @@
                     "className": "text-center",
                     "width": "150px",
                     "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1)
-                        {
-                            $(nTd).addClass('modal-show-for-info-select2-set');
-
-                            $(nTd).attr('data-id',row.id);
-                            $(nTd).attr('data-name','默认副驾');
-                            $(nTd).attr('data-key','copilot_id');
-                            $(nTd).attr('data-value',data);
-
-                            if(row.driver_er == null) $(nTd).attr('data-option-name','未指定');
-                            else $(nTd).attr('data-option-name',row.driver_er.driver_name);
-
-                            $(nTd).attr('data-column-name','默认副驾');
-
-                            if(row.driver_id) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
                     render: function(data, type, row, meta) {
                         if(row.copilot_er == null) return '--';
                         else
@@ -242,18 +175,6 @@
                     "className": "text-center",
                     "width": "360px",
                     "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-//                            if(row.is_published != 0)
-                        {
-                            $(nTd).addClass('modal-show-for-info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name',row.name);
-                            $(nTd).attr('data-key','linkman_name').attr('data-value',data);
-                            $(nTd).attr('data-column-name','联系人');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
                     render: function(data, type, row, meta) {
                         if(!data) return '--';
                         else return data;
@@ -265,21 +186,21 @@
                     "className": "text-center",
                     "width": "120px",
                     "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-//                            if(row.is_published != 0)
-                        {
-                            $(nTd).addClass('modal-show-for-info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name',row.name);
-                            $(nTd).attr('data-key','linkman_phone').attr('data-value',data);
-                            $(nTd).attr('data-column-name','联系电话');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
                     render: function(data, type, row, meta) {
                         if(!data) return '--';
-                        else return data;
+                        if(data == '0000-00-00 00:00:00') return '--';
+
+                        var $date = new Date(data);
+                        var $year = $date.getFullYear();
+                        var $month = ('00'+($date.getMonth()+1)).slice(-2);
+                        var $day = ('00'+($date.getDate())).slice(-2);
+                        var $hour = ('00'+$date.getHours()).slice(-2);
+                        var $minute = ('00'+$date.getMinutes()).slice(-2);
+                        var $second = ('00'+$date.getSeconds()).slice(-2);
+
+                        var $currentYear = new Date().getFullYear();
+                        if($year == $currentYear) return $month+'-'+$day+'&nbsp;&nbsp;'+$hour+':'+$minute;
+                        else return $year+'-'+$month+'-'+$day+'&nbsp;&nbsp;'+$hour+':'+$minute;
                     }
                 },
             ],
