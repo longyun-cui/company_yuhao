@@ -393,16 +393,16 @@ class WLStaffOrderRepository {
                 'copilot_er'=>function($query) { $query->select('id','driver_name','driver_phone'); }
             ])
             ->join(DB::raw('(
-                    SELECT car_id, assign_time
+                    SELECT car_id, assign_date
                     FROM `wl__common__order`
                     WHERE `car_owner_type` = 1 and `car_id` > 0 and `deleted_at` is null 
-                    GROUP BY car_id, assign_time
+                    GROUP BY car_id, assign_date
                     HAVING COUNT(*) > 1
                 ) as dup'), function($join) {
                 $join->on('wl__common__order.car_id', '=', 'dup.car_id')
-                    ->on('wl__common__order.assign_time', '=', 'dup.assign_time');
+                    ->on('wl__common__order.assign_date', '=', 'dup.assign_date');
             })
-            ->orderBy('assign_time')
+            ->orderBy('assign_date')
             ->orderBy('car_id')
             ->get();
 
@@ -418,16 +418,16 @@ class WLStaffOrderRepository {
                 'copilot_er'=>function($query) { $query->select('id','driver_name','driver_phone'); }
             ])
             ->join(DB::raw('(
-                    SELECT external_car, assign_time
+                    SELECT external_car, assign_date
                     FROM `wl__common__order`
                     WHERE `car_owner_type` = 11 and `deleted_at` is null 
-                    GROUP BY external_car, assign_time
+                    GROUP BY external_car, assign_date
                     HAVING COUNT(*) > 1
                 ) as dup'), function($join) {
                 $join->on('wl__common__order.external_car', '=', 'dup.external_car')
-                    ->on('wl__common__order.assign_time', '=', 'dup.assign_time');
+                    ->on('wl__common__order.assign_date', '=', 'dup.assign_date');
             })
-            ->orderBy('assign_time')
+            ->orderBy('assign_date')
             ->orderBy('external_car')
             ->get();
 
@@ -615,7 +615,7 @@ class WLStaffOrderRepository {
                 $repeated = WL_Common_Order::select('*')
 //                    ->where('project_id',$post_data['project_id'])
                     ->where('car_id',$post_data['car_id'])
-                    ->where('assign_time',$post_data['assign_time'])
+                    ->where('assign_date',$post_data['assign_date'])
                     ->first();
                 if($repeated) return response_error([],"该订单已存在！！");
             }
@@ -624,7 +624,7 @@ class WLStaffOrderRepository {
                 $repeated = WL_Common_Order::select('*')
 //                    ->where('project_id',$post_data['project_id'])
                     ->where('car_id',$post_data['car_id'])
-                    ->where('assign_time',$post_data['assign_time'])
+                    ->where('assign_date',$post_data['assign_date'])
                     ->first();
                 if($repeated) return response_error([],"该订单已存在！！");
             }
@@ -633,7 +633,7 @@ class WLStaffOrderRepository {
                 $repeated = WL_Common_Order::select('*')
 //                    ->where('project_id',$post_data['project_id'])
                     ->where('external_car',$post_data['external_car'])
-                    ->where('assign_time',$post_data['assign_time'])
+                    ->where('assign_date',$post_data['assign_date'])
                     ->first();
                 if($repeated) return response_error([],"该订单已存在！！");
             }
@@ -645,42 +645,42 @@ class WLStaffOrderRepository {
         {
             $assigned = WL_Common_Order::select('*')
                 ->where('car_id',$post_data['car_id'])
-                ->where('assign_time',$post_data['assign_time'])
+                ->where('assign_date',$post_data['assign_date'])
                 ->when(($operate_type == 'edit'), function ($query) use ($operate_id) {
                     return $query->where('id', '!=', $operate_id);
                 })
                 ->get();
             if(count($assigned) > 0)
             {
-                $msg = '该车辆【'.$car->name.'】【'.$post_data['assign_time'].'】已安排任务！';
+                $msg = '该车辆【'.$car->name.'】【'.$post_data['assign_date'].'】已安排任务！';
             }
         }
         else if($car_owner_type == 9)
         {
             $assigned = WL_Common_Order::select('*')
                 ->where('car_id',$post_data['car_id'])
-                ->where('assign_time',$post_data['assign_time'])
+                ->where('assigassign_daten_time',$post_data['assign_date'])
                 ->when(($operate_type == 'edit'), function ($query) use ($operate_id) {
                     return $query->where('id', '!=', $operate_id);
                 })
                 ->get();
             if(count($assigned) > 0)
             {
-                $msg = '该车辆【'.$car->name.'】【'.$post_data['assign_time'].'】已安排任务！';
+                $msg = '该车辆【'.$car->name.'】【'.$post_data['assign_date'].'】已安排任务！';
             }
         }
         else if($car_owner_type == 11)
         {
             $assigned = WL_Common_Order::select('*')
                 ->where('external_car',$post_data['external_car'])
-                ->where('assign_time',$post_data['assign_time'])
+                ->where('assign_date',$post_data['assign_date'])
                 ->when(($operate_type == 'edit'), function ($query) use ($operate_id) {
                     return $query->where('id', '!=', $operate_id);
                 })
                 ->get();
             if(count($assigned) > 0)
             {
-                $msg = '该【外请】车辆【'.$post_data['external_car'].'】【'.$post_data['assign_time'].'】已安排任务，！';
+                $msg = '该【外请】车辆【'.$post_data['external_car'].'】【'.$post_data['assign_date'].'】已安排任务，！';
             }
         }
 
@@ -718,9 +718,9 @@ class WLStaffOrderRepository {
             // 指派日期
             if(!empty($post_data['assign_date']))
             {
-                $post_data['assign_time'] = strtotime($post_data['assign_date']);
+                $post_data['assign_date'] = strtotime($post_data['assign_date']);
             }
-//            else $post_data['assign_time'] = 0;
+//            else $post_data['assign_date'] = 0;
 
 
 
@@ -2270,7 +2270,7 @@ class WLStaffOrderRepository {
             $journey_data["client_id"] = $order->client_id;
             $journey_data["project_id"] = $order->project_id;
             $journey_data["order_id"] = $operate_id;
-            $journey_data["order_assign_time"] = $order->assign_time;
+            $journey_data["order_assign_date"] = $order->assign_date;
             $journey_data["order_task_date"] = $order->task_date;
             $journey_data["car_id"] = $order->car_id;
             $journey_data["driver_id"] = $order->driver_id;
@@ -2625,7 +2625,7 @@ class WLStaffOrderRepository {
         $fee_data["client_id"] = $order->client_id;
         $fee_data["project_id"] = $order->project_id;
         $fee_data["order_id"] = $operate_id;
-        $fee_data["order_assign_time"] = $order->assign_time;
+        $fee_data["order_assign_date"] = $order->assign_date;
         $fee_data["order_task_date"] = $order->task_date;
         $fee_data["car_id"] = $order->car_id;
         $fee_data["driver_id"] = $order->driver_id;
@@ -2662,7 +2662,7 @@ class WLStaffOrderRepository {
             $finance_data["client_id"] = $order->client_id;
             $finance_data["project_id"] = $order->project_id;
             $finance_data["order_id"] = $operate_id;
-            $finance_data["order_assign_time"] = $order->assign_time;
+            $finance_data["order_assign_date"] = $order->assign_date;
             $finance_data["order_task_date"] = $order->task_date;
             $finance_data["car_id"] = $order->car_id;
             $finance_data["driver_id"] = $order->driver_id;

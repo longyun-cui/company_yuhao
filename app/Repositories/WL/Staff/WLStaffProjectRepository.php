@@ -1027,13 +1027,24 @@ class WLStaffProjectRepository{
 
 
         $list = $list->reject(function ($item) {
-            return ($item->order_0 == 0) &&
-                ($item->order_1 == 0) &&
-                ($item->order_2 == 0) &&
-                ($item->order_3 == 0) &&
-                ($item->order_4 == 0) &&
-                ($item->order_5 == 0) &&
-                ($item->order_6 == 0);
+            return ($item->order_c == 0)
+                && ($item->order_b == 0)
+                && ($item->order_a == 0)
+                && ($item->order_0 == 0)
+                && ($item->order_1 == 0)
+                && ($item->order_2 == 0)
+                && ($item->order_3 == 0)
+                && ($item->order_4 == 0)
+                && ($item->order_5 == 0)
+                && ($item->order_6 == 0)
+                && ($item->order_7 == 0)
+                && ($item->order_8 == 0)
+                && ($item->order_9 == 0)
+                && ($item->order_10 == 0)
+                && ($item->order_11 == 0)
+                && ($item->order_12 == 0)
+                && ($item->order_13 == 0)
+                && ($item->order_14 == 0);
         })->values();
 
         return datatable_response($list, $draw, $total);
