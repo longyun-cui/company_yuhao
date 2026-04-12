@@ -29,6 +29,7 @@
             <input type="text" class="search-filter form-filter filter-keyup" name="driver-id" placeholder="ID" />
             <input type="text" class="search-filter form-filter filter-keyup" name="driver-mobile" placeholder="工号" />
             <input type="text" class="search-filter form-filter filter-keyup" name="driver-name" placeholder="姓名" />
+            <input type="text" class="search-filter form-filter filter-keyup" name="driver-phone" placeholder="电话" />
 
             @if(in_array($me->user_type,[0,1,9,11]))
             <select class="search-filter form-filter filter-md select2-box-c" name="driver-type">

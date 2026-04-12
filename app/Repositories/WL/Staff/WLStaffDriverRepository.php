@@ -73,6 +73,7 @@ class WLStaffDriverRepository {
         if(!empty($post_data['id'])) $query->where('id', $post_data['id']);
 //        if(!empty($post_data['name'])) $query->where('name', 'like', "%{$post_data['name']}%");
         if(!empty($post_data['name'])) $query->where('driver_name', 'like', "%{$post_data['name']}%");
+        if(!empty($post_data['phone'])) $query->where('driver_phone', 'like', "%{$post_data['phone']}%");
         if(!empty($post_data['title'])) $query->where('title', 'like', "%{$post_data['title']}%");
         if(!empty($post_data['remark'])) $query->where('remark', 'like', "%{$post_data['remark']}%");
         if(!empty($post_data['description'])) $query->where('description', 'like', "%{$post_data['description']}%");

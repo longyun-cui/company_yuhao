@@ -24,8 +24,8 @@
                 "data": function (d) {
                     d._token = $('meta[name="_token"]').attr('content');
                     d.id = $tableSearch.find('input[name="driver-id"]').val();
-                    d.mobile = $tableSearch.find('input[name="driver-mobile"]').val();
                     d.name = $tableSearch.find('input[name="driver-name"]').val();
+                    d.phone = $tableSearch.find('input[name="driver-phone"]').val();
                     d.driver_type = $tableSearch.find('select[name="driver-type"]').val();
                     d.item_status = $tableSearch.find('select[name="driver-item-status"]').val();
                 },
