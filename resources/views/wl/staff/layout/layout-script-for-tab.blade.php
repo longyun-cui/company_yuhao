@@ -184,6 +184,10 @@
                 {
                     Datatable__for__Car_List('#'+$config.id);
                 }
+                else if($id == "datatable-car-location-list")
+                {
+                    Datatable__for__Car_Location_List('#'+$config.id);
+                }
                 else if($id == "datatable-driver-list")
                 {
                     Datatable__for__Driver_List('#'+$config.id);

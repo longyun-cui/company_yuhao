@@ -637,6 +637,11 @@ class WLStaffController extends Controller
     {
         return $this->car_repo->o1__car__item_disable(request()->all());
     }
+    // 【车辆】禁用
+    public function o1__car__batch__api_location_update()
+    {
+        return $this->car_repo->o1__car__batch__api_location_update(request()->all());
+    }
     // 【车辆】操作记录
     public function o1__car__item_operation_record_list__datatable_query()
     {

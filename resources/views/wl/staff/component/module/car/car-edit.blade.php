@@ -88,9 +88,17 @@
 
                     {{--车牌号--}}
                     <div class="form-group">
-                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 车牌号</label>
+                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 真实车牌号</label>
                         <div class="col-md-9 ">
-                            <input type="text" class="form-control" name="name" placeholder="车牌号" value="">
+                            <input type="text" class="form-control" name="car_name" placeholder="真实车牌号" value="">
+                        </div>
+                    </div>
+
+                    {{--车牌号--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 车牌名称</label>
+                        <div class="col-md-9 ">
+                            <input type="text" class="form-control" name="name" placeholder="车牌名称" value="">
                         </div>
                     </div>
 

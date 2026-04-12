@@ -65,6 +65,7 @@
     @include(env('TEMPLATE_WL_STAFF').'component.module.motorcade.motorcade-list')
     {{--车辆--}}
     @include(env('TEMPLATE_WL_STAFF').'component.module.car.car-list')
+    @include(env('TEMPLATE_WL_STAFF').'component.module.car.car-location-list')
     @include(env('TEMPLATE_WL_STAFF').'component.module.car.car--statistic--task-recent')
     {{--司机--}}
     @include(env('TEMPLATE_WL_STAFF').'component.module.driver.driver-list')
@@ -211,6 +212,7 @@
     {{--车辆--}}
     @include(env('TEMPLATE_WL_STAFF').'component.module.car.car-edit-script')
     @include(env('TEMPLATE_WL_STAFF').'component.module.car.car-list-datatable')
+    @include(env('TEMPLATE_WL_STAFF').'component.module.car.car-location-list-datatable')
     @include(env('TEMPLATE_WL_STAFF').'component.module.car.car-list-script')
     @include(env('TEMPLATE_WL_STAFF').'component.module.car.car--item-operation-record-datatable')
     @include(env('TEMPLATE_WL_STAFF').'component.module.car.car--statistic--task-recent--datatable')

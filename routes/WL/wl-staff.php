@@ -157,6 +157,8 @@ Route::group(['middleware' => ['wl.staff.login']], function () {
     // 【车辆】启用 & 禁用
     Route::post('/o1/car/item-enable', $controller.'@o1__car__item_enable');
     Route::post('/o1/car/item-disable', $controller.'@o1__car__item_disable');
+    // 【车辆】api 车辆位置
+    Route::post('/o1/car/batch-api-location-update', $controller.'@o1__car__batch__api_location_update');
     // 【车辆】操作记录
     Route::post('/o1/car/item-operation-record-list/datatable-query', $controller.'@o1__car__item_operation_record_list__datatable_query');
     // 【车辆】统计

@@ -211,6 +211,7 @@
                         // $modal.find('select[name="driver_id"]').val($response.data.driver_id).trigger('change');
 
                         $modal.find('input[name="name"]').val($response.data.name);
+                        $modal.find('input[name="car_name"]').val($response.data.car_name);
                         $modal.find('input[name="car_number"]').val($response.data.car_number);
                         $modal.find('input[name="pre_name"]').val($response.data.pre_name);
                         $modal.find('input[name="sub_name"]').val($response.data.sub_name);
@@ -761,6 +762,76 @@
             var $modal = $('#modal--for--car--item-operation-record-list');
             $modal.find('.id-title').html('【'+$id+'】');
             $modal.modal('show');
+        });
+
+
+        // 【车辆】禁用
+        $(".main-wrapper").off('click', ".car--batch--api-location-update").on('click', ".car--batch--api-location-update", function() {
+            var $that = $(this);
+            var $datatable_wrapper = $that.closest('.datatable-wrapper');
+            var $table_id = $datatable_wrapper.find('table').filter('[id][id!=""]').attr("id");
+
+
+            layer.msg('确定"更新"么?', {
+                time: 0
+                ,btn: ['确定', '取消']
+                ,yes: function(index)
+                {
+                    layer.close(index);
+
+                    //
+                    var $index = layer.load(1, {
+                        shade: [0.3, '#fff'],
+                        content: '<span class="loadtip">正在提交</span>',
+                        success: function (layer) {
+                            layer.find('.layui-layer-content').css({
+                                'padding-top': '40px',
+                                'width': '100px',
+                            });
+                            layer.find('.loadtip').css({
+                                'font-size':'20px',
+                                'margin-left':'-18px'
+                            });
+                        }
+                    });
+
+                    //
+                    $.post(
+                        "{{ url('/o1/car/batch-api-location-update') }}",
+                        {
+                            _token: $('meta[name="_token"]').attr('content'),
+                            operate: "car--batch--api-location-update"
+                        },
+                        'json'
+                    )
+                        .done(function($response, status, jqXHR) {
+                            console.log('done');
+                            $response = JSON.parse($response);
+                            if(!$response.success)
+                            {
+                                if($response.msg) layer.msg($response.msg);
+                            }
+                            else
+                            {
+                                $('#'+$table_id).DataTable().ajax.reload(null,false);
+                            }
+                        })
+                        .fail(function(jqXHR, status, error) {
+                            console.log('fail');
+                            layer.msg('服务器错误！');
+
+                        })
+                        .always(function(jqXHR, status) {
+                            console.log('always');
+                            layer.closeAll('loading');
+                        });
+                }
+                ,btn2: function(index)
+                {
+                    layer.close(index);
+                    $row.removeClass('operating');
+                }
+            });
         });
 
 

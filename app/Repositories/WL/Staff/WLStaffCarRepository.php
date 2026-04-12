@@ -10,6 +10,15 @@ use App\Repositories\Common\CommonRepository;
 use Response, Auth, Validator, DB, Exception, Cache, Blade, Carbon;
 use QrCode, Excel;
 
+require_once base_path('lib/g7-openapi-sdk/Init.php');
+
+use OpenApiSDK\Constant\ContentType;
+use OpenApiSDK\Constant\HttpHeader;
+use OpenApiSDK\Constant\HttpMethod;
+use OpenApiSDK\Http\HttpClient;
+use OpenApiSDK\Http\HttpRequest;
+use OpenApiSDK\Util\SignUtil;
+
 
 class WLStaffCarRepository {
 
@@ -851,6 +860,106 @@ class WLStaffCarRepository {
         }
 
     }
+
+
+
+
+    // 【车辆】禁用
+    public function o1__car__batch__api_location_update($post_data)
+    {
+        $messages = [
+            'operate.required' => 'operate.required.',
+//            'item_id.required' => 'item_id.required.',
+        ];
+        $v = Validator::make($post_data, [
+            'operate' => 'required',
+//            'item_id' => 'required',
+        ], $messages);
+        if ($v->fails())
+        {
+            $messages = $v->errors();
+            return response_error([],$messages->first());
+        }
+
+
+        $operate = $post_data["operate"];
+        if($operate != 'car--batch--api-location-update') return response_error([],"参数【operate】有误！");
+
+        $this->get_me();
+        $me = $this->me;
+
+        // 判断用户操作权限
+        if(!in_array($me->user_type,[0,1,9,11])) return response_error([],"你没有操作权限！");
+
+        $list = WL_Common_Car::select('car_name')
+            ->where('active',1)
+            ->where('item_status',1)
+            ->where('car_category',1)
+            ->get();
+//        dd($car_list);
+
+        $car_list = [];
+        foreach ($list as $k => $v)
+        {
+            if($v->car_name) $car_list[] = $v->car_name;
+        }
+//        dd($car_list);
+
+
+        //域名后、query前的部分
+        $request_url = 'https://openapi.huoyunren.com';
+        $path = '/v1/device/truck/current_info/batch';
+
+        $APP_KEY = env('API_G7_APP_KEY');
+        $APP_SECRET = env('APP_G7_APP_SECRET');
+
+        $request = new HttpRequest($request_url, $path, HttpMethod::POST, $APP_KEY, $APP_SECRET);
+
+        //传入内容是json格式的字符串
+        $data['plate_nums'] = $car_list;
+        $data['fields'] = ["loc"];
+        $data['addr_required'] = true;
+        $bodyContent = json_encode($data);
+
+        //设定Content-Type，根据服务器端接受的值来设置
+        $request->setHeader(HttpHeader::HTTP_HEADER_CONTENT_TYPE, ContentType::CONTENT_TYPE_JSON);
+
+        //注意：业务body部分，不能设置key值，只能有value
+        if (0 < strlen($bodyContent)) {
+            $request->setHeader(HttpHeader::HTTP_HEADER_CONTENT_MD5,SignUtil::md5Body($bodyContent));
+            $request->setBodyString($bodyContent);
+        }
+
+        $response = HttpClient::execute($request);
+        $responseBody = json_decode($response->getBody(),true);
+
+        if($responseBody['code'] == 0)
+        {
+            $data = $responseBody['data'];
+            foreach ($data as $key => $val)
+            {
+//                dd($v);
+                $car = WL_Common_Car::select('*')->where('car_name',$key)->first();
+                if($car)
+                {
+                    if(!empty($val['data']))
+                    {
+                        $car->location_address = $val['data']['loc']['address'];
+                        $car->location_address_format = $val['data']['loc']['formatAddress'];
+                        $car->gps_time = $val['data']['loc']['gps_time'];
+                        $car->save();
+                    }
+                }
+            }
+            return response_success([]);
+        }
+        else return response_error([],"接口请求失败！");
+
+
+
+    }
+
+
 
 
     // 【车辆】【操作记录】返回-列表-数据

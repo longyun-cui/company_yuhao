@@ -6,7 +6,7 @@
         let $tableSearch = $datatable_wrapper.find('.datatable-search-box');
 
         $($tableId).DataTable({
-            "aLengthMenu": [[100, 100, 200, 500], ["100", "100", "200", "500"]],
+            "aLengthMenu": [[200, 500], ["200", "500"]],
             "processing": true,
             "serverSide": true,
             "searching": false,
@@ -35,15 +35,15 @@
                 "rightColumns": "1"
             },
             "columns": [
-                {
-                    "title": '<input type="checkbox" class="check-review-all">',
-                    "data": "id",
-                    "width": "60px",
-                    "orderable": false,
-                    render: function(data, type, row, meta) {
-                        return '<label><input type="checkbox" name="bulk-id" class="minimal" value="'+data+'"></label>';
-                    }
-                },
+                // {
+                //     "title": '<input type="checkbox" class="check-review-all">',
+                //     "data": "id",
+                //     "width": "60px",
+                //     "orderable": false,
+                //     render: function(data, type, row, meta) {
+                //         return '<label><input type="checkbox" name="bulk-id" class="minimal" value="'+data+'"></label>';
+                //     }
+                // },
                 {
                     "title": "ID",
                     "data": "id",
@@ -115,6 +115,17 @@
                 },
                 {
                     "title": "车牌号",
+                    "data": "car_name",
+                    "className": "text-center",
+                    "width": "100px",
+                    "orderable": false,
+                    render: function(data, type, row, meta) {
+                        var $name = data;
+                        return $name;
+                    }
+                },
+                {
+                    "title": "车牌名称",
                     "data": "name",
                     "className": "text-center",
                     "width": "120px",

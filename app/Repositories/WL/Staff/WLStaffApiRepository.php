@@ -1,12 +1,22 @@
 <?php
 namespace App\Repositories\WL\Staff;
 
-use App\Models\WL\API\WL_API__G7_Received;
-use App\Models\WL\Common\WL_Common_Car;
-use App\Models\WL\Common\WL_Common_Order;
-use App\Models\WL\Staff\WL_Staff_Record_Operation;
+//use App\Models\WL\API\WL_API__G7_Received;
+//use App\Models\WL\Common\WL_Common_Car;
+//use App\Models\WL\Common\WL_Common_Order;
+//use App\Models\WL\Staff\WL_Staff_Record_Operation;
 
-use App\Repositories\Common\CommonRepository;
+require_once base_path('lib/g7-openapi-sdk/Init.php');
+
+use OpenApiSDK\Constant\ContentType;
+use OpenApiSDK\Constant\HttpHeader;
+use OpenApiSDK\Constant\HttpMethod;
+use OpenApiSDK\Http\HttpClient;
+use OpenApiSDK\Http\HttpRequest;
+use OpenApiSDK\Util\SignUtil;
+
+
+//use App\Repositories\Common\CommonRepository;
 
 use Response, Auth, Validator, DB, Exception, Cache, Blade, Carbon;
 use QrCode, Excel;
@@ -58,8 +68,11 @@ class WLStaffApiRepository {
      * 车辆-管理 Car
      */
     // 【车辆】返回-列表-数据
-    public function o1__api__g7__request__test()
+    public function o1__api__g7__request__test1()
     {
+
+//        $demo = new Demo();
+//        $demo->doDelete();
 
         $request_url = 'https://openapi.g7.com.cn/v1/device/truck/current_info/batch';
         $request_url = 'https://openapi.huoyunren.com/v1/device/truck/current_info/batch';
@@ -68,8 +81,8 @@ class WLStaffApiRepository {
         $HTTP_Verb = 'POST';
 
         //AccessId和Secret由G7分配，是对G7对数据访问权限的控制方式，请妥善保管，不要泄漏给第三方
-        $AccessId = 'vtv4ly';
-        $Secret = '7kj7gpuaxgwklzodxerbnghvbbxywpax';
+        $appId = 'vtv4ly';
+        $appSecret = '7kj7gpuaxgwklzodxerbnghvbbxywpax';
 
 
 //        date_default_timezone_set('UTC');
@@ -106,22 +119,25 @@ class WLStaffApiRepository {
         }
         echo $StringToSign;
         echo '<br>';
-        $Signature = base64_encode(hash_hmac('sha256', $StringToSign, $Secret, true));
-        echo $Signature;
+
+        // 生成签名
+        $sign = base64_encode(hash_hmac('sha256', $StringToSign, $appSecret, true));
+        echo $sign;
         echo '<br>';
 
-        $Authorization = 'g7ac ' . $AccessId . ':' . $Signature;
+//        $Authorization = 'g7ac ' . $appId . ':' . $sign;
+        $Authorization = 'g7ac '.$appId.':'.$sign;
         echo $Authorization;
         echo '<br>';
 
-        $return['AccessId'] = $AccessId;
-        $return['Secret'] = $Secret;
+        $return['AccessId'] = $appId;
+        $return['Secret'] = $appSecret;
         $return['Timestamp'] = $Timestamp;
         $return['content'] = $content;
         $return['content_MD5'] = $content_MD5;
         $return['Content_Type'] = $Content_Type;
         $return['StringToSign'] = $StringToSign;
-        $return['Signature'] = $Signature;
+        $return['Signature'] = $sign;
         $return['Authorization'] = $Authorization;
 
 //        dd($return);
@@ -184,6 +200,42 @@ class WLStaffApiRepository {
 
 
 
+    }
+
+
+    public function o1__api__g7__request__test() {
+        //域名后、query前的部分
+        $request_url = 'https://openapi.g7.com.cn/v1/device/truck/current_info/batch';
+        $request_url = 'https://openapi.huoyunren.com';
+        $path = '/v1/device/truck/current_info/batch';
+        $AccessId = 'vtv4ly';
+        $secret = '7kj7gpuaxgwklzodxerbnghvbbxywpax';
+        $request = new HttpRequest($request_url, $path, HttpMethod::POST, $AccessId, $secret);
+        //传入内容是json格式的字符串
+        $data['plate_nums'] = ["沪GC2705","沪GA1516"];
+        $data['fields'] = ["loc"];
+        $data['addr_required'] = true;
+        $bodyContent = json_encode($data);
+//        $bodyContent = json_encode(['aa'=>'bbb']);
+        //设定Content-Type，根据服务器端接受的值来设置
+        $request->setHeader(HttpHeader::HTTP_HEADER_CONTENT_TYPE, ContentType::CONTENT_TYPE_JSON);
+
+        //设定Accept，根据服务器端接受的值来设置
+        //$request->setHeader(HttpHeader::HTTP_HEADER_ACCEPT, ContentType::CONTENT_TYPE_JSON);
+
+        //注意：业务header部分，如果没有则无此行(如果有中文，请做Utf8ToIso88591处理)
+        //mb_convert_encoding("headervalue2中文", "ISO-8859-1", "UTF-8");
+//        $request->setHeader("X-G7-Ca-header2", "headervalue2");
+//        $request->setHeader("X-G7-Ca-header1", "headervalue1");
+
+        //注意：业务body部分，不能设置key值，只能有value
+        if (0 < strlen($bodyContent)) {
+            $request->setHeader(HttpHeader::HTTP_HEADER_CONTENT_MD5,SignUtil::md5Body($bodyContent));
+            $request->setBodyString($bodyContent);
+        }
+
+        $response = HttpClient::execute($request);
+        dd(json_decode($response->getBody()));
     }
 
 

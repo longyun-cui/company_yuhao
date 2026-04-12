@@ -178,7 +178,7 @@
                    data-id="client-list"
                    data-title='客户列表'
                    data-content='<i class="fa fa-user-secret text-white"></i> 客户列表'
-                   data-icon='<i class="fa fa-user-secret text-blue"></i>'
+                   data-icon='<i class="fa fa-user-secret text-white"></i>'
 
                    data-datatable-type="create"
                    data-datatable-unique="y"
@@ -219,27 +219,25 @@
 
 
 
-            @if(in_array($me->staff_category,[0,1,9,81]))
-                <li class="treeview">
-                    <a class="tab-control datatable-control"
-                       data-type="create"
-                       data-unique="y"
-                       data-id="project--statistic--task-recent"
-                       data-title='项目近期订单'
-                       data-content='<i class="fa fa-cube text-green"></i> 项目近期订单'
-                       data-icon='<i class="fa fa-cube text-green"></i>'
+            <li class="treeview">
+                <a class="tab-control datatable-control"
+                   data-type="create"
+                   data-unique="y"
+                   data-id="car-location-list"
+                   data-title='车辆列表'
+                   data-content='<i class="fa fa-location-arrow text-red"></i> 车辆位置'
+                   data-icon='<i class="fa fa-location-arrow text-red"></i>'
 
-                       data-datatable-type="create"
-                       data-datatable-unique="y"
-                       data-datatable-id="datatable--project--statistic--task-recent"
-                       data-datatable-target="project--statistic--task-recent"
-                       data-datatable-clone-object="project--statistic--task-recent--clone"
-                    >
-                        <i class="fa fa-cube text-green"></i>
-                        <span>项目近期订单</span>
-                    </a>
-                </li>
-            @endif
+                   data-datatable-type="create"
+                   data-datatable-unique="y"
+                   data-datatable-id="datatable-car-location-list"
+                   data-datatable-target="car-location-list"
+                   data-datatable-clone-object="car-location-list-clone"
+                >
+                    <i class="fa fa-location-arrow text-red"></i>
+                    <span>车辆位置</span>
+                </a>
+            </li>
             @if(in_array($me->staff_category,[0,1,9,81]))
                 <li class="treeview">
                     <a class="tab-control datatable-control"
@@ -258,6 +256,27 @@
                     >
                         <i class="fa fa-car text-green"></i>
                         <span>车辆近期订单</span>
+                    </a>
+                </li>
+            @endif
+            @if(in_array($me->staff_category,[0,1,9,81]))
+                <li class="treeview">
+                    <a class="tab-control datatable-control"
+                       data-type="create"
+                       data-unique="y"
+                       data-id="project--statistic--task-recent"
+                       data-title='项目近期订单'
+                       data-content='<i class="fa fa-cube text-green"></i> 项目近期订单'
+                       data-icon='<i class="fa fa-cube text-green"></i>'
+
+                       data-datatable-type="create"
+                       data-datatable-unique="y"
+                       data-datatable-id="datatable--project--statistic--task-recent"
+                       data-datatable-target="project--statistic--task-recent"
+                       data-datatable-clone-object="project--statistic--task-recent--clone"
+                    >
+                        <i class="fa fa-cube text-green"></i>
+                        <span>项目近期订单</span>
                     </a>
                 </li>
             @endif

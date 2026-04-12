@@ -41,6 +41,12 @@ class WL_Common_Car extends Model
         'copilot_name',
         'copilot_phone',
 
+
+        'location_address',
+        'location_address_format',
+        'gps_time',
+
+
         'trailer_type',
         'trailer_length',
         'trailer_volume',
