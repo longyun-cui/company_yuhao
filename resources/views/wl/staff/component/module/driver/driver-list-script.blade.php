@@ -191,7 +191,7 @@
                         $modal.find('input[name="driver_emergency_contact_phone"]').val($response.data.driver_emergency_contact_phone);
 
                         $modal.find('input[name="copilot_name"]').val($response.data.copilot_name);
-                        $modal.find('input[name="copilot_phone"]').val($response.data.copilot__phone);
+                        $modal.find('input[name="copilot_phone"]').val($response.data.copilot_phone);
                         $modal.find('input[name="copilot_ID"]').val($response.data.copilot_ID);
 
                         $modal.find('input[name="copilot_title"]').val($response.data.copilot_title);
