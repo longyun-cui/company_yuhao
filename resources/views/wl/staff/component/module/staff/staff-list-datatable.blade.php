@@ -23,10 +23,10 @@
                 "dataType" : 'json',
                 "data": function (d) {
                     d._token = $('meta[name="_token"]').attr('content');
-                    d.id = $('input[name="staff-id"]').val();
-                    d.mobile = $('input[name="staff-mobile"]').val();
-                    d.name = $('input[name="staff-name"]').val();
-                    d.username = $('input[name="staff-username"]').val();
+                    d.id = $tableSearch.find('input[name="staff-id"]').val();
+                    d.mobile = $tableSearch.find('input[name="staff-mobile"]').val();
+                    d.name = $tableSearch.find('input[name="staff-name"]').val();
+                    d.username = $tableSearch.find('input[name="staff-username"]').val();
                     d.department_district = $tableSearch.find('select[name="staff-department-district"]').val();
                     d.staff_type = $tableSearch.find('select[name="staff-type"]').val();
                     d.staff_status = $tableSearch.find('select[name="staff-status"]').val();

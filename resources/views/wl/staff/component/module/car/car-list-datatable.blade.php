@@ -23,8 +23,8 @@
                 "dataType" : 'json',
                 "data": function (d) {
                     d._token = $('meta[name="_token"]').attr('content');
-                    d.id = $('input[name="car-id"]').val();
-                    d.name = $('input[name="car-name"]').val();
+                    d.id = $tableSearch.find('input[name="car-id"]').val();
+                    d.name = $tableSearch.find('input[name="car-name"]').val();
                     d.car_category = $tableSearch.find('select[name="car-category"]').val();
                     d.car_type = $tableSearch.find('select[name="car-type"]').val();
                     d.item_status = $tableSearch.find('select[name="car-item-status"]').val();
