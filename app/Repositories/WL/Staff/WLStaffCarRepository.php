@@ -1026,13 +1026,13 @@ class WLStaffCarRepository {
 
 
 //        $time_type  = isset($post_data['time_type']) ? $post_data['time_type']  : '';
-        $query_order->where('assign_time','>',date("Y-m-d",strtotime("-14 day")))
+        $query_order->where('assign_date','>',date("Y-m-d",strtotime("-14 day")))
             ->addSelect(DB::raw("
-                    assign_time as date_day,
-                    DATE_FORMAT(assign_time,'%e') as day,
+                    assign_date as date_day,
+                    DATE_FORMAT(assign_date,'%e') as day,
                     count(*) as order_count
                 "))
-            ->groupBy('assign_time');
+            ->groupBy('assign_date');
 
 //        $query_order->addSelect(DB::raw("
 //                    count(*) as order_count
