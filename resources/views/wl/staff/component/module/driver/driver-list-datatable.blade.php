@@ -450,120 +450,120 @@
                         else return '--';
                     }
                 },
-                {
-                    "title": "副驾身份证",
-                    "data": "copilot_ID",
-                    "className": "",
-                    "width": "120px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.user_status != 97)
-                        {
-                            $(nTd).addClass('modal-show-for-info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','副驾身份证号');
-                            $(nTd).attr('data-key','sub_driver_ID').attr('data-value',data);
-                            $(nTd).attr('data-column-name','副驾身份证号');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        if(data) return data;
-                        else return '--';
-                    }
-                },
-                {
-                    "className": "",
-                    "width": "80px",
-                    "title": "副驾职称",
-                    "data": "copilot_title",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.user_status != 97)
-                        {
-                            $(nTd).addClass('modal-show-for-info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','副驾职称');
-                            $(nTd).attr('data-key','sub_driver_title').attr('data-value',data);
-                            $(nTd).attr('data-column-name','副驾职称');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        if(data) return data;
-                        else return '--';
-                    }
-                },
-                {
-                    "className": "",
-                    "width": "80px",
-                    "title": "入职时间",
-                    "data": "copilot_entry_date",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-//                            if(row.is_published != 0)
-                        {
-                            $(nTd).addClass('modal-show-for-info-time-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name',row.sub_driver_name);
-                            $(nTd).attr('data-key','sub_driver_entry_time').attr('data-value',data);
-                            $(nTd).attr('data-column-name','副驾入职时间');
-                            $(nTd).attr('data-time-type','date');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        if(data)
-                        {
-                            var $date = new Date(data);
-                            var $year = $date.getFullYear();
-                            var $month = ('00'+($date.getMonth()+1)).slice(-2);
-                            var $day = ('00'+($date.getDate())).slice(-2);
-
-                            var $currentYear = new Date().getFullYear();
-                            if($year == $currentYear) return $month+'-'+$day;
-                            else return $year+'-'+$month+'-'+$day;
-                            return $year;
-                        }
-                        return '--';
-                    }
-                },
-                {
-                    "className": "",
-                    "width": "80px",
-                    "title": "离职时间",
-                    "data": "copilot_leave_date",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-//                            if(row.is_published != 0)
-                        {
-                            $(nTd).addClass('modal-show-for-info-time-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name',row.sub_driver_name);
-                            $(nTd).attr('data-key','sub_driver_leave_time').attr('data-value',data);
-                            $(nTd).attr('data-column-name','副驾离职时间');
-                            $(nTd).attr('data-time-type','date');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        if(data)
-                        {
-                            var $date = new Date(data);
-                            var $year = $date.getFullYear();
-                            var $month = ('00'+($date.getMonth()+1)).slice(-2);
-                            var $day = ('00'+($date.getDate())).slice(-2);
-
-                            var $currentYear = new Date().getFullYear();
-                            if($year == $currentYear) return $month+'-'+$day;
-                            else return $year+'-'+$month+'-'+$day;
-                            return $year;
-                        }
-                        return '--';
-                    }
-                },
+                // {
+                //     "title": "副驾身份证",
+                //     "data": "copilot_ID",
+                //     "className": "",
+                //     "width": "120px",
+                //     "orderable": false,
+                //     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                //         if(row.user_status != 97)
+                //         {
+                //             $(nTd).addClass('modal-show-for-info-text-set');
+                //             $(nTd).attr('data-id',row.id).attr('data-name','副驾身份证号');
+                //             $(nTd).attr('data-key','sub_driver_ID').attr('data-value',data);
+                //             $(nTd).attr('data-column-name','副驾身份证号');
+                //             $(nTd).attr('data-text-type','text');
+                //             if(data) $(nTd).attr('data-operate-type','edit');
+                //             else $(nTd).attr('data-operate-type','add');
+                //         }
+                //     },
+                //     render: function(data, type, row, meta) {
+                //         if(data) return data;
+                //         else return '--';
+                //     }
+                // },
+                // {
+                //     "className": "",
+                //     "width": "80px",
+                //     "title": "副驾职称",
+                //     "data": "copilot_title",
+                //     "orderable": false,
+                //     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                //         if(row.user_status != 97)
+                //         {
+                //             $(nTd).addClass('modal-show-for-info-text-set');
+                //             $(nTd).attr('data-id',row.id).attr('data-name','副驾职称');
+                //             $(nTd).attr('data-key','sub_driver_title').attr('data-value',data);
+                //             $(nTd).attr('data-column-name','副驾职称');
+                //             $(nTd).attr('data-text-type','text');
+                //             if(data) $(nTd).attr('data-operate-type','edit');
+                //             else $(nTd).attr('data-operate-type','add');
+                //         }
+                //     },
+                //     render: function(data, type, row, meta) {
+                //         if(data) return data;
+                //         else return '--';
+                //     }
+                // },
+//                 {
+//                     "className": "",
+//                     "width": "80px",
+//                     "title": "入职时间",
+//                     "data": "copilot_entry_date",
+//                     "orderable": false,
+//                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+// //                            if(row.is_published != 0)
+//                         {
+//                             $(nTd).addClass('modal-show-for-info-time-set');
+//                             $(nTd).attr('data-id',row.id).attr('data-name',row.sub_driver_name);
+//                             $(nTd).attr('data-key','sub_driver_entry_time').attr('data-value',data);
+//                             $(nTd).attr('data-column-name','副驾入职时间');
+//                             $(nTd).attr('data-time-type','date');
+//                             if(data) $(nTd).attr('data-operate-type','edit');
+//                             else $(nTd).attr('data-operate-type','add');
+//                         }
+//                     },
+//                     render: function(data, type, row, meta) {
+//                         if(data)
+//                         {
+//                             var $date = new Date(data);
+//                             var $year = $date.getFullYear();
+//                             var $month = ('00'+($date.getMonth()+1)).slice(-2);
+//                             var $day = ('00'+($date.getDate())).slice(-2);
+//
+//                             var $currentYear = new Date().getFullYear();
+//                             if($year == $currentYear) return $month+'-'+$day;
+//                             else return $year+'-'+$month+'-'+$day;
+//                             return $year;
+//                         }
+//                         return '--';
+//                     }
+//                 },
+//                 {
+//                     "className": "",
+//                     "width": "80px",
+//                     "title": "离职时间",
+//                     "data": "copilot_leave_date",
+//                     "orderable": false,
+//                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+// //                            if(row.is_published != 0)
+//                         {
+//                             $(nTd).addClass('modal-show-for-info-time-set');
+//                             $(nTd).attr('data-id',row.id).attr('data-name',row.sub_driver_name);
+//                             $(nTd).attr('data-key','sub_driver_leave_time').attr('data-value',data);
+//                             $(nTd).attr('data-column-name','副驾离职时间');
+//                             $(nTd).attr('data-time-type','date');
+//                             if(data) $(nTd).attr('data-operate-type','edit');
+//                             else $(nTd).attr('data-operate-type','add');
+//                         }
+//                     },
+//                     render: function(data, type, row, meta) {
+//                         if(data)
+//                         {
+//                             var $date = new Date(data);
+//                             var $year = $date.getFullYear();
+//                             var $month = ('00'+($date.getMonth()+1)).slice(-2);
+//                             var $day = ('00'+($date.getDate())).slice(-2);
+//
+//                             var $currentYear = new Date().getFullYear();
+//                             if($year == $currentYear) return $month+'-'+$day;
+//                             else return $year+'-'+$month+'-'+$day;
+//                             return $year;
+//                         }
+//                         return '--';
+//                     }
+//                 },
                 // {
                 //     "className": "",
                 //     "width": "80px",
@@ -656,52 +656,52 @@
                 //         else return '--';
                 //     }
                 // },
-                {
-                    "title": "紧急联系人",
-                    "data": "copilot_emergency_contact_name",
-                    "className": "",
-                    "width": "100px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.user_status != 97)
-                        {
-                            $(nTd).addClass('modal-show-for-info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','副驾紧急联系人');
-                            $(nTd).attr('data-key','sub_emergency_contact_name').attr('data-value',data);
-                            $(nTd).attr('data-column-name','副驾紧急联系人');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        if(data) return data;
-                        else return '--';
-                    }
-                },
-                {
-                    "title": "紧急联系电话",
-                    "data": "copilot_emergency_contact_phone",
-                    "className": "",
-                    "width": "100px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.user_status != 97)
-                        {
-                            $(nTd).addClass('modal-show-for-info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','副驾紧急联系电话');
-                            $(nTd).attr('data-key','sub_contact_phone').attr('data-value',data);
-                            $(nTd).attr('data-column-name','副驾紧急联系电话');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        if(data) return data;
-                        else return '--';
-                    }
-                },
+                // {
+                //     "title": "紧急联系人",
+                //     "data": "copilot_emergency_contact_name",
+                //     "className": "",
+                //     "width": "100px",
+                //     "orderable": false,
+                //     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                //         if(row.user_status != 97)
+                //         {
+                //             $(nTd).addClass('modal-show-for-info-text-set');
+                //             $(nTd).attr('data-id',row.id).attr('data-name','副驾紧急联系人');
+                //             $(nTd).attr('data-key','sub_emergency_contact_name').attr('data-value',data);
+                //             $(nTd).attr('data-column-name','副驾紧急联系人');
+                //             $(nTd).attr('data-text-type','text');
+                //             if(data) $(nTd).attr('data-operate-type','edit');
+                //             else $(nTd).attr('data-operate-type','add');
+                //         }
+                //     },
+                //     render: function(data, type, row, meta) {
+                //         if(data) return data;
+                //         else return '--';
+                //     }
+                // },
+                // {
+                //     "title": "紧急联系电话",
+                //     "data": "copilot_emergency_contact_phone",
+                //     "className": "",
+                //     "width": "100px",
+                //     "orderable": false,
+                //     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                //         if(row.user_status != 97)
+                //         {
+                //             $(nTd).addClass('modal-show-for-info-text-set');
+                //             $(nTd).attr('data-id',row.id).attr('data-name','副驾紧急联系电话');
+                //             $(nTd).attr('data-key','sub_contact_phone').attr('data-value',data);
+                //             $(nTd).attr('data-column-name','副驾紧急联系电话');
+                //             $(nTd).attr('data-text-type','text');
+                //             if(data) $(nTd).attr('data-operate-type','edit');
+                //             else $(nTd).attr('data-operate-type','add');
+                //         }
+                //     },
+                //     render: function(data, type, row, meta) {
+                //         if(data) return data;
+                //         else return '--';
+                //     }
+                // },
                 {
                     "title": "备注",
                     "data": "remark",
