@@ -2270,6 +2270,7 @@ class WLStaffOrderRepository {
             $journey_data["client_id"] = $order->client_id;
             $journey_data["project_id"] = $order->project_id;
             $journey_data["order_id"] = $operate_id;
+            $journey_data["order_assign_time"] = $order->assign_time;
             $journey_data["order_task_date"] = $order->task_date;
             $journey_data["car_id"] = $order->car_id;
             $journey_data["driver_id"] = $order->driver_id;
@@ -2624,6 +2625,7 @@ class WLStaffOrderRepository {
         $fee_data["client_id"] = $order->client_id;
         $fee_data["project_id"] = $order->project_id;
         $fee_data["order_id"] = $operate_id;
+        $fee_data["order_assign_time"] = $order->assign_time;
         $fee_data["order_task_date"] = $order->task_date;
         $fee_data["car_id"] = $order->car_id;
         $fee_data["driver_id"] = $order->driver_id;
@@ -2660,6 +2662,7 @@ class WLStaffOrderRepository {
             $finance_data["client_id"] = $order->client_id;
             $finance_data["project_id"] = $order->project_id;
             $finance_data["order_id"] = $operate_id;
+            $finance_data["order_assign_time"] = $order->assign_time;
             $finance_data["order_task_date"] = $order->task_date;
             $finance_data["car_id"] = $order->car_id;
             $finance_data["driver_id"] = $order->driver_id;
