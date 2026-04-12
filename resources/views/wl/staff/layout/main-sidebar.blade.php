@@ -224,7 +224,7 @@
                    data-type="create"
                    data-unique="y"
                    data-id="car-location-list"
-                   data-title='车辆列表'
+                   data-title='车辆位置'
                    data-content='<i class="fa fa-location-arrow text-red"></i> 车辆位置'
                    data-icon='<i class="fa fa-location-arrow text-red"></i>'
 
