@@ -60,6 +60,11 @@
                 $('.internal-car').show();
                 $('.external-car').hide();
             }
+            else if($value == 9)
+            {
+                $('.internal-car').show();
+                $('.external-car').hide();
+            }
             else if($value == 11)
             {
                 $('.external-car').show();

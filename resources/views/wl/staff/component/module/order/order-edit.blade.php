@@ -184,6 +184,14 @@
                                 </span>
                             </button>
 
+                            <button type="button" class="btn radio-btn radio-car-type">
+                                <span class="radio">
+                                    <label>
+                                        <input type="radio" name="car_owner_type" value="9"> 共建车
+                                    </label>
+                                </span>
+                            </button>
+
                             <button type="button" class="btn radio-btn radio-department-type">
                                 <span class="radio">
                                     <label>

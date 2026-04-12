@@ -135,6 +135,11 @@
                             $('.internal-car').show();
                             $('.external-car').hide();
                         }
+                        else if($response.data.car_owner_type == 9)
+                        {
+                            $('.internal-car').show();
+                            $('.external-car').hide();
+                        }
                         else if($response.data.car_owner_type == 11)
                         {
                             $('.internal-car').hide();

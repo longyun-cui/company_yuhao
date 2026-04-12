@@ -619,6 +619,15 @@ class WLStaffOrderRepository {
                     ->first();
                 if($repeated) return response_error([],"该订单已存在！！");
             }
+            else if($car_owner_type == 9)
+            {
+                $repeated = WL_Common_Order::select('*')
+                    ->where('project_id',$post_data['project_id'])
+                    ->where('car_id',$post_data['car_id'])
+                    ->where('task_date',$post_data['task_date'])
+                    ->first();
+                if($repeated) return response_error([],"该订单已存在！！");
+            }
             else if($car_owner_type == 11)
             {
                 $repeated = WL_Common_Order::select('*')
@@ -633,6 +642,20 @@ class WLStaffOrderRepository {
         $assigned = 0;
         $msg = '';
         if($car_owner_type == 1)
+        {
+            $assigned = WL_Common_Order::select('*')
+                ->where('car_id',$post_data['car_id'])
+                ->where('task_date',$post_data['task_date'])
+                ->when(($operate_type == 'edit'), function ($query) use ($operate_id) {
+                    return $query->where('id', '!=', $operate_id);
+                })
+                ->get();
+            if(count($assigned) > 0)
+            {
+                $msg = '该车辆【'.$car->name.'】【'.$post_data['task_date'].'】已安排任务！';
+            }
+        }
+        else if($car_owner_type == 9)
         {
             $assigned = WL_Common_Order::select('*')
                 ->where('car_id',$post_data['car_id'])
@@ -662,7 +685,7 @@ class WLStaffOrderRepository {
         }
 
 
-        if($post_data['car_owner_type'] == 1)
+        if($post_data['car_owner_type'] == 1 || $post_data['car_owner_type'] == 9)
         {
             if(!empty($driver))
             {
@@ -704,6 +727,12 @@ class WLStaffOrderRepository {
             $mine_data = $post_data;
             unset($mine_data['operate']);
             if($car_owner_type == 1)
+            {
+                $mine_data['external_car_price'] = 0;
+                $mine_data['external_car'] = null;
+                $mine_data['external_trailer'] = null;
+            }
+            else if($car_owner_type == 9)
             {
                 $mine_data['external_car_price'] = 0;
                 $mine_data['external_car'] = null;

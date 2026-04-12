@@ -141,6 +141,14 @@
 {{--            </select>--}}
 {{--            @endif--}}
 
+            {{--选择车辆所有人--}}
+            <select class="search-filter form-filter filter-lg select2-box-c" name="order-car-owner-type">
+                <option value="-1">选择车辆类型</option>
+                <option value="1">自有</option>
+                <option value="9">自有</option>
+                <option value="11">外请</option>
+            </select>
+
             {{--选择项目--}}
             <select class="search-filter form-filter filter-lg select2-box-c select2--project-c-" name="order-project">
                 <option value="-1">选择项目</option>
@@ -170,13 +178,6 @@
                         <option value="{{ $v->id }}">{{ $v->name }}</option>
                     @endforeach
                 @endif
-            </select>
-
-            {{--选择车辆所有人--}}
-            <select class="search-filter form-filter filter-lg select2-box-c" name="order-car-owner-type">
-                <option value="-1">选择车辆所有人</option>
-                <option value="1">自有</option>
-                <option value="11">外请</option>
             </select>
 
             {{--外请车--}}

@@ -132,6 +132,10 @@
                         {
                             return '<small class="btn-xs bg-green">自有</small>';
                         }
+                        else if(row.car_owner_type == 9)
+                        {
+                            return '<small class="btn-xs bg-orange">共建</small>';
+                        }
                         else if(row.car_owner_type == 11)
                         {
                             return '<small class="btn-xs bg-purple">外请</small>';
@@ -476,7 +480,7 @@
                     },
                     render: function(data, type, row, meta) {
                         var car_html = '';
-                        if(row.car_owner_type == 1)
+                        if(row.car_owner_type == 1 || row.car_owner_type == 9)
                         {
                             if(row.car_er != null)
                             {
@@ -524,7 +528,7 @@
                     render: function(data, type, row, meta) {
                         var trailer_text = '';
                         var trailer_html = '';
-                        if(row.car_owner_type == 1)
+                        if(row.car_owner_type == 1 || row.car_owner_type == 9)
                         {
                             if(row.trailer_er != null)
                             {
