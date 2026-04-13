@@ -3352,12 +3352,27 @@ class WLStaffOrderRepository {
 
 
         $operate = $post_data["operate"];
-        $operate_type = $operate["type"];
-        $operate_id = $operate['id'];
+        if($operate != 'order--item-financial--one-click-calculation') return response_error([],"参数【operate】有误！");
+        $item_id = $post_data["item_id"];
+        if(intval($item_id) !== 0 && !$item_id) return response_error([],"参数[ID]有误！");
 
 
-        $order = WL_Common_Order::with([])->withTrashed()->find($operate_id);
+        $order = WL_Common_Order::with([])->withTrashed()->find($item_id);
         if(!$order) return response_error([],"【订单】不存在警告，请刷新页面重试！");
+
+
+        $fee_list = WL_Common_Fee::select('fee_category','fee_type','fee_title','fee_title_num','fee_amount')
+            ->where('order_id',$item_id)
+            ->get();
+        if(count($fee_list) > 0)
+        {
+            foreach($fee_list as $k => $v)
+            {
+
+            }
+        }
+        else return response_error([],"该订单没有费用记录！");
+
 
         $timestamp = time();
         $datetime = date('Y-m-d H:i:s', $timestamp);

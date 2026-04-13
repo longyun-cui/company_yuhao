@@ -6,12 +6,12 @@
         let $tableSearch = $datatable_wrapper.find('.datatable-search-box');
 
         $($tableId).DataTable({
-            "aLengthMenu": [[10, 50, 200], ["10", "50", "200"]],
+            "aLengthMenu": [[50, 200], ["50", "200"]],
             "processing": true,
             "serverSide": true,
             "searching": true,
             "pagingType": "simple_numbers",
-            "sDom": '<"dataTables_length_box"l> <"dataTables_info_box"i> <"dataTables_paginate_box"p> <t> <"dataTables_length_box"l> <"dataTables_info_box"i> <"dataTables_paginate_box"p>',
+            "sDom": '<"dataTables_length_box"l> <"dataTables_info_box"i> <"dataTables_paginate_box"p> <t>',
             "order": [],
             "orderCellsTop": true,
             "scrollX": true,
@@ -1757,6 +1757,7 @@
                         var $html_follow = '';
                         var $html_fee = '';
                         var $html_accounting = '';
+                        var $html_calculation = '';
                         var $html_operation_record = '<a class="btn btn-xs bg-default modal-show--for--order--item-operation-record" data-id="'+data+'">记录</a>';
                         var $html_fee_record = '<a class="btn btn-xs bg-default modal-show--for--order-fee-record" data-id="'+data+'">费用记录</a>';
 
