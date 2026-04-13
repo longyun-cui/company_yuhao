@@ -115,17 +115,17 @@
                         else return data;
                     }
                 },
-                // {
-                //     "title": "默认车挂",
-                //     "data": "trailer_id",
-                //     "className": "text-center",
-                //     "width": "240px",
-                //     "orderable": false,
-                //     render: function(data, type, row, meta) {
-                //         if(row.trailer_er == null) return '--';
-                //         else return '<a href="javascript:void(0);">'+row.trailer_er.name+' ('+row.trailer_er.sub_name+')'+'</a>';
-                //     }
-                // },
+                {
+                    "title": "默认车挂",
+                    "data": "trailer_id",
+                    "className": "text-center",
+                    "width": "180px",
+                    "orderable": false,
+                    render: function(data, type, row, meta) {
+                        if(row.trailer_er == null) return '--';
+                        else return '<a href="javascript:void(0);">'+row.trailer_er.name+' ('+row.trailer_er.sub_name+')'+'</a>';
+                    }
+                },
                 {
                     "title": "默认主驾",
                     "data": "driver_id",
