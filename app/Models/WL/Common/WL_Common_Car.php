@@ -155,7 +155,7 @@ class WL_Common_Car extends Model
         return $this->hasMany('App\Models\WL\Common\WL_Common_Order','car_id','id');
     }
 
-    public function latestOrder()
+    public function latest_order()
     {
         return $this->hasOne('App\Models\WL\Common\WL_Common_Order', 'car_id', 'id')
             ->orderBy('assign_date', 'desc')
