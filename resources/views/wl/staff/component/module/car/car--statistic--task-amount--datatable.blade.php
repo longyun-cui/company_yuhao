@@ -190,8 +190,22 @@
                         $(nTd).addClass('_bold');
                     },
                     render: function(data, type, row, meta) {
-                        if(!data) return '--';
-                        else return data;
+                        if (type === 'display')
+                        {
+                            // 显示时返回格式化字符串
+                            if(!data) return '--';
+                            return data;
+                        }
+                        else if (type === 'sort')
+                        {
+                            // 排序时返回数值
+                            return data;
+                        }
+                        else
+                        {
+                            // 过滤等其他操作使用原始值
+                            return data;
+                        }
                     }
                 },
             ],
