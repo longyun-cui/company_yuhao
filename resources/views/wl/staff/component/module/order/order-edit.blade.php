@@ -93,7 +93,7 @@
                 </div>
                 {{--出发地 & 目的地--}}
                 <div class="form-group" >
-                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 出发地 & 目的地</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 出发地 & 目的地 & 线路</label>
                     <div class="col-md-9 ">
                         <div class="col-sm-3 col-md-3 padding-0">
                             <input type="text" class="form-control" name="transport_departure_place" placeholder="出发地" value="" data-default="" list="_transport_departure_place_title">
