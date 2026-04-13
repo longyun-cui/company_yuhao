@@ -2455,6 +2455,7 @@ class WLStaffOrderRepository {
 //            $operation['after'] = $fee_title;
 //            $operation_record_data[] = $operation;
 //        }
+        $fee_title_key = 0;
         if($fee_type == 1)
         {
             $fee_title = $post_data['fee-title-for-receipt'];
@@ -2462,14 +2463,20 @@ class WLStaffOrderRepository {
         else if($fee_type == 99)
         {
             $fee_title = $post_data['fee-title-for-fee'];
+            $key = array_search($fee_title,config('wl.common-config.fee_title'));
+            if($key) $fee_title_key = $key;
         }
         else if($fee_type == 101)
         {
             $fee_title = $post_data['fee-title-for-deduction'];
+            $key = array_search($fee_title,config('wl.common-config.deduction_title'));
+            if($key) $fee_title_key = $key;
         }
         else if($fee_type == 111)
         {
             $fee_title = $post_data['fee-title-for-fine'];
+            $key = array_search($fee_title,config('wl.common-config.fine_title'));
+            if($key) $fee_title_key = $key;
         }
         if(!empty($fee_title))
         {
@@ -2620,6 +2627,7 @@ class WLStaffOrderRepository {
         $fee_data["fee_datetime"] = $fee_datetime;
         $fee_data["fee_amount"] = $fee_amount;
         $fee_data["fee_title"] = $fee_title;
+        $fee_data["fee_title_num"] = $fee_title_key;
         $fee_data["fee_description"] = $fee_description;
 
         $fee_data["client_id"] = $order->client_id;

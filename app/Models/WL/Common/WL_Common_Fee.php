@@ -65,6 +65,7 @@ class WL_Common_Fee extends Model
         'fee_reference_no',
         'fee_attachment_url',
         'fee_title',
+        'fee_title_num',
         'fee_description',
 
         'funds_total',

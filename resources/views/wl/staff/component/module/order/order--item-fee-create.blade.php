@@ -105,22 +105,22 @@
                     {{--名目--}}
                     <div class="form-group fee-title-box fee-box">
                         <label class="control-label col-md-2"><sup class="text-red">*</sup> 费用名目</label>
-                        <div class="col-md-9 ">
-                            <input type="text" class="form-control" name="fee-title-for-fee" placeholder="请输入费用名目" value="">
-                        </div>
 {{--                        <div class="col-md-9 ">--}}
-{{--                            <select class="form-control modal--select2 select2-reset"--}}
-{{--                                    name="fee-title-for-fee"--}}
-{{--                                    data-modal="#modal--for--order--item-fee-create"--}}
-{{--                            >--}}
-{{--                                <option value="">请选择费用名目</option>--}}
-{{--                                @if(!empty(config('wl.common-config.fee_title')))--}}
-{{--                                    @foreach(config('wl.common-config.fee_title') as $k => $v)--}}
-{{--                                        <option value ="{{ $v }}">{{ $v }}</option>--}}
-{{--                                    @endforeach--}}
-{{--                                @endif--}}
-{{--                            </select>--}}
+{{--                            <input type="text" class="form-control" name="fee-title-for-fee" placeholder="请输入费用名目" value="">--}}
 {{--                        </div>--}}
+                        <div class="col-md-9 ">
+                            <select class="form-control modal--select2 select2-reset"
+                                    name="fee-title-for-fee"
+                                    data-modal="#modal--for--order--item-fee-create"
+                            >
+                                <option value="">请选择费用名目</option>
+                                @if(!empty(config('wl.common-config.fee_title')))
+                                    @foreach(config('wl.common-config.fee_title') as $k => $v)
+                                        <option value ="{{ $v }}">{{ $v }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
                     </div>
                     {{--收款名目--}}
                     <div class="form-group fee-title-box receipt-box">
@@ -132,42 +132,42 @@
                     {{--扣款名目--}}
                     <div class="form-group fee-title-box deduction-box">
                         <label class="control-label col-md-2"><sup class="text-red">*</sup> 扣款名目</label>
-                        <div class="col-md-9 ">
-                            <input type="text" class="form-control" name="fee-title-for-deduction" placeholder="请输入扣款名目" value="">
-                        </div>
 {{--                        <div class="col-md-9 ">--}}
-{{--                            <select class="form-control modal--select2 select2-reset"--}}
-{{--                                    name="fee-title-for-deduction"--}}
-{{--                                    data-modal="#modal--for--order--item-fee-create"--}}
-{{--                            >--}}
-{{--                                <option value="">请选择扣款名目</option>--}}
-{{--                                @if(!empty(config('wl.common-config.deduction_title')))--}}
-{{--                                    @foreach(config('wl.common-config.deduction_title') as $k => $v)--}}
-{{--                                        <option value ="{{ $v }}">{{ $v }}</option>--}}
-{{--                                    @endforeach--}}
-{{--                                @endif--}}
-{{--                            </select>--}}
+{{--                            <input type="text" class="form-control" name="fee-title-for-deduction" placeholder="请输入扣款名目" value="">--}}
 {{--                        </div>--}}
+                        <div class="col-md-9 ">
+                            <select class="form-control modal--select2 select2-reset"
+                                    name="fee-title-for-deduction"
+                                    data-modal="#modal--for--order--item-fee-create"
+                            >
+                                <option value="">请选择扣款名目</option>
+                                @if(!empty(config('wl.common-config.deduction_title')))
+                                    @foreach(config('wl.common-config.deduction_title') as $k => $v)
+                                        <option value ="{{ $v }}">{{ $v }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
                     </div>
                     {{--罚款名目--}}
                     <div class="form-group fee-title-box fine-box">
                         <label class="control-label col-md-2"><sup class="text-red">*</sup> 罚款名目</label>
-                        <div class="col-md-9 ">
-                            <input type="text" class="form-control" name="fee-title-for-fine" placeholder="请输入罚款名目" value="">
-                        </div>
 {{--                        <div class="col-md-9 ">--}}
-{{--                            <select class="form-control modal--select2 select2-reset"--}}
-{{--                                    name="fee-title-for-c"--}}
-{{--                                    data-modal="#modal--for--order--item-fee-create"--}}
-{{--                            >--}}
-{{--                                <option value="">请选择罚款名目</option>--}}
-{{--                                @if(!empty(config('wl.common-config.fine_title')))--}}
-{{--                                    @foreach(config('wl.common-config.fine_title') as $k => $v)--}}
-{{--                                        <option value ="{{ $v }}">{{ $v }}</option>--}}
-{{--                                    @endforeach--}}
-{{--                                @endif--}}
-{{--                            </select>--}}
+{{--                            <input type="text" class="form-control" name="fee-title-for-fine" placeholder="请输入罚款名目" value="">--}}
 {{--                        </div>--}}
+                        <div class="col-md-9 ">
+                            <select class="form-control modal--select2 select2-reset"
+                                    name="fee-title-for-c"
+                                    data-modal="#modal--for--order--item-fee-create"
+                            >
+                                <option value="">请选择罚款名目</option>
+                                @if(!empty(config('wl.common-config.fine_title')))
+                                    @foreach(config('wl.common-config.fine_title') as $k => $v)
+                                        <option value ="{{ $v }}">{{ $v }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
                     </div>
 {{--                    <datalist id="_fee_title">--}}
 {{--                        <option value="油费" />--}}
