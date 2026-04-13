@@ -743,7 +743,7 @@ class WLStaffProjectRepository{
 
 
         // 工单统计
-        $query_order = WL_Common_Order::withTrashed()->select('project_id','transport_departure_place','transport_destination_place')
+        $query_order = WL_Common_Order::select('project_id','transport_departure_place','transport_destination_place')
             ->groupBy('project_id');
 
 
