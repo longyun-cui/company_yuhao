@@ -156,7 +156,7 @@
                     "title": "GPS位置",
                     "data": "location_address_format",
                     "className": "text-left",
-                    "width": "400px",
+                    "width": "600px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
                         if(!data) return '--';
