@@ -841,11 +841,11 @@
                     render: function(data, type, row, meta) {
                         if(data == 1)
                         {
-                            return '<i class="fa fa-clock-o text-red"></i> 单次结算';
+                            return '<i class="fa fa-clock-o text-red"></i> 单结';
                         }
                         if(data == 3)
                         {
-                            return '<i class="fa fa-clock-o text-yellow"></i> 多次结算</small>';
+                            return '<i class="fa fa-clock-o text-yellow"></i> 多结</small>';
                         }
                         if(data == 7)
                         {
