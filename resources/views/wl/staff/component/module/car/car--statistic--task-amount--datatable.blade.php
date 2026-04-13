@@ -128,6 +128,36 @@
                     }
                 },
                 {
+                    "title": "订单数",
+                    "data": "order_count",
+                    "className": "text-center",
+                    "width": "80px",
+                    "orderable": true,
+                    "orderSequence": ["desc", "asc"],
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).addClass('color-red');
+                        $(nTd).addClass('_bold');
+                    },
+                    render: function(data, type, row, meta) {
+                        if (type === 'display')
+                        {
+                            // 显示时返回格式化字符串
+                            if(!data) return '--';
+                            return data;
+                        }
+                        else if (type === 'sort')
+                        {
+                            // 排序时返回数值
+                            return data;
+                        }
+                        else
+                        {
+                            // 过滤等其他操作使用原始值
+                            return data;
+                        }
+                    }
+                },
+                {
                     "title": "车型",
                     "data": "car_info_type",
                     "className": "text-center",
@@ -175,36 +205,6 @@
                             //     $copilot_html = '<a href="javascript:void(0);">'+row.copilot_er.driver_name+' '+row.copilot_er.driver_phone+'</a>';
                             // }
                             return $driver_html+'<br>'+$copilot_html;
-                        }
-                    }
-                },
-                {
-                    "title": "订单数",
-                    "data": "order_count",
-                    "className": "text-center",
-                    "width": "80px",
-                    "orderable": true,
-                    "orderSequence": ["desc", "asc"],
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        $(nTd).addClass('color-red');
-                        $(nTd).addClass('_bold');
-                    },
-                    render: function(data, type, row, meta) {
-                        if (type === 'display')
-                        {
-                            // 显示时返回格式化字符串
-                            if(!data) return '--';
-                            return data;
-                        }
-                        else if (type === 'sort')
-                        {
-                            // 排序时返回数值
-                            return data;
-                        }
-                        else
-                        {
-                            // 过滤等其他操作使用原始值
-                            return data;
                         }
                     }
                 },
