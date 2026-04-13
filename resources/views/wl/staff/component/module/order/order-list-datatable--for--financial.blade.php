@@ -616,8 +616,11 @@
                         if(row.driver_phone) $driver_html = row.driver_name + ' (' +  row.driver_phone + ') <br>';
                         else $driver_html = row.copilot_name;
                         // 副驾
-                        if(row.copilot_phone) $copilot_html = row.copilot_name + ' (' +  row.copilot_phone + ')';
-                        else $copilot_html = row.copilot_name;
+                        if(row.copilot_name)
+                        {
+                            if(row.copilot_phone) $copilot_html = row.copilot_name + ' (' +  row.copilot_phone + ')';
+                            else $copilot_html = row.copilot_name;
+                        }
 
                         return $driver_html + $copilot_html;
                     }
@@ -1739,22 +1742,12 @@
                     "title": "操作",
                     "data": 'id',
                     "className": "",
-                    "width": "300px",
+                    "width": "240px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
 
                         var $html_edit = '';
                         var $html_detail = '';
-                        var $html_travel = '';
-                        var $html_journey = '';
-                        var $html_finance = '';
-                        var $html_record = '';
-                        var $html_delete = '';
-                        var $html_publish = '';
-                        var $html_abandon = '';
-                        var $html_completed = '';
-                        var $html_verified = '';
-                        var $html_follow = '';
                         var $html_fee = '';
                         var $html_accounting = '';
                         var $html_calculation = '';
@@ -1769,7 +1762,6 @@
 
 
                         var $html =
-                            $html_follow+
                             $html_fee+
                             $html_accounting+
                             // $html_calculation+

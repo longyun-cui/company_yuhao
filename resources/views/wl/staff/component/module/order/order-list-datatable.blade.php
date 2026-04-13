@@ -616,8 +616,11 @@
                         if(row.driver_phone) $driver_html = row.driver_name + ' (' +  row.driver_phone + ') <br>';
                         else $driver_html = row.copilot_name;
                         // 副驾
-                        if(row.copilot_phone) $copilot_html = row.copilot_name + ' (' +  row.copilot_phone + ')';
-                        else $copilot_html = row.copilot_name;
+                        if(row.copilot_name)
+                        {
+                            if(row.copilot_phone) $copilot_html = row.copilot_name + ' (' +  row.copilot_phone + ')';
+                            else $copilot_html = row.copilot_name;
+                        }
 
                         return $driver_html + $copilot_html;
                     }

@@ -126,7 +126,7 @@
                 <h3 class="box-title comprehensive-month-title">订单统计</h3>
             </div>
             <div class="box-body no-padding">
-                <div class="tableArea full table-order" style="margin-top:8px;">
+                <div class="tableArea full table-order-finance" style="margin-top:8px;">
                     <table class='table table-striped table-bordered table-hover order-column' id="datatable-order-list">
                         <thead>
                         </thead>

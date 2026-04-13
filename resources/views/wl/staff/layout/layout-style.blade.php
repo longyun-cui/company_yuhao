@@ -94,7 +94,8 @@
     .tableArea tr.operating td { background:#99bbff !important; }
     .tableArea table ._total { font-weight:bold; color:green; }
 
-    .tableArea.table-order table { min-width:3200px; }
+    .tableArea.table-order table { min-width:3400px; }
+    .tableArea.table-order-finance table { min-width:4000px; }
     .tableArea.table-car-list table { min-width:4000px; }
     .tableArea.table-driver-list table { min-width:2400px; }
 
