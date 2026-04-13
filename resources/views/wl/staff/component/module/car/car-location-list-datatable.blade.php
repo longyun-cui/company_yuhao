@@ -153,23 +153,6 @@
                     }
                 },
                 {
-                    "title": "默认副驾",
-                    "data": "copilot_id",
-                    "className": "text-center",
-                    "width": "150px",
-                    "orderable": false,
-                    render: function(data, type, row, meta) {
-                        if(row.copilot_er == null) return '--';
-                        else
-                        {
-                            var $copilot_html = '';
-
-                            $copilot_html = '<a href="javascript:void(0);">'+row.copilot_er.driver_name+' '+row.copilot_er.driver_phone+'</a>';
-                            return $copilot_html;
-                        }
-                    }
-                },
-                {
                     "title": "GPS位置",
                     "data": "location_address_format",
                     "className": "text-center",

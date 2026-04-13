@@ -1064,9 +1064,7 @@ class WLStaffCarRepository {
             ->with([
                 'creator'=>function ($query) { $query->select('id','name'); },
                 'motorcade_er'=>function ($query) { $query->select('id','name'); },
-                'trailer_er'=>function ($query) { $query->select('id','name','sub_name'); },
                 'driver_er'=>function ($query) { $query->select('id','driver_name','driver_phone','copilot_name','copilot_phone'); },
-                'copilot_er'=>function ($query) { $query->select('id','driver_name','driver_phone','copilot_name','copilot_phone'); },
             ])
             ->where('active',1)
             ->where('item_status',1)

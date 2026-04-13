@@ -8,7 +8,7 @@
         $($tableId).DataTable({
             "aLengthMenu": [[100, 100, 200, 500], ["100", "100", "200", "500"]],
             "processing": true,
-            "serverSide": true,
+            "serverSide": false,
             "searching": false,
             "pagingType": "simple_numbers",
             "sDom": '<"dataTables_length_box"l> <"dataTables_info_box"i> <"dataTables_paginate_box"p> <t>',
@@ -122,17 +122,6 @@
                     }
                 },
                 {
-                    "title": "默认车挂",
-                    "data": "trailer_id",
-                    "className": "text-center",
-                    "width": "240px",
-                    "orderable": false,
-                    render: function(data, type, row, meta) {
-                        if(row.trailer_er == null) return '--';
-                        else return '<a href="javascript:void(0);">'+row.trailer_er.name+' ('+row.trailer_er.sub_name+')'+'</a>';
-                    }
-                },
-                {
                     "title": "默认主驾",
                     "data": "driver_id",
                     "className": "text-center",
@@ -159,28 +148,12 @@
                     }
                 },
                 {
-                    "title": "默认副驾",
-                    "data": "copilot_id",
-                    "className": "text-center",
-                    "width": "150px",
-                    "orderable": false,
-                    render: function(data, type, row, meta) {
-                        if(row.copilot_er == null) return '--';
-                        else
-                        {
-                            var $copilot_html = '';
-
-                            $copilot_html = '<a href="javascript:void(0);">'+row.copilot_er.driver_name+' '+row.copilot_er.driver_phone+'</a>';
-                            return $copilot_html;
-                        }
-                    }
-                },
-                {
                     "title": "订单数",
                     "data": "order_count",
                     "className": "text-center",
                     "width": "360px",
-                    "orderable": false,
+                    "orderable": true,
+                    "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         $(nTd).addClass('color-red');
                         $(nTd).addClass('_bold');
