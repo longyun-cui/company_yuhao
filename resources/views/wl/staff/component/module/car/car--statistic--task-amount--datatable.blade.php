@@ -58,13 +58,9 @@
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1)
+                        if(row.id == "统计")
                         {
-                            $(nTd).addClass('modal-show-for-attachment');
-                            $(nTd).attr('data-id',row.id).attr('data-name','附件');
-                            $(nTd).attr('data-key','attachment_list').attr('data-value','');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
+                            $(nTd).addClass('_bold');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -76,7 +72,14 @@
                     "data": 'car_category',
                     "width": "60px",
                     "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.id == "统计")
+                        {
+                            $(nTd).addClass('_bold');
+                        }
+                    },
                     render: function(data, type, row, meta) {
+                        if(row.id == "统计") return '统计';
                         if(data == 1)
                         {
                             if(row.car_type == 1) return '<i class="fa fa-circle text-green"></i> 车';
@@ -93,7 +96,14 @@
                     "className": "text-center",
                     "width": "60px",
                     "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.id == "统计")
+                        {
+                            $(nTd).addClass('_bold');
+                        }
+                    },
                     render: function(data, type, row, meta) {
+                        if(row.id == "统计") return '统计';
                         if(!data) return '--';
                         else return data;
                     }
@@ -104,7 +114,14 @@
                     "className": "text-center",
                     "width": "120px",
                     "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.id == "统计")
+                        {
+                            $(nTd).addClass('_bold');
+                        }
+                    },
                     render: function(data, type, row, meta) {
+                        if(row.id == "统计") return '统计';
                         var $name = data;
                         if(row.pre_name) $name = data + ' (' + row.pre_name + ')';
                         return '<a class="car-control" data-id="'+row.id+'" data-title="'+data+'">'+$name+'</a>';
@@ -116,7 +133,14 @@
                     "className": "text-center",
                     "width": "60px",
                     "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.id == "统计")
+                        {
+                            $(nTd).addClass('_bold');
+                        }
+                    },
                     render: function(data, type, row, meta) {
+                        if(row.id == "统计") return '统计';
                         if(!data) return '--';
                         else return data;
                     }
@@ -127,7 +151,14 @@
                     "className": "text-center",
                     "width": "150px",
                     "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.id == "统计")
+                        {
+                            $(nTd).addClass('_bold');
+                        }
+                    },
                     render: function(data, type, row, meta) {
+                        if(row.id == "统计") return '统计';
                         if(row.driver_er == null) return '--';
                         else
                         {
