@@ -182,7 +182,7 @@
                     "title": "订单数",
                     "data": "order_count",
                     "className": "text-center",
-                    "width": "360px",
+                    "width": "480px",
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
