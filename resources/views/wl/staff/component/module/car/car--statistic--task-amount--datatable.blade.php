@@ -112,7 +112,7 @@
                     "title": "车牌号",
                     "data": "name",
                     "className": "text-center",
-                    "width": "120px",
+                    "width": "200px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.id == "统计")
@@ -182,7 +182,7 @@
                     "title": "订单数",
                     "data": "order_count",
                     "className": "text-center",
-                    "width": "480px",
+                    "width": "80px",
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -206,6 +206,20 @@
                             // 过滤等其他操作使用原始值
                             return data;
                         }
+                    }
+                },
+                {
+                    "title": "备注",
+                    "data": "description",
+                    "className": "text-center",
+                    "width": "",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                    },
+                    render: function(data, type, row, meta) {
+                        return data;
+                        // if(data) return '<small class="btn-xs bg-yellow">查看</small>';
+                        // else return '';
                     }
                 },
             ],

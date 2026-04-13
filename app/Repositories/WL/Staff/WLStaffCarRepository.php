@@ -1105,6 +1105,7 @@ class WLStaffCarRepository {
         $total_data['driver_id'] = 0;
         $total_data['copilot_id'] = 0;
         $total_data['order_count'] = 0;
+        $total_data['description'] = '';
 
         foreach ($list as $k => $v)
         {
