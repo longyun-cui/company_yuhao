@@ -66,6 +66,7 @@
     {{--车辆--}}
     @include(env('TEMPLATE_WL_STAFF').'component.module.car.car-list')
     @include(env('TEMPLATE_WL_STAFF').'component.module.car.car-location-list')
+    @include(env('TEMPLATE_WL_STAFF').'component.module.car.car--statistic--task-amount')
     @include(env('TEMPLATE_WL_STAFF').'component.module.car.car--statistic--task-recent')
     @include(env('TEMPLATE_WL_STAFF').'component.module.car.car--statistic--external-task-recent')
     {{--司机--}}
@@ -216,6 +217,7 @@
     @include(env('TEMPLATE_WL_STAFF').'component.module.car.car-location-list-datatable')
     @include(env('TEMPLATE_WL_STAFF').'component.module.car.car-list-script')
     @include(env('TEMPLATE_WL_STAFF').'component.module.car.car--item-operation-record-datatable')
+    @include(env('TEMPLATE_WL_STAFF').'component.module.car.car--statistic--task-amount--datatable')
     @include(env('TEMPLATE_WL_STAFF').'component.module.car.car--statistic--task-recent--datatable')
     @include(env('TEMPLATE_WL_STAFF').'component.module.car.car--statistic--external-task-recent--datatable')
     {{--司机--}}

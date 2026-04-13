@@ -647,12 +647,17 @@ class WLStaffController extends Controller
     {
         return $this->car_repo->o1__car__item_operation_record_list__datatable_query(request()->all());
     }
-    // 【车辆】统计
+    // 【车辆】【统计】任务数
+    public function o1__car__statistic__task_amount()
+    {
+        return $this->car_repo->o1__car__statistic__task_amount(request()->all());
+    }
+    // 【车辆】【统计】自有车-最新任务
     public function o1__car__statistic__task_recent()
     {
         return $this->car_repo->o1__car__statistic__task_recent(request()->all());
     }
-    // 【车辆】统计
+    // 【车辆】【统计】外请车-任务数
     public function o1__car__statistic__external_task_recent()
     {
         return $this->car_repo->o1__car__statistic__external_task_recent(request()->all());

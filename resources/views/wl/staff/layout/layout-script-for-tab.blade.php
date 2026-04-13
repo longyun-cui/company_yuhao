@@ -224,7 +224,15 @@
                 {
                     Datatable_Statistic_Order_Daily('#'+$config.id, $config.chart_id);
                 }
-                else if($id == "datatable--car--statistic--task-recent")
+                else if($id == "datatable--statistic")
+                {
+                    console.log("datatable--statistic");
+                }
+                else if($id == "datatable--car--statistic--task-amount")
+                {
+                    Datatable_Statistic__Car__Task_Amount('#'+$config.id, $config.chart_id);
+                }
+                else if($id == "datatable--car--statistic--task-amount")
                 {
                     Datatable_Statistic__Car__Task_Recent('#'+$config.id, $config.chart_id);
                 }

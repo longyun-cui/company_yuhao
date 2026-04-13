@@ -1,5 +1,5 @@
 <script>
-    function Datatable__for__Car_Location_List($tableId)
+    function Datatable_Statistic__Car__Task_Amount($tableId)
     {
         let $that = $($tableId);
         let $datatable_wrapper = $that.parents('.datatable-wrapper');
@@ -16,9 +16,10 @@
             "orderCellsTop": true,
             "scrollX": true,
 //                "scrollY": true,
+            "scrollY": ($(document).height() - 298)+"px",
             "scrollCollapse": true,
             "ajax": {
-                'url': "{{ url('/o1/car/car-list/datatable-query') }}",
+                'url': "{{ url('/o1/car/statistic/statistic-task-amount') }}",
                 "type": 'POST',
                 "dataType" : 'json',
                 "data": function (d) {
@@ -28,11 +29,16 @@
                     d.car_category = $tableSearch.find('select[name="car-category"]').val();
                     d.car_type = $tableSearch.find('select[name="car-type"]').val();
                     d.item_status = $tableSearch.find('select[name="car-item-status"]').val();
+                    d.time_type = $tableSearch.find('input[name="car--statistic--task-amount-time-type"]').val();
+                    d.time_month = $tableSearch.find('input[name="car--statistic--task-amount-month"]').val();
+                    d.time_date = $tableSearch.find('input[name="car--statistic--task-amount-date"]').val();
+                    d.date_start = $tableSearch.find('input[name="car--statistic--task-amount-start"]').val();
+                    d.date_ended = $tableSearch.find('input[name="car--statistic--task-amount-ended"]').val();
                 },
             },
             "fixedColumns": {
                 "leftColumns": "@if($is_mobile_equipment) 1 @else 2 @endif",
-                "rightColumns": "1"
+                "rightColumns": "0"
             },
             "columns": [
                 // {
@@ -170,42 +176,18 @@
                     }
                 },
                 {
-                    "title": "GPS位置",
-                    "data": "location_address_format",
+                    "title": "订单数",
+                    "data": "order_count",
                     "className": "text-center",
                     "width": "360px",
                     "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).addClass('color-red');
+                        $(nTd).addClass('_bold');
+                    },
                     render: function(data, type, row, meta) {
                         if(!data) return '--';
                         else return data;
-                    }
-                },
-                {
-                    "title": "GPS时间",
-                    "data": "gps_time",
-                    "className": "text-center",
-                    "width": "120px",
-                    "orderable": false,
-                    render: function(data, type, row, meta) {
-                        if(!data) return '--';
-                        if(data == '0000-00-00 00:00:00') return '--';
-
-                        var $date = new Date(data);
-                        var $year = $date.getFullYear();
-                        var $month = ('00'+($date.getMonth()+1)).slice(-2);
-                        var $day = ('00'+($date.getDate())).slice(-2);
-                        var $hour = ('00'+$date.getHours()).slice(-2);
-                        var $minute = ('00'+$date.getMinutes()).slice(-2);
-                        var $second = ('00'+$date.getSeconds()).slice(-2);
-
-                        var $today = new Date();
-                        var $currentYear = $today.getFullYear();
-                        var $currentMonth = $today.getMonth();
-                        var $currentDay = $today.getDate();
-
-                        if($year == $currentYear && $month == $currentMonth && $day == $currentDay) return '今天 '+$hour+':'+$minute;
-                        if($year == $currentYear) return $month+'-'+$day+'&nbsp;&nbsp;'+$hour+':'+$minute;
-                        else return $year+'-'+$month+'-'+$day+'&nbsp;&nbsp;'+$hour+':'+$minute;
                     }
                 },
             ],

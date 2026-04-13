@@ -243,6 +243,27 @@
                     <a class="tab-control datatable-control"
                        data-type="create"
                        data-unique="y"
+                       data-id="car--statistic--task-amount"
+                       data-title='车辆统计'
+                       data-content='<i class="fa fa-car text-red"></i> 车辆统计'
+                       data-icon='<i class="fa fa-car text-red"></i>'
+
+                       data-datatable-type="create"
+                       data-datatable-unique="y"
+                       data-datatable-id="datatable--car--statistic--task-amount"
+                       data-datatable-target="car--statistic--task-amount"
+                       data-datatable-clone-object="car--statistic--task-amount--clone"
+                    >
+                        <i class="fa fa-car text-red"></i>
+                        <span>车辆统计</span>
+                    </a>
+                </li>
+            @endif
+            @if(in_array($me->staff_category,[0,1,9,81]))
+                <li class="treeview">
+                    <a class="tab-control datatable-control"
+                       data-type="create"
+                       data-unique="y"
                        data-id="car--statistic--task-recent"
                        data-title='自有车最近订单'
                        data-content='<i class="fa fa-car text-green"></i> 自有车最近订单'

@@ -1013,6 +1013,123 @@ class WLStaffCarRepository {
 
 
 
+    // 【车辆】近期订单
+    public function o1__car__statistic__task_amount($post_data)
+    {
+        $this->get_me();
+        $me = $this->me;
+
+
+        // 工单统计
+        $query_order = WL_Common_Order::select('car_id')
+            ->addSelect(DB::raw("
+                    count(*) as order_count
+                "))
+            ->groupBy('car_id');
+
+
+        // 时间
+        $time_type  = isset($post_data['time_type']) ? $post_data['time_type'] : 'all';
+        if($time_type == 'date')
+        {
+            $the_date  = isset($post_data['time_date']) ? $post_data['time_date'] : date('Y-m-d');
+            $query_order->where('assign_date',$the_date);
+        }
+        else if($time_type == 'month')
+        {
+            $the_month  = isset($post_data['time_month']) ? $post_data['time_month'] : date('Y-m');
+            $the_month_timestamp = strtotime($the_month);
+
+            $the_month_start_date = date('Y-m-01',$the_month_timestamp); // 指定月份-开始日期
+            $the_month_ended_date = date('Y-m-t',$the_month_timestamp); // 指定月份-结束日期
+
+            $query_order->whereBetween('assign_date',[$the_month_start_date,$the_month_ended_date]);
+        }
+        else if($time_type == 'period')
+        {
+            if(!empty($post_data['date_start'])) $query_order->where('assign_date', '>=', $post_data['date_start']);
+            if(!empty($post_data['date_ended'])) $query_order->where('assign_date', '<=', $post_data['date_ended']);
+        }
+        else
+        {
+        }
+
+
+        // 工单统计
+        $order_list = $query_order->get()->keyBy('car_id')->toArray();
+
+
+
+        $query = WL_Common_Car::select('*')
+            ->with([
+                'creator'=>function ($query) { $query->select('id','name'); },
+                'motorcade_er'=>function ($query) { $query->select('id','name'); },
+                'trailer_er'=>function ($query) { $query->select('id','name','sub_name'); },
+                'driver_er'=>function ($query) { $query->select('id','driver_name','driver_phone','copilot_name','copilot_phone'); },
+                'copilot_er'=>function ($query) { $query->select('id','driver_name','driver_phone','copilot_name','copilot_phone'); },
+            ])
+            ->where('active',1)
+            ->where('item_status',1)
+            ->where('car_category',1);
+
+
+        $total = $query->count();
+
+        $draw  = isset($post_data['draw'])  ? $post_data['draw']  : 1;
+        $skip  = isset($post_data['start'])  ? $post_data['start']  : 0;
+        $limit = isset($post_data['length']) ? $post_data['length'] : -1;
+
+        if(isset($post_data['order']))
+        {
+            $columns = $post_data['columns'];
+            $order = $post_data['order'][0];
+            $order_column = $order['column'];
+            $order_dir = $order['dir'];
+
+            $field = $columns[$order_column]["data"];
+            $query->orderBy($field, $order_dir);
+        }
+        else $query->orderBy("id", "asc");
+
+        if($limit == -1) $list = $query->get();
+        else $list = $query->skip($skip)->take($limit)->get();
+
+
+        $total_data = [];
+        $total_data['car_category'] = '';
+        $total_data['car_type'] = '';
+        $total_data['car_info_type'] = '';
+        $total_data['id'] = '统计';
+        $total_data['name'] = '--';
+        $total_data['sub_name'] = '';
+        $total_data['car_number'] = '';
+        $total_data['trailer_id'] = 0;
+        $total_data['driver_id'] = 0;
+        $total_data['copilot_id'] = 0;
+        $total_data['order_count'] = 0;
+
+        foreach ($list as $k => $v)
+        {
+            if(isset($order_list[$v->id]))
+            {
+                $list[$k]->order_count = $order_list[$v->id]['order_count'];
+
+                $total_data['order_count'] += $v->order_count;
+            }
+            else
+            {
+                $list[$k]->order_count = 0;
+            }
+
+        }
+//        dd($list->toArray());
+
+
+        $list[] = $total_data;
+
+        return datatable_response($list, $draw, $total);
+    }
+
 
     // 【车辆】近期订单
     public function o1__car__statistic__task_recent($post_data)
