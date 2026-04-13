@@ -659,7 +659,7 @@ class WLStaffOrderRepository {
         {
             $assigned = WL_Common_Order::select('*')
                 ->where('car_id',$post_data['car_id'])
-                ->where('assigassign_daten_time',$post_data['assign_date'])
+                ->where('assign_date',$post_data['assign_date'])
                 ->when(($operate_type == 'edit'), function ($query) use ($operate_id) {
                     return $query->where('id', '!=', $operate_id);
                 })
