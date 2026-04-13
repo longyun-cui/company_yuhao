@@ -2908,7 +2908,7 @@ class WLStaffOrderRepository {
 
     }
     // 【工单】保存数据
-    public function o1__order__item_financial_accounting_save($post_data)
+    public function o1__order__item_financial__accounting_save($post_data)
     {
         $messages = [
             'operate.required' => 'operate.required.',
@@ -2960,6 +2960,421 @@ class WLStaffOrderRepository {
             $operation['title'] = '操作';
             $operation['before'] = '';
             $operation['after'] = '财务核算';
+            $operation_record_data[] = $operation;
+        }
+        // 时间
+//        $accounting_datetime = $post_data['accounting-datetime'];
+//        if(!empty($accounting_datetime))
+//        {
+//            $operation = [];
+//            $operation['field'] = 'accounting_datetime';
+//            $operation['title'] = '时间';
+//            $operation['before'] = '';
+//            $operation['after'] = $accounting_datetime;
+//            $operation_record_data[] = $operation;
+//        }
+        // 运费现金
+        $accounting_freight_cash = (float)$post_data['accounting_freight_cash'];
+        if((float)$order->financial_receipt_for_freight_cash != $accounting_freight_cash)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_receipt_for_freight_cash';
+            $operation['title'] = '运费现金';
+            $operation['before'] = (float)$order->financial_receipt_for_freight_cash;
+            $operation['after'] = $accounting_freight_cash;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_receipt_for_freight_cash'] = $accounting_freight_cash;
+        }
+        // 运费油卡
+        $financial_receipt_for_freight_oil_card = (float)$post_data['accounting_freight_oil_card'];
+        if((float)$order->financial_receipt_for_freight_oil_card != $financial_receipt_for_freight_oil_card)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_receipt_for_freight_oil_card';
+            $operation['title'] = '运费油卡';
+            $operation['before'] = (float)$order->financial_receipt_for_freight_oil_card;
+            $operation['after'] = $financial_receipt_for_freight_oil_card;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_receipt_for_freight_oil_card'] = $financial_receipt_for_freight_oil_card;
+        }
+        // 开票金额
+        $financial_receipt_for_invoice_amount = (float)$post_data['accounting_invoice_amount'];
+        if((float)$order->financial_receipt_for_invoice_amount != $financial_receipt_for_invoice_amount)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_receipt_for_invoice_amount';
+            $operation['title'] = '开票金额';
+            $operation['before'] = (float)$order->financial_receipt_for_invoice_amount;
+            $operation['after'] = $financial_receipt_for_invoice_amount;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_receipt_for_invoice_amount'] = $financial_receipt_for_invoice_amount;
+        }
+        // 开票点数
+        $financial_receipt_for_invoice_point = (float)$post_data['accounting_invoice_point'];
+        if((float)$order->financial_receipt_for_invoice_point != $financial_receipt_for_invoice_point)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_receipt_for_invoice_point';
+            $operation['title'] = '开票点数';
+            $operation['before'] = (float)$order->financial_receipt_for_invoice_point;
+            $operation['after'] = $financial_receipt_for_invoice_point;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_receipt_for_invoice_point'] = $financial_receipt_for_invoice_point;
+        }
+        // 总油费
+        $financial_fee_for_oil_total = (float)$post_data['accounting_oil_total'];
+        if((float)$order->financial_fee_for_oil_total != $financial_fee_for_oil_total)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_oil_total';
+            $operation['title'] = '总油费';
+            $operation['before'] = (float)$order->financial_fee_for_oil_total;
+            $operation['after'] = $financial_fee_for_oil_total;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_oil_total'] = $financial_fee_for_oil_total;
+        }
+        // 油费-油卡
+        $financial_fee_for_oil_card = (float)$post_data['accounting_oil_card'];
+        if((float)$order->financial_fee_for_oil_card != $financial_fee_for_oil_card)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_oil_card';
+            $operation['title'] = '油费-油卡';
+            $operation['before'] = (float)$order->financial_fee_for_oil_card;
+            $operation['after'] = $financial_fee_for_oil_card;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_oil_card'] = $financial_fee_for_oil_card;
+        }
+        // 油费-现金
+        $financial_fee_for_oil_cash = (float)$post_data['accounting_oil_cash'];
+        if((float)$order->financial_fee_for_oil_cash != $financial_fee_for_oil_cash)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_oil_cash';
+            $operation['title'] = '油费-现金';
+            $operation['before'] = (float)$order->financial_fee_for_oil_cash;
+            $operation['after'] = $financial_fee_for_oil_cash;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_oil_cash'] = $financial_fee_for_oil_cash;
+        }
+        // 公里数
+        $oil_mileage = (int)$post_data['accounting_oil_mileage'];
+        if((float)$order->oil_mileage != $oil_mileage)
+        {
+            $operation = [];
+            $operation['field'] = 'oil_mileage';
+            $operation['title'] = '公里数';
+            $operation['before'] = (int)$order->oil_mileage;
+            $operation['after'] = $oil_mileage;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['oil_mileage'] = $oil_mileage;
+        }
+        // 油耗
+        $oil_consumption = (float)$post_data['accounting_oil_consumption'];
+        if((float)$order->oil_consumption != $oil_consumption)
+        {
+            $operation = [];
+            $operation['field'] = 'oil_consumption';
+            $operation['title'] = '油耗';
+            $operation['before'] = (float)$order->oil_consumption;
+            $operation['after'] = $oil_consumption;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['oil_consumption'] = $oil_consumption;
+        }
+        // 单价
+        $oil_unit_price = (float)$post_data['accounting_oil_unit_price'];
+        if((float)$order->oil_unit_price != $oil_unit_price)
+        {
+            $operation = [];
+            $operation['field'] = 'oil_unit_price';
+            $operation['title'] = '单价';
+            $operation['before'] = (float)$order->oil_unit_price;
+            $operation['after'] = $oil_unit_price;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['oil_unit_price'] = $oil_unit_price;
+        }
+        // 路费-ETC
+        $financial_fee_for_toll_etc = (float)$post_data['accounting_toll_etc'];
+        if((float)$order->financial_fee_for_toll_etc != $financial_fee_for_toll_etc)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_toll_etc';
+            $operation['title'] = '路费-ETC';
+            $operation['before'] = (float)$order->financial_fee_for_toll_etc;
+            $operation['after'] = $financial_fee_for_toll_etc;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_toll_etc'] = $financial_fee_for_toll_etc;
+        }
+        // 路费-现金
+        $financial_fee_for_toll_cash = (float)$post_data['accounting_toll_cash'];
+        if((float)$order->financial_fee_for_toll_cash != $financial_fee_for_toll_cash)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_toll_cash';
+            $operation['title'] = '路费-现金';
+            $operation['before'] = (float)$order->financial_fee_for_toll_cash;
+            $operation['after'] = $financial_fee_for_toll_cash;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_toll_cash'] = $financial_fee_for_toll_cash;
+        }
+        // 停车费
+        $financial_fee_for_parking = (float)$post_data['accounting_parking'];
+        if((float)$order->financial_fee_for_parking != $financial_fee_for_parking)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_parking';
+            $operation['title'] = '停车费';
+            $operation['before'] = (float)$order->financial_fee_for_parking;
+            $operation['after'] = $financial_fee_for_parking;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_parking'] = $financial_fee_for_parking;
+        }
+        // 工资
+        $financial_fee_for_salary = (float)$post_data['accounting_salary'];
+        if((float)$order->financial_fee_for_salary != $financial_fee_for_salary)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_salary';
+            $operation['title'] = '工资';
+            $operation['before'] = (float)$order->financial_fee_for_salary;
+            $operation['after'] = $financial_fee_for_salary;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_salary'] = $financial_fee_for_salary;
+        }
+        // 奖金
+        $financial_fee_for_bonus = (float)$post_data['accounting_bonus'];
+        if((float)$order->financial_fee_for_bonus != $financial_fee_for_bonus)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_bonus';
+            $operation['title'] = '奖金';
+            $operation['before'] = (float)$order->financial_fee_for_bonus;
+            $operation['after'] = $financial_fee_for_bonus;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_bonus'] = $financial_fee_for_bonus;
+        }
+        // 维修费
+        $financial_fee_for_repair_cost = (float)$post_data['accounting_repair'];
+        if((float)$order->financial_fee_for_repair_cost != $financial_fee_for_repair_cost)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_repair_cost';
+            $operation['title'] = '维修费';
+            $operation['before'] = (float)$order->financial_fee_for_repair_cost;
+            $operation['after'] = $financial_fee_for_repair_cost;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_repair_cost'] = $financial_fee_for_repair_cost;
+        }
+        // 保养费
+        $financial_fee_for_maintenance_cost = (float)$post_data['accounting_maintenance'];
+        if((float)$order->financial_fee_for_maintenance_cost != $financial_fee_for_maintenance_cost)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_maintenance_cost';
+            $operation['title'] = '保养费';
+            $operation['before'] = (float)$order->financial_fee_for_maintenance_cost;
+            $operation['after'] = $financial_fee_for_maintenance_cost;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_maintenance_cost'] = $financial_fee_for_maintenance_cost;
+        }
+        // 审车费
+        $financial_fee_for_inspection_cost = (float)$post_data['accounting_inspection'];
+        if((float)$order->financial_fee_for_inspection_cost != $financial_fee_for_inspection_cost)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_inspection_cost';
+            $operation['title'] = '审车费';
+            $operation['before'] = (float)$order->financial_fee_for_inspection_cost;
+            $operation['after'] = $financial_fee_for_inspection_cost;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_inspection_cost'] = $financial_fee_for_inspection_cost;
+        }
+        // 过户费
+        $financial_fee_for_transfer_cost = (float)$post_data['accounting_transfer'];
+        if((float)$order->financial_fee_for_transfer_cost != $financial_fee_for_transfer_cost)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_transfer_cost';
+            $operation['title'] = '过户费';
+            $operation['before'] = (float)$order->financial_fee_for_transfer_cost;
+            $operation['after'] = $financial_fee_for_transfer_cost;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_transfer_cost'] = $financial_fee_for_transfer_cost;
+        }
+        // 保险费
+        $financial_fee_for_insurance_cost = (float)$post_data['accounting_insurance'];
+        if((float)$order->financial_fee_for_insurance_cost != $financial_fee_for_insurance_cost)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_insurance_cost';
+            $operation['title'] = '保险费';
+            $operation['before'] = (float)$order->financial_fee_for_insurance_cost;
+            $operation['after'] = $financial_fee_for_insurance_cost;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_insurance_cost'] = $financial_fee_for_insurance_cost;
+        }
+        // 贷款费用
+        $financial_fee_for_loan_cost = (float)$post_data['accounting_loan'];
+        if((float)$order->financial_fee_for_loan_cost != $financial_fee_for_loan_cost)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_loan_cost';
+            $operation['title'] = '贷款费用';
+            $operation['before'] = (float)$order->financial_fee_for_loan_cost;
+            $operation['after'] = $financial_fee_for_loan_cost;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_loan_cost'] = $financial_fee_for_loan_cost;
+        }
+        // 其他费用
+        $financial_fee_for_others = (float)$post_data['accounting_others'];
+        if((float)$order->financial_fee_for_others != $financial_fee_for_others)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_others';
+            $operation['title'] = '其他费用';
+            $operation['before'] = (float)$order->financial_fee_for_others;
+            $operation['after'] = $financial_fee_for_others;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_others'] = $financial_fee_for_others;
+        }
+        // 费用备注
+        $financial_description = trim($post_data['accounting_description']);
+        if((empty($order->financial_description) && !empty($financial_description)) || (!empty($order->financial_description) && (trim($order->financial_description) != $financial_description)))
+        {
+            $operation = [];
+            $operation['field'] = 'financial_description';
+            $operation['title'] = '费用备注';
+            $operation['before'] = $order->financial_description;
+            $operation['after'] = $financial_description;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_description'] = $financial_description;
+        }
+
+
+
+        $record_data["operate_category"] = 1;
+        $record_data["operate_type"] = 81;
+        $record_data["client_id"] = $order->client_id;
+        $record_data["project_id"] = $order->project_id;
+        $record_data["order_id"] = $operate_id;
+        $record_data["creator_id"] = $me->id;
+        $record_data["company_id"] = $me->company_id;
+        $record_data["department_id"] = $me->department_id;
+        $record_data["team_id"] = $me->team_id;
+//        $record_data["custom_date"] = $fee_datetime;
+//        $record_data["custom_datetime"] = $fee_datetime;
+        $record_data["content"] = json_encode($operation_record_data);
+
+
+
+
+        // 启动数据库事务
+        DB::beginTransaction();
+        try
+        {
+            $order = WL_Common_Order::lockForUpdate()->find($operate_id);
+            $bool_order = $order->fill($order_update_date)->save();
+            if(!$bool_order) throw new Exception("WL_Common_Order--update--fail");
+
+            $order_operation_record = new WL_Common_Order_Operation_Record;
+            $bool_oor = $order_operation_record->fill($record_data)->save();
+            if($bool_oor)
+            {
+                $order->last_operation_datetime = $datetime;
+                $order->last_operation_date = $datetime;
+            }
+            else throw new Exception("WL_Common_Order_Operation_Record--insert--fail");
+
+
+            DB::commit();
+            return response_success(['order'=>$order]);
+        }
+        catch (Exception $e)
+        {
+            DB::rollback();
+            $msg = '操作失败，请重试！';
+            $msg = $e->getMessage();
+//            exit($e->getMessage());
+            return response_fail([],$msg);
+        }
+
+    }
+    // 【工单】保存数据
+    public function o1__order__item_financial__one_click_calculation($post_data)
+    {
+        $messages = [
+            'operate.required' => 'operate.required.',
+//            'fee-title.required' => '请输入名目！',
+//            'fee-amount.required' => '请输入金额！',
+//            'fee-datetime.required' => '请输入时间！',
+//            'name.unique' => '该部门号已存在！',
+        ];
+        $v = Validator::make($post_data, [
+            'operate' => 'required',
+//            'fee-title' => 'required',
+//            'fee-amount' => 'required',
+//            'fee-datetime' => 'required',
+//            'name' => 'required|unique:dk_department,name',
+        ], $messages);
+        if ($v->fails())
+        {
+            $messages = $v->errors();
+            return response_error([],$messages->first());
+        }
+
+        $this->get_me();
+        $me = $this->me;
+
+//        if(!in_array($me->user_category,[0,1,11,19])) return response_error([],"你没有操作权限！");
+
+
+        $operate = $post_data["operate"];
+        $operate_type = $operate["type"];
+        $operate_id = $operate['id'];
+
+
+        $order = WL_Common_Order::with([])->withTrashed()->find($operate_id);
+        if(!$order) return response_error([],"【订单】不存在警告，请刷新页面重试！");
+
+        $timestamp = time();
+        $datetime = date('Y-m-d H:i:s', $timestamp);
+
+
+        $order_update_date = [];
+        $operation_record_data = [];
+
+        // 操作
+        if(true)
+        {
+            $operation = [];
+            $operation['operation'] = 'item_financial__one_click_calculation';
+            $operation['field'] = '';
+            $operation['title'] = '操作';
+            $operation['before'] = '';
+            $operation['after'] = '一键核算';
             $operation_record_data[] = $operation;
         }
         // 时间

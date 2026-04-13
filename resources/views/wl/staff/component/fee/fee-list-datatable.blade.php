@@ -295,7 +295,7 @@
                     "orderable": false,
                     render: function(data, type, row, meta) {
                         // return data;
-                        if(row.creator) return row.creator.username;
+                        if(row.creator) return row.creator.name;
                         else return '--';
 
                     }

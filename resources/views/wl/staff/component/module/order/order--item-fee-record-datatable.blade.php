@@ -143,10 +143,10 @@
                         }
                     },
                     {
-                        "className": "text-center",
-                        "width": "120px",
                         "title": "操作人",
                         "data": "creator_id",
+                        "className": "text-center",
+                        "width": "120px",
                         "orderable": false,
                         render: function(data, type, row, meta) {
                             return row.creator == null ? '未知' : '<a href="javascript:void(0);">'+row.creator.name+'</a>';
