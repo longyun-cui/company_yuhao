@@ -78,6 +78,7 @@ class WLStaffCarRepository {
                 'trailer_er'=>function ($query) { $query->select('id','name','sub_name'); },
                 'driver_er'=>function ($query) { $query->select('id','driver_name','driver_phone','copilot_name','copilot_phone'); },
                 'copilot_er'=>function ($query) { $query->select('id','driver_name','driver_phone','copilot_name','copilot_phone'); },
+                'order_list'=>function ($query) { $query->select('*')->limit(1)->orderBy('assign_date','desc'); },
             ]);
 
         if(!empty($post_data['id'])) $query->where('id', $post_data['id']);

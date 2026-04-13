@@ -8,7 +8,7 @@
         $($tableId).DataTable({
             "aLengthMenu": [[100, 100, 200, 500], ["100", "100", "200", "500"]],
             "processing": true,
-            "serverSide": true,
+            "serverSide": false,
             "searching": false,
             "pagingType": "simple_numbers",
             "sDom": '<"dataTables_length_box"l> <"dataTables_info_box"i> <"dataTables_paginate_box"p> <t>',
@@ -150,6 +150,39 @@
                             // }
                             return $driver_html+'<br>'+$copilot_html;
                         }
+                    }
+                },
+                {
+                    "title": "订单",
+                    "data": "id",
+                    "className": "text-center",
+                    "width": "120px",
+                    "orderable": true,
+                    render: function(data, type, row, meta) {
+                        if(!row.order_list[0]) return '--';
+                        else return '(' + row.order_list[0].id + ')' +  row.order_list[0].assign_date;
+                    }
+                },
+                {
+                    "title": "出发地",
+                    "data": "id",
+                    "className": "text-center",
+                    "width": "100px",
+                    "orderable": true,
+                    render: function(data, type, row, meta) {
+                        if(!row.order_list[0]) return '--';
+                        else return row.order_list[0].transport_departure_place;
+                    }
+                },
+                {
+                    "title": "目的地",
+                    "data": "id",
+                    "className": "text-center",
+                    "width": "100px",
+                    "orderable": true,
+                    render: function(data, type, row, meta) {
+                        if(!row.order_list[0]) return '--';
+                        else return row.order_list[0].transport_destination_place;
                     }
                 },
                 {
