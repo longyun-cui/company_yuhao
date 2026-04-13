@@ -652,6 +652,11 @@ class WLStaffController extends Controller
     {
         return $this->car_repo->o1__car__statistic__task_recent(request()->all());
     }
+    // 【车辆】统计
+    public function o1__car__statistic__external_task_recent()
+    {
+        return $this->car_repo->o1__car__statistic__external_task_recent(request()->all());
+    }
 
 
 

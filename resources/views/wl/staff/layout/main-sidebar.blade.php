@@ -244,8 +244,8 @@
                        data-type="create"
                        data-unique="y"
                        data-id="car--statistic--task-recent"
-                       data-title='车辆最近订单'
-                       data-content='<i class="fa fa-car text-green"></i> 车辆近期订单'
+                       data-title='自有车最近订单'
+                       data-content='<i class="fa fa-car text-green"></i> 自有车最近订单'
                        data-icon='<i class="fa fa-car text-green"></i>'
 
                        data-datatable-type="create"
@@ -255,7 +255,28 @@
                        data-datatable-clone-object="car--statistic--task-recent--clone"
                     >
                         <i class="fa fa-car text-green"></i>
-                        <span>车辆近期订单</span>
+                        <span>自有车最近订单</span>
+                    </a>
+                </li>
+            @endif
+            @if(in_array($me->staff_category,[0,1,9,81]))
+                <li class="treeview">
+                    <a class="tab-control datatable-control"
+                       data-type="create"
+                       data-unique="y"
+                       data-id="car--statistic--external-task-recent"
+                       data-title='外请车近期订单'
+                       data-content='<i class="fa fa-car text-green"></i> 外请车近期订单'
+                       data-icon='<i class="fa fa-car text-green"></i>'
+
+                       data-datatable-type="create"
+                       data-datatable-unique="y"
+                       data-datatable-id="datatable--car--statistic--external-task-recent"
+                       data-datatable-target="car--statistic--external-task-recent"
+                       data-datatable-clone-object="car--statistic--external-task-recent--clone"
+                    >
+                        <i class="fa fa-car text-green"></i>
+                        <span>外请车近期订单</span>
                     </a>
                 </li>
             @endif

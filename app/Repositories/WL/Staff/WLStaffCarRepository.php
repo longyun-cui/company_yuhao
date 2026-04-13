@@ -1407,9 +1407,9 @@ class WLStaffCarRepository {
         $this->get_me();
         $me = $this->me;
 
-
         // 工单统计
         $query_order = WL_Common_Order::select('external_car','transport_departure_place','transport_destination_place')
+            ->where('car_owner_type',11)
             ->groupBy('external_car');
 
 
@@ -1422,12 +1422,10 @@ class WLStaffCarRepository {
                 "))
             ->groupBy('assign_date');
 
-//        $query_order->addSelect(DB::raw("
-//                    count(*) as order_count
-//                "));
 
         // 工单统计
         $order_list = $query_order->get();
+//        dd($order_list->toArray());
 
         foreach($order_list as $k => $v)
         {
@@ -1451,7 +1449,7 @@ class WLStaffCarRepository {
             $order_list[$k] = $v->keyBy('diff');
         }
         $order_list = $order_list->toArray();
-        dd($order_list);
+//        dd($order_list);
 
 
 
@@ -1464,51 +1462,34 @@ class WLStaffCarRepository {
         $use['is_month'] = 0;
         $use['project_id'] = 0;
         $use['the_date'] = 0;
-        $use['the_month_start_timestamp'] = 0;
-        $use['the_month_ended_timestamp'] = 0;
 
 
 
 
+        // 工单统计
+        $list = WL_Common_Order::select('external_car')
+            ->where('car_owner_type',11)
+            ->groupBy('external_car')
+            ->get();
+//        dd($list);
 
-        $query = WL_Common_Car::select(['id','item_status','name','sub_name','car_number'])
-            ->with([
-            ])
-            ->where('active',1)
-            ->where('item_status',1)
-            ->where('car_category',1);
 
-
-        $total = $query->count();
+        $total = $list->count();
 
         $draw  = isset($post_data['draw'])  ? $post_data['draw']  : 1;
         $skip  = isset($post_data['start'])  ? $post_data['start']  : 0;
         $limit = isset($post_data['length']) ? $post_data['length'] : -1;
 
-        if(isset($post_data['order']))
-        {
-            $columns = $post_data['columns'];
-            $order = $post_data['order'][0];
-            $order_column = $order['column'];
-            $order_dir = $order['dir'];
-
-            $field = $columns[$order_column]["data"];
-            $query->orderBy($field, $order_dir);
-        }
-        else $query->orderBy("id", "asc");
-
-        if($limit == -1) $list = $query->get();
-        else $list = $query->skip($skip)->take($limit)->get();
 
         foreach ($list as $k => $v)
         {
-            if(isset($order_list[$v->id]))
+            if(isset($order_list[$v->external_car]))
             {
-                if(isset($order_list[$v->id][14]))
+                if(isset($order_list[$v->external_car][14]))
                 {
-                    $list[$k]->order_14 = $order_list[$v->id][14]['order_count'];
-                    $list[$k]->departure_14 = $order_list[$v->id][14]['transport_departure_place'];
-                    $list[$k]->destination_14 = $order_list[$v->id][14]['transport_destination_place'];
+                    $list[$k]->order_14 = $order_list[$v->external_car][14]['order_count'];
+                    $list[$k]->departure_14 = $order_list[$v->external_car][14]['transport_departure_place'];
+                    $list[$k]->destination_14 = $order_list[$v->external_car][14]['transport_destination_place'];
                 }
                 else
                 {
@@ -1517,11 +1498,11 @@ class WLStaffCarRepository {
                     $list[$k]->destination_14 = '';
                 }
 
-                if(isset($order_list[$v->id][13]))
+                if(isset($order_list[$v->external_car][13]))
                 {
-                    $list[$k]->order_13 = $order_list[$v->id][13]['order_count'];
-                    $list[$k]->departure_13 = $order_list[$v->id][13]['transport_departure_place'];
-                    $list[$k]->destination_13 = $order_list[$v->id][13]['transport_destination_place'];
+                    $list[$k]->order_13 = $order_list[$v->external_car][13]['order_count'];
+                    $list[$k]->departure_13 = $order_list[$v->external_car][13]['transport_departure_place'];
+                    $list[$k]->destination_13 = $order_list[$v->external_car][13]['transport_destination_place'];
                 }
                 else
                 {
@@ -1530,11 +1511,11 @@ class WLStaffCarRepository {
                     $list[$k]->destination_13 = '';
                 }
 
-                if(isset($order_list[$v->id][12]))
+                if(isset($order_list[$v->external_car][12]))
                 {
-                    $list[$k]->order_12 = $order_list[$v->id][12]['order_count'];
-                    $list[$k]->departure_12 = $order_list[$v->id][12]['transport_departure_place'];
-                    $list[$k]->destination_12 = $order_list[$v->id][12]['transport_destination_place'];
+                    $list[$k]->order_12 = $order_list[$v->external_car][12]['order_count'];
+                    $list[$k]->departure_12 = $order_list[$v->external_car][12]['transport_departure_place'];
+                    $list[$k]->destination_12 = $order_list[$v->external_car][12]['transport_destination_place'];
                 }
                 else
                 {
@@ -1543,11 +1524,11 @@ class WLStaffCarRepository {
                     $list[$k]->destination_12 = '';
                 }
 
-                if(isset($order_list[$v->id][11]))
+                if(isset($order_list[$v->external_car][11]))
                 {
-                    $list[$k]->order_11 = $order_list[$v->id][11]['order_count'];
-                    $list[$k]->departure_11 = $order_list[$v->id][11]['transport_departure_place'];
-                    $list[$k]->destination_11 = $order_list[$v->id][11]['transport_destination_place'];
+                    $list[$k]->order_11 = $order_list[$v->external_car][11]['order_count'];
+                    $list[$k]->departure_11 = $order_list[$v->external_car][11]['transport_departure_place'];
+                    $list[$k]->destination_11 = $order_list[$v->external_car][11]['transport_destination_place'];
                 }
                 else
                 {
@@ -1556,11 +1537,11 @@ class WLStaffCarRepository {
                     $list[$k]->destination_11 = '';
                 }
 
-                if(isset($order_list[$v->id][10]))
+                if(isset($order_list[$v->external_car][10]))
                 {
-                    $list[$k]->order_10 = $order_list[$v->id][10]['order_count'];
-                    $list[$k]->departure_10 = $order_list[$v->id][10]['transport_departure_place'];
-                    $list[$k]->destination_10 = $order_list[$v->id][10]['transport_destination_place'];
+                    $list[$k]->order_10 = $order_list[$v->external_car][10]['order_count'];
+                    $list[$k]->departure_10 = $order_list[$v->external_car][10]['transport_departure_place'];
+                    $list[$k]->destination_10 = $order_list[$v->external_car][10]['transport_destination_place'];
                 }
                 else
                 {
@@ -1569,11 +1550,11 @@ class WLStaffCarRepository {
                     $list[$k]->destination_10 = '';
                 }
 
-                if(isset($order_list[$v->id][9]))
+                if(isset($order_list[$v->external_car][9]))
                 {
-                    $list[$k]->order_9 = $order_list[$v->id][9]['order_count'];
-                    $list[$k]->departure_9 = $order_list[$v->id][9]['transport_departure_place'];
-                    $list[$k]->destination_9 = $order_list[$v->id][9]['transport_destination_place'];
+                    $list[$k]->order_9 = $order_list[$v->external_car][9]['order_count'];
+                    $list[$k]->departure_9 = $order_list[$v->external_car][9]['transport_departure_place'];
+                    $list[$k]->destination_9 = $order_list[$v->external_car][9]['transport_destination_place'];
                 }
                 else
                 {
@@ -1582,11 +1563,11 @@ class WLStaffCarRepository {
                     $list[$k]->destination_9 = '';
                 }
 
-                if(isset($order_list[$v->id][8]))
+                if(isset($order_list[$v->external_car][8]))
                 {
-                    $list[$k]->order_8 = $order_list[$v->id][8]['order_count'];
-                    $list[$k]->departure_8 = $order_list[$v->id][8]['transport_departure_place'];
-                    $list[$k]->destination_8 = $order_list[$v->id][8]['transport_destination_place'];
+                    $list[$k]->order_8 = $order_list[$v->external_car][8]['order_count'];
+                    $list[$k]->departure_8 = $order_list[$v->external_car][8]['transport_departure_place'];
+                    $list[$k]->destination_8 = $order_list[$v->external_car][8]['transport_destination_place'];
                 }
                 else
                 {
@@ -1595,11 +1576,11 @@ class WLStaffCarRepository {
                     $list[$k]->destination_8 = '';
                 }
 
-                if(isset($order_list[$v->id][7]))
+                if(isset($order_list[$v->external_car][7]))
                 {
-                    $list[$k]->order_7 = $order_list[$v->id][7]['order_count'];
-                    $list[$k]->departure_7 = $order_list[$v->id][7]['transport_departure_place'];
-                    $list[$k]->destination_7 = $order_list[$v->id][7]['transport_destination_place'];
+                    $list[$k]->order_7 = $order_list[$v->external_car][7]['order_count'];
+                    $list[$k]->departure_7 = $order_list[$v->external_car][7]['transport_departure_place'];
+                    $list[$k]->destination_7 = $order_list[$v->external_car][7]['transport_destination_place'];
                 }
                 else
                 {
@@ -1608,11 +1589,11 @@ class WLStaffCarRepository {
                     $list[$k]->destination_7 = '';
                 }
 
-                if(isset($order_list[$v->id][6]))
+                if(isset($order_list[$v->external_car][6]))
                 {
-                    $list[$k]->order_6 = $order_list[$v->id][6]['order_count'];
-                    $list[$k]->departure_6 = $order_list[$v->id][6]['transport_departure_place'];
-                    $list[$k]->destination_6 = $order_list[$v->id][6]['transport_destination_place'];
+                    $list[$k]->order_6 = $order_list[$v->external_car][6]['order_count'];
+                    $list[$k]->departure_6 = $order_list[$v->external_car][6]['transport_departure_place'];
+                    $list[$k]->destination_6 = $order_list[$v->external_car][6]['transport_destination_place'];
                 }
                 else
                 {
@@ -1621,11 +1602,11 @@ class WLStaffCarRepository {
                     $list[$k]->destination_6 = '';
                 }
 
-                if(isset($order_list[$v->id][5]))
+                if(isset($order_list[$v->iexternal_card][5]))
                 {
-                    $list[$k]->order_5 = $order_list[$v->id][5]['order_count'];
-                    $list[$k]->departure_5 = $order_list[$v->id][5]['transport_departure_place'];
-                    $list[$k]->destination_5 = $order_list[$v->id][5]['transport_destination_place'];
+                    $list[$k]->order_5 = $order_list[$v->external_car][5]['order_count'];
+                    $list[$k]->departure_5 = $order_list[$v->external_car][5]['transport_departure_place'];
+                    $list[$k]->destination_5 = $order_list[$v->external_car][5]['transport_destination_place'];
                 }
                 else
                 {
@@ -1634,11 +1615,11 @@ class WLStaffCarRepository {
                     $list[$k]->destination_5 = '';
                 }
 
-                if(isset($order_list[$v->id][4]))
+                if(isset($order_list[$v->external_car][4]))
                 {
-                    $list[$k]->order_4 = $order_list[$v->id][4]['order_count'];
-                    $list[$k]->departure_4 = $order_list[$v->id][4]['transport_departure_place'];
-                    $list[$k]->destination_4 = $order_list[$v->id][4]['transport_destination_place'];
+                    $list[$k]->order_4 = $order_list[$v->external_car][4]['order_count'];
+                    $list[$k]->departure_4 = $order_list[$v->external_car][4]['transport_departure_place'];
+                    $list[$k]->destination_4 = $order_list[$v->external_car][4]['transport_destination_place'];
                 }
                 else
                 {
@@ -1647,11 +1628,11 @@ class WLStaffCarRepository {
                     $list[$k]->destination_4 = '';
                 }
 
-                if(isset($order_list[$v->id][3]))
+                if(isset($order_list[$v->external_car][3]))
                 {
-                    $list[$k]->order_3 = $order_list[$v->id][3]['order_count'];
-                    $list[$k]->departure_3 = $order_list[$v->id][3]['transport_departure_place'];
-                    $list[$k]->destination_3 = $order_list[$v->id][3]['transport_destination_place'];
+                    $list[$k]->order_3 = $order_list[$v->external_car][3]['order_count'];
+                    $list[$k]->departure_3 = $order_list[$v->external_car][3]['transport_departure_place'];
+                    $list[$k]->destination_3 = $order_list[$v->external_car][3]['transport_destination_place'];
                 }
                 else
                 {
@@ -1660,11 +1641,11 @@ class WLStaffCarRepository {
                     $list[$k]->destination_3 = '';
                 }
 
-                if(isset($order_list[$v->id][2]))
+                if(isset($order_list[$v->external_car][2]))
                 {
-                    $list[$k]->order_2 = $order_list[$v->id][2]['order_count'];
-                    $list[$k]->departure_2 = $order_list[$v->id][2]['transport_departure_place'];
-                    $list[$k]->destination_2 = $order_list[$v->id][2]['transport_destination_place'];
+                    $list[$k]->order_2 = $order_list[$v->external_car][2]['order_count'];
+                    $list[$k]->departure_2 = $order_list[$v->external_car][2]['transport_departure_place'];
+                    $list[$k]->destination_2 = $order_list[$v->external_car][2]['transport_destination_place'];
                 }
                 else
                 {
@@ -1673,11 +1654,11 @@ class WLStaffCarRepository {
                     $list[$k]->destination_2 = '';
                 }
 
-                if(isset($order_list[$v->id][1]))
+                if(isset($order_list[$v->external_car][1]))
                 {
-                    $list[$k]->order_1 = $order_list[$v->id][1]['order_count'];
-                    $list[$k]->departure_1 = $order_list[$v->id][1]['transport_departure_place'];
-                    $list[$k]->destination_1 = $order_list[$v->id][1]['transport_destination_place'];
+                    $list[$k]->order_1 = $order_list[$v->external_car][1]['order_count'];
+                    $list[$k]->departure_1 = $order_list[$v->external_car][1]['transport_departure_place'];
+                    $list[$k]->destination_1 = $order_list[$v->external_car][1]['transport_destination_place'];
                 }
                 else
                 {
@@ -1686,11 +1667,11 @@ class WLStaffCarRepository {
                     $list[$k]->destination_1 = '';
                 }
 
-                if(isset($order_list[$v->id][0]))
+                if(isset($order_list[$v->external_car][0]))
                 {
-                    $list[$k]->order_0 = $order_list[$v->id][0]['order_count'];
-                    $list[$k]->departure_0 = $order_list[$v->id][0]['transport_departure_place'];
-                    $list[$k]->destination_0 = $order_list[$v->id][0]['transport_destination_place'];
+                    $list[$k]->order_0 = $order_list[$v->external_car][0]['order_count'];
+                    $list[$k]->departure_0 = $order_list[$v->external_car][0]['transport_departure_place'];
+                    $list[$k]->destination_0 = $order_list[$v->external_car][0]['transport_destination_place'];
                 }
                 else
                 {
@@ -1699,11 +1680,11 @@ class WLStaffCarRepository {
                     $list[$k]->destination_0 = '';
                 }
 
-                if(isset($order_list[$v->id][-1]))
+                if(isset($order_list[$v->external_car][-1]))
                 {
-                    $list[$k]->order_a = $order_list[$v->id][-1]['order_count'];
-                    $list[$k]->departure_a = $order_list[$v->id][-1]['transport_departure_place'];
-                    $list[$k]->destination_a = $order_list[$v->id][-1]['transport_destination_place'];
+                    $list[$k]->order_a = $order_list[$v->external_car][-1]['order_count'];
+                    $list[$k]->departure_a = $order_list[$v->external_car][-1]['transport_departure_place'];
+                    $list[$k]->destination_a = $order_list[$v->external_car][-1]['transport_destination_place'];
                 }
                 else
                 {
@@ -1712,11 +1693,11 @@ class WLStaffCarRepository {
                     $list[$k]->destination_a = '';
                 }
 
-                if(isset($order_list[$v->id][-2]))
+                if(isset($order_list[$v->iexternal_card][-2]))
                 {
-                    $list[$k]->order_b = $order_list[$v->id][-2]['order_count'];
-                    $list[$k]->departure_b = $order_list[$v->id][-2]['transport_departure_place'];
-                    $list[$k]->destination_b = $order_list[$v->id][-2]['transport_destination_place'];
+                    $list[$k]->order_b = $order_list[$v->external_car][-2]['order_count'];
+                    $list[$k]->departure_b = $order_list[$v->external_car][-2]['transport_departure_place'];
+                    $list[$k]->destination_b = $order_list[$v->external_car][-2]['transport_destination_place'];
                 }
                 else
                 {
@@ -1725,11 +1706,11 @@ class WLStaffCarRepository {
                     $list[$k]->destination_b = '';
                 }
 
-                if(isset($order_list[$v->id][-3]))
+                if(isset($order_list[$v->external_car][-3]))
                 {
-                    $list[$k]->order_c = $order_list[$v->id][-3]['order_count'];
-                    $list[$k]->departure_c = $order_list[$v->id][-3]['transport_departure_place'];
-                    $list[$k]->destination_c = $order_list[$v->id][-3]['transport_destination_place'];
+                    $list[$k]->order_c = $order_list[$v->external_car][-3]['order_count'];
+                    $list[$k]->departure_c = $order_list[$v->external_car][-3]['transport_departure_place'];
+                    $list[$k]->destination_c = $order_list[$v->external_car][-3]['transport_destination_place'];
                 }
                 else
                 {

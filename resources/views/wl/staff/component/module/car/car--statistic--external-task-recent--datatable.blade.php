@@ -1,5 +1,5 @@
 <script>
-    function Datatable_Statistic__Car__Task_Recent($tableId)
+    function Datatable_Statistic__Car__External_Task_Recent($tableId)
     {
         let $that = $($tableId);
         let $datatable_wrapper = $that.parents('.datatable-wrapper');
@@ -22,7 +22,7 @@
             "scrollCollapse": true,
             "showRefresh": true,
             "ajax": {
-                'url': "{{ url('/o1/car/statistic/statistic-task-recent') }}",
+                'url': "{{ url('/o1/car/statistic/statistic-external-task-recent') }}",
                 "type": 'POST',
                 "dataType" : 'json',
                 "data": function (d) {
@@ -65,8 +65,8 @@
 //                        "orderable": false
 //                    },
                 {
-                    "title": "自有车",
-                    "data": "name",
+                    "title": "外请车",
+                    "data": "external_car",
                     "className": "text-center",
                     "width": "160px",
                     "orderable": false,
@@ -74,14 +74,14 @@
                         {
                             // this.column(2)
                             $(nTd).addClass('modal-show-for-text');
-                            $(nTd).attr('data-id',row.id).attr('data-name','自有车');
+                            $(nTd).attr('data-id',row.id).attr('data-name','外请车');
                             $(nTd).attr('data-key','username').attr('data-value',data);
                             if(data) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
                         }
                     },
                     render: function(data, type, row, meta) {
-                        return '<a class="caller-control" data-id="'+row.id+'" data-title="'+data+'">'+data+' ('+row.car_number+')'+'</a>';
+                        return data;
                     }
                 },
                 // {
