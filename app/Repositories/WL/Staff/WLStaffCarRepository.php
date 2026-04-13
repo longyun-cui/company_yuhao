@@ -1401,4 +1401,391 @@ class WLStaffCarRepository {
     }
 
 
+    // 【车辆】近期订单
+    public function o1__car__statistic__external_task_recent($post_data)
+    {
+        $this->get_me();
+        $me = $this->me;
+
+
+        // 工单统计
+        $query_order = WL_Common_Order::select('external_car','transport_departure_place','transport_destination_place')
+            ->groupBy('external_car');
+
+
+//        $time_type  = isset($post_data['time_type']) ? $post_data['time_type']  : '';
+        $query_order->where('assign_date','>',date("Y-m-d",strtotime("-14 day")))
+            ->addSelect(DB::raw("
+                    assign_date as date_day,
+                    DATE_FORMAT(assign_date,'%e') as day,
+                    count(*) as order_count
+                "))
+            ->groupBy('assign_date');
+
+//        $query_order->addSelect(DB::raw("
+//                    count(*) as order_count
+//                "));
+
+        // 工单统计
+        $order_list = $query_order->get();
+
+        foreach($order_list as $k => $v)
+        {
+            $date_day = date_create($v->date_day);
+            $today = date_create(date('Y-m-d'));
+
+            if($date_day >= $today)
+            {
+                $diff = $today->diff($date_day)->days;
+                $v->diff = -$diff;
+            }
+            else
+            {
+                $diff = $today->diff($date_day)->days;
+                $v->diff = $diff;
+            }
+        }
+        $order_list = $order_list->groupBy('external_car');
+        foreach($order_list as $k => $v)
+        {
+            $order_list[$k] = $v->keyBy('diff');
+        }
+        $order_list = $order_list->toArray();
+        dd($order_list);
+
+
+
+
+        $use = [];
+        $use['is_manager'] = 0;
+        $use['is_supervisor'] = 0;
+        $use['is_customer_service'] = 0;
+        $use['is_day'] = 0;
+        $use['is_month'] = 0;
+        $use['project_id'] = 0;
+        $use['the_date'] = 0;
+        $use['the_month_start_timestamp'] = 0;
+        $use['the_month_ended_timestamp'] = 0;
+
+
+
+
+
+        $query = WL_Common_Car::select(['id','item_status','name','sub_name','car_number'])
+            ->with([
+            ])
+            ->where('active',1)
+            ->where('item_status',1)
+            ->where('car_category',1);
+
+
+        $total = $query->count();
+
+        $draw  = isset($post_data['draw'])  ? $post_data['draw']  : 1;
+        $skip  = isset($post_data['start'])  ? $post_data['start']  : 0;
+        $limit = isset($post_data['length']) ? $post_data['length'] : -1;
+
+        if(isset($post_data['order']))
+        {
+            $columns = $post_data['columns'];
+            $order = $post_data['order'][0];
+            $order_column = $order['column'];
+            $order_dir = $order['dir'];
+
+            $field = $columns[$order_column]["data"];
+            $query->orderBy($field, $order_dir);
+        }
+        else $query->orderBy("id", "asc");
+
+        if($limit == -1) $list = $query->get();
+        else $list = $query->skip($skip)->take($limit)->get();
+
+        foreach ($list as $k => $v)
+        {
+            if(isset($order_list[$v->id]))
+            {
+                if(isset($order_list[$v->id][14]))
+                {
+                    $list[$k]->order_14 = $order_list[$v->id][14]['order_count'];
+                    $list[$k]->departure_14 = $order_list[$v->id][14]['transport_departure_place'];
+                    $list[$k]->destination_14 = $order_list[$v->id][14]['transport_destination_place'];
+                }
+                else
+                {
+                    $list[$k]->order_14 = 0;
+                    $list[$k]->departure_14 = '';
+                    $list[$k]->destination_14 = '';
+                }
+
+                if(isset($order_list[$v->id][13]))
+                {
+                    $list[$k]->order_13 = $order_list[$v->id][13]['order_count'];
+                    $list[$k]->departure_13 = $order_list[$v->id][13]['transport_departure_place'];
+                    $list[$k]->destination_13 = $order_list[$v->id][13]['transport_destination_place'];
+                }
+                else
+                {
+                    $list[$k]->order_13 = 0;
+                    $list[$k]->departure_13 = '';
+                    $list[$k]->destination_13 = '';
+                }
+
+                if(isset($order_list[$v->id][12]))
+                {
+                    $list[$k]->order_12 = $order_list[$v->id][12]['order_count'];
+                    $list[$k]->departure_12 = $order_list[$v->id][12]['transport_departure_place'];
+                    $list[$k]->destination_12 = $order_list[$v->id][12]['transport_destination_place'];
+                }
+                else
+                {
+                    $list[$k]->order_12 = 0;
+                    $list[$k]->departure_12 = '';
+                    $list[$k]->destination_12 = '';
+                }
+
+                if(isset($order_list[$v->id][11]))
+                {
+                    $list[$k]->order_11 = $order_list[$v->id][11]['order_count'];
+                    $list[$k]->departure_11 = $order_list[$v->id][11]['transport_departure_place'];
+                    $list[$k]->destination_11 = $order_list[$v->id][11]['transport_destination_place'];
+                }
+                else
+                {
+                    $list[$k]->order_11 = 0;
+                    $list[$k]->departure_11 = '';
+                    $list[$k]->destination_11 = '';
+                }
+
+                if(isset($order_list[$v->id][10]))
+                {
+                    $list[$k]->order_10 = $order_list[$v->id][10]['order_count'];
+                    $list[$k]->departure_10 = $order_list[$v->id][10]['transport_departure_place'];
+                    $list[$k]->destination_10 = $order_list[$v->id][10]['transport_destination_place'];
+                }
+                else
+                {
+                    $list[$k]->order_10 = 0;
+                    $list[$k]->departure_10 = '';
+                    $list[$k]->destination_10 = '';
+                }
+
+                if(isset($order_list[$v->id][9]))
+                {
+                    $list[$k]->order_9 = $order_list[$v->id][9]['order_count'];
+                    $list[$k]->departure_9 = $order_list[$v->id][9]['transport_departure_place'];
+                    $list[$k]->destination_9 = $order_list[$v->id][9]['transport_destination_place'];
+                }
+                else
+                {
+                    $list[$k]->order_9 = 0;
+                    $list[$k]->departure_9 = '';
+                    $list[$k]->destination_9 = '';
+                }
+
+                if(isset($order_list[$v->id][8]))
+                {
+                    $list[$k]->order_8 = $order_list[$v->id][8]['order_count'];
+                    $list[$k]->departure_8 = $order_list[$v->id][8]['transport_departure_place'];
+                    $list[$k]->destination_8 = $order_list[$v->id][8]['transport_destination_place'];
+                }
+                else
+                {
+                    $list[$k]->order_8 = 0;
+                    $list[$k]->departure_8 = '';
+                    $list[$k]->destination_8 = '';
+                }
+
+                if(isset($order_list[$v->id][7]))
+                {
+                    $list[$k]->order_7 = $order_list[$v->id][7]['order_count'];
+                    $list[$k]->departure_7 = $order_list[$v->id][7]['transport_departure_place'];
+                    $list[$k]->destination_7 = $order_list[$v->id][7]['transport_destination_place'];
+                }
+                else
+                {
+                    $list[$k]->order_7 = 0;
+                    $list[$k]->departure_7 = '';
+                    $list[$k]->destination_7 = '';
+                }
+
+                if(isset($order_list[$v->id][6]))
+                {
+                    $list[$k]->order_6 = $order_list[$v->id][6]['order_count'];
+                    $list[$k]->departure_6 = $order_list[$v->id][6]['transport_departure_place'];
+                    $list[$k]->destination_6 = $order_list[$v->id][6]['transport_destination_place'];
+                }
+                else
+                {
+                    $list[$k]->order_6 = 0;
+                    $list[$k]->departure_6 = '';
+                    $list[$k]->destination_6 = '';
+                }
+
+                if(isset($order_list[$v->id][5]))
+                {
+                    $list[$k]->order_5 = $order_list[$v->id][5]['order_count'];
+                    $list[$k]->departure_5 = $order_list[$v->id][5]['transport_departure_place'];
+                    $list[$k]->destination_5 = $order_list[$v->id][5]['transport_destination_place'];
+                }
+                else
+                {
+                    $list[$k]->order_5 = 0;
+                    $list[$k]->departure_5 = '';
+                    $list[$k]->destination_5 = '';
+                }
+
+                if(isset($order_list[$v->id][4]))
+                {
+                    $list[$k]->order_4 = $order_list[$v->id][4]['order_count'];
+                    $list[$k]->departure_4 = $order_list[$v->id][4]['transport_departure_place'];
+                    $list[$k]->destination_4 = $order_list[$v->id][4]['transport_destination_place'];
+                }
+                else
+                {
+                    $list[$k]->order_4 = 0;
+                    $list[$k]->departure_4 = '';
+                    $list[$k]->destination_4 = '';
+                }
+
+                if(isset($order_list[$v->id][3]))
+                {
+                    $list[$k]->order_3 = $order_list[$v->id][3]['order_count'];
+                    $list[$k]->departure_3 = $order_list[$v->id][3]['transport_departure_place'];
+                    $list[$k]->destination_3 = $order_list[$v->id][3]['transport_destination_place'];
+                }
+                else
+                {
+                    $list[$k]->order_3 = 0;
+                    $list[$k]->departure_3 = '';
+                    $list[$k]->destination_3 = '';
+                }
+
+                if(isset($order_list[$v->id][2]))
+                {
+                    $list[$k]->order_2 = $order_list[$v->id][2]['order_count'];
+                    $list[$k]->departure_2 = $order_list[$v->id][2]['transport_departure_place'];
+                    $list[$k]->destination_2 = $order_list[$v->id][2]['transport_destination_place'];
+                }
+                else
+                {
+                    $list[$k]->order_2 = 0;
+                    $list[$k]->departure_2 = '';
+                    $list[$k]->destination_2 = '';
+                }
+
+                if(isset($order_list[$v->id][1]))
+                {
+                    $list[$k]->order_1 = $order_list[$v->id][1]['order_count'];
+                    $list[$k]->departure_1 = $order_list[$v->id][1]['transport_departure_place'];
+                    $list[$k]->destination_1 = $order_list[$v->id][1]['transport_destination_place'];
+                }
+                else
+                {
+                    $list[$k]->order_1 = 0;
+                    $list[$k]->departure_1 = '';
+                    $list[$k]->destination_1 = '';
+                }
+
+                if(isset($order_list[$v->id][0]))
+                {
+                    $list[$k]->order_0 = $order_list[$v->id][0]['order_count'];
+                    $list[$k]->departure_0 = $order_list[$v->id][0]['transport_departure_place'];
+                    $list[$k]->destination_0 = $order_list[$v->id][0]['transport_destination_place'];
+                }
+                else
+                {
+                    $list[$k]->order_0 = 0;
+                    $list[$k]->departure_0 = '';
+                    $list[$k]->destination_0 = '';
+                }
+
+                if(isset($order_list[$v->id][-1]))
+                {
+                    $list[$k]->order_a = $order_list[$v->id][-1]['order_count'];
+                    $list[$k]->departure_a = $order_list[$v->id][-1]['transport_departure_place'];
+                    $list[$k]->destination_a = $order_list[$v->id][-1]['transport_destination_place'];
+                }
+                else
+                {
+                    $list[$k]->order_a = 0;
+                    $list[$k]->departure_a = '';
+                    $list[$k]->destination_a = '';
+                }
+
+                if(isset($order_list[$v->id][-2]))
+                {
+                    $list[$k]->order_b = $order_list[$v->id][-2]['order_count'];
+                    $list[$k]->departure_b = $order_list[$v->id][-2]['transport_departure_place'];
+                    $list[$k]->destination_b = $order_list[$v->id][-2]['transport_destination_place'];
+                }
+                else
+                {
+                    $list[$k]->order_b = 0;
+                    $list[$k]->departure_b = '';
+                    $list[$k]->destination_b = '';
+                }
+
+                if(isset($order_list[$v->id][-3]))
+                {
+                    $list[$k]->order_c = $order_list[$v->id][-3]['order_count'];
+                    $list[$k]->departure_c = $order_list[$v->id][-3]['transport_departure_place'];
+                    $list[$k]->destination_c = $order_list[$v->id][-3]['transport_destination_place'];
+                }
+                else
+                {
+                    $list[$k]->order_c = 0;
+                    $list[$k]->departure_c = '';
+                    $list[$k]->destination_c = '';
+                }
+            }
+            else
+            {
+                $list[$k]->order_14 = 0;
+                $list[$k]->order_13 = 0;
+                $list[$k]->order_12 = 0;
+                $list[$k]->order_11 = 0;
+                $list[$k]->order_10 = 0;
+                $list[$k]->order_9 = 0;
+                $list[$k]->order_8 = 0;
+                $list[$k]->order_7 = 0;
+                $list[$k]->order_6 = 0;
+                $list[$k]->order_5 = 0;
+                $list[$k]->order_4 = 0;
+                $list[$k]->order_3 = 0;
+                $list[$k]->order_2 = 0;
+                $list[$k]->order_1 = 0;
+                $list[$k]->order_0 = 0;
+                $list[$k]->order_a = 0;
+                $list[$k]->order_b = 0;
+                $list[$k]->order_c = 0;
+            }
+        }
+//        dd($list->toArray());
+
+
+        $list = $list->reject(function ($item) {
+            return ($item->order_c == 0)
+                && ($item->order_b == 0)
+                && ($item->order_a == 0)
+                && ($item->order_0 == 0)
+                && ($item->order_1 == 0)
+                && ($item->order_2 == 0)
+                && ($item->order_3 == 0)
+                && ($item->order_4 == 0)
+                && ($item->order_5 == 0)
+                && ($item->order_6 == 0)
+                && ($item->order_7 == 0)
+                && ($item->order_8 == 0)
+                && ($item->order_9 == 0)
+                && ($item->order_10 == 0)
+                && ($item->order_11 == 0)
+                && ($item->order_12 == 0)
+                && ($item->order_13 == 0)
+                && ($item->order_14 == 0);
+        })->values();
+
+        return datatable_response($list, $draw, $total);
+    }
+
+
 }

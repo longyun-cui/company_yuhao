@@ -198,7 +198,12 @@
                         var $minute = ('00'+$date.getMinutes()).slice(-2);
                         var $second = ('00'+$date.getSeconds()).slice(-2);
 
-                        var $currentYear = new Date().getFullYear();
+                        var $today = new Date();
+                        var $currentYear = $today.getFullYear();
+                        var $currentMonth = $today.getMonth();
+                        var $currentDay = $today.getDate();
+
+                        if($year == $currentYear && $month == $currentMonth && $day == $currentDay) return '今天 '+$hour+':'+$minute;
                         if($year == $currentYear) return $month+'-'+$day+'&nbsp;&nbsp;'+$hour+':'+$minute;
                         else return $year+'-'+$month+'-'+$day+'&nbsp;&nbsp;'+$hour+':'+$minute;
                     }
