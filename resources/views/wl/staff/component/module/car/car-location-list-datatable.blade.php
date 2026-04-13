@@ -159,8 +159,8 @@
                     "width": "120px",
                     "orderable": true,
                     render: function(data, type, row, meta) {
-                        if(!row.order_list[0]) return '--';
-                        else return '(' + row.order_list[0].id + ')' +  row.order_list[0].assign_date;
+                        if(!row.latest_order) return '--';
+                        else return '(' + row.latest_order.id + ') ' +  row.latest_order.assign_date;
                     }
                 },
                 {
@@ -170,8 +170,8 @@
                     "width": "100px",
                     "orderable": true,
                     render: function(data, type, row, meta) {
-                        if(!row.order_list[0]) return '--';
-                        else return row.order_list[0].transport_departure_place;
+                        if(!row.latest_order) return '--';
+                        else return row.latest_order.transport_departure_place;
                     }
                 },
                 {
@@ -181,8 +181,8 @@
                     "width": "100px",
                     "orderable": true,
                     render: function(data, type, row, meta) {
-                        if(!row.order_list[0]) return '--';
-                        else return row.order_list[0].transport_destination_place;
+                        if(!row.latest_order) return '--';
+                        else return row.latest_order.transport_destination_place;
                     }
                 },
                 {

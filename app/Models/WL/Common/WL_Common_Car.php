@@ -155,6 +155,13 @@ class WL_Common_Car extends Model
         return $this->hasMany('App\Models\WL\Common\WL_Common_Order','car_id','id');
     }
 
+    public function latestOrder()
+    {
+        return $this->hasOne('App\Models\WL\Common\WL_Common_Order', 'car_id', 'id')
+            ->orderBy('assign_date', 'desc')
+            ->latest('assign_date');
+    }
+
     // 车辆订单
     function car_order_list()
     {
