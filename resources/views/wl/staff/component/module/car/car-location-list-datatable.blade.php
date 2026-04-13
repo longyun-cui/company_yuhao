@@ -160,14 +160,14 @@
                     "orderable": true,
                     render: function(data, type, row, meta) {
                         if(!row.latest_order) return '--';
-                        else return '(' + row.latest_order.id + ') ' +  row.latest_order.assign_date;
+                        else return row.latest_order.assign_date + ' (' + row.latest_order.id + ')';
                     }
                 },
                 {
                     "title": "出发地",
                     "data": "id",
                     "className": "text-center",
-                    "width": "100px",
+                    "width": "80px",
                     "orderable": true,
                     render: function(data, type, row, meta) {
                         if(!row.latest_order) return '--';
@@ -178,7 +178,7 @@
                     "title": "目的地",
                     "data": "id",
                     "className": "text-center",
-                    "width": "100px",
+                    "width": "80px",
                     "orderable": true,
                     render: function(data, type, row, meta) {
                         if(!row.latest_order) return '--';

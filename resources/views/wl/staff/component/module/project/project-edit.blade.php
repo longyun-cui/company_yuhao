@@ -131,11 +131,14 @@
                 <div class="form-group" >
                     <label class="control-label col-md-2"><sup class="text-red">*</sup> 出发地 & 目的地</label>
                     <div class="col-md-8 ">
-                        <div class="col-sm-6 col-md-6 padding-0">
+                        <div class="col-sm-3 col-md-3 padding-0">
                             <input type="text" class="form-control" name="transport_departure_place" placeholder="出发地" value="" data-default="">
                         </div>
-                        <div class="col-sm-6 col-md-6 padding-0">
+                        <div class="col-sm-3 col-md-3 padding-0">
                             <input type="text" class="form-control" name="transport_destination_place" placeholder="目的地" value="" data-default="">
+                        </div>
+                        <div class="col-sm-6 col-md-6 padding-0">
+                            <input type="text" class="form-control" name="transport_route" placeholder="线路" value="" data-default="">
                         </div>
                     </div>
                 </div>

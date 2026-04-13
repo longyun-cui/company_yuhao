@@ -540,7 +540,7 @@ class WLStaffCommonRepository {
         $this->get_me();
         $me = $this->me;
 
-        $query = WL_Common_Project::select(['id','name as text','transport_departure_place','transport_destination_place','transport_distance','transport_time_limitation','freight_amount'])
+        $query = WL_Common_Project::select(['id','name as text','transport_route','transport_departure_place','transport_destination_place','transport_distance','transport_time_limitation','freight_amount'])
             ->where('item_status',1);
 
         if(!empty($post_data['keyword']))

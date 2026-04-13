@@ -72,6 +72,7 @@ class WL_Common_Order extends Model
 
         'transport_journey',
 
+        'transport_route',
         'transport_departure_place',
         'transport_destination_place',
         'transport_stopover_place',
@@ -153,6 +154,7 @@ class WL_Common_Order extends Model
 
         'settlement_period',
         'freight_amount',
+        'freight_extra_amount',
         'freight_oil_card_amount',
         'cooperative_vehicle_amount',
         'oil_card_amount',

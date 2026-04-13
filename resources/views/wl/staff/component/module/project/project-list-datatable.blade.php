@@ -234,7 +234,7 @@
                             $(nTd).attr('data-key','freight_amount');
                             $(nTd).attr('data-value',data);
 
-                            if(row.client_id) $(nTd).attr('data-operate-type','edit');
+                            if(data) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
                         }
                     },
@@ -264,7 +264,7 @@
                             $(nTd).attr('data-key','transport_departure_place');
                             $(nTd).attr('data-value',data);
 
-                            if(row.client_id) $(nTd).attr('data-operate-type','edit');
+                            if(data) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
                         }
                     },
@@ -281,7 +281,7 @@
                     "width": "80px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1 && row.item_status != 97)
+                        if(row.is_completed != 1)
                         {
                             $(nTd).attr('data-row-index',iRow);
 
@@ -294,7 +294,37 @@
                             $(nTd).attr('data-key','transport_destination_place');
                             $(nTd).attr('data-value',data);
 
-                            if(row.client_id) $(nTd).attr('data-operate-type','edit');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = data;
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "线路",
+                    "data": "transport_route",
+                    "className": "",
+                    "width": "160px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).attr('data-row-index',iRow);
+
+                            $(nTd).addClass('modal-show--for--project-field-set');
+                            $(nTd).attr('data-column-type','text');
+                            $(nTd).attr('data-column-name','线路');
+
+                            $(nTd).attr('data-id',row.id);
+                            $(nTd).attr('data-name','线路');
+                            $(nTd).attr('data-key','transport_route');
+                            $(nTd).attr('data-value',data);
+
+                            if(data) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
                         }
                     },
@@ -322,7 +352,7 @@
                             $(nTd).attr('data-id',row.id).attr('data-name','距离');
                             $(nTd).attr('data-key','transport_distance').attr('data-value',data);
 
-                            if(row.client_id) $(nTd).attr('data-operate-type','edit');
+                            if(data) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
                         }
                     },
@@ -350,7 +380,7 @@
                             $(nTd).attr('data-id',row.id).attr('data-name','时效');
                             $(nTd).attr('data-key','transport_time_limitation').attr('data-value',data);
 
-                            if(row.client_id) $(nTd).attr('data-operate-type','edit');
+                            if(data) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
                         }
                     },

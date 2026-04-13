@@ -26,6 +26,7 @@ class WL_Common_Project extends Model
 
         'client_id',
 
+        'transport_route',
         'transport_departure_place',
         'transport_destination_place',
 

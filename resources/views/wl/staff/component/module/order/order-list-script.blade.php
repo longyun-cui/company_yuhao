@@ -108,6 +108,7 @@
                         // select
                         $modal.find('select[name="client_type"]').val($response.data.client_type).trigger('change');
 
+                        $modal.find('input[name="transport_route"]').val($response.data.transport_route);
                         $modal.find('input[name="transport_departure_place"]').val($response.data.transport_departure_place);
                         $modal.find('input[name="transport_destination_place"]').val($response.data.transport_destination_place);
 
@@ -317,14 +318,20 @@
 
         // 【工单】【添加工单】select2 选择项目
         $('#select2--project--for--order--item-edit').on('select2:select', function(e) {
-            $('input[name=transport_departure_place]').val(e.params.data.transport_departure_place);
-            $('input[name=transport_destination_place]').val(e.params.data.transport_destination_place);
+            var $that = $(this);
+            var $form_id = $that.data('form-id');
+            var $modal_id = $that.data('modal');
+            var $modal = $($modal_id);
+
+            $modal.find('input[name=transport_route]').val(e.params.data.transport_route);
+            $modal.find('input[name=transport_departure_place]').val(e.params.data.transport_departure_place);
+            $modal.find('input[name=transport_destination_place]').val(e.params.data.transport_destination_place);
             // 距离
-            $('input[name=transport_distance]').val(e.params.data.transport_distance);
+            $modal.find('input[name=transport_distance]').val(e.params.data.transport_distance);
             // 时效
             var $transport_time_limitation = parseFloat((e.params.data.transport_time_limitation / 60).toFixed(2));
-            $('input[name=transport_time_limitation]').val($transport_time_limitation);
-            $('input[name=freight_amount]').val(parseFloat(e.params.data.freight_amount));
+            $modal.find('input[name=transport_time_limitation]').val($transport_time_limitation);
+            $modal.find('input[name=freight_amount]').val(parseFloat(e.params.data.freight_amount));
         });
 
 

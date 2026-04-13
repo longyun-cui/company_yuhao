@@ -95,11 +95,14 @@
                 <div class="form-group" >
                     <label class="control-label col-md-3"><sup class="text-red">*</sup> 出发地 & 目的地</label>
                     <div class="col-md-9 ">
-                        <div class="col-sm-6 col-md-6 padding-0">
+                        <div class="col-sm-3 col-md-3 padding-0">
                             <input type="text" class="form-control" name="transport_departure_place" placeholder="出发地" value="" data-default="" list="_transport_departure_place_title">
                         </div>
-                        <div class="col-sm-6 col-md-6 padding-0">
+                        <div class="col-sm-3 col-md-3 padding-0">
                             <input type="text" class="form-control" name="transport_destination_place" placeholder="目的地" value="" data-default="" list="_transport_destination_place_title">
+                        </div>
+                        <div class="col-sm-6 col-md-6 padding-0">
+                            <input type="text" class="form-control" name="transport_route" placeholder="线路" value="" data-default="" list="_transport_route_title">
                         </div>
                     </div>
                 </div>
@@ -111,6 +114,8 @@
                 <datalist id="_transport_destination_place_title">
                     <option value="南大区（鹤山、高明）" />
                     <option value="北大区（三、芦、旺、肇）" />
+                </datalist>
+                <datalist id="_transport_route_title">
                 </datalist>
                 {{--里程 & 时效--}}
                 <div class="form-group" >
@@ -127,13 +132,16 @@
 
                 {{--运费 & 油卡 & 信息费--}}
                 <div class="form-group">
-                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 运费 & 油卡 (客收)</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 运费 & 油卡 & 串点运费(收)</label>
                     <div class="col-md-9 ">
-                        <div class="col-sm-6 col-md-6 padding-0">
-                            <input type="text" class="form-control" name="freight_amount" placeholder="金额" value="0" data-default="0">
+                        <div class="col-sm-4 col-md-4 padding-0">
+                            <input type="text" class="form-control" name="freight_amount" placeholder="运费" value="0" data-default="0">
                         </div>
-                        <div class="col-sm-6 col-md-6 padding-0">
+                        <div class="col-sm-4 col-md-4 padding-0">
                             <input type="text" class="form-control" name="freight_oil_card_amount" placeholder="油卡" value="0" data-default="0">
+                        </div>
+                        <div class="col-sm-4 col-md-4 padding-0">
+                            <input type="text" class="form-control" name="freight_extra_amount" placeholder="串点运费" value="0" data-default="0">
                         </div>
                     </div>
                 </div>

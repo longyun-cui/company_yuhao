@@ -776,15 +776,18 @@
                     "title": "出发地",
                     "data": "transport_departure_place",
                     "className": "",
-                    "width": "100px",
+                    "width": "80px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
                         {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','出发地');
-                            $(nTd).attr('data-key','departure_place').attr('data-value',data);
+                            $(nTd).attr('data-id',row.id);
+                            $(nTd).attr('data-name','出发地');
+                            $(nTd).attr('data-key','departure_place');
+                            $(nTd).attr('data-value',data);
                             $(nTd).attr('data-column-name','出发地');
+
+                            $(nTd).addClass('modal-show--for--info-text-set');
                             $(nTd).attr('data-text-type','text');
                             if(data) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
@@ -798,15 +801,43 @@
                     "title": "目的地",
                     "data": "transport_destination_place",
                     "className": "",
-                    "width": "100px",
+                    "width": "80px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
                         {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','目的地');
-                            $(nTd).attr('data-key','destination_place').attr('data-value',data);
+                            $(nTd).attr('data-id',row.id);
+                            $(nTd).attr('data-name','目的地');
+                            $(nTd).attr('data-key','destination_place');
+                            $(nTd).attr('data-value',data);
                             $(nTd).attr('data-column-name','目的地');
+
+                            $(nTd).addClass('modal-show--for--info-text-set');
+                            $(nTd).attr('data-text-type','text');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        return data == null ? '--' : data;
+                    }
+                },
+                {
+                    "title": "线路",
+                    "data": "transport_route",
+                    "className": "",
+                    "width": "160px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).attr('data-id',row.id);
+                            $(nTd).attr('data-name','线路');
+                            $(nTd).attr('data-key','transport_route');
+                            $(nTd).attr('data-value',data);
+                            $(nTd).attr('data-column-name','线路');
+
+                            $(nTd).addClass('modal-show--for--info-text-set');
                             $(nTd).attr('data-text-type','text');
                             if(data) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
@@ -865,17 +896,17 @@
                     }
                 },
                 {
-                    "title": "运价",
+                    "title": "运费",
                     "data": "freight_amount",
                     "className": "bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         $(nTd).attr('data-id',row.id);
-                        $(nTd).attr('data-name','运价');
+                        $(nTd).attr('data-name','运费');
                         $(nTd).attr('data-key','freight_amount');
                         $(nTd).attr('data-value',parseFloat(data));
-                        $(nTd).attr('data-column-name','运价');
+                        $(nTd).attr('data-column-name','运费');
                         $(nTd).addClass('color-blue');
                         $(nTd).addClass('_bold');
 
@@ -905,6 +936,35 @@
                         $(nTd).attr('data-key','freight_oil_card_amount');
                         $(nTd).attr('data-value',parseFloat(data));
                         $(nTd).attr('data-column-name','运价');
+                        $(nTd).addClass('color-blue');
+                        $(nTd).addClass('_bold');
+
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).addClass('modal-show--for--info-text-set');
+                            $(nTd).attr('data-text-type','text');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "串点费·收",
+                    "data": "freight_extra_amount",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','串点费');
+                        $(nTd).attr('data-key','freight_extra_amount');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).attr('data-column-name','串点费');
                         $(nTd).addClass('color-blue');
                         $(nTd).addClass('_bold');
 
@@ -1634,52 +1694,6 @@
                     }
                 },
                 {
-                    "title": "距离(km)",
-                    "name": "transport_distance",
-                    "data": "transport_distance",
-                    "className": "bg-route",
-                    "width": "60px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1)
-                        {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','距离');
-                            $(nTd).attr('data-key','transport_distance').attr('data-value',data);
-                            $(nTd).attr('data-column-name','距离');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        if(!data) return '';
-                        else return data;
-                    }
-                },
-                {
-                    "title": "时效(H)",
-                    "data": "transport_time_limitation",
-                    "className": "",
-                    "width": "60px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1)
-                        {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','时效');
-                            $(nTd).attr('data-key','time_limitation_prescribed').attr('data-value',data);
-                            $(nTd).attr('data-column-name','时效');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        return convertMinutesToHoursAndMinutes(data);
-                    }
-                },
-                {
                     "title": "车货源",
                     "name": "car_supply",
                     "data": "car_supply",
@@ -1727,6 +1741,53 @@
 //                            else return '';
                     }
                 },
+
+                {
+                    "title": "距离(km)",
+                    "name": "transport_distance",
+                    "data": "transport_distance",
+                    "className": "bg-route",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).addClass('modal-show--for--info-text-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name','距离');
+                            $(nTd).attr('data-key','transport_distance').attr('data-value',data);
+                            $(nTd).attr('data-column-name','距离');
+                            $(nTd).attr('data-text-type','text');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(!data) return '';
+                        else return data;
+                    }
+                },
+                // {
+                //     "title": "时效(H)",
+                //     "data": "transport_time_limitation",
+                //     "className": "",
+                //     "width": "60px",
+                //     "orderable": false,
+                //     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                //         if(row.is_completed != 1)
+                //         {
+                //             $(nTd).addClass('modal-show--for--info-text-set');
+                //             $(nTd).attr('data-id',row.id).attr('data-name','时效');
+                //             $(nTd).attr('data-key','time_limitation_prescribed').attr('data-value',data);
+                //             $(nTd).attr('data-column-name','时效');
+                //             $(nTd).attr('data-text-type','text');
+                //             if(data) $(nTd).attr('data-operate-type','edit');
+                //             else $(nTd).attr('data-operate-type','add');
+                //         }
+                //     },
+                //     render: function(data, type, row, meta) {
+                //         return convertMinutesToHoursAndMinutes(data);
+                //     }
+                // },
 
                 {
                     "title": "创建人",

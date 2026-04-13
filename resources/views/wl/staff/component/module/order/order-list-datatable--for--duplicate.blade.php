@@ -766,15 +766,18 @@
                     "title": "出发地",
                     "data": "transport_departure_place",
                     "className": "",
-                    "width": "100px",
+                    "width": "80px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
                         {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','出发地');
-                            $(nTd).attr('data-key','departure_place').attr('data-value',data);
+                            $(nTd).attr('data-id',row.id);
+                            $(nTd).attr('data-name','出发地');
+                            $(nTd).attr('data-key','departure_place');
+                            $(nTd).attr('data-value',data);
                             $(nTd).attr('data-column-name','出发地');
+
+                            $(nTd).addClass('modal-show--for--info-text-set');
                             $(nTd).attr('data-text-type','text');
                             if(data) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
@@ -788,15 +791,43 @@
                     "title": "目的地",
                     "data": "transport_destination_place",
                     "className": "",
-                    "width": "100px",
+                    "width": "80px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
                         {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','目的地');
-                            $(nTd).attr('data-key','destination_place').attr('data-value',data);
+                            $(nTd).attr('data-id',row.id);
+                            $(nTd).attr('data-name','目的地');
+                            $(nTd).attr('data-key','destination_place');
+                            $(nTd).attr('data-value',data);
                             $(nTd).attr('data-column-name','目的地');
+
+                            $(nTd).addClass('modal-show--for--info-text-set');
+                            $(nTd).attr('data-text-type','text');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        return data == null ? '--' : data;
+                    }
+                },
+                {
+                    "title": "线路",
+                    "data": "transport_route",
+                    "className": "",
+                    "width": "160px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).attr('data-id',row.id);
+                            $(nTd).attr('data-name','线路');
+                            $(nTd).attr('data-key','transport_route');
+                            $(nTd).attr('data-value',data);
+                            $(nTd).attr('data-column-name','线路');
+
+                            $(nTd).addClass('modal-show--for--info-text-set');
                             $(nTd).attr('data-text-type','text');
                             if(data) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');

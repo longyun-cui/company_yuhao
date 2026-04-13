@@ -91,6 +91,7 @@
 
                         $modal.find('input[name="name"]').val($response.data.name);
                         $modal.find('input[name="freight_amount"]').val($response.data.freight_amount);
+                        $modal.find('input[name="transport_route"]').val($response.data.transport_route);
                         $modal.find('input[name="transport_departure_place"]').val($response.data.transport_departure_place);
                         $modal.find('input[name="transport_destination_place"]').val($response.data.transport_destination_place);
                         $modal.find('input[name="transport_distance"]').val($response.data.transport_distance);
