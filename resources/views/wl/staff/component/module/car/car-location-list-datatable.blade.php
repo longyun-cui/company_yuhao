@@ -12,7 +12,7 @@
             "searching": false,
             "pagingType": "simple_numbers",
             "sDom": '<"dataTables_length_box"l> <"dataTables_info_box"i> <"dataTables_paginate_box"p> <t>',
-            "order": [],
+            "order": [7,'desc'],
             "orderCellsTop": true,
             "scrollX": true,
 //                "scrollY": true,
@@ -153,14 +153,14 @@
                     }
                 },
                 {
-                    "title": "订单",
+                    "title": "安排日期",
                     "data": "id",
                     "className": "text-center",
-                    "width": "120px",
+                    "width": "100px",
                     "orderable": true,
                     render: function(data, type, row, meta) {
                         if(!row.latest_order) return '--';
-                        else return row.latest_order.assign_date + ' (' + row.latest_order.id + ')';
+                        else return row.latest_order.assign_date;
                     }
                 },
                 {
