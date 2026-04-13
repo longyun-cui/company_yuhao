@@ -232,7 +232,7 @@
                 {
                     Datatable_Statistic__Car__Task_Amount('#'+$config.id, $config.chart_id);
                 }
-                else if($id == "datatable--car--statistic--task-amount")
+                else if($id == "datatable--car--statistic--task-recent")
                 {
                     Datatable_Statistic__Car__Task_Recent('#'+$config.id, $config.chart_id);
                 }
