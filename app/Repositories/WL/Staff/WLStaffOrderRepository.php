@@ -3361,14 +3361,39 @@ class WLStaffOrderRepository {
         if(!$order) return response_error([],"【订单】不存在警告，请刷新页面重试！");
 
 
+        $receipt_amount = 0;
+        $fee_amount = 0;
+        $deduction_amount = 0;
+        $fine_amount = 0;
+
         $fee_list = WL_Common_Fee::select('fee_category','fee_type','fee_title','fee_title_num','fee_amount')
             ->where('order_id',$item_id)
             ->get();
         if(count($fee_list) > 0)
         {
+            $fee_calculation = [];
+            $fee_calculation['receipt_amount'] = 0;
+            $fee_calculation['fee_amount'] = 0;
+            $fee_calculation['deduction_amount'] = 0;
+            $fee_calculation['fine_amount'] = 0;
             foreach($fee_list as $k => $v)
             {
-
+                if($v->fee_type == 1)
+                {
+                    $receipt_amount += $v->fee_amount;
+                }
+                else if($v->fee_type == 99)
+                {
+                    $fee_amount += $v->fee_amount;
+                }
+                else if($v->fee_type == 101)
+                {
+                    $deduction_amount += $v->fee_amount;
+                }
+                else if($v->fee_type == 111)
+                {
+                    $fine_amount += $v->fee_amount;
+                }
             }
         }
         else return response_error([],"该订单没有费用记录！");

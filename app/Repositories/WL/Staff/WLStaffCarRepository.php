@@ -1022,7 +1022,7 @@ class WLStaffCarRepository {
 
 
         // 工单统计
-        $query_order = WL_Common_Order::withTrashed()->select('car_id','transport_departure_place','transport_destination_place')
+        $query_order = WL_Common_Order::select('car_id','transport_departure_place','transport_destination_place')
             ->groupBy('car_id');
 
 
