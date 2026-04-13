@@ -216,8 +216,8 @@
 
                         var $today = new Date();
                         var $currentYear = $today.getFullYear();
-                        var $currentMonth = $today.getMonth();
-                        var $currentDay = $today.getDate();
+                        var $currentMonth = ('00'+($today.getMonth()+1)).slice(-2);
+                        var $currentDay = ('00'+($today.getDate())).slice(-2);
 
                         if($year == $currentYear && $month == $currentMonth && $day == $currentDay) return '今天 '+$hour+':'+$minute;
                         if($year == $currentYear) return $month+'-'+$day+'&nbsp;&nbsp;'+$hour+':'+$minute;
