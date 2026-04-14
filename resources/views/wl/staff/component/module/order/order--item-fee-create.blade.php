@@ -196,12 +196,12 @@
                         <div class="col-md-8 control-label" style="text-align:left;">
                             <button type="button" class="btn radio">
                                 <label>
-                                    <input type="radio" name="fee-record-type" value=1 checked="checked"> 普通记录
+                                    <input type="radio" name="fee-record-type" value=1> 普通记录
                                 </label>
                             </button>
                             <button type="button" class="btn radio">
                                 <label>
-                                    <input type="radio" name="fee-record-type" value=81> 财务入账
+                                    <input type="radio" name="fee-record-type" value=81 checked="checked"> 财务入账
                                 </label>
                             </button>
                             <button type="button" class="btn radio advance-box">
