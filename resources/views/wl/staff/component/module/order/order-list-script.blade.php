@@ -1508,7 +1508,7 @@
 
                         $modal.find('input[name="accounting_gas_total"]').val(parseFloat($response.data.financial_fee_for_gas_total));
                         $modal.find('input[name="accounting_gas_card"]').val(parseFloat($response.data.financial_fee_for_gas_card));
-                        $modal.find('input[name="accounting_v_cash"]').val(parseFloat($response.data.financial_fee_for_gas_cash));
+                        $modal.find('input[name="accounting_gas_cash"]').val(parseFloat($response.data.financial_fee_for_gas_cash));
                         $modal.find('input[name="accounting_gas_mileage"]').val(parseFloat($response.data.gas_mileage));
                         $modal.find('input[name="accounting_gas_consumption"]').val(parseFloat($response.data.gas_consumption));
                         $modal.find('input[name="accounting_gas_unit_price"]').val(parseFloat($response.data.gas_unit_price));

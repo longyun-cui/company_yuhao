@@ -76,10 +76,10 @@
                     </div>
                     {{--气费--}}
                     <div class="form-group">
-                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 气费 & 公里数 & 气耗 & 单价</label>
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 总气费 & 油卡 & 现金</label>
                         <div class="col-md-9 ">
                             <div class="col-sm-4 col-md-4 padding-0">
-                                <input type="text" class="form-control form-filter" name="accounting_gas_total" placeholder="总油费" />
+                                <input type="text" class="form-control form-filter" name="accounting_gas_total" placeholder="总气费" />
                             </div>
                             <div class="col-sm-4 col-md-4 padding-0">
                                 <input type="text" class="form-control form-filter" name="accounting_gas_card" placeholder="气卡" />
@@ -88,6 +88,7 @@
                                 <input type="text" class="form-control form-filter" name="accounting_gas_cash" placeholder="现金" />
                             </div>
                         </div>
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 公里数 & 气耗 & 单价</label>
                         <div class="col-md-9 ">
                             <div class="col-sm-4 col-md-4 padding-0">
                                 <input type="text" class="form-control form-filter" name="accounting_gas_mileage" placeholder="公里数" />

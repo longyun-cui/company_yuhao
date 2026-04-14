@@ -3025,6 +3025,8 @@ class WLStaffOrderRepository {
 
             $order_update_date['financial_receipt_for_invoice_point'] = $financial_receipt_for_invoice_point;
         }
+
+
         // 总油费
         $financial_fee_for_oil_total = (float)$post_data['accounting_oil_total'];
         if((float)$order->financial_fee_for_oil_total != $financial_fee_for_oil_total)
@@ -3064,45 +3066,127 @@ class WLStaffOrderRepository {
 
             $order_update_date['financial_fee_for_oil_cash'] = $financial_fee_for_oil_cash;
         }
-        // 公里数
+        // 油费-公里数
         $oil_mileage = (int)$post_data['accounting_oil_mileage'];
         if((float)$order->oil_mileage != $oil_mileage)
         {
             $operation = [];
             $operation['field'] = 'oil_mileage';
-            $operation['title'] = '公里数';
+            $operation['title'] = '油费-公里数';
             $operation['before'] = (int)$order->oil_mileage;
             $operation['after'] = $oil_mileage;
             $operation_record_data[] = $operation;
 
             $order_update_date['oil_mileage'] = $oil_mileage;
         }
-        // 油耗
+        // 油费-油耗
         $oil_consumption = (float)$post_data['accounting_oil_consumption'];
         if((float)$order->oil_consumption != $oil_consumption)
         {
             $operation = [];
             $operation['field'] = 'oil_consumption';
-            $operation['title'] = '油耗';
+            $operation['title'] = '油费-油耗';
             $operation['before'] = (float)$order->oil_consumption;
             $operation['after'] = $oil_consumption;
             $operation_record_data[] = $operation;
 
             $order_update_date['oil_consumption'] = $oil_consumption;
         }
-        // 单价
+        // 油费-单价
         $oil_unit_price = (float)$post_data['accounting_oil_unit_price'];
         if((float)$order->oil_unit_price != $oil_unit_price)
         {
             $operation = [];
             $operation['field'] = 'oil_unit_price';
-            $operation['title'] = '单价';
+            $operation['title'] = '油费-单价';
             $operation['before'] = (float)$order->oil_unit_price;
             $operation['after'] = $oil_unit_price;
             $operation_record_data[] = $operation;
 
             $order_update_date['oil_unit_price'] = $oil_unit_price;
         }
+
+
+        // 总气费
+        $financial_fee_for_gas_total = (float)$post_data['accounting_gas_total'];
+        if((float)$order->financial_fee_for_gas_total != $financial_fee_for_gas_total)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_gas_total';
+            $operation['title'] = '总气费';
+            $operation['before'] = (float)$order->financial_fee_for_gas_total;
+            $operation['after'] = $financial_fee_for_gas_total;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_gas_total'] = $financial_fee_for_gas_total;
+        }
+        // 气费-气卡
+        $financial_fee_for_gas_card = (float)$post_data['accounting_gas_card'];
+        if((float)$order->financial_fee_for_gas_card != $financial_fee_for_gas_card)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_gas_card';
+            $operation['title'] = '气费-气卡';
+            $operation['before'] = (float)$order->financial_fee_for_gas_card;
+            $operation['after'] = $financial_fee_for_gas_card;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_gas_card'] = $financial_fee_for_gas_card;
+        }
+        // 气费-现金
+        $financial_fee_for_gas_cash = (float)$post_data['accounting_gas_cash'];
+        if((float)$order->financial_fee_for_gas_cash != $financial_fee_for_gas_cash)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_gas_cash';
+            $operation['title'] = '气费-现金';
+            $operation['before'] = (float)$order->financial_fee_for_gas_cash;
+            $operation['after'] = $financial_fee_for_gas_cash;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_gas_cash'] = $financial_fee_for_gas_cash;
+        }
+        // 气费-公里数
+        $gas_mileage = (int)$post_data['accounting_gas_mileage'];
+        if((float)$order->gas_mileage != $gas_mileage)
+        {
+            $operation = [];
+            $operation['field'] = 'gas_mileage';
+            $operation['title'] = '气费-公里数';
+            $operation['before'] = (int)$order->gas_mileage;
+            $operation['after'] = $gas_mileage;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['gas_mileage'] = $gas_mileage;
+        }
+        // 气费-气耗
+        $gas_consumption = (float)$post_data['accounting_gas_consumption'];
+        if((float)$order->gas_consumption != $gas_consumption)
+        {
+            $operation = [];
+            $operation['field'] = 'gas_consumption';
+            $operation['title'] = '气费-气耗';
+            $operation['before'] = (float)$order->gas_consumption;
+            $operation['after'] = $gas_consumption;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['gas_consumption'] = $gas_consumption;
+        }
+        // 气费-单价
+        $gas_unit_price = (float)$post_data['accounting_gas_unit_price'];
+        if((float)$order->gas_unit_price != $gas_unit_price)
+        {
+            $operation = [];
+            $operation['field'] = 'gas_unit_price';
+            $operation['title'] = '气费-单价';
+            $operation['before'] = (float)$order->gas_unit_price;
+            $operation['after'] = $gas_unit_price;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['gas_unit_price'] = $gas_unit_price;
+        }
+
+
         // 路费-ETC
         $financial_fee_for_toll_etc = (float)$post_data['accounting_toll_etc'];
         if((float)$order->financial_fee_for_toll_etc != $financial_fee_for_toll_etc)
