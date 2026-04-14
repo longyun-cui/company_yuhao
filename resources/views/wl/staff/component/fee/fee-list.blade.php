@@ -27,38 +27,21 @@
 
 
             <input type="text" class="search-filter form-filter filter-keyup" name="fee-id" placeholder="ID" />
-            <input type="text" class="search-filter form-filter filter-keyup" name="fee-name" placeholder="名目" />
-{{--            <input type="text" class="search-filter form-filter filter-keyup" name="fee-username" placeholder="名称" />--}}
+            <input type="text" class="search-filter form-filter filter-keyup" name="fee-title" placeholder="名目" />
 
-{{--            @if(in_array($me->user_type,[0,1,9,11]))--}}
-{{--            <select class="search-filter form-filter filter-md select2-box-c" name="fee-user-type">--}}
-{{--                <option value="-1">全部人员</option>--}}
-{{--                <option value="41">团队·总经理</option>--}}
-{{--                <option value="88">客服</option>--}}
-{{--                <option value="84">客服主管</option>--}}
-{{--                <option value="81">客服经理</option>--}}
-{{--                <option value="77">质检员</option>--}}
-{{--                <option value="71">质检经理</option>--}}
-{{--                <option value="66">运营人员</option>--}}
-{{--                <option value="61">运营经理</option>--}}
-{{--            </select>--}}
-{{--            @endif--}}
-
-{{--            @if(in_array($me->user_type,[0,1,9,11]))--}}
-{{--            <select class="search-filter form-filter filter-md select2-box-c" name="fee-department-district">--}}
-{{--                <option value="-1">选择大区</option>--}}
-{{--                @foreach($department_district_list as $v)--}}
-{{--                    <option value="{{ $v->id }}">{{ $v->name }}</option>--}}
-{{--                @endforeach--}}
-{{--            </select>--}}
-{{--            @endif--}}
 
             <select class="search-filter form-filter filter-md select2-box-c" name="fee-fee-type">
-                <option value ="-1">全部</option>
-                <option value ="1">收入</option>
-                <option value ="99">费用</option>
-                <option value ="101">扣款</option>
-                <option value ="111">罚款</option>
+                <option value="-1">全部类型</option>
+                <option value="1">收入</option>
+                <option value="99">费用</option>
+                <option value="101">扣款</option>
+                <option value="111">罚款</option>
+            </select>
+
+            <select class="search-filter form-filter filter-md select2-box-c" name="fee-is-recorded">
+                <option value="-1">全部状态</option>
+                <option value="0">待入账</option>
+                <option value="1">已入账</option>
             </select>
 
 

@@ -81,7 +81,7 @@ class WLStaffFeeRepository {
 
         if(!empty($post_data['id'])) $query->where('id', $post_data['id']);
         if(!empty($post_data['name'])) $query->where('name', 'like', "%{$post_data['name']}%");
-        if(!empty($post_data['title'])) $query->where('title', 'like', "%{$post_data['title']}%");
+        if(!empty($post_data['title'])) $query->where('fee_title', 'like', "%{$post_data['title']}%");
         if(!empty($post_data['remark'])) $query->where('remark', 'like', "%{$post_data['remark']}%");
         if(!empty($post_data['description'])) $query->where('description', 'like', "%{$post_data['description']}%");
         if(!empty($post_data['keyword'])) $query->where('content', 'like', "%{$post_data['keyword']}%");
@@ -100,11 +100,34 @@ class WLStaffFeeRepository {
             $query->where('item_status', 1);
         }
 
+        // 类型 [|]
+        if(!empty($post_data['fee_type']))
+        {
+            $fee_type_int = intval($post_data['fee_type']);
+            if(!in_array($fee_type_int,[-1,0]))
+            {
+                $query->where('fee_type', $fee_type_int);
+            }
+        }
+
+        // 是否入账 [|]
+        if(isset($post_data['is_recorded']))
+        {
+            $is_recorded_int = intval($post_data['is_recorded']);
+            if($is_recorded_int == 0)
+            {
+                $query->whereIn('fee_type', [1,99])->where('is_recorded', 0);
+            }
+            else if($is_recorded_int == 1)
+            {
+                $query->where('is_recorded', 1);
+            }
+        }
 
         $total = $query->count();
 
-        $draw  = isset($post_data['draw'])  ? $post_data['draw']  : 1;
-        $skip  = isset($post_data['start'])  ? $post_data['start']  : 0;
+        $draw  = isset($post_data['draw'])  ? $post_data['draw'] : 1;
+        $skip  = isset($post_data['start'])  ? $post_data['start'] : 0;
         $limit = isset($post_data['length']) ? $post_data['length'] : 100;
 
         if(isset($post_data['order']))
@@ -520,7 +543,6 @@ class WLStaffFeeRepository {
         DB::beginTransaction();
         try
         {
-
             $finance = new WL_Common_Finance;
             $finance_data["fee_id"] = $fee->id;
             $bool_finance = $finance->fill($finance_data)->save();
@@ -545,6 +567,182 @@ class WLStaffFeeRepository {
 
             DB::commit();
             return response_success(['fee'=>$fee]);
+        }
+        catch (Exception $e)
+        {
+            DB::rollback();
+            $msg = '操作失败，请重试！';
+            $msg = $e->getMessage();
+//            exit($e->getMessage());
+            return response_fail([],$msg);
+        }
+
+    }
+
+
+    // 【订单管理】删除
+    public function o1__fee__item_delete($post_data)
+    {
+        $messages = [
+            'operate.required' => 'operate.required.',
+            'item_id.required' => 'item_id.required.',
+        ];
+        $v = Validator::make($post_data, [
+            'operate' => 'required',
+            'item_id' => 'required',
+        ], $messages);
+        if ($v->fails())
+        {
+            $messages = $v->errors();
+            return response_error([],$messages->first());
+        }
+
+        $timestamp = time();
+        $datetime = date('Y-m-d H:i:s', $timestamp);
+
+
+        $this->get_me();
+        $me = $this->me;
+
+//        if(!in_array($me->staff_category,[0,1,11,19])) return response_error([],"你没有操作权限！");
+
+        $operate = $post_data["operate"];
+        if($operate != 'fee--item-delete') return response_error([],"参数[operate]有误！");
+        $item_id = $post_data["item_id"];
+        if(intval($item_id) !== 0 && !$item_id) return response_error([],"参数[ID]有误！");
+
+
+        $mine = WL_Common_Fee::find($item_id);
+        if(!$mine) return response_error([],"该【费用记录】不存在或已删除，刷新页面重试！");
+
+        $order = WL_Common_Order::find($mine->order_id);
+        if(!$order) return response_error([],"该【费用记录】的【订单】不存在或已删除，刷新页面重试！");
+
+
+        $operation_record_data = [];
+
+        // 操作
+        if(true)
+        {
+            $operation = [];
+            $operation['operation'] = 'item.fee.delete';
+            $operation['field'] = '';
+            $operation['title'] = '操作';
+            $operation['before'] = '';
+            $operation['after'] = '费用删除';
+            $operation_record_data[] = $operation;
+        }
+        if(true)
+        {
+            $operation = [];
+            $operation['field'] = '';
+            $operation['title'] = 'ID';
+            $operation['before'] = '';
+            $operation['after'] = $item_id;
+            $operation_record_data[] = $operation;
+        }
+        if(true)
+        {
+            $operation = [];
+            $operation['field'] = '';
+            $operation['title'] = '类型';
+            $operation['before'] = '';
+
+            $fee_type = $mine->fee_type;
+            if($fee_type == 1) $operation['after'] = "收入";
+            else if($fee_type == 99) $operation['after'] = "费用";
+            else if($fee_type == 101) $operation['after'] = "订单扣款";
+            else if($fee_type == 111) $operation['after'] = "司机罚款";
+            else $operation['after'] = $fee_type;
+
+            $operation_record_data[] = $operation;
+        }
+        if(true)
+        {
+            $operation = [];
+            $operation['field'] = '';
+            $operation['title'] = '金额';
+            $operation['before'] = '';
+            $operation['after'] = $mine->fee_amount;
+            $operation_record_data[] = $operation;
+        }
+        if(true)
+        {
+            $operation = [];
+            $operation['field'] = '';
+            $operation['title'] = '名目';
+            $operation['before'] = '';
+            $operation['after'] = $mine->fee_title;
+            $operation_record_data[] = $operation;
+        }
+
+        $record_data["operate_category"] = 81;
+        $record_data["operate_type"] = 11;
+        $record_data["client_id"] = $mine->client_id;
+        $record_data["project_id"] = $mine->project_id;
+        $record_data["order_id"] = $mine->order_id;
+        $record_data["fee_id"] = $mine->id;
+        $record_data["finance_id"] = $mine->finance_id;
+        $record_data["creator_id"] = $me->id;
+        $record_data["company_id"] = $me->company_id;
+        $record_data["department_id"] = $me->department_id;
+        $record_data["team_id"] = $me->team_id;
+        $record_data["custom_date"] = $datetime;
+        $record_data["custom_datetime"] = $datetime;
+        $record_data["content"] = json_encode($operation_record_data);
+
+
+        // 启动数据库事务
+        DB::beginTransaction();
+        try
+        {
+
+            $order = WL_Common_Order::withTrashed()->lockForUpdate()->find($mine->order_id);
+            if(!$order) throw new Exception("该订单不存在，刷新页面重试！");
+
+            if($mine->fee_type == 1)
+            {
+                $order->financial_income_total -= $mine->fee_amount;
+            }
+            else if($mine->fee_type == 99)
+            {
+                $order->financial_expense_total -= $mine->fee_amount;
+            }
+            else if($mine->fee_type == 101)
+            {
+                $order->financial_deduction_total += $mine->fee_amount;
+            }
+            else if($mine->fee_type == 111)
+            {
+                $order->financial_fine_total += $mine->fee_amount;
+            }
+
+            $bool_order = $order->save();
+            if(!$bool_order) throw new Exception("WL_Common_Order--update--fail");
+
+            if($mine->is_recorded == 1)
+            {
+                $finance = WL_Common_Finance::withTrashed()->lockForUpdate()->find($mine->finance_id);
+                if($finance)
+                {
+                    $finance->timestamps = false;
+                    $bool_finance = $finance->delete();  // 普通删除
+                    if(!$bool_finance) throw new Exception("WL_Common_Finance--delete--fail");
+                }
+            }
+
+            $mine->timestamps = false;
+            $bool = $mine->delete();  // 普通删除
+            if(!$bool) throw new Exception("WL_Common_Fee--delete--fail");
+
+
+            $order_operation_record = new WL_Common_Order_Operation_Record;
+            $bool_oor = $order_operation_record->fill($record_data)->save();
+            if(!$bool_oor) throw new Exception("WL_Common_Order_Operation_Record--insert--fail");
+
+            DB::commit();
+
+            return response_success([]);
         }
         catch (Exception $e)
         {

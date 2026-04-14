@@ -956,6 +956,13 @@ class WLStaffController extends Controller
     }
 
 
+    // 【费用】删除
+    public function o1__fee__item_delete()
+    {
+        return $this->fee_repo->o1__fee__item_delete(request()->all());
+    }
+
+
     // 【费用】【全部操作】操作记录
     public function o1__fee__item_operation_record_list__datatable_query()
     {
@@ -983,6 +990,13 @@ class WLStaffController extends Controller
     public function o1__finance__item_save()
     {
         return $this->finance_repo->o1__finance__item_save(request()->all());
+    }
+
+
+    // 【财务】删除
+    public function o1__finance__item_delete()
+    {
+        return $this->fee_repo->o1__finance__item_delete(request()->all());
     }
 
 

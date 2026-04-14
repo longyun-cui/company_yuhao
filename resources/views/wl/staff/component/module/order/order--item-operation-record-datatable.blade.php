@@ -95,13 +95,18 @@
                             else if(data == 81)
                             {
                                 $category_text = "费用";
-                                // $category_html = '<small class="btn-xs bg-yellow">费用</small>';
+                                $category_html = '<small class="btn-xs bg-yellow">费用</small>';
+
+                                if(row.operate_type == 11)
+                                {
+                                    $type_text = "删除";
+                                    $type_html = '<small class="btn-xs bg-black">'+$type_text+'</small>';
+                                }
                                 if(row.operate_type == 88)
                                 {
                                     $category_text += "&入账";
-                                    // $category_html += '<small class="btn-xs bg-yellow">入账</small>';
+                                    $category_html = '<small class="btn-xs bg-yellow">'+$category_text+'</small>';
                                 }
-                                $category_html = '<small class="btn-xs bg-yellow">'+$category_text+'</small>';
                             }
                             else if(data == 88) $category_html = '<small class="btn-xs bg-red">入账</small>';
                             else if(data == 101) $category_html = '<small class="btn-xs bg-red">附件</small>';

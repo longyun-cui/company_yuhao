@@ -2686,8 +2686,6 @@ class WLStaffOrderRepository {
         try
         {
 
-
-
             $fee = new WL_Common_Fee;
             $bool_fee = $fee->fill($fee_data)->save();
             if($bool_fee)

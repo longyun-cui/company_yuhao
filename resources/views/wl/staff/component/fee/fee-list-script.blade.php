@@ -103,6 +103,75 @@
 
 
 
+        // 【费用】删除
+        $(".main-wrapper").off('click', ".fee--item-delete-submit").on('click', ".fee--item-delete-submit", function() {
+            var $that = $(this);
+            var $datatable_wrapper = $that.closest('.datatable-wrapper');
+            var $table_id = $datatable_wrapper.find('table').filter('[id][id!=""]').attr("id");
+
+
+            layer.msg('确定"删除"么?', {
+                time: 0
+                ,btn: ['确定', '取消']
+                ,yes: function(index)
+                {
+                    layer.close(index);
+
+                    //
+                    var $index = layer.load(1, {
+                        shade: [0.3, '#fff'],
+                        content: '<span class="loadtip">正在提交</span>',
+                        success: function (layer) {
+                            layer.find('.layui-layer-content').css({
+                                'padding-top': '40px',
+                                'width': '100px',
+                            });
+                            layer.find('.loadtip').css({
+                                'font-size':'20px',
+                                'margin-left':'-18px'
+                            });
+                        }
+                    });
+
+                    //
+                    $.post(
+                        "{{ url('/o1/fee/item-delete') }}",
+                        {
+                            _token: $('meta[name="_token"]').attr('content'),
+                            operate: "fee--item-delete",
+                            item_id: $that.attr('data-id')
+                        },
+                        'json'
+                    )
+                        .done(function($response, status, jqXHR) {
+                            console.log('#'+$that.attr('id')+'.post.done.');
+
+                            $response = JSON.parse($response);
+                            if(!$response.success)
+                            {
+                                if($response.msg) layer.msg($response.msg);
+                            }
+                            else
+                            {
+                                $('#'+$table_id).DataTable().ajax.reload(null,false);
+                            }
+                        })
+                        .fail(function(jqXHR, status, error) {
+                            console.log('#'+$that.attr('id')+'.post.fail.');
+                            layer.msg('服务器错误！');
+
+                        })
+                        .always(function(jqXHR, status) {
+                            console.log('#'+$that.attr('id')+'.post.always.');
+                            layer.closeAll('loading');
+                        });
+                }
+            });
+        });
+
+
+
+
         // 【费用】财务入账-显示
         $(".main-wrapper").off('click', ".modal-show--for--fee-item-finance-bookkeeping").on('click', ".modal-show--for--fee-item-finance-bookkeeping", function() {
             var $that = $(this);

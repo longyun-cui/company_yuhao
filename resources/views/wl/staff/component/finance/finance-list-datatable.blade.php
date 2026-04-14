@@ -60,6 +60,19 @@
                     }
                 },
                 {
+                    "title": "状态",
+                    "data": "id",
+                    "width": "80px",
+                    "orderable": false,
+                    render: function(data, type, row, meta) {
+                        if(row.deleted_at != null)
+                        {
+                            return '<small class="btn-xs bg-black">已删除</small>';
+                        }
+                        else return '<small class="btn-xs bg-green">正常</small>';
+                    }
+                },
+                {
                     "title": "类型",
                     "data": "transaction_type",
                     "width": "80px",
@@ -173,7 +186,7 @@
                     "title": "支付方式",
                     "data": "transaction_payment_method",
                     "className": "",
-                    "width": "120px",
+                    "width": "100px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                     },
@@ -186,7 +199,7 @@
                     "title": "付款账号",
                     "data": "transaction_account_from",
                     "className": "",
-                    "width": "100px",
+                    "width": "160px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                     },
@@ -199,7 +212,7 @@
                     "title": "收款账号",
                     "data": "transaction_account_to",
                     "className": "",
-                    "width": "100px",
+                    "width": "160px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                     },
@@ -314,7 +327,7 @@
 
                         var html =
                             // $html_edit+
-                            $html_pay+
+                            // $html_pay+
                             // $html_delete+
                             $html_record+
                             '';

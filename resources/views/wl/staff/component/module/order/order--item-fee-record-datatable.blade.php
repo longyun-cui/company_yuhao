@@ -78,11 +78,20 @@
                         "width": "100px",
                         "orderable": false,
                         render: function(data, type, row, meta) {
-                            if(data == 1) return '<small class="btn-xs bg-green">收入</small>';
-                            else if(data == 99) return '<small class="btn-xs bg-red">费用</small>';
-                            else if(data == 101) return '<small class="btn-xs bg-orange">订单扣款</small>';
-                            else if(data == 111) return '<small class="btn-xs bg-yellow">司机罚款</small>';
-                            else return '有误';
+                            var $html_delete = '';
+                            if(row.deleted_at != null)
+                            {
+                                $html_delete = '<small class="btn-xs bg-black">已删除</small>';
+                            }
+
+                            var $type_html = '';
+                            if(data == 1) $type_html = '<small class="btn-xs bg-green">收入</small>';
+                            else if(data == 99) $type_html = '<small class="btn-xs bg-red">费用</small>';
+                            else if(data == 101) $type_html = '<small class="btn-xs bg-orange">订单扣款</small>';
+                            else if(data == 111) $type_html = '<small class="btn-xs bg-yellow">司机罚款</small>';
+                            else $type_html = '有误';
+
+                            return $type_html + $html_delete;
                         }
                     },
                     {

@@ -27,9 +27,9 @@
                     d.mobile = $('input[name="fee-mobile"]').val();
                     d.name = $('input[name="fee-name"]').val();
                     d.username = $('input[name="fee-username"]').val();
-                    d.department_district = $tableSearch.find('select[name="fee-department-district"]').val();
-                    d.user_type = $tableSearch.find('select[name="fee-user-type"]').val();
-                    d.user_status = $tableSearch.find('select[name="fee-user-status"]').val();
+                    d.title = $('input[name="fee-title"]').val();
+                    d.fee_type = $tableSearch.find('select[name="fee-fee-type"]').val();
+                    d.is_recorded = $tableSearch.find('select[name="fee-is-recorded"]').val();
                 },
             },
             "fixedColumns": {
@@ -64,6 +64,11 @@
                     "width": "80px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
+                        if(row.deleted_at != null)
+                        {
+                            return '<small class="btn-xs bg-black">已删除</small>';
+                        }
+
                         if([1,99].includes(row.fee_type))
                         {
                             if(data == 0)
@@ -214,7 +219,7 @@
                     "title": "工单",
                     "data": "order_id",
                     "className": "",
-                    "width": "300px",
+                    "width": "240px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                     },
@@ -347,34 +352,33 @@
                         // 删除
                         if(row.deleted_at == null)
                         {
-                            $html_delete = '<a class="btn btn-xs item-admin-delete-submit" data-id="'+data+'">删除</a>';
+                            $html_delete = '<a class="btn btn-xs fee--item-delete-submit" data-id="'+data+'">删除</a>';
+                            if([1,99].includes(row.fee_type) && row.is_recorded == 0)
+                            {
+                                $html_bookkeeping = '<a class="btn btn-xs modal-show--for--fee-item-finance-bookkeeping" data-id="'+data+'">入账</a>';
+                            }
+                            else
+                            {
+                                $html_bookkeeping = '<a class="btn btn-xs btn-default disabled" data-id="'+data+'">入账</a>';
+                            }
                         }
                         else
                         {
-                            $html_delete = '<a class="btn btn-xs item-admin-restore-submit" data-id="'+data+'">恢复</a>';
+                            $html_bookkeeping = '<a class="btn btn-xs btn-default disabled">入账</a>';
+                            $html_delete = '<a class="btn btn-xs btn-default disabled">删除</a>';
+                            // $html_delete = '<a class="btn btn-xs item-admin-restore-submit" data-id="'+data+'">恢复</a>';
                         }
 
-
-                        if([1,99].includes(row.fee_type) && row.is_recorded == 0)
-                        {
-                            $html_bookkeeping = '<a class="btn btn-xs modal-show--for--fee-item-finance-bookkeeping" data-id="'+data+'">入账</a>';
-                            $html_delete = '<a class="btn btn-xs bg-black- item-admin-delete-submit" data-id="'+data+'">删除</a>';
-                        }
-                        else
-                        {
-                            $html_bookkeeping = '<a class="btn btn-xs btn-default disabled" data-id="'+data+'">入账</a>';
-                            $html_delete = '<a class="btn btn-xs btn-default disabled" data-id="'+data+'">删除</a>';
-                        }
 
                         $html_record = '<a class="btn btn-xs bg-purple- item-modal-show-for-modify" data-id="'+data+'">记录</a>';
 
-                        var html =
+                        var $html =
                             $html_edit+
                             $html_bookkeeping+
                             $html_delete+
-                            $html_record+
+                            // $html_record+
                             '';
-                        return html;
+                        return $html;
                     }
                 }
             ],
