@@ -126,6 +126,13 @@ class WL_Common_Order extends Model
         'financial_fee_for_oil_card',
         'financial_fee_for_oil_cash',
 
+        'gas_amount',
+        'gas_unit_price',
+        'gas_mileage',
+        'financial_fee_for_gas_total',
+        'financial_fee_for_gas_card',
+        'financial_fee_for_gas_cash',
+
         'financial_fee_for_toll_total',
         'financial_fee_for_toll_etc',
         'financial_fee_for_toll_cash',
@@ -180,6 +187,11 @@ class WL_Common_Order extends Model
         'oil_consumption',
         'oil_unit_price',
         'oil_fee',
+
+        'gas_amount',
+        'gas_consumption',
+        'gas_unit_price',
+        'gas_fee',
 
         'toll_main_etc', 'toll_east_etc', 'toll_south_etc',
         'toll_main_cash', 'toll_east_cash', 'toll_south_cash',
