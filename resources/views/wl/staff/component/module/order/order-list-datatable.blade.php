@@ -1598,6 +1598,36 @@
                     }
                 },
                 {
+                    "title": "创建时间",
+                    "data": 'created_at',
+                    "className": "",
+                    "width": "120px",
+                    "orderable": true,
+                    render: function(data, type, row, meta) {
+                        // return data;
+                        var $date = new Date(data*1000);
+                        var $year = $date.getFullYear();
+                        var $month = ('00'+($date.getMonth()+1)).slice(-2);
+                        var $day = ('00'+($date.getDate())).slice(-2);
+                        var $hour = ('00'+$date.getHours()).slice(-2);
+                        var $minute = ('00'+$date.getMinutes()).slice(-2);
+                        var $second = ('00'+$date.getSeconds()).slice(-2);
+
+                        // return $year+'-'+$month+'-'+$day;
+                        // return $year+'-'+$month+'-'+$day+'&nbsp;&nbsp;'+$hour+':'+$minute;
+                        // return $year+'-'+$month+'-'+$day+'&nbsp;&nbsp;'+$hour+':'+$minute+':'+$second;
+
+                        var $today = new Date();
+                        var $currentYear = $today.getFullYear();
+                        var $currentMonth = ('00'+($today.getMonth()+1)).slice(-2);
+                        var $currentDay = ('00'+($today.getDate())).slice(-2);
+
+                        if($year == $currentYear && $month == $currentMonth && $day == $currentDay) return '今天 '+$hour+':'+$minute;
+                        if($year == $currentYear) return $month+'-'+$day+'&nbsp;&nbsp;'+$hour+':'+$minute;
+                        else return $year+'-'+$month+'-'+$day+'&nbsp;&nbsp;'+$hour+':'+$minute;
+                    }
+                },
+                {
                     "title": "操作",
                     "data": 'id',
                     "className": "",
