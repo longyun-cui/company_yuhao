@@ -3246,6 +3246,32 @@ class WLStaffOrderRepository {
 
             $order_update_date['financial_fee_for_loan_cost'] = $financial_fee_for_loan_cost;
         }
+        // 信息费
+        $financial_fee_for_information = (float)$post_data['accounting_information'];
+        if((float)$order->financial_fee_for_information != $financial_fee_for_information)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_information';
+            $operation['title'] = '信息费';
+            $operation['before'] = (float)$order->financial_fee_for_information;
+            $operation['after'] = $financial_fee_for_information;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_information'] = $financial_fee_for_information;
+        }
+        // 管理费
+        $financial_fee_for_administrative = (float)$post_data['accounting_administrative'];
+        if((float)$order->financial_fee_for_administrative != $financial_fee_for_administrative)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_administrative';
+            $operation['title'] = '管理费';
+            $operation['before'] = (float)$order->financial_fee_for_administrative;
+            $operation['after'] = $financial_fee_for_administrative;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_administrative'] = $financial_fee_for_administrative;
+        }
         // 其他费用
         $financial_fee_for_others = (float)$post_data['accounting_others'];
         if((float)$order->financial_fee_for_others != $financial_fee_for_others)

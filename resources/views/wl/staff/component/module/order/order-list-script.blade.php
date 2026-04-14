@@ -18,7 +18,7 @@
             $modal.find('input[name="operate[type]"]').val('create');
             $modal.find('input[name="operate[id]"]').val(0);
             $modal.find('.box-title').html($title);
-            $modal.find('.edit-submit').attr('data-datatable-list-id',$table_id);
+            $modal.find('.edit-submit').data('datatable-list-id',$table_id);
             $modal.find('.radio-btn').show();
             $modal.modal('show');
 
@@ -225,7 +225,7 @@
 
                         var $datatable_wrapper = $that.closest('.datatable-wrapper');
                         var $table_id = $datatable_wrapper.find('table').filter('[id][id!=""]').attr("id");
-                        $modal.find('.edit-submit').attr('data-datatable-list-id',$table_id);
+                        $modal.find('.edit-submit').data('datatable-list-id',$table_id);
 
                         $modal.modal('show');
                     }
@@ -1531,7 +1531,7 @@
 
                         var $datatable_wrapper = $that.closest('.datatable-wrapper');
                         var $table_id = $datatable_wrapper.find('table').filter('[id][id!=""]').attr("id");
-                        $modal.find('.edit-submit').attr('data-datatable-list-id',$table_id);
+                        $modal.find('.edit-submit').data('datatable-list-id',$table_id);
 
                         $modal.modal('show');
                     }
@@ -1603,7 +1603,7 @@
                         //     $("body").addClass("modal-open");
                         // });
 
-                        // $('#'+$table_id).DataTable().ajax.reload(null,false);
+                        $('#'+$table_id).DataTable().ajax.reload(null,false);
 
                         var $order = $response.data.order;
                         console.log($row);

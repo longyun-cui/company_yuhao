@@ -1251,7 +1251,7 @@
                     }
                 },
                 {
-                    "title": "油费",
+                    "title": "总油费",
                     "name": "financial_fee_for_oil_total",
                     "data": "financial_fee_for_oil_total",
                     "className": "bg-fee",
@@ -1279,8 +1279,48 @@
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         $(nTd).attr('data-id',row.id);
-                        $(nTd).attr('data-name','费用');
+                        $(nTd).attr('data-name','过路费');
                         $(nTd).attr('data-key','financial_fee_for_toll_total');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "路费-ETC",
+                    "name": "financial_fee_for_toll_etc",
+                    "data": "financial_fee_for_toll_etc",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','路费-ETC');
+                        $(nTd).attr('data-key','financial_fee_for_toll_etc');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "路费-现金",
+                    "name": "financial_fee_for_toll_cash",
+                    "data": "financial_fee_for_toll_cash",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','路费-现金');
+                        $(nTd).attr('data-key','financial_fee_for_toll_cash');
                         $(nTd).attr('data-value',parseFloat(data));
                         $(nTd).addClass('color-red');
                     },

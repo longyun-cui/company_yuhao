@@ -74,9 +74,27 @@
                             </div>
                         </div>
                     </div>
+                    {{--气费--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 气费 & 公里数 & 气耗 & 单价</label>
+                        <div class="col-md-9 ">
+                            <div class="col-sm-3 col-md-3 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_gas_total" placeholder="气费" />
+                            </div>
+                            <div class="col-sm-3 col-md-3 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_gas_mileage" placeholder="公里数" />
+                            </div>
+                            <div class="col-sm-3 col-md-3 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_gas_consumption" placeholder="气耗" />
+                            </div>
+                            <div class="col-sm-3 col-md-3 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_gas_unit_price" placeholder="单价" />
+                            </div>
+                        </div>
+                    </div>
                     {{--过路费--}}
                     <div class="form-group">
-                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 过路费</label>
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 路费-ETC & 路费-现金</label>
                         <div class="col-md-9 ">
                             <div class="col-sm-6 col-md-6 padding-0">
                                 <input type="text" class="form-control form-filter" name="accounting_toll_etc" placeholder="路费-ETC" />
@@ -102,6 +120,18 @@
                             </div>
                             <div class="col-sm-6 col-md-6 padding-0">
                                 <input type="text" class="form-control form-filter" name="accounting_bonus" placeholder="奖金" />
+                            </div>
+                        </div>
+                    </div>
+                    {{--费用--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 信息费 & 管理费</label>
+                        <div class="col-md-9 ">
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_information" placeholder="信息费" />
+                            </div>
+                            <div class="col-sm-6 col-md-6 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_administrative" placeholder="管理费" />
                             </div>
                         </div>
                     </div>
