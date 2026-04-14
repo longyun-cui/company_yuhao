@@ -35,6 +35,8 @@ class WL_Common_Project extends Model
         'transport_time_limitation',
 
         'freight_amount',
+        'invoice_amount',
+        'invoice_point',
         'settlement_period',
 
 

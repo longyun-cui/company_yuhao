@@ -145,18 +145,6 @@
                         </div>
                     </div>
                 </div>
-                {{--共建车费 & 信息费--}}
-                <div class="form-group">
-                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 共建车费 & 信息费 (支)</label>
-                    <div class="col-md-9 ">
-                        <div class="col-sm-6 col-md-6 padding-0">
-                            <input type="text" class="form-control" name="cooperative_vehicle_amount" placeholder="共建车费" value="0" data-default="0">
-                        </div>
-                        <div class="col-sm-6 col-md-6 padding-0">
-                            <input type="text" class="form-control" name="financial_fee_for_information" placeholder="信息费" value="0" data-default="0">
-                        </div>
-                    </div>
-                </div>
                 {{--开票--}}
                 <div class="form-group">
                     <label class="control-label col-md-3"><sup class="text-red">*</sup> 开票金额 & 票点 (支)</label>
@@ -166,6 +154,18 @@
                         </div>
                         <div class="col-sm-6 col-md-6 padding-0">
                             <input type="text" class="form-control" name="financial_receipt_for_invoice_point" placeholder="开票点" value="0.00" data-default="0.00">
+                        </div>
+                    </div>
+                </div>
+                {{--共建车费 & 信息费--}}
+                <div class="form-group">
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 共建车费 & 信息费 (支)</label>
+                    <div class="col-md-9 ">
+                        <div class="col-sm-6 col-md-6 padding-0">
+                            <input type="text" class="form-control" name="cooperative_vehicle_amount" placeholder="共建车费" value="0" data-default="0">
+                        </div>
+                        <div class="col-sm-6 col-md-6 padding-0">
+                            <input type="text" class="form-control" name="financial_fee_for_information" placeholder="信息费" value="0" data-default="0">
                         </div>
                     </div>
                 </div>

@@ -218,7 +218,7 @@
                     "title": "运费",
                     "data": "freight_amount",
                     "className": "",
-                    "width": "80px",
+                    "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
@@ -245,10 +245,70 @@
                     }
                 },
                 {
+                    "title": "开票额",
+                    "data": "invoice_amount",
+                    "className": "",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).attr('data-row-index',iRow);
+
+                            $(nTd).attr('data-id',row.id);
+                            $(nTd).attr('data-name','开票金额');
+                            $(nTd).attr('data-key','invoice_amount');
+                            $(nTd).attr('data-value',data);
+
+                            $(nTd).addClass('modal-show--for--project-field-set');
+                            $(nTd).attr('data-column-type','text');
+                            $(nTd).attr('data-column-name','开票金额');
+
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "开票点",
+                    "data": "invoice_point",
+                    "className": "",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).attr('data-row-index',iRow);
+
+                            $(nTd).attr('data-id',row.id);
+                            $(nTd).attr('data-name','开票点');
+                            $(nTd).attr('data-key','invoice_point');
+                            $(nTd).attr('data-value',data);
+
+                            $(nTd).addClass('modal-show--for--project-field-set');
+                            $(nTd).attr('data-column-type','text');
+                            $(nTd).attr('data-column-name','开票点');
+
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
                     "title": "出发地",
                     "data": "transport_departure_place",
                     "className": "",
-                    "width": "80px",
+                    "width": "120px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
@@ -278,7 +338,7 @@
                     "title": "目的地",
                     "data": "transport_destination_place",
                     "className": "",
-                    "width": "80px",
+                    "width": "120px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
@@ -308,7 +368,7 @@
                     "title": "线路",
                     "data": "transport_route",
                     "className": "",
-                    "width": "160px",
+                    "width": "80px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
@@ -452,7 +512,7 @@
                 {
                     "title": "操作",
                     "data": 'id',
-                    "width": "160px",
+                    "width": "200px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
 

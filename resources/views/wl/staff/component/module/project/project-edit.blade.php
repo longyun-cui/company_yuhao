@@ -120,9 +120,17 @@
 
                 {{--运费 & 油卡--}}
                 <div class="form-group">
-                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 运费</label>
+                    <label class="control-label col-md-2"><sup class="text-red">*</sup> 运费&开票额&开票点</label>
                     <div class="col-md-8 ">
-                        <input type="text" class="form-control" name="freight_amount" placeholder="运费" value="0" data-default="0">
+                        <div class="col-sm-3 col-md-3 padding-0">
+                            <input type="text" class="form-control" name="freight_amount" placeholder="默认运费" value="0" data-default="0">
+                        </div>
+                        <div class="col-sm-3 col-md-3 padding-0">
+                            <input type="text" class="form-control" name="invoice_amount" placeholder="开票额" value="0" data-default="0">
+                        </div>
+                        <div class="col-sm-6 col-md-6 padding-0">
+                            <input type="text" class="form-control" name="invoice_point" placeholder="开票点" value="0" data-default="0">
+                        </div>
                     </div>
                 </div>
 

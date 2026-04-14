@@ -323,6 +323,11 @@
             var $modal_id = $that.data('modal');
             var $modal = $($modal_id);
 
+            // 金额
+            $modal.find('input[name=freight_amount]').val(parseFloat(e.params.data.freight_amount));
+            $modal.find('input[name=financial_receipt_for_invoice_amount]').val(parseFloat(e.params.data.invoice_amount));
+            $modal.find('input[name=financial_receipt_for_invoice_point]').val(parseFloat(e.params.data.invoice_point));
+            // 线路-出发地-目的地
             $modal.find('input[name=transport_route]').val(e.params.data.transport_route);
             $modal.find('input[name=transport_departure_place]').val(e.params.data.transport_departure_place);
             $modal.find('input[name=transport_destination_place]').val(e.params.data.transport_destination_place);
@@ -331,7 +336,6 @@
             // 时效
             var $transport_time_limitation = parseFloat((e.params.data.transport_time_limitation / 60).toFixed(2));
             $modal.find('input[name=transport_time_limitation]').val($transport_time_limitation);
-            $modal.find('input[name=freight_amount]').val(parseFloat(e.params.data.freight_amount));
         });
 
 
