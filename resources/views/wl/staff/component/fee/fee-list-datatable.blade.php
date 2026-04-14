@@ -342,7 +342,7 @@
                 {
                     "title": "操作",
                     "data": "id",
-                    "width": "160px",
+                    "width": "120px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
                         var $html_edit = '';

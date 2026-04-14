@@ -286,7 +286,7 @@
                 {
                     "title": "操作",
                     "data": "id",
-                    "width": "120px",
+                    "width": "100px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
                         var html_edit = '';
