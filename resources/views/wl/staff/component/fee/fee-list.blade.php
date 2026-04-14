@@ -30,7 +30,7 @@
             <input type="text" class="search-filter form-filter filter-keyup" name="fee-title" placeholder="名目" />
 
 
-            <select class="search-filter form-filter filter-md select2-box-c" name="fee-fee-type">
+            <select class="search-filter form-filter filter-md select2-box-c" name="fee-type">
                 <option value="-1">全部类型</option>
                 <option value="1">收入</option>
                 <option value="99">费用</option>
@@ -86,9 +86,6 @@
                         </tfoot>
                     </table>
                 </div>
-            </div>
-
-            <div class="box-header">
             </div>
 
         </div>

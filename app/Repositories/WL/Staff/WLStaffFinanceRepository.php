@@ -99,25 +99,21 @@ class WLStaffFinanceRepository {
             $query->where('item_status', 1);
         }
 
-        // 状态 [|]
-        if(!empty($post_data['finance_status']))
+        // 类型 [|]
+        if(!empty($post_data['transaction_type']))
         {
-            $finance_status_int = intval($post_data['finance_status']);
-            if(!in_array($finance_status_int,[-1,0]))
+            $transaction_type_int = intval($post_data['transaction_type']);
+            if(!in_array($transaction_type_int,[-1,0]))
             {
-                $query->where('finance_status', $finance_status_int);
+                $query->where('transaction_type', $transaction_type_int);
             }
-        }
-        else
-        {
-            $query->where('finance_status', 1);
         }
 
 
         $total = $query->count();
 
-        $draw  = isset($post_data['draw'])  ? $post_data['draw'] : 1;
-        $skip  = isset($post_data['start'])  ? $post_data['start'] : 0;
+        $draw  = isset($post_data['draw']) ? $post_data['draw'] : 1;
+        $skip  = isset($post_data['start']) ? $post_data['start'] : 0;
         $limit = isset($post_data['length']) ? $post_data['length'] : 100;
 
         if(isset($post_data['order']))

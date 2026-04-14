@@ -27,10 +27,8 @@
                     d.id = $('input[name="finance-id"]').val();
                     d.mobile = $('input[name="finance-mobile"]').val();
                     d.name = $('input[name="finance-name"]').val();
-                    d.username = $('input[name="finance-username"]').val();
-                    d.department_district = $tableSearch.find('select[name="finance-department-district"]').val();
-                    d.user_type = $tableSearch.find('select[name="finance-user-type"]').val();
-                    d.user_status = $tableSearch.find('select[name="finance-user-status"]').val();
+                    d.title = $('input[name="finance-title"]').val();
+                    d.transaction_type = $tableSearch.find('select[name="finance-transaction-type"]').val();
                 },
             },
             "fixedColumns": {
@@ -288,7 +286,7 @@
                 {
                     "title": "操作",
                     "data": "id",
-                    "width": "160px",
+                    "width": "120px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
                         var html_edit = '';
