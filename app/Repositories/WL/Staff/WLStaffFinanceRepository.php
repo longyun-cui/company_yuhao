@@ -71,7 +71,7 @@ class WLStaffFinanceRepository {
         $query = WL_Common_Finance::select('*')
             ->withTrashed()
             ->with([
-                'creator'=>function($query) { $query->select(['id','username']); },
+                'creator'=>function($query) { $query->select(['id','name']); },
                 'client_er'=>function($query) { $query->select(['id','name']); },
                 'project_er'=>function($query) { $query->select(['id','name']); },
                 'order_er'=>function($query) { $query->select(['*']); },
@@ -150,7 +150,7 @@ class WLStaffFinanceRepository {
         $id  = $post_data["id"];
         $query = WL_Common_Order_Operation_Record::select('*')
             ->with([
-                'creator'=>function($query) { $query->select(['id','username','true_name']); },
+                'creator'=>function($query) { $query->select(['id','name']); },
             ])
             ->where(['finance_id'=>$id]);
 //            ->where(['record_object'=>21,'operate_object'=>61,'item_id'=>$id]);
