@@ -119,7 +119,7 @@ class WLStaffCarRepository {
 
         $draw  = isset($post_data['draw'])  ? $post_data['draw']  : 1;
         $skip  = isset($post_data['start'])  ? $post_data['start']  : 0;
-        $limit = isset($post_data['length']) ? $post_data['length'] : 50;
+        $limit = isset($post_data['length']) ? $post_data['length'] : 200;
 
         if(isset($post_data['order']))
         {
