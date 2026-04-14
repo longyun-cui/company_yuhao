@@ -176,7 +176,11 @@ class WL_Common_Order extends Model
         'last_operation_date',
         'last_operation_datetime',
 
-        'oil_amount', 'oil_unit_price', 'oil_fee',
+        'oil_amount',
+        'oil_consumption',
+        'oil_unit_price',
+        'oil_fee',
+
         'toll_main_etc', 'toll_east_etc', 'toll_south_etc',
         'toll_main_cash', 'toll_east_cash', 'toll_south_cash',
         'oil_main_cost', 'oil_east_cost', 'oil_south_cost',
