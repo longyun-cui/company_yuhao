@@ -167,7 +167,7 @@
                     "title": "出发地",
                     "data": "id",
                     "className": "text-center",
-                    "width": "80px",
+                    "width": "100px",
                     "orderable": true,
                     render: function(data, type, row, meta) {
                         if(!row.latest_order) return '--';
@@ -178,11 +178,22 @@
                     "title": "目的地",
                     "data": "id",
                     "className": "text-center",
-                    "width": "80px",
+                    "width": "100px",
                     "orderable": true,
                     render: function(data, type, row, meta) {
                         if(!row.latest_order) return '--';
                         else return row.latest_order.transport_destination_place;
+                    }
+                },
+                {
+                    "title": "线路",
+                    "data": "id",
+                    "className": "text-center",
+                    "width": "80px",
+                    "orderable": true,
+                    render: function(data, type, row, meta) {
+                        if(!row.latest_order) return '--';
+                        else return row.latest_order.transport_route;
                     }
                 },
                 {
