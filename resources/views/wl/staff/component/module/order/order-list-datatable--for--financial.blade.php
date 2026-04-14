@@ -1259,7 +1259,7 @@
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         $(nTd).attr('data-id',row.id);
-                        $(nTd).attr('data-name','费用');
+                        $(nTd).attr('data-name','总油费');
                         $(nTd).attr('data-key','financial_fee_for_oil_total');
                         $(nTd).attr('data-value',parseFloat(data));
                         $(nTd).addClass('color-red');
@@ -1270,6 +1270,128 @@
                         else return '--';
                     }
                 },
+
+                {
+                    "title": "公里数",
+                    "name": "gas_mileage",
+                    "data": "gas_mileage",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','公里数');
+                        $(nTd).attr('data-key','gas_mileage');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "气耗",
+                    "name": "gas_consumption",
+                    "data": "gas_consumption",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','气耗');
+                        $(nTd).attr('data-key','gas_consumption');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "气价",
+                    "name": "gas_unit_price",
+                    "data": "gas_unit_price",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','气价');
+                        $(nTd).attr('data-key','gas_unit_price');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "气费-平台",
+                    "name": "financial_fee_for_gas_card",
+                    "data": "financial_fee_for_gas_card",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','气费-平台');
+                        $(nTd).attr('data-key','financial_fee_for_gas_card');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "气费-现金",
+                    "name": "financial_fee_for_gas_cash",
+                    "data": "financial_fee_for_gas_cash",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','气费-现金');
+                        $(nTd).attr('data-key','financial_fee_for_gas_cash');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+                {
+                    "title": "总气费",
+                    "name": "financial_fee_for_gas_total",
+                    "data": "financial_fee_for_gas_total",
+                    "className": "bg-fee",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        $(nTd).attr('data-id',row.id);
+                        $(nTd).attr('data-name','总气费');
+                        $(nTd).attr('data-key','financial_fee_for_gas_total');
+                        $(nTd).attr('data-value',parseFloat(data));
+                        $(nTd).addClass('color-red');
+                    },
+                    render: function(data, type, row, meta) {
+                        var $data = parseFloat(data);
+                        if($data) return $data;
+                        else return '--';
+                    }
+                },
+
                 {
                     "title": "过路费",
                     "name": "financial_fee_for_toll_total",
