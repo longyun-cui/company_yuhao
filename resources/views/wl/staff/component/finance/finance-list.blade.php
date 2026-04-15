@@ -27,6 +27,7 @@
 
 
             <input type="text" class="search-filter form-filter filter-keyup" name="finance-id" placeholder="ID" />
+            <input type="text" class="search-filter form-filter filter-keyup" name="finance-order-id" placeholder="订单ID" />
             <input type="text" class="search-filter form-filter filter-keyup" name="finance-title" placeholder="名目" />
 
 

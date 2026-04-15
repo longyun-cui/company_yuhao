@@ -27,6 +27,7 @@
 
 
             <input type="text" class="search-filter form-filter filter-keyup" name="fee-id" placeholder="ID" />
+            <input type="text" class="search-filter form-filter filter-keyup" name="fee-order-id" placeholder="订单ID" />
             <input type="text" class="search-filter form-filter filter-keyup" name="fee-title" placeholder="名目" />
 
 

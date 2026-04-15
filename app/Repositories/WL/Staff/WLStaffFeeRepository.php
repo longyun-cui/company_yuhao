@@ -86,6 +86,8 @@ class WLStaffFeeRepository {
         if(!empty($post_data['description'])) $query->where('description', 'like', "%{$post_data['description']}%");
         if(!empty($post_data['keyword'])) $query->where('content', 'like', "%{$post_data['keyword']}%");
 
+        if(!empty($post_data['order_id'])) $query->where('order_id', "{$post_data['order_id']}");
+
         // 状态 [|]
         if(!empty($post_data['item_status']))
         {

@@ -28,6 +28,7 @@
                     d.name = $('input[name="fee-name"]').val();
                     d.username = $('input[name="fee-username"]').val();
                     d.title = $('input[name="fee-title"]').val();
+                    d.order_id = $('input[name="fee-order-id"]').val();
                     d.fee_type = $tableSearch.find('select[name="fee-type"]').val();
                     d.is_recorded = $tableSearch.find('select[name="fee-is-recorded"]').val();
                 },

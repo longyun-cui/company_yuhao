@@ -28,6 +28,7 @@
                     d.mobile = $('input[name="finance-mobile"]').val();
                     d.name = $('input[name="finance-name"]').val();
                     d.title = $('input[name="finance-title"]').val();
+                    d.order_id = $('input[name="finance-order-id"]').val();
                     d.transaction_type = $tableSearch.find('select[name="finance-transaction-type"]').val();
                 },
             },
