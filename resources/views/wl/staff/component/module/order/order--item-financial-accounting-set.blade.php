@@ -37,13 +37,31 @@
                     </div>
                     {{--开票--}}
                     <div class="form-group">
-                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 运费开票 & 开票点数</label>
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 开票费用 & 金额 & 点数(收)</label>
                         <div class="col-md-9 ">
-                            <div class="col-sm-6 col-md-6 padding-0">
-                                <input type="text" class="form-control form-filter" name="accounting_invoice_amount" placeholder="运费开票" />
+                            <div class="col-sm-3 col-md-3 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_invoice_total" placeholder="开票金额(收)" />
                             </div>
-                            <div class="col-sm-6 col-md-6 padding-0">
-                                <input type="text" class="form-control form-filter" name="accounting_invoice_point" placeholder="开票点数" />
+                            <div class="col-sm-3 col-md-3 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_invoice_amount" placeholder="开票金额(收)" />
+                            </div>
+                            <div class="col-sm-3 col-md-3 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_invoice_point" placeholder="开票点数(收)" />
+                            </div>
+                        </div>
+                    </div>
+                    {{--开票--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 开票费用 & 金额 & 票点(支)</label>
+                        <div class="col-md-9 ">
+                            <div class="col-sm-3 col-md-3 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_fee_invoice_total" placeholder="开票费用(支)" />
+                            </div>
+                            <div class="col-sm-3 col-md-3 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_fee_invoice_amount" placeholder="开票金额(支)" />
+                            </div>
+                            <div class="col-sm-3 col-md-3 padding-0">
+                                <input type="text" class="form-control form-filter" name="accounting_fee_invoice_point" placeholder="票点(支)" />
                             </div>
                         </div>
                     </div>
@@ -76,7 +94,7 @@
                     </div>
                     {{--气费--}}
                     <div class="form-group">
-                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 总气费 & 油卡 & 现金</label>
+                        <label class="control-label col-md-3"><sup class="text-red">*</sup> 总气费 & 气卡 & 现金</label>
                         <div class="col-md-9 ">
                             <div class="col-sm-4 col-md-4 padding-0">
                                 <input type="text" class="form-control form-filter" name="accounting_gas_total" placeholder="总气费" />

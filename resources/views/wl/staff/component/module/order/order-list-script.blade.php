@@ -1496,8 +1496,13 @@
                         $modal.find('input[name="accounting_freight_cash"]').val(parseFloat($response.data.financial_receipt_for_freight_cash));
                         $modal.find('input[name="accounting_freight_oil_card"]').val(parseFloat($response.data.financial_receipt_for_freight_oil_card));
 
+                        $modal.find('input[name="accounting_invoice_total"]').val(parseFloat($response.data.financial_receipt_for_invoice_total));
                         $modal.find('input[name="accounting_invoice_amount"]').val(parseFloat($response.data.financial_receipt_for_invoice_amount));
                         $modal.find('input[name="accounting_invoice_point"]').val(parseFloat($response.data.financial_receipt_for_invoice_point));
+
+                        $modal.find('input[name="accounting_fee_invoice_total"]').val(parseFloat($response.data.financial_fee_for_invoice_total));
+                        $modal.find('input[name="accounting_fee_invoice_amount"]').val(parseFloat($response.data.financial_fee_for_invoice_amount));
+                        $modal.find('input[name="accounting_fee_invoice_point"]').val(parseFloat($response.data.financial_fee_for_invoice_point));
 
                         $modal.find('input[name="accounting_oil_total"]').val(parseFloat($response.data.financial_fee_for_oil_total));
                         $modal.find('input[name="accounting_oil_card"]').val(parseFloat($response.data.financial_fee_for_oil_card));

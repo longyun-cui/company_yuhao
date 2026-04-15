@@ -2997,6 +2997,21 @@ class WLStaffOrderRepository {
 
             $order_update_date['financial_receipt_for_freight_oil_card'] = $financial_receipt_for_freight_oil_card;
         }
+
+
+        // 开票费用(收入)
+        $financial_receipt_for_invoice_total = (float)$post_data['accounting_invoice_total'];
+        if((float)$order->financial_receipt_for_invoice_total != $financial_receipt_for_invoice_total)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_receipt_for_invoice_total';
+            $operation['title'] = '开票金额';
+            $operation['before'] = (float)$order->financial_receipt_for_invoice_total;
+            $operation['after'] = $financial_receipt_for_invoice_total;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_receipt_for_invoice_total'] = $financial_receipt_for_invoice_total;
+        }
         // 开票金额
         $financial_receipt_for_invoice_amount = (float)$post_data['accounting_invoice_amount'];
         if((float)$order->financial_receipt_for_invoice_amount != $financial_receipt_for_invoice_amount)
@@ -3022,6 +3037,47 @@ class WLStaffOrderRepository {
             $operation_record_data[] = $operation;
 
             $order_update_date['financial_receipt_for_invoice_point'] = $financial_receipt_for_invoice_point;
+        }
+
+
+        // 开票费用(支出)
+        $financial_fee_for_invoice_total = (float)$post_data['accounting_fee_invoice_total'];
+        if((float)$order->financial_fee_for_invoice_total != $financial_fee_for_invoice_total)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_invoice_total';
+            $operation['title'] = '开票金额';
+            $operation['before'] = (float)$order->financial_fee_for_invoice_total;
+            $operation['after'] = $financial_fee_for_invoice_total;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_invoice_total'] = $financial_fee_for_invoice_total;
+        }
+        // 开票金额
+        $financial_fee_for_invoice_amount = (float)$post_data['accounting_fee_invoice_amount'];
+        if((float)$order->financial_fee_for_invoice_amount != $financial_fee_for_invoice_amount)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_invoice_amount';
+            $operation['title'] = '开票金额';
+            $operation['before'] = (float)$order->financial_fee_for_invoice_amount;
+            $operation['after'] = $financial_fee_for_invoice_amount;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_invoice_amount'] = $financial_fee_for_invoice_amount;
+        }
+        // 开票点数
+        $financial_fee_for_invoice_point = (float)$post_data['accounting_fee_invoice_point'];
+        if((float)$order->financial_fee_for_invoice_point != $financial_fee_for_invoice_point)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_invoice_point';
+            $operation['title'] = '开票点数';
+            $operation['before'] = (float)$order->financial_fee_for_invoice_point;
+            $operation['after'] = v;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_invoice_point'] = $financial_fee_for_invoice_point;
         }
 
 
@@ -3495,6 +3551,7 @@ class WLStaffOrderRepository {
         $fee_calculation['financial_fee_for_transfer_cost'] = 0;
         $fee_calculation['financial_fee_for_insurance_cost'] = 0;
         $fee_calculation['financial_fee_for_loan_cost'] = 0;
+        $fee_calculation['financial_fee_for_invoice_total'] = 0;
         $fee_calculation['financial_fee_for_others'] = 0;
 
         $fee_calculation['financial_deduction_total'] = 0;
@@ -3610,6 +3667,10 @@ class WLStaffOrderRepository {
                     else if($fee_title_num == 92)
                     {
                         $fee_calculation['financial_fee_for_administrative'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 96)
+                    {
+                        $fee_calculation['financial_fee_for_invoice_total'] += $fee_amount;
                     }
                     else if($fee_title_num == 99)
                     {
@@ -3911,6 +3972,19 @@ class WLStaffOrderRepository {
             $operation_record_data[] = $operation;
 
             $order_update_date['financial_fee_for_administrative'] = $financial_fee_for_administrative;
+        }
+        // 开票费
+        $financial_fee_for_invoice_total = (float)$fee_calculation['financial_fee_for_invoice_total'];
+        if((float)$order->financial_fee_for_invoice_total != $financial_fee_for_invoice_total)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_invoice_total';
+            $operation['title'] = '开票费';
+            $operation['before'] = (float)$order->financial_fee_for_invoice_total;
+            $operation['after'] = $financial_fee_for_invoice_total;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_invoice_total'] = $financial_fee_for_invoice_total;
         }
         // 其他费用
         $financial_fee_for_others = (float)$fee_calculation['financial_fee_for_others'];
