@@ -106,19 +106,26 @@ class WL_Common_Order extends Model
         'financial_expense_to_be_confirm',
 
 
+        'financial_receipt_total',
         'financial_receipt_for_freight_cash',
         'financial_receipt_for_freight_oil_card',
         'financial_receipt_for_invoice_fee',
         'financial_receipt_for_invoice_amount',
         'financial_receipt_for_invoice_point',
 
+
+        'financial_deduction_total',
         'financial_deduction_for_time_limitation',
         'financial_deduction_for_others',
 
+
+        'financial_fine_total',
         'financial_fine_for_driver',
         'financial_fine_for_assessment',
         'financial_fine_for_others',
 
+
+        'financial_fee_total',
         'oil_amount',
         'oil_unit_price',
         'oil_mileage',

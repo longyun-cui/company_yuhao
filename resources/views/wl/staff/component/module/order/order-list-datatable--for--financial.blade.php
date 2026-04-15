@@ -1965,7 +1965,7 @@
                     "title": "操作",
                     "data": 'id',
                     "className": "",
-                    "width": "240px",
+                    "width": "280px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
 
@@ -1987,7 +1987,7 @@
                         var $html =
                             $html_fee+
                             $html_accounting+
-                            // $html_calculation+
+                            $html_calculation+
                             $html_operation_record+
                             // $html_abandon+
                             '';

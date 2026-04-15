@@ -3469,42 +3469,165 @@ class WLStaffOrderRepository {
         if(!$order) return response_error([],"【订单】不存在警告，请刷新页面重试！");
 
 
-        $receipt_amount = 0;
-        $fee_amount = 0;
-        $deduction_amount = 0;
-        $fine_amount = 0;
+        $fee_calculation = [];
+        $fee_calculation['financial_receipt_total'] = 0;
+
+        $fee_calculation['financial_fee_total'] = 0;
+        $fee_calculation['financial_fee_for_oil_total'] = 0;
+        $fee_calculation['financial_fee_for_oil_cash'] = 0;
+        $fee_calculation['financial_fee_for_oil_card'] = 0;
+        $fee_calculation['financial_fee_for_gas_total'] = 0;
+        $fee_calculation['financial_fee_for_gas_cash'] = 0;
+        $fee_calculation['financial_fee_for_gas_card'] = 0;
+        $fee_calculation['financial_fee_for_toll_total'] = 0;
+        $fee_calculation['financial_fee_for_toll_cash'] = 0;
+        $fee_calculation['financial_fee_for_toll_etc'] = 0;
+        $fee_calculation['financial_fee_for_parking'] = 0;
+        $fee_calculation['financial_fee_for_salary'] = 0;
+        $fee_calculation['financial_fee_for_bonus'] = 0;
+        $fee_calculation['financial_fee_for_information'] = 0;
+        $fee_calculation['financial_fee_for_administrative'] = 0;
+        $fee_calculation['financial_fee_for_shipping_cost'] = 0;
+        $fee_calculation['financial_fee_for_urea_cost'] = 0;
+        $fee_calculation['financial_fee_for_repair_cost'] = 0;
+        $fee_calculation['financial_fee_for_maintenance_cost'] = 0;
+        $fee_calculation['financial_fee_for_inspection_cost'] = 0;
+        $fee_calculation['financial_fee_for_transfer_cost'] = 0;
+        $fee_calculation['financial_fee_for_insurance_cost'] = 0;
+        $fee_calculation['financial_fee_for_loan_cost'] = 0;
+        $fee_calculation['financial_fee_for_others'] = 0;
+
+        $fee_calculation['financial_deduction_total'] = 0;
+        $fee_calculation['financial_fine_total'] = 0;
 
         $fee_list = WL_Common_Fee::select('fee_category','fee_type','fee_title','fee_title_num','fee_amount')
             ->where('order_id',$item_id)
             ->get();
         if(count($fee_list) > 0)
         {
-            $fee_calculation = [];
-            $fee_calculation['receipt_amount'] = 0;
-            $fee_calculation['fee_amount'] = 0;
-            $fee_calculation['deduction_amount'] = 0;
-            $fee_calculation['fine_amount'] = 0;
+
             foreach($fee_list as $k => $v)
             {
-                if($v->fee_type == 1)
+                $fee_type = $v->fee_type;
+                $fee_amount = $v->fee_amount;
+                $fee_title_num = $v->fee_title_num;
+
+                if($fee_type == 1)
                 {
-                    $receipt_amount += $v->fee_amount;
+                    $fee_calculation['financial_receipt_total'] += $v->fee_amount;
                 }
-                else if($v->fee_type == 99)
+                else if($fee_type == 99)
                 {
-                    $fee_amount += $v->fee_amount;
+                    $fee_calculation['financial_fee_total'] += $fee_amount;
+                    if($fee_title_num == 1)
+                    {
+                        $fee_calculation['financial_fee_for_oil_total'] += $fee_amount;
+                        $fee_calculation['financial_fee_for_oil_cash'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 2)
+                    {
+                        $fee_calculation['financial_fee_for_oil_total'] += $fee_amount;
+                        $fee_calculation['financial_fee_for_oil_card'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 11)
+                    {
+                        $fee_calculation['financial_fee_for_gas_total'] += $fee_amount;
+                        $fee_calculation['financial_fee_for_gas_cash'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 12)
+                    {
+                        $fee_calculation['financial_fee_for_gas_total'] += $fee_amount;
+                        $fee_calculation['financial_fee_for_gas_card'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 13)
+                    {
+                        $fee_calculation['financial_fee_for_gas_total'] += $fee_amount;
+                        $fee_calculation['financial_fee_for_gas_card'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 14)
+                    {
+                        $fee_calculation['financial_fee_for_gas_total'] += $fee_amount;
+                        $fee_calculation['financial_fee_for_gas_card'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 21)
+                    {
+                        $fee_calculation['financial_fee_for_toll_total'] += $fee_amount;
+                        $fee_calculation['financial_fee_for_toll_cash'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 22)
+                    {
+                        $fee_calculation['financial_fee_for_toll_total'] += $fee_amount;
+                        $fee_calculation['financial_fee_for_toll_etc'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 31)
+                    {
+                        $fee_calculation['financial_fee_for_parking'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 32)
+                    {
+                        $fee_calculation['financial_fee_for_shipping_cost'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 41)
+                    {
+                        $fee_calculation['financial_fee_for_urea_cost'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 61)
+                    {
+                        $fee_calculation['financial_fee_for_repair_cost'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 62)
+                    {
+                        $fee_calculation['financial_fee_for_maintenance_cost'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 63)
+                    {
+                        $fee_calculation['financial_fee_for_inspection_cost'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 64)
+                    {
+                        $fee_calculation['financial_fee_for_transfer_cost'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 65)
+                    {
+                        $fee_calculation['financial_fee_for_insurance_cost'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 71)
+                    {
+                        $fee_calculation['financial_fee_for_loan_cost'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 81)
+                    {
+                        $fee_calculation['financial_fee_for_salary'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 82)
+                    {
+                        $fee_calculation['financial_fee_for_bonus'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 91)
+                    {
+                        $fee_calculation['financial_fee_for_information'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 92)
+                    {
+                        $fee_calculation['financial_fee_for_administrative'] += $fee_amount;
+                    }
+                    else if($fee_title_num == 99)
+                    {
+                        $fee_calculation['financial_fee_for_others'] += $fee_amount;
+                    }
                 }
-                else if($v->fee_type == 101)
+                else if($fee_type == 101)
                 {
-                    $deduction_amount += $v->fee_amount;
+                    $fee_calculation['financial_deduction_total'] += $fee_amount;
                 }
-                else if($v->fee_type == 111)
+                else if($fee_type == 111)
                 {
-                    $fine_amount += $v->fee_amount;
+                    $fee_calculation['financial_fine_total'] += $fee_amount;
                 }
             }
         }
         else return response_error([],"该订单没有费用记录！");
+
 
 
         $timestamp = time();
@@ -3536,60 +3659,10 @@ class WLStaffOrderRepository {
 //            $operation['after'] = $accounting_datetime;
 //            $operation_record_data[] = $operation;
 //        }
-        // 运费现金
-        $accounting_freight_cash = (float)$post_data['accounting_freight_cash'];
-        if((float)$order->financial_receipt_for_freight_cash != $accounting_freight_cash)
-        {
-            $operation = [];
-            $operation['field'] = 'financial_receipt_for_freight_cash';
-            $operation['title'] = '运费现金';
-            $operation['before'] = (float)$order->financial_receipt_for_freight_cash;
-            $operation['after'] = $accounting_freight_cash;
-            $operation_record_data[] = $operation;
 
-            $order_update_date['financial_receipt_for_freight_cash'] = $accounting_freight_cash;
-        }
-        // 运费油卡
-        $financial_receipt_for_freight_oil_card = (float)$post_data['accounting_freight_oil_card'];
-        if((float)$order->financial_receipt_for_freight_oil_card != $financial_receipt_for_freight_oil_card)
-        {
-            $operation = [];
-            $operation['field'] = 'financial_receipt_for_freight_oil_card';
-            $operation['title'] = '运费油卡';
-            $operation['before'] = (float)$order->financial_receipt_for_freight_oil_card;
-            $operation['after'] = $financial_receipt_for_freight_oil_card;
-            $operation_record_data[] = $operation;
 
-            $order_update_date['financial_receipt_for_freight_oil_card'] = $financial_receipt_for_freight_oil_card;
-        }
-        // 开票金额
-        $financial_receipt_for_invoice_amount = (float)$post_data['accounting_invoice_amount'];
-        if((float)$order->financial_receipt_for_invoice_amount != $financial_receipt_for_invoice_amount)
-        {
-            $operation = [];
-            $operation['field'] = 'financial_receipt_for_invoice_amount';
-            $operation['title'] = '开票金额';
-            $operation['before'] = (float)$order->financial_receipt_for_invoice_amount;
-            $operation['after'] = $financial_receipt_for_invoice_amount;
-            $operation_record_data[] = $operation;
-
-            $order_update_date['financial_receipt_for_invoice_amount'] = $financial_receipt_for_invoice_amount;
-        }
-        // 开票点数
-        $financial_receipt_for_invoice_point = (float)$post_data['accounting_invoice_point'];
-        if((float)$order->financial_receipt_for_invoice_point != $financial_receipt_for_invoice_point)
-        {
-            $operation = [];
-            $operation['field'] = 'financial_receipt_for_invoice_point';
-            $operation['title'] = '开票点数';
-            $operation['before'] = (float)$order->financial_receipt_for_invoice_point;
-            $operation['after'] = $financial_receipt_for_invoice_point;
-            $operation_record_data[] = $operation;
-
-            $order_update_date['financial_receipt_for_invoice_point'] = $financial_receipt_for_invoice_point;
-        }
         // 总油费
-        $financial_fee_for_oil_total = (float)$post_data['accounting_oil_total'];
+        $financial_fee_for_oil_total = (float)$fee_calculation['financial_fee_for_oil_total'];
         if((float)$order->financial_fee_for_oil_total != $financial_fee_for_oil_total)
         {
             $operation = [];
@@ -3602,7 +3675,7 @@ class WLStaffOrderRepository {
             $order_update_date['financial_fee_for_oil_total'] = $financial_fee_for_oil_total;
         }
         // 油费-油卡
-        $financial_fee_for_oil_card = (float)$post_data['accounting_oil_card'];
+        $financial_fee_for_oil_card = (float)$fee_calculation['financial_fee_for_oil_card'];
         if((float)$order->financial_fee_for_oil_card != $financial_fee_for_oil_card)
         {
             $operation = [];
@@ -3615,7 +3688,7 @@ class WLStaffOrderRepository {
             $order_update_date['financial_fee_for_oil_card'] = $financial_fee_for_oil_card;
         }
         // 油费-现金
-        $financial_fee_for_oil_cash = (float)$post_data['accounting_oil_cash'];
+        $financial_fee_for_oil_cash = (float)$fee_calculation['financial_fee_for_oil_cash'];
         if((float)$order->financial_fee_for_oil_cash != $financial_fee_for_oil_cash)
         {
             $operation = [];
@@ -3627,47 +3700,51 @@ class WLStaffOrderRepository {
 
             $order_update_date['financial_fee_for_oil_cash'] = $financial_fee_for_oil_cash;
         }
-        // 公里数
-        $oil_mileage = (int)$post_data['accounting_oil_mileage'];
-        if((float)$order->oil_mileage != $oil_mileage)
+
+
+        // 总气费
+        $financial_fee_for_gas_total = (float)$fee_calculation['financial_fee_for_gas_total'];
+        if((float)$order->financial_fee_for_gas_total != $financial_fee_for_gas_total)
         {
             $operation = [];
-            $operation['field'] = 'oil_mileage';
-            $operation['title'] = '公里数';
-            $operation['before'] = (int)$order->oil_mileage;
-            $operation['after'] = $oil_mileage;
+            $operation['field'] = 'financial_fee_for_gas_total';
+            $operation['title'] = '总气费';
+            $operation['before'] = (float)$order->financial_fee_for_gas_total;
+            $operation['after'] = $financial_fee_for_gas_total;
             $operation_record_data[] = $operation;
 
-            $order_update_date['oil_mileage'] = $oil_mileage;
+            $order_update_date['financial_fee_for_gas_total'] = $financial_fee_for_gas_total;
         }
-        // 油耗
-        $oil_consumption = (float)$post_data['accounting_oil_consumption'];
-        if((float)$order->oil_consumption != $oil_consumption)
+        // 气费-气卡
+        $financial_fee_for_gas_card = (float)$fee_calculation['financial_fee_for_gas_card'];
+        if((float)$order->financial_fee_for_gas_card != $financial_fee_for_gas_card)
         {
             $operation = [];
-            $operation['field'] = 'oil_consumption';
-            $operation['title'] = '油耗';
-            $operation['before'] = (float)$order->oil_consumption;
-            $operation['after'] = $oil_consumption;
+            $operation['field'] = 'financial_fee_for_gas_card';
+            $operation['title'] = '气费-气卡';
+            $operation['before'] = (float)$order->financial_fee_for_gas_card;
+            $operation['after'] = $financial_fee_for_gas_card;
             $operation_record_data[] = $operation;
 
-            $order_update_date['oil_consumption'] = $oil_consumption;
+            $order_update_date['financial_fee_for_gas_card'] = $financial_fee_for_gas_card;
         }
-        // 单价
-        $oil_unit_price = (float)$post_data['accounting_oil_unit_price'];
-        if((float)$order->oil_unit_price != $oil_unit_price)
+        // 气费-现金
+        $financial_fee_for_gas_cash = (float)$fee_calculation['financial_fee_for_gas_cash'];
+        if((float)$order->financial_fee_for_gas_cash != $financial_fee_for_gas_cash)
         {
             $operation = [];
-            $operation['field'] = 'oil_unit_price';
-            $operation['title'] = '单价';
-            $operation['before'] = (float)$order->oil_unit_price;
-            $operation['after'] = $oil_unit_price;
+            $operation['field'] = 'financial_fee_for_gas_cash';
+            $operation['title'] = '气费-现金';
+            $operation['before'] = (float)$order->financial_fee_for_gas_cash;
+            $operation['after'] = $financial_fee_for_gas_cash;
             $operation_record_data[] = $operation;
 
-            $order_update_date['oil_unit_price'] = $oil_unit_price;
+            $order_update_date['financial_fee_for_gas_cash'] = $financial_fee_for_gas_cash;
         }
+
+
         // 路费-ETC
-        $financial_fee_for_toll_etc = (float)$post_data['accounting_toll_etc'];
+        $financial_fee_for_toll_etc = (float)$fee_calculation['financial_fee_for_toll_etc'];
         if((float)$order->financial_fee_for_toll_etc != $financial_fee_for_toll_etc)
         {
             $operation = [];
@@ -3680,7 +3757,7 @@ class WLStaffOrderRepository {
             $order_update_date['financial_fee_for_toll_etc'] = $financial_fee_for_toll_etc;
         }
         // 路费-现金
-        $financial_fee_for_toll_cash = (float)$post_data['accounting_toll_cash'];
+        $financial_fee_for_toll_cash = (float)$fee_calculation['financial_fee_for_toll_cash'];
         if((float)$order->financial_fee_for_toll_cash != $financial_fee_for_toll_cash)
         {
             $operation = [];
@@ -3693,7 +3770,7 @@ class WLStaffOrderRepository {
             $order_update_date['financial_fee_for_toll_cash'] = $financial_fee_for_toll_cash;
         }
         // 停车费
-        $financial_fee_for_parking = (float)$post_data['accounting_parking'];
+        $financial_fee_for_parking = (float)$fee_calculation['financial_fee_for_parking'];
         if((float)$order->financial_fee_for_parking != $financial_fee_for_parking)
         {
             $operation = [];
@@ -3706,7 +3783,7 @@ class WLStaffOrderRepository {
             $order_update_date['financial_fee_for_parking'] = $financial_fee_for_parking;
         }
         // 工资
-        $financial_fee_for_salary = (float)$post_data['accounting_salary'];
+        $financial_fee_for_salary = (float)$fee_calculation['financial_fee_for_salary'];
         if((float)$order->financial_fee_for_salary != $financial_fee_for_salary)
         {
             $operation = [];
@@ -3719,7 +3796,7 @@ class WLStaffOrderRepository {
             $order_update_date['financial_fee_for_salary'] = $financial_fee_for_salary;
         }
         // 奖金
-        $financial_fee_for_bonus = (float)$post_data['accounting_bonus'];
+        $financial_fee_for_bonus = (float)$fee_calculation['financial_fee_for_bonus'];
         if((float)$order->financial_fee_for_bonus != $financial_fee_for_bonus)
         {
             $operation = [];
@@ -3732,7 +3809,7 @@ class WLStaffOrderRepository {
             $order_update_date['financial_fee_for_bonus'] = $financial_fee_for_bonus;
         }
         // 维修费
-        $financial_fee_for_repair_cost = (float)$post_data['accounting_repair'];
+        $financial_fee_for_repair_cost = (float)$fee_calculation['financial_fee_for_repair_cost'];
         if((float)$order->financial_fee_for_repair_cost != $financial_fee_for_repair_cost)
         {
             $operation = [];
@@ -3745,7 +3822,7 @@ class WLStaffOrderRepository {
             $order_update_date['financial_fee_for_repair_cost'] = $financial_fee_for_repair_cost;
         }
         // 保养费
-        $financial_fee_for_maintenance_cost = (float)$post_data['accounting_maintenance'];
+        $financial_fee_for_maintenance_cost = (float)$fee_calculation['financial_fee_for_maintenance_cost'];
         if((float)$order->financial_fee_for_maintenance_cost != $financial_fee_for_maintenance_cost)
         {
             $operation = [];
@@ -3758,7 +3835,7 @@ class WLStaffOrderRepository {
             $order_update_date['financial_fee_for_maintenance_cost'] = $financial_fee_for_maintenance_cost;
         }
         // 审车费
-        $financial_fee_for_inspection_cost = (float)$post_data['accounting_inspection'];
+        $financial_fee_for_inspection_cost = (float)$fee_calculation['financial_fee_for_inspection_cost'];
         if((float)$order->financial_fee_for_inspection_cost != $financial_fee_for_inspection_cost)
         {
             $operation = [];
@@ -3771,7 +3848,7 @@ class WLStaffOrderRepository {
             $order_update_date['financial_fee_for_inspection_cost'] = $financial_fee_for_inspection_cost;
         }
         // 过户费
-        $financial_fee_for_transfer_cost = (float)$post_data['accounting_transfer'];
+        $financial_fee_for_transfer_cost = (float)$fee_calculation['financial_fee_for_transfer_cost'];
         if((float)$order->financial_fee_for_transfer_cost != $financial_fee_for_transfer_cost)
         {
             $operation = [];
@@ -3784,7 +3861,7 @@ class WLStaffOrderRepository {
             $order_update_date['financial_fee_for_transfer_cost'] = $financial_fee_for_transfer_cost;
         }
         // 保险费
-        $financial_fee_for_insurance_cost = (float)$post_data['accounting_insurance'];
+        $financial_fee_for_insurance_cost = (float)$fee_calculation['financial_fee_for_insurance_cost'];
         if((float)$order->financial_fee_for_insurance_cost != $financial_fee_for_insurance_cost)
         {
             $operation = [];
@@ -3797,7 +3874,7 @@ class WLStaffOrderRepository {
             $order_update_date['financial_fee_for_insurance_cost'] = $financial_fee_for_insurance_cost;
         }
         // 贷款费用
-        $financial_fee_for_loan_cost = (float)$post_data['accounting_loan'];
+        $financial_fee_for_loan_cost = (float)$fee_calculation['financial_fee_for_loan_cost'];
         if((float)$order->financial_fee_for_loan_cost != $financial_fee_for_loan_cost)
         {
             $operation = [];
@@ -3809,8 +3886,34 @@ class WLStaffOrderRepository {
 
             $order_update_date['financial_fee_for_loan_cost'] = $financial_fee_for_loan_cost;
         }
+        // 信息费
+        $financial_fee_for_information = (float)$fee_calculation['financial_fee_for_information'];
+        if((float)$order->financial_fee_for_information != $financial_fee_for_information)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_information';
+            $operation['title'] = '信息费';
+            $operation['before'] = (float)$order->financial_fee_for_information;
+            $operation['after'] = $financial_fee_for_information;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_information'] = $financial_fee_for_information;
+        }
+        // 管理费
+        $financial_fee_for_administrative = (float)$fee_calculation['financial_fee_for_administrative'];
+        if((float)$order->financial_fee_for_administrative != $financial_fee_for_administrative)
+        {
+            $operation = [];
+            $operation['field'] = 'financial_fee_for_administrative';
+            $operation['title'] = '管理费';
+            $operation['before'] = (float)$order->financial_fee_for_administrative;
+            $operation['after'] = $financial_fee_for_administrative;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['financial_fee_for_administrative'] = $financial_fee_for_administrative;
+        }
         // 其他费用
-        $financial_fee_for_others = (float)$post_data['accounting_others'];
+        $financial_fee_for_others = (float)$fee_calculation['financial_fee_for_others'];
         if((float)$order->financial_fee_for_others != $financial_fee_for_others)
         {
             $operation = [];
@@ -3822,27 +3925,14 @@ class WLStaffOrderRepository {
 
             $order_update_date['financial_fee_for_others'] = $financial_fee_for_others;
         }
-        // 费用备注
-        $financial_description = trim($post_data['accounting_description']);
-        if((empty($order->financial_description) && !empty($financial_description)) || (!empty($order->financial_description) && (trim($order->financial_description) != $financial_description)))
-        {
-            $operation = [];
-            $operation['field'] = 'financial_description';
-            $operation['title'] = '费用备注';
-            $operation['before'] = $order->financial_description;
-            $operation['after'] = $financial_description;
-            $operation_record_data[] = $operation;
-
-            $order_update_date['financial_description'] = $financial_description;
-        }
 
 
 
         $record_data["operate_category"] = 1;
-        $record_data["operate_type"] = 81;
+        $record_data["operate_type"] = 91;
         $record_data["client_id"] = $order->client_id;
         $record_data["project_id"] = $order->project_id;
-        $record_data["order_id"] = $operate_id;
+        $record_data["order_id"] = $item_id;
         $record_data["creator_id"] = $me->id;
         $record_data["company_id"] = $me->company_id;
         $record_data["department_id"] = $me->department_id;
@@ -3858,7 +3948,7 @@ class WLStaffOrderRepository {
         DB::beginTransaction();
         try
         {
-            $order = WL_Common_Order::lockForUpdate()->find($operate_id);
+            $order = WL_Common_Order::lockForUpdate()->find($item_id);
             $bool_order = $order->fill($order_update_date)->save();
             if(!$bool_order) throw new Exception("WL_Common_Order--update--fail");
 
