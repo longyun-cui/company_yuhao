@@ -92,16 +92,41 @@
                     </div>
                 </div>
                 {{--出发地 & 目的地--}}
+{{--                <div class="form-group" >--}}
+{{--                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 出发地 & 目的地 & 线路</label>--}}
+{{--                    <div class="col-md-9 ">--}}
+{{--                        <div class="col-sm-3 col-md-3 padding-0">--}}
+{{--                            <input type="text" class="form-control" name="transport_departure_place" placeholder="出发地" value="" data-default="" list="_transport_departure_place_title">--}}
+{{--                        </div>--}}
+{{--                        <div class="col-sm-3 col-md-3 padding-0">--}}
+{{--                            <input type="text" class="form-control" name="transport_destination_place" placeholder="目的地" value="" data-default="" list="_transport_destination_place_title">--}}
+{{--                        </div>--}}
+{{--                        <div class="col-sm-6 col-md-6 padding-0">--}}
+{{--                            <input type="text" class="form-control" name="transport_route" placeholder="线路" value="" data-default="" list="_transport_route_title">--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
                 <div class="form-group" >
-                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 出发地 & 目的地 & 线路</label>
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 出发地</label>
                     <div class="col-md-9 ">
-                        <div class="col-sm-3 col-md-3 padding-0">
+                        <div class="col-sm-12 col-md-12 padding-0">
                             <input type="text" class="form-control" name="transport_departure_place" placeholder="出发地" value="" data-default="" list="_transport_departure_place_title">
                         </div>
-                        <div class="col-sm-3 col-md-3 padding-0">
+                    </div>
+                </div>
+                {{--出发地 & 目的地--}}
+                <div class="form-group" >
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 目的地</label>
+                    <div class="col-md-9 ">
+                        <div class="col-sm-12 col-md-12 padding-0">
                             <input type="text" class="form-control" name="transport_destination_place" placeholder="目的地" value="" data-default="" list="_transport_destination_place_title">
                         </div>
-                        <div class="col-sm-6 col-md-6 padding-0">
+                    </div>
+                </div>
+                <div class="form-group" >
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 线路</label>
+                    <div class="col-md-9 ">
+                        <div class="col-sm-12 col-md-12 padding-0">
                             <input type="text" class="form-control" name="transport_route" placeholder="线路" value="" data-default="" list="_transport_route_title">
                         </div>
                     </div>
@@ -130,29 +155,37 @@
                     </div>
                 </div>
 
-                {{--运费 & 油卡 & 信息费--}}
+                {{--运费 & 油卡 & 串点运费--}}
                 <div class="form-group">
                     <label class="control-label col-md-3"><sup class="text-red">*</sup> 运费 & 油卡 & 串点运费(收)</label>
                     <div class="col-md-9 ">
-                        <div class="col-sm-4 col-md-4 padding-0">
+                        <div class="col-sm-6 col-md-6 padding-0">
                             <input type="text" class="form-control" name="freight_amount" placeholder="运费" value="0" data-default="0">
                         </div>
-                        <div class="col-sm-4 col-md-4 padding-0">
+                        <div class="col-sm-6 col-md-6 padding-0">
                             <input type="text" class="form-control" name="freight_oil_card_amount" placeholder="油卡" value="0" data-default="0">
                         </div>
-                        <div class="col-sm-4 col-md-4 padding-0">
+                    </div>
+                </div>
+
+                {{--串点运费--}}
+                <div class="form-group">
+                    <label class="control-label col-md-3"><sup class="text-red">*</sup> 串点运费(收)</label>
+                    <div class="col-md-9 ">
+                        <div class="col-sm-12 col-md-12 padding-0">
                             <input type="text" class="form-control" name="freight_extra_amount" placeholder="串点运费" value="0" data-default="0">
                         </div>
                     </div>
                 </div>
+
                 {{--开票--}}
                 <div class="form-group">
                     <label class="control-label col-md-3"><sup class="text-red">*</sup> 开票金额 & 票点 (支)</label>
                     <div class="col-md-9 ">
-                        <div class="col-sm-6 col-md-6 padding-0">
+                        <div class="col-sm-4 col-md-4 padding-0">
                             <input type="text" class="form-control" name="financial_receipt_for_invoice_amount" placeholder="开票金额" value="0" data-default="0">
                         </div>
-                        <div class="col-sm-6 col-md-6 padding-0">
+                        <div class="col-sm-4 col-md-4 padding-0">
                             <input type="text" class="form-control" name="financial_receipt_for_invoice_point" placeholder="开票点" value="0.00" data-default="0.00">
                         </div>
                     </div>
