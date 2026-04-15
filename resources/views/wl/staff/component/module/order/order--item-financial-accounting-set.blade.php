@@ -39,13 +39,13 @@
                     <div class="form-group">
                         <label class="control-label col-md-3"><sup class="text-red">*</sup> 开票费用 & 金额 & 点数(收)</label>
                         <div class="col-md-9 ">
-                            <div class="col-sm-3 col-md-3 padding-0">
+                            <div class="col-sm-4 col-md-4 padding-0">
                                 <input type="text" class="form-control form-filter" name="accounting_invoice_total" placeholder="开票金额(收)" />
                             </div>
-                            <div class="col-sm-3 col-md-3 padding-0">
+                            <div class="col-sm-4 col-md-4 padding-0">
                                 <input type="text" class="form-control form-filter" name="accounting_invoice_amount" placeholder="开票金额(收)" />
                             </div>
-                            <div class="col-sm-3 col-md-3 padding-0">
+                            <div class="col-sm-4 col-md-4 padding-0">
                                 <input type="text" class="form-control form-filter" name="accounting_invoice_point" placeholder="开票点数(收)" />
                             </div>
                         </div>
@@ -54,13 +54,13 @@
                     <div class="form-group">
                         <label class="control-label col-md-3"><sup class="text-red">*</sup> 开票费用 & 金额 & 票点(支)</label>
                         <div class="col-md-9 ">
-                            <div class="col-sm-3 col-md-3 padding-0">
+                            <div class="col-sm-4 col-md-4 padding-0">
                                 <input type="text" class="form-control form-filter" name="accounting_fee_invoice_total" placeholder="开票费用(支)" />
                             </div>
-                            <div class="col-sm-3 col-md-3 padding-0">
+                            <div class="col-sm-4 col-md-4 padding-0">
                                 <input type="text" class="form-control form-filter" name="accounting_fee_invoice_amount" placeholder="开票金额(支)" />
                             </div>
-                            <div class="col-sm-3 col-md-3 padding-0">
+                            <div class="col-sm-4 col-md-4 padding-0">
                                 <input type="text" class="form-control form-filter" name="accounting_fee_invoice_point" placeholder="票点(支)" />
                             </div>
                         </div>
