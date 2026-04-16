@@ -533,7 +533,7 @@
                             if(row.trailer_er != null)
                             {
                                 trailer_text = row.trailer_er.name;
-                                if(row.trailer_er.sub_name) trailer_text += ' ('+row.trailer_er.sub_name+')';
+                                if(row.trailer_er.sub_name) trailer_text += ' '+row.trailer_er.sub_name+'';
                                 trailer_html = '<a href="javascript:void(0);" class="text-black">'+trailer_text+'</a>';
                             }
                         }
@@ -613,12 +613,12 @@
                         // }
 
                         // 主驾
-                        if(row.driver_phone) $driver_html = row.driver_name + ' (' +  row.driver_phone + ') <br>';
+                        if(row.driver_phone) $driver_html = row.driver_name + '' +  row.driver_phone + ' <br>';
                         else $driver_html = row.copilot_name;
                         // 副驾
                         if(row.copilot_name)
                         {
-                            if(row.copilot_phone) $copilot_html = row.copilot_name + ' (' +  row.copilot_phone + ')';
+                            if(row.copilot_phone) $copilot_html = row.copilot_name + '' +  row.copilot_phone + '';
                             else $copilot_html = row.copilot_name;
                         }
 

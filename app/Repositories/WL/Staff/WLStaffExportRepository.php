@@ -265,17 +265,20 @@ class WLStaffExportRepository {
             if($v['car_owner_type'] == 1 || $v['car_owner_type'] == 9)
             {
                 $trailer_name = $v['trailer_er']['name'];
-                if($v['trailer_er']['sub_name']) $trailer_name .= ' ('.$v['trailer_er']['sub_name'].')';
+                if($v['trailer_er']['sub_name']) $trailer_name .= ' '.$v['trailer_er']['sub_name'].'';
             }
             else
             {
                 $trailer_name = $v['external_trailer'];
             }
             $cellData[$k]['trailer_er_name'] = $trailer_name;
+
             // 主驾
-            $cellData[$k]['driver_er_name'] = $v['driver_name'].'('.$v['driver_phone'].')';
+//            $cellData[$k]['driver_er_name'] = $v['driver_name'].''.$v['driver_phone'].'';
             // 副驾
-            $cellData[$k]['copilot_er_name'] = $v['copilot_name'].'('.$v['copilot_phone'].')';
+//            $cellData[$k]['copilot_er_name'] = $v['copilot_name'].''.$v['copilot_phone'].'';
+            // 驾驶员
+            $cellData[$k]['driver_er_list'] = $v['driver_name'].''.$v['driver_phone'].''."\r\n".$v['copilot_name'].''.$v['copilot_phone'].'';
 
             // 车型
             $cellData[$k]['car_type'] = $v['car_type'];
@@ -338,8 +341,9 @@ class WLStaffExportRepository {
             'project_er_name'=>'项目',
             'car_er_name'=>'车辆',
             'trailer_er_name'=>'车挂',
-            'driver_er_name'=>'主驾',
-            'copilot_er_name'=>'副驾',
+            'driver_er_list'=>'驾驶员',
+//            'driver_er_name'=>'主驾',
+//            'copilot_er_name'=>'副驾',
             'car_type'=>'车型',
             'task_number'=>'任务编号',
             'transport_departure_place'=>'出发地',
@@ -416,7 +420,9 @@ class WLStaffExportRepository {
 
         $file = Excel::create($title, function($excel) use($cellData) {
             $excel->sheet('订单', function($sheet) use($cellData) {
+
                 $sheet->rows($cellData);
+
                 $sheet->setWidth(array(
                     'A'=>10,
                     'B'=>10,
@@ -426,12 +432,12 @@ class WLStaffExportRepository {
                     'F'=>16,
                     'G'=>32,
                     'H'=>20,
-                    'I'=>20,
-                    'J'=>10,
-                    'K'=>20,
+                    'I'=>10,
+                    'J'=>20,
+                    'K'=>30,
                     'L'=>30,
-                    'M'=>30,
-                    'N'=>12,
+                    'M'=>12,
+                    'N'=>10,
                     'O'=>10,
                     'P'=>10,
                     'Q'=>10,
@@ -443,15 +449,33 @@ class WLStaffExportRepository {
                     'W'=>10,
                     'X'=>10,
                     'Y'=>10,
-                    'Z'=>10,
-                    'AA'=>30,
-                    'AB'=>10,
+                    'Z'=>30,
+                    'AA'=>10,
+                    'AB'=>20,
                     'AC'=>20
                 ));
                 $sheet->setAutoSize(false);
                 $sheet->freezeFirstRow();
+
+
+                $totalRows = count($cellData);
+
+                if ($totalRows > 1) {
+                    // 正确方法：通过 getStyle() 设置自动换行
+                    $sheet->getStyle('H2:H' . $totalRows)->getAlignment()->setWrapText(true);
+
+                    // 设置垂直对齐
+                    $sheet->getStyle('H2:H' . $totalRows)->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_TOP);
+
+
+                    // 设置行高
+//                    for ($i = 2; $i <= $totalRows; $i++) {
+//                        $sheet->setHeight($i, 40);
+//                    }
+                }
+
             });
-        })->export('xls');
+        })->export('xlsx');
 
     }
 
