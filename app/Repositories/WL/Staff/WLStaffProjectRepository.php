@@ -748,7 +748,7 @@ class WLStaffProjectRepository{
 
 
 //        $time_type  = isset($post_data['time_type']) ? $post_data['time_type']  : '';
-        $query_order->where('assign_date','>',date("Y-m-d",strtotime("-14 day")))
+        $query_order->where('assign_date','>=',date("Y-m-d",strtotime("-14 day")))
             ->addSelect(DB::raw("
                     assign_date as date_day,
                     DATE_FORMAT(assign_date,'%e') as day,
