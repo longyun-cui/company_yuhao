@@ -833,6 +833,29 @@ class WLStaffProjectRepository{
         if($limit == -1) $list = $query->get();
         else $list = $query->skip($skip)->take($limit)->get();
 
+
+
+        $total_data = [];
+        $total_data['name'] = '统计';
+        $total_data['order_14'] = 0;
+        $total_data['order_13'] = 0;
+        $total_data['order_12'] = 0;
+        $total_data['order_11'] = 0;
+        $total_data['order_10'] = 0;
+        $total_data['order_9'] = 0;
+        $total_data['order_8'] = 0;
+        $total_data['order_7'] = 0;
+        $total_data['order_6'] = 0;
+        $total_data['order_5'] = 0;
+        $total_data['order_4'] = 0;
+        $total_data['order_3'] = 0;
+        $total_data['order_2'] = 0;
+        $total_data['order_1'] = 0;
+        $total_data['order_0'] = 0;
+        $total_data['order_a'] = 0;
+        $total_data['order_b'] = 0;
+        $total_data['order_c'] = 0;
+
         foreach ($list as $k => $v)
         {
             if(isset($order_list[$v->id]))
@@ -840,6 +863,7 @@ class WLStaffProjectRepository{
                 if(isset($order_list[$v->id][14]))
                 {
                     $list[$k]->order_14 = $order_list[$v->id][14]['order_count'];
+                    $total_data['order_14'] += $order_list[$v->id][14]['order_count'];
                 }
                 else
                 {
@@ -849,6 +873,7 @@ class WLStaffProjectRepository{
                 if(isset($order_list[$v->id][13]))
                 {
                     $list[$k]->order_13 = $order_list[$v->id][13]['order_count'];
+                    $total_data['order_13'] += $order_list[$v->id][13]['order_count'];
                 }
                 else
                 {
@@ -858,6 +883,7 @@ class WLStaffProjectRepository{
                 if(isset($order_list[$v->id][12]))
                 {
                     $list[$k]->order_12 = $order_list[$v->id][12]['order_count'];
+                    $total_data['order_12'] += $order_list[$v->id][12]['order_count'];
                 }
                 else
                 {
@@ -867,6 +893,7 @@ class WLStaffProjectRepository{
                 if(isset($order_list[$v->id][11]))
                 {
                     $list[$k]->order_11 = $order_list[$v->id][11]['order_count'];
+                    $total_data['order_11'] += $order_list[$v->id][11]['order_count'];
                 }
                 else
                 {
@@ -876,6 +903,7 @@ class WLStaffProjectRepository{
                 if(isset($order_list[$v->id][10]))
                 {
                     $list[$k]->order_10 = $order_list[$v->id][10]['order_count'];
+                    $total_data['order_10'] += $order_list[$v->id][10]['order_count'];
                 }
                 else
                 {
@@ -885,6 +913,7 @@ class WLStaffProjectRepository{
                 if(isset($order_list[$v->id][9]))
                 {
                     $list[$k]->order_9 = $order_list[$v->id][9]['order_count'];
+                    $total_data['order_9'] += $order_list[$v->id][9]['order_count'];
                 }
                 else
                 {
@@ -894,6 +923,7 @@ class WLStaffProjectRepository{
                 if(isset($order_list[$v->id][8]))
                 {
                     $list[$k]->order_8 = $order_list[$v->id][8]['order_count'];
+                    $total_data['order_8'] += $order_list[$v->id][8]['order_count'];
                 }
                 else
                 {
@@ -903,6 +933,7 @@ class WLStaffProjectRepository{
                 if(isset($order_list[$v->id][7]))
                 {
                     $list[$k]->order_7 = $order_list[$v->id][7]['order_count'];
+                    $total_data['order_7'] += $order_list[$v->id][7]['order_count'];
                 }
                 else
                 {
@@ -912,6 +943,7 @@ class WLStaffProjectRepository{
                 if(isset($order_list[$v->id][6]))
                 {
                     $list[$k]->order_6 = $order_list[$v->id][6]['order_count'];
+                    $total_data['order_6'] += $order_list[$v->id][6]['order_count'];
                 }
                 else
                 {
@@ -921,6 +953,7 @@ class WLStaffProjectRepository{
                 if(isset($order_list[$v->id][5]))
                 {
                     $list[$k]->order_5 = $order_list[$v->id][5]['order_count'];
+                    $total_data['order_5'] += $order_list[$v->id][5]['order_count'];
                 }
                 else
                 {
@@ -930,6 +963,7 @@ class WLStaffProjectRepository{
                 if(isset($order_list[$v->id][4]))
                 {
                     $list[$k]->order_4 = $order_list[$v->id][4]['order_count'];
+                    $total_data['order_4'] += $order_list[$v->id][4]['order_count'];
                 }
                 else
                 {
@@ -939,6 +973,7 @@ class WLStaffProjectRepository{
                 if(isset($order_list[$v->id][3]))
                 {
                     $list[$k]->order_3 = $order_list[$v->id][3]['order_count'];
+                    $total_data['order_3'] += $order_list[$v->id][3]['order_count'];
                 }
                 else
                 {
@@ -948,6 +983,7 @@ class WLStaffProjectRepository{
                 if(isset($order_list[$v->id][2]))
                 {
                     $list[$k]->order_2 = $order_list[$v->id][2]['order_count'];
+                    $total_data['order_2'] += $order_list[$v->id][2]['order_count'];
                 }
                 else
                 {
@@ -957,6 +993,7 @@ class WLStaffProjectRepository{
                 if(isset($order_list[$v->id][1]))
                 {
                     $list[$k]->order_1 = $order_list[$v->id][1]['order_count'];
+                    $total_data['order_1'] += $order_list[$v->id][1]['order_count'];
                 }
                 else
                 {
@@ -966,6 +1003,7 @@ class WLStaffProjectRepository{
                 if(isset($order_list[$v->id][0]))
                 {
                     $list[$k]->order_0 = $order_list[$v->id][0]['order_count'];
+                    $total_data['order_0'] += $order_list[$v->id][0]['order_count'];
                 }
                 else
                 {
@@ -975,6 +1013,7 @@ class WLStaffProjectRepository{
                 if(isset($order_list[$v->id][-1]))
                 {
                     $list[$k]->order_a = $order_list[$v->id][-1]['order_count'];
+                    $total_data['order_a'] += $order_list[$v->id][-1]['order_count'];
                 }
                 else
                 {
@@ -986,6 +1025,7 @@ class WLStaffProjectRepository{
                 if(isset($order_list[$v->id][-2]))
                 {
                     $list[$k]->order_b = $order_list[$v->id][-2]['order_count'];
+                    $total_data['order_b'] += $order_list[$v->id][-2]['order_count'];
                 }
                 else
                 {
@@ -995,6 +1035,7 @@ class WLStaffProjectRepository{
                 if(isset($order_list[$v->id][-3]))
                 {
                     $list[$k]->order_c = $order_list[$v->id][-3]['order_count'];
+                    $total_data['order_c'] += $order_list[$v->id][-3]['order_count'];
                 }
                 else
                 {
@@ -1047,6 +1088,7 @@ class WLStaffProjectRepository{
                 && ($item->order_14 == 0);
         })->values();
 
+        $list[] = $total_data;
         return datatable_response($list, $draw, $total);
     }
 

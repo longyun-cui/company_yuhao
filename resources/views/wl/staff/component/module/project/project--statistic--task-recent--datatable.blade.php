@@ -107,10 +107,10 @@
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(data)
+                        if(row.name == "统计")
                         {
-                            $(nTd).addClass('_bold-');
-                            $(nTd).addClass('text-red-');
+                            $(nTd).addClass('_bold');
+                            $(nTd).addClass('text-red');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -126,10 +126,10 @@
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(data)
+                        if(row.name == "统计")
                         {
-                            $(nTd).addClass('_bold-');
-                            $(nTd).addClass('text-red-');
+                            $(nTd).addClass('_bold');
+                            $(nTd).addClass('text-red');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -145,10 +145,10 @@
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(data)
+                        if(row.name == "统计")
                         {
                             $(nTd).addClass('_bold');
-                            $(nTd).addClass('text-red-');
+                            $(nTd).addClass('text-red');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -164,10 +164,10 @@
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(data)
+                        if(row.name == "统计")
                         {
-                            $(nTd).addClass('_bold-');
-                            $(nTd).addClass('text-red-');
+                            $(nTd).addClass('_bold');
+                            $(nTd).addClass('text-red');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -183,10 +183,10 @@
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(data)
+                        if(row.name == "统计")
                         {
-                            $(nTd).addClass('_bold-');
-                            $(nTd).addClass('text-red-');
+                            $(nTd).addClass('_bold');
+                            $(nTd).addClass('text-red');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -202,10 +202,10 @@
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(data)
+                        if(row.name == "统计")
                         {
-                            $(nTd).addClass('_bold-');
-                            $(nTd).addClass('text-red-');
+                            $(nTd).addClass('_bold');
+                            $(nTd).addClass('text-red');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -221,10 +221,10 @@
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(data)
+                        if(row.name == "统计")
                         {
-                            $(nTd).addClass('_bold-');
-                            $(nTd).addClass('text-red-');
+                            $(nTd).addClass('_bold');
+                            $(nTd).addClass('text-red');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -240,10 +240,10 @@
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(data)
+                        if(row.name == "统计")
                         {
-                            $(nTd).addClass('_bold-');
-                            $(nTd).addClass('text-red-');
+                            $(nTd).addClass('_bold');
+                            $(nTd).addClass('text-red');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -259,10 +259,10 @@
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(data)
+                        if(row.name == "统计")
                         {
-                            $(nTd).addClass('_bold-');
-                            $(nTd).addClass('text-red-');
+                            $(nTd).addClass('_bold');
+                            $(nTd).addClass('text-red');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -278,10 +278,10 @@
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(data)
+                        if(row.name == "统计")
                         {
-                            $(nTd).addClass('_bold-');
-                            $(nTd).addClass('text-red-');
+                            $(nTd).addClass('_bold');
+                            $(nTd).addClass('text-red');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -297,10 +297,10 @@
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(data)
+                        if(row.name == "统计")
                         {
-                            $(nTd).addClass('_bold-');
-                            $(nTd).addClass('text-red-');
+                            $(nTd).addClass('_bold');
+                            $(nTd).addClass('text-red');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -316,10 +316,10 @@
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(data)
+                        if(row.name == "统计")
                         {
-                            $(nTd).addClass('_bold-');
-                            $(nTd).addClass('text-red-');
+                            $(nTd).addClass('_bold');
+                            $(nTd).addClass('text-red');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -335,10 +335,10 @@
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(data)
+                        if(row.name == "统计")
                         {
-                            $(nTd).addClass('_bold-');
-                            $(nTd).addClass('text-red-');
+                            $(nTd).addClass('_bold');
+                            $(nTd).addClass('text-red');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -354,10 +354,10 @@
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(data)
+                        if(row.name == "统计")
                         {
-                            $(nTd).addClass('_bold-');
-                            $(nTd).addClass('text-red-');
+                            $(nTd).addClass('_bold');
+                            $(nTd).addClass('text-red');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -373,10 +373,10 @@
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(data)
+                        if(row.name == "统计")
                         {
-                            $(nTd).addClass('_bold-');
-                            $(nTd).addClass('text-red-');
+                            $(nTd).addClass('_bold');
+                            $(nTd).addClass('text-red');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -392,10 +392,10 @@
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(data)
+                        if(row.name == "统计")
                         {
-                            $(nTd).addClass('_bold-');
-                            $(nTd).addClass('text-red-');
+                            $(nTd).addClass('_bold');
+                            $(nTd).addClass('text-red');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -411,10 +411,10 @@
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(data)
+                        if(row.name == "统计")
                         {
-                            $(nTd).addClass('_bold-');
-                            $(nTd).addClass('text-red-');
+                            $(nTd).addClass('_bold');
+                            $(nTd).addClass('text-red');
                         }
                     },
                     render: function(data, type, row, meta) {
