@@ -286,6 +286,10 @@ Route::group(['middleware' => ['wl.staff.login']], function () {
     Route::get('/o1/export/order-export', $controller.'@o1__order__export');
 
 
+    // 【导出】
+    Route::post('/o1/record/record-list/datatable-query', $controller.'@o1__record__list__datatable_query');
+
+
 
 
 

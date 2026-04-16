@@ -266,6 +266,7 @@
 
 
     {{--导出--}}
+    @include(env('TEMPLATE_WL_STAFF').'component.export.export-datatable')
     @include(env('TEMPLATE_WL_STAFF').'component.export.export-script')
 
 

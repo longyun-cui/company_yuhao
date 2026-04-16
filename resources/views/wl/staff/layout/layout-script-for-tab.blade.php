@@ -220,6 +220,14 @@
                 {
                     Datatable__for__Finance_List('#'+$config.id);
                 }
+                else if($id == "datatable--export")
+                {
+                    console.log("datatable--export");
+                }
+                else if($id == "datatable-export")
+                {
+                    Datatable__for__Export('#'+$config.id);
+                }
                 else if($id == "datatable-statistic-order-daily")
                 {
                     Datatable_Statistic_Order_Daily('#'+$config.id, $config.chart_id);
