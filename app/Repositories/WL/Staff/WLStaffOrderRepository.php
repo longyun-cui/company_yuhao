@@ -3949,16 +3949,19 @@ class WLStaffOrderRepository {
         }
         // 信息费
         $financial_fee_for_information = (float)$fee_calculation['financial_fee_for_information'];
-        if((float)$order->financial_fee_for_information != $financial_fee_for_information)
+        if($financial_fee_for_information > 0)
         {
-            $operation = [];
-            $operation['field'] = 'financial_fee_for_information';
-            $operation['title'] = '信息费';
-            $operation['before'] = (float)$order->financial_fee_for_information;
-            $operation['after'] = $financial_fee_for_information;
-            $operation_record_data[] = $operation;
+            if((float)$order->financial_fee_for_information != $financial_fee_for_information)
+            {
+                $operation = [];
+                $operation['field'] = 'financial_fee_for_information';
+                $operation['title'] = '信息费';
+                $operation['before'] = (float)$order->financial_fee_for_information;
+                $operation['after'] = $financial_fee_for_information;
+                $operation_record_data[] = $operation;
 
-            $order_update_date['financial_fee_for_information'] = $financial_fee_for_information;
+                $order_update_date['financial_fee_for_information'] = $financial_fee_for_information;
+            }
         }
         // 管理费
         $financial_fee_for_administrative = (float)$fee_calculation['financial_fee_for_administrative'];

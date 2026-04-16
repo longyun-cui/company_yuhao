@@ -29,6 +29,8 @@ use App\Repositories\WL\Staff\WLStaffOrderRepository;
 use App\Repositories\WL\Staff\WLStaffFeeRepository;
 use App\Repositories\WL\Staff\WLStaffFinanceRepository;
 
+use App\Repositories\WL\Staff\WLStaffExportRepository;
+
 
 use Response, Auth, Validator, DB, Exception, Cache, Blade, Carbon, DateTime;
 use QrCode, Excel;
@@ -58,6 +60,8 @@ class WLStaffController extends Controller
     private $fee_repo;
     private $finance_repo;
 
+    private $export_repo;
+
     public function __construct()
     {
         $this->repo = new WLStaffRepository;
@@ -81,6 +85,8 @@ class WLStaffController extends Controller
 
         $this->fee_repo = new WLStaffFeeRepository;
         $this->finance_repo = new WLStaffFinanceRepository;
+
+        $this->export_repo = new WLStaffExportRepository;
     }
 
 
@@ -1004,6 +1010,19 @@ class WLStaffController extends Controller
     public function o1__finance__item_operation_record_list__datatable_query()
     {
         return $this->finance_repo->o1__finance__item_operation_record_list__datatable_query(request()->all());
+    }
+
+
+
+
+
+
+
+
+    // 【财务】删除
+    public function o1__order__export()
+    {
+        return $this->export_repo->o1__order__export(request()->all());
     }
 
 

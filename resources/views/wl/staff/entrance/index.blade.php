@@ -88,6 +88,10 @@
     @include(env('TEMPLATE_WL_STAFF').'component.finance.finance-list')
 
 
+    {{--导出--}}
+    @include(env('TEMPLATE_WL_STAFF').'component.export.export')
+
+
     {{--统计--}}
     {{--统计【订单】--}}
     @include(env('TEMPLATE_WL_STAFF').'component.statistic-order.statistic-view-of-order-by-daily')
@@ -259,6 +263,10 @@
     @include(env('TEMPLATE_WL_STAFF').'component.finance.finance-list-datatable')
     @include(env('TEMPLATE_WL_STAFF').'component.finance.finance-list-script')
     @include(env('TEMPLATE_WL_STAFF').'component.finance.finance--item-operation-record-datatable')
+
+
+    {{--导出--}}
+    @include(env('TEMPLATE_WL_STAFF').'component.export.export-script')
 
 
     {{--统计--}}

@@ -1419,7 +1419,7 @@
 
 
         // 【工单】【财务核算】显示
-        $(".main-wrapper").off('click', ".modal-show--for--order--item-financial-accounting-set").on('click', ".modal-show--for--order--item-financial-accounting-set", function() {
+        $(".main-wrapper").off('click', ".modal-show--for--order--item-financial--accounting-set").on('click', ".modal-show--for--order--item-financial--accounting-set", function() {
             var $that = $(this);
             var $id = $(this).data('id');
             var $row = $that.parents('tr');

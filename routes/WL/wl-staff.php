@@ -259,11 +259,11 @@ Route::group(['middleware' => ['wl.staff.login']], function () {
     Route::post('/o1/fee/fee-list/datatable-query', $controller.'@o1__fee__list__datatable_query');
     Route::post('/o1/fee/item-get', $controller.'@o1__fee__item_get');
     Route::post('/o1/fee/item-save', $controller.'@o1__fee__item_save');
-    // 【工单】删除 & 恢复 & 永久删除
+    // 【费用】删除 & 恢复 & 永久删除
     Route::post('/o1/fee/item-delete', $controller.'@o1__fee__item_delete');
     // 【费用】财务
     Route::post('/o1/fee/item-finance-bookkeeping', $controller.'@o1__fee__item_finance_bookkeeping');
-    // 【工单】操作记录
+    // 【费用】操作记录
     Route::post('/o1/fee/item-operation-record-list/datatable-query', $controller.'@o1__fee__item_operation_record_list__datatable_query');
 
 
@@ -273,11 +273,17 @@ Route::group(['middleware' => ['wl.staff.login']], function () {
     Route::post('/o1/finance/finance-list/datatable-query', $controller.'@o1__finance__list__datatable_query');
     Route::post('/o1/finance/item-get', $controller.'@o1__finance__item_get');
     Route::post('/o1/finance/item-save', $controller.'@o1__finance__item_save');
-    // 【工单】删除 & 恢复 & 永久删除
+    // 【财务】删除 & 恢复 & 永久删除
     Route::post('/o1/finance/item-delete', $controller.'@o1__finance__item_delete');
-    // 【工单】操作记录
+    // 【财务】操作记录
     Route::post('/o1/finance/item-operation-record-list/datatable-query', $controller.'@o1__finance__item_operation_record_list__datatable_query');
 
+
+
+
+
+    // 【导出】
+    Route::get('/o1/export/order-export', $controller.'@o1__order__export');
 
 
 

@@ -1979,15 +1979,16 @@
 
 
                         $html_fee = '<a class="btn btn-xs modal-show--for--order--item-fee-create" data-id="'+data+'">费用</a>';
-                        $html_accounting = '<a class="btn btn-xs modal-show--for--order--item-financial-accounting-set" data-id="'+data+'">财务核对</a>';
                         $html_calculation = '<a class="btn btn-xs order--item-financial--one-click-calculation" data-id="'+data+'">一键核对</a>';
+                        $html_accounting = '<a class="btn btn-xs modal-show--for--order--item-financial--accounting-set" data-id="'+data+'">手工核对</a>';
+
 
 
 
                         var $html =
                             $html_fee+
-                            $html_accounting+
                             $html_calculation+
+                            $html_accounting+
                             $html_operation_record+
                             // $html_abandon+
                             '';
