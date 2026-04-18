@@ -295,7 +295,7 @@
                     "name": 'assign_date',
                     "data": 'assign_date',
                     "className": "",
-                    "width": "90px",
+                    "width": "80px",
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -342,7 +342,7 @@
                     "name": 'task_date',
                     "data": 'task_date',
                     "className": "",
-                    "width": "90px",
+                    "width": "80px",
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -441,7 +441,8 @@
                         if(row.project_er)
                         {
                             // return '<a href="javascript:void(0);" class="text-black">'+row.project_er.name+'</a>';
-                            return '<a class="project-control" data-id="'+row.project_id+'" data-title="'+row.project_er.name+'">'+row.project_er.name+'</a>';
+                            // return '<a class="project-control" data-id="'+row.project_id+'" data-title="'+row.project_er.name+'">'+row.project_er.name+'</a>';
+                            return row.project_er.name;
                         }
                         else return '未指定';
                     }
@@ -450,7 +451,7 @@
                     "title": "车辆",
                     "data": "car_id",
                     "className": "",
-                    "width": "100px",
+                    "width": "80px",
                     "orderable": true,
                     "orderSequence": ["desc", "asc"],
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -484,7 +485,8 @@
                         {
                             if(row.car_er != null)
                             {
-                                car_html = '<a class="car-control" data-id="'+row.car_id+'" data-title="'+row.car_er.name+'">'+row.car_er.name+'</a>';
+                                // car_html = '<a class="car-control" data-id="'+row.car_id+'" data-title="'+row.car_er.name+'">'+row.car_er.name+'</a>';
+                                car_html = row.car_er.car_name;
                             }
                         }
                         else
@@ -498,7 +500,7 @@
                     "title": "车挂",
                     "data": "trailer_id",
                     "className": "",
-                    "width": "120px",
+                    "width": "80px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
@@ -533,8 +535,9 @@
                             if(row.trailer_er != null)
                             {
                                 trailer_text = row.trailer_er.name;
-                                if(row.trailer_er.sub_name) trailer_text += ''+row.trailer_er.sub_name+'';
-                                trailer_html = '<a href="javascript:void(0);" class="text-black">'+trailer_text+'</a>';
+                                // if(row.trailer_er.sub_name) trailer_text += ''+row.trailer_er.sub_name+'';
+                                // trailer_html = '<a href="javascript:void(0);" class="text-black">'+trailer_text+'</a>';
+                                trailer_html = trailer_text;
                             }
                         }
                         else
@@ -550,7 +553,7 @@
                     "title": "驾驶员",
                     "data": "driver_id",
                     "className": "",
-                    "width": "160px",
+                    "width": "120px",
                     "orderable": false,
                     "visible" : true,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -613,15 +616,17 @@
                         // }
 
                         // 主驾
-                        if(row.driver_phone) $driver_html = row.driver_name + '' +  row.driver_phone + '<br>';
-                        else $driver_html = row.copilot_name;
+                        // if(row.driver_phone) $driver_html = row.driver_name + '' +  row.driver_phone + '<br>';
+                        // else $driver_html = row.copilot_name;
                         // 副驾
-                        if(row.copilot_name)
-                        {
-                            if(row.copilot_phone) $copilot_html = row.copilot_name + '' +  row.copilot_phone + '';
-                            else $copilot_html = row.copilot_name;
-                        }
+                        // if(row.copilot_name)
+                        // {
+                        //     if(row.copilot_phone) $copilot_html = row.copilot_name + '' +  row.copilot_phone + '';
+                        //     else $copilot_html = row.copilot_name;
+                        // }
 
+                        $driver_html = row.driver_name;
+                        if(row.copilot_name) $copilot_html = ' / ' + row.copilot_name;
                         return $driver_html + $copilot_html;
                     }
                 },
@@ -728,7 +733,7 @@
                     "name": "car_type",
                     "data": "car_type",
                     "className": "",
-                    "width": "60px",
+                    "width": "50px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)

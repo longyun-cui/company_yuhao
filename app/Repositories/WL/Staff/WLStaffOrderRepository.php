@@ -86,7 +86,7 @@ class WLStaffOrderRepository {
                 'owner'=>function($query) { $query->select('id','name'); },
                 'client_er'=>function($query) { $query->select('id','name'); },
                 'project_er'=>function($query) { $query->select('id','name'); },
-                'car_er'=>function($query) { $query->select('id','name'); },
+                'car_er'=>function($query) { $query->select('id','name','car_name'); },
                 'trailer_er'=>function($query) { $query->select('id','name','sub_name'); },
                 'driver_er'=>function($query) { $query->select('id','driver_name','driver_phone'); },
                 'copilot_er'=>function($query) { $query->select('id','driver_name','driver_phone'); }

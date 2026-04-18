@@ -180,7 +180,7 @@ class WLStaffExportRepository {
                 'creator'=>function($query) { $query->select('id','name'); },
                 'client_er'=>function($query) { $query->select('id','name'); },
                 'project_er'=>function($query) { $query->select('id','name'); },
-                'car_er'=>function($query) { $query->select('id','name'); },
+                'car_er'=>function($query) { $query->select('id','name','car_name'); },
                 'trailer_er'=>function($query) { $query->select('id','name','sub_name'); },
                 'driver_er'=>function($query) { $query->select('id','driver_name','driver_phone'); },
                 'copilot_er'=>function($query) { $query->select('id','driver_name','driver_phone'); }
@@ -253,7 +253,7 @@ class WLStaffExportRepository {
             $car_name = '';
             if($v['car_owner_type'] == 1 || $v['car_owner_type'] == 9)
             {
-                $car_name = $v['car_er']['name'];
+                $car_name = $v['car_er']['car_name'];
             }
             else
             {
@@ -265,7 +265,7 @@ class WLStaffExportRepository {
             if($v['car_owner_type'] == 1 || $v['car_owner_type'] == 9)
             {
                 $trailer_name = $v['trailer_er']['name'];
-                if($v['trailer_er']['sub_name']) $trailer_name .= ' '.$v['trailer_er']['sub_name'].'';
+//                if($v['trailer_er']['sub_name']) $trailer_name .= ' '.$v['trailer_er']['sub_name'].'';
             }
             else
             {
@@ -278,7 +278,9 @@ class WLStaffExportRepository {
             // 副驾
 //            $cellData[$k]['copilot_er_name'] = $v['copilot_name'].''.$v['copilot_phone'].'';
             // 驾驶员
-            $cellData[$k]['driver_er_list'] = $v['driver_name'].''.$v['driver_phone'].''."\r\n".$v['copilot_name'].''.$v['copilot_phone'].'';
+//            $cellData[$k]['driver_er_list'] = $v['driver_name'].''.$v['driver_phone'].''."\r\n".$v['copilot_name'].''.$v['copilot_phone'].'';
+            if($v['copilot_name']) $cellData[$k]['driver_er_list'] = $v['driver_name']." / ".$v['copilot_name'];
+            else $cellData[$k]['driver_er_list'] = $v['driver_name'];
 
             // 车型
             $cellData[$k]['car_type'] = $v['car_type'];
@@ -425,27 +427,27 @@ class WLStaffExportRepository {
 
                 $sheet->setWidth(array(
                     'A'=>10,
-                    'B'=>10,
-                    'C'=>12,
-                    'D'=>12,
-                    'E'=>12,
-                    'F'=>16,
-                    'G'=>32,
-                    'H'=>20,
-                    'I'=>10,
-                    'J'=>20,
+                    'B'=>6,
+                    'C'=>10,
+                    'D'=>10,
+                    'E'=>10,
+                    'F'=>10,
+                    'G'=>10,
+                    'H'=>16,
+                    'I'=>6,
+                    'J'=>16,
                     'K'=>30,
                     'L'=>30,
                     'M'=>12,
-                    'N'=>10,
-                    'O'=>10,
-                    'P'=>10,
-                    'Q'=>10,
-                    'R'=>10,
-                    'S'=>10,
-                    'T'=>10,
-                    'U'=>10,
-                    'V'=>10,
+                    'N'=>8,
+                    'O'=>8,
+                    'P'=>8,
+                    'Q'=>8,
+                    'R'=>8,
+                    'S'=>8,
+                    'T'=>8,
+                    'U'=>8,
+                    'V'=>8,
                     'W'=>10,
                     'X'=>10,
                     'Y'=>10,
