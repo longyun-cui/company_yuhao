@@ -123,7 +123,7 @@
             </li>
             @endif
             {{--车辆列表--}}
-            @if(in_array($me->staff_category,[0,1,9]))
+            @if(in_array($me->staff_category,[0,1,9,81]))
             <li class="treeview">
                 <a class="tab-control datatable-control"
                    data-type="create"
@@ -145,7 +145,7 @@
             </li>
             @endif
             {{--司机列表--}}
-            @if(in_array($me->staff_category,[0,1,9]))
+            @if(in_array($me->staff_category,[0,1,9,81]))
             <li class="treeview">
                 <a class="tab-control datatable-control"
                    data-type="create"
@@ -170,7 +170,7 @@
             
             
             {{--客户列表--}}
-            @if(in_array($me->staff_category,[0,1,9]))
+            @if(in_array($me->staff_category,[0,1,9,81]))
             <li class="treeview _none-">
                 <a class="tab-control datatable-control"
                    data-type="create"
@@ -194,7 +194,7 @@
 
 
             {{--项目列表--}}
-            @if(in_array($me->staff_category,[0,1,9]))
+            @if(in_array($me->staff_category,[0,1,9,81]))
             <li class="treeview _none-">
                 <a class="tab-control datatable-control"
                    data-type="create"
@@ -218,7 +218,7 @@
 
 
 
-
+            @if(in_array($me->staff_category,[0,1,9,81]))
             <li class="treeview">
                 <a class="tab-control datatable-control"
                    data-type="create"
@@ -238,6 +238,9 @@
                     <span>车辆位置</span>
                 </a>
             </li>
+            @endif
+
+
             @if(in_array($me->staff_category,[0,1,9,81]))
                 <li class="treeview">
                     <a class="tab-control datatable-control"
@@ -324,6 +327,7 @@
             @endif
 
             {{--工单列表--}}
+            @if(in_array($me->staff_category,[0,1,9,81]))
             <li class="treeview _none-">
                 <a class="tab-control datatable-control"
                    data-type="create"
@@ -343,7 +347,9 @@
                     <span>订单列表</span>
                 </a>
             </li>
+            @endif
             {{--工单列表--}}
+            @if(in_array($me->staff_category,[0,1,9,81]))
             <li class="treeview _none-">
                 <a class="tab-control datatable-control"
                    data-type="create"
@@ -363,14 +369,16 @@
                     <span>重复订单</span>
                 </a>
             </li>
+            @endif
             {{--工单列表--}}
+            @if(in_array($me->staff_category,[0,1,9,31,81]))
             <li class="treeview _none-">
                 <a class="tab-control datatable-control"
                    data-type="create"
                    data-unique="y"
                    data-id="order-list--for--financial"
                    data-title='订单(财务)'
-                   data-content='<i class="fa fa-file-text text-red"></i> 订单列表(财务)'
+                   data-content='<i class="fa fa-file-text text-red"></i> 订单列表(财务用)'
                    data-icon='<i class="fa fa-file-text text-red"></i>'
 
                    data-datatable-type="create"
@@ -383,8 +391,9 @@
                     <span>订单列表(财务)</span>
                 </a>
             </li>
+            @endif
             {{--费用列表--}}
-            @if(in_array($me->staff_position,[0,1,9,11,41,61,71,81,99]))
+            @if(in_array($me->staff_category,[0,1,9,31,81]))
             <li class="treeview">
                 <a class="tab-control datatable-control"
                    data-type="create"
@@ -406,7 +415,7 @@
             </li>
             @endif
             {{--财务列表--}}
-            @if(in_array($me->staff_position,[0,1,9,11,41,61,71,81,99]))
+            @if(in_array($me->staff_category,[0,1,9,31,81]))
             <li class="treeview">
                 <a class="tab-control datatable-control"
                    data-type="create"

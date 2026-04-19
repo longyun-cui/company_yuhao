@@ -788,6 +788,173 @@ class WLStaffStaffRepository {
     }
 
 
+    // 【员工-管理】管理员-重置密码
+    public function o1__staff__item_password_reset($post_data)
+    {
+        $messages = [
+            'operate.required' => 'operate.required.',
+            'item_id.required' => 'item_id.required.',
+        ];
+        $v = Validator::make($post_data, [
+            'operate' => 'required',
+            'item_id' => 'required',
+        ], $messages);
+        if ($v->fails())
+        {
+            $messages = $v->errors();
+            return response_error([],$messages->first());
+        }
+
+        $operate = $post_data["operate"];
+        if($operate != 'staff--item-password-reset') return response_error([],"参数【operate】有误！");
+        $id = $post_data["item_id"];
+        if(intval($id) !== 0 && !$id) return response_error([],"参数【ID】有误！");
+
+        $this->get_me();
+        $me = $this->me;
+
+        // 判断用户操作权限
+        if(!in_array($me->staff_position,[0,1,9,11,31,41,51,61,71])) return response_error([],"你没有操作权限！");
+
+        // 判断对象是否合法
+        $mine = WL_Common_Staff::withTrashed()->find($id);
+        if(!$mine) return response_error([],"该【员工】不存在，刷新页面重试！");
+        if($mine->staff_position <= $me->staff_position) return response_error([],"你不能操作比你职级更高或同级的员工！");
+
+        // 启动数据库事务
+        DB::beginTransaction();
+        try
+        {
+            $mine->password = password_encode('12345678');
+            $bool = $mine->save();
+            if(!$bool) throw new Exception("DK_Common__Staff--update--fail");
+
+            DB::commit();
+            return response_success([]);
+        }
+        catch (Exception $e)
+        {
+            DB::rollback();
+            $msg = '操作失败，请重试！';
+            $msg = $e->getMessage();
+//            exit($e->getMessage());
+            return response_fail([],$msg);
+        }
+
+    }
+    // 【员工-管理】管理员-修改密码
+    public function o1__staff__item_password_change($post_data)
+    {
+        $messages = [
+            'operate.required' => 'operate.required.',
+            'item_id.required' => 'item_id.required.',
+            'password.required' => '请输入密码！',
+            'password_confirm.required' => '请输入确认密码！',
+        ];
+        $v = Validator::make($post_data, [
+            'operate' => 'required',
+            'item_id' => 'required',
+            'password' => 'required',
+            'password_confirm' => 'required',
+        ], $messages);
+        if ($v->fails())
+        {
+            $messages = $v->errors();
+            return response_error([],$messages->first());
+        }
+
+
+        $operate = $post_data["operate"];
+        if($operate != 'staff--item-password-change') return response_error([],"参数【operate】有误！");
+        $id = $post_data["item_id"];
+        if(intval($id) !== 0 && !$id) return response_error([],"参数【ID】有误！");
+
+        $this->get_me();
+        $me = $this->me;
+
+        // 判断用户操作权限
+        if(!in_array($me->staff_position,[0,1,9,11,31,41,51,61,71])) return response_error([],"你没有操作权限！");
+
+        // 判断对象是否合法
+        $mine = WL_Common_Staff::withTrashed()->find($id);
+        if(!$mine) return response_error([],"该【员工】不存在，刷新页面重试！");
+        if($mine->staff_position <= $me->staff_position) return response_error([],"你不能操作比你职级更高或同级的员工！");
+
+        $password = $post_data["password"];
+        $confirm = $post_data["password_confirm"];
+        if($password != $confirm) return response_error([],"两次密码不一致！");
+
+//        if(!password_is_legal($password)) ;
+        $pattern = '/^[a-zA-Z0-9]{1}[a-zA-Z0-9]{5,19}$/i';
+        if(!preg_match($pattern,$password)) return response_error([],"密码格式不正确！");
+
+
+        // 启动数据库事务
+        DB::beginTransaction();
+        try
+        {
+            $mine->password = password_encode($password);
+            $bool = $mine->save();
+            if(!$bool) throw new Exception("DK_Common__Staff--update--fail");
+
+            DB::commit();
+            return response_success([]);
+        }
+        catch (Exception $e)
+        {
+            DB::rollback();
+            $msg = '操作失败，请重试！';
+            $msg = $e->getMessage();
+//            exit($e->getMessage());
+            return response_fail([],$msg);
+        }
+
+    }
+
+
+    // 【员工】登录
+    public function o1__staff__item_login($post_data)
+    {
+        $messages = [
+            'operate.required' => 'operate.required.',
+            'item_id.required' => 'item_id.required.',
+        ];
+        $v = Validator::make($post_data, [
+            'operate' => 'required',
+            'item_id' => 'required',
+        ], $messages);
+        if ($v->fails())
+        {
+            $messages = $v->errors();
+            return response_error([],$messages->first());
+        }
+
+
+        $operate = $post_data["operate"];
+        if($operate != 'staff--item-login') return response_error([],"参数【operate】有误！");
+        $item_id = $post_data["item_id"];
+        if(intval($item_id) !== 0 && !$item_id) return response_error([],"参数【ID】有误！");
+
+        $this->get_me();
+        $me = $this->me;
+
+        // 判断用户操作权限
+        if(!in_array($me->staff_category,[0,1,9])) return response_error([],"你没有操作权限！");
+//        if(!in_array($me->staff_position,[0,1,9,11,31,41,51,61,71])) return response_error([],"你没有操作权限！");
+
+        // 判断对象是否合法
+        $mine = WL_Common_Staff::find($item_id);
+        if(!$mine) return response_error([],"该【员工】不存在，刷新页面重试！");
+
+        $token = request()->get('_token');
+        Auth::guard('wl_staff')->login($mine,true);
+//        Auth::guard('wl_staff')->user()->only_token = $token;
+        Auth::guard('wl_staff')->user()->save();
+        return response_success();
+
+    }
+
+
     // 【员工】【操作记录】返回-列表-数据
     public function o1__staff__item_operation_record_list__datatable_query($post_data)
     {

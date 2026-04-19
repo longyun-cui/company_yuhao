@@ -236,7 +236,7 @@
                 {
                     "title": "操作",
                     "data": "id",
-                    "width": "240px",
+                    "width": "260px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
 
@@ -245,7 +245,8 @@
                         var $html_able = '';
                         var $html_delete = '';
                         var $html_promote = '';
-                        var $html_password_reset = '<a class="btn btn-xs item-password-reset-submit" data-id="'+data+'">重置密码</a>';
+                        var $html_login = '<a class="btn btn-xs staff--item-login-submit" data-id="'+data+'">登录</a>';
+                        var $html_password_reset = '<a class="btn btn-xs staff--item-password-reset-submit" data-id="'+data+'">重置密码</a>';
                         var $html_operation_record = '<a class="btn btn-xs modal-show--for--staff--item-operation-record" data-id="'+data+'">记录</a>';
 
                         if(row.user_category == 1)
@@ -296,6 +297,7 @@
                             $html_able+
                             $html_delete+
                             $html_operation_record+
+                            $html_login+
                             // '<a class="btn btn-xs project--item-statistic" data-id="'+data+'">统计</a>'+
                             // '<a class="btn btn-xs project--item-login-submit" data-id="'+data+'">登录</a>'+
                             '';
