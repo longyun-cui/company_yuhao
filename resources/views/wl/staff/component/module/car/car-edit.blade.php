@@ -80,9 +80,9 @@
 
                     {{--车辆编号--}}
                     <div class="form-group">
-                        <label class="control-label col-md-2">车辆编号</label>
+                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 车辆编号</label>
                         <div class="col-md-9 ">
-                            <input type="text" class="form-control" name="car_number" placeholder="车辆编号" value="">
+                            <input type="text" class="form-control" name="car_number" placeholder="车辆编号" value="0">
                         </div>
                     </div>
 

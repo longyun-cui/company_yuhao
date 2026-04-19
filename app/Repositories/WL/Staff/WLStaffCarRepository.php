@@ -190,13 +190,17 @@ class WLStaffCarRepository {
 //        dd($post_data);
         $messages = [
             'operate.required' => 'operate.required.',
-            'name.required' => '请输入车牌号！',
+            'name.required' => '请输入车牌名称！',
 //            'name.unique' => '该车牌号已存在！',
+            'ca_name.required' => '请输入真实车牌号！',
+            'car_number.required' => '请输入车编号，默认填0！',
         ];
         $v = Validator::make($post_data, [
             'operate' => 'required',
             'name' => 'required',
 //            'name' => 'required|unique:yh_car,name',
+            'car_name' => 'required',
+            'car_number' => 'required',
         ], $messages);
         if ($v->fails())
         {
