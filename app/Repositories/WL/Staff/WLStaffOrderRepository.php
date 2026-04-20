@@ -2551,7 +2551,7 @@ class WLStaffOrderRepository {
             if(!empty($transaction_payment_method))
             {
                 $operation = [];
-                $operation['field'] = 'fee_payment_method';
+                $operation['field'] = 'transaction_payment_method';
                 $operation['title'] = '付款方式';
                 $operation['before'] = '';
                 $operation['after'] = $transaction_payment_method;

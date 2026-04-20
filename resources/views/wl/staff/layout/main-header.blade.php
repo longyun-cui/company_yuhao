@@ -253,6 +253,15 @@
                                 <i class="fa fa-file-excel-o text-yellow"></i> 导入工单
                             </a>
                         </li>
+                            <li class="header">
+                                <a href="javascript:void(0);" class="modal-show--for--fee-import"
+                                   data-form-id="form--for--fee--import--by-excel"
+                                   data-modal-id="modal--for--fee--import--by-excel"
+                                   data-title="导入费用"
+                                >
+                                    <i class="fa fa-file-excel-o text-yellow"></i> 导入费用
+                                </a>
+                            </li>
                         @endif
 
                         <li class="footer"><a href="#">See All Messages</a></li>

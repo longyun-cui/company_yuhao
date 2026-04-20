@@ -158,6 +158,7 @@
 
     {{--费用--}}
     @include(env('TEMPLATE_WL_STAFF').'component.fee.fee-edit')
+    @include(env('TEMPLATE_WL_STAFF').'component.fee.fee-import--by-excel')
     @include(env('TEMPLATE_WL_STAFF').'component.fee.fee--item-finance-bookkeeping')
     @include(env('TEMPLATE_WL_STAFF').'component.fee.fee--item-operation-record')
     {{--财务--}}

@@ -4,6 +4,7 @@ namespace App\Repositories\WL\Staff;
 use App\Models\WL\Common\WL_Common_Finance;
 use App\Models\WL\Common\WL_Common_Fee;
 
+use App\Models\WL\Common\WL_Common_Car;
 use App\Models\WL\Common\WL_Common_Order;
 use App\Models\WL\Common\WL_Common_Order_Operation_Record;
 
@@ -56,6 +57,567 @@ class WLStaffFeeRepository {
     }
 
 
+
+
+    // 【费用】导入
+    public function o1__fee__import__save($post_data)
+    {
+        $messages = [
+            'operate.required' => 'operate.required.',
+            'fee-type.required' => '请选择类型！',
+            'fee-record-type.required' => '请选择记录类型！',
+//            'fee-title.required' => '请输入名目！',
+//            'fee-amount.required' => '请输入金额！',
+//            'fee-datetime.required' => '请输入时间！',
+//            'name.unique' => '该部门号已存在！',
+        ];
+        $v = Validator::make($post_data, [
+            'operate' => 'required',
+            'fee-type' => 'required',
+            'fee-record-type' => 'required',
+//            'fee-title' => 'required',
+//            'fee-amount' => 'required',
+//            'fee-datetime' => 'required',
+//            'name' => 'required|unique:dk_department,name',
+        ], $messages);
+        if ($v->fails())
+        {
+            $messages = $v->errors();
+            return response_error([],$messages->first());
+        }
+
+        $this->get_me();
+        $me = $this->me;
+
+//        if(!in_array($me->staff_category,[0,1,11,19])) return response_error([],"你没有操作权限！");
+
+
+        $timestamp = time();
+        $date = date('Y-m-d', $timestamp);
+        $datetime = date('Y-m-d H:i:s', $timestamp);
+
+
+        $operate = $post_data["operate"];
+        $operate_type = $operate["type"];
+        $operate_id = $operate['id'];
+
+
+        $fee_type = $post_data['fee-type'];
+        if(!in_array($fee_type,[1,99,101,111])) return response_error([],"费用类型有误！");
+
+        $fee_record_type = $post_data['fee-record-type'];
+
+
+        // 附件
+        if(!empty($post_data["upload-file"]))
+        {
+
+//            $result = upload_storage($post_data["attachment"]);
+//            $result = upload_storage($post_data["attachment"], null, null, 'assign');
+            $result = upload_file_storage($post_data["upload-file"],null,'wl/unique/attachment','');
+            if($result["result"])
+            {
+//                $mine->attachment_name = $result["name"];
+//                $mine->attachment_src = $result["local"];
+//                $mine->save();
+            }
+            else throw new Exception("file--upload--fail");
+        }
+
+        $upload_file = storage_resource_path($result["local"]);
+
+        $data = Excel::load($upload_file, function($reader) {
+
+//            $reader->takeColumns(50);
+            $reader->limitColumns(20);
+
+//            $reader->takeRows(200);
+//            $reader->limitRows(200);
+
+            $reader->ignoreEmpty();
+
+            $data = $reader->all();
+//            $data = $reader->toArray();
+
+        })->get();
+        $data = $data->toArray();
+//        dd($data);
+
+
+        $import_list = [];
+
+        foreach($data as $key => $value)
+        {
+            $import_data = [];
+
+
+            $car_name = !empty($value['car_name']) ? trim($value['car_name']) : null;
+            $assign_date = !empty($value['assign_date']) ? trim($value['assign_date']) : null;
+
+            $fee_title = !empty($value['fee_title']) ? trim($value['fee_title']) : null;
+            $fee_amount = !empty($value['fee_amount']) ? (float)trim($value['fee_amount']) : 0;
+            $fee_datetime = !empty($value['fee_datetime']) ? trim($value['fee_datetime']) : null;
+            $fee_description = !empty($value['fee_description']) ? trim($value['fee_description']) : null;
+
+
+            if($car_name && $assign_date && $fee_title && $fee_amount)
+            {
+                $import_data['car_name'] = $car_name;
+                $import_data['assign_date'] = date('Y-m-d', strtotime($assign_date));
+            }
+            else continue;
+
+            $transaction_payment_method = !empty($value['transaction_payment_method']) ? trim($value['transaction_payment_method']) : null;
+            $transaction_datetime = !empty($value['transaction_datetime']) ? trim($value['transaction_datetime']) : null;
+            if(empty($transaction_datetime)) $transaction_datetime = $fee_datetime;
+            $transaction_account_from = !empty($value['transaction_account_from']) ? trim($value['transaction_account_from']) : null;
+            $transaction_account_to = !empty($value['transaction_account_to']) ? trim($value['transaction_account_to']) : null;
+            $transaction_reference_no = !empty($value['transaction_reference_no']) ? trim($value['transaction_reference_no']) : null;
+            $transaction_description = !empty($value['transaction_description']) ? trim($value['transaction_description']) : null;
+            if(empty($transaction_description)) $transaction_description = $fee_description;
+
+
+            $operation_record_data = [];
+
+
+            // 操作
+            if(true)
+            {
+                $operation = [];
+                $operation['operation'] = 'item.fee';
+                $operation['field'] = '';
+                $operation['title'] = '操作';
+                $operation['before'] = '';
+                $operation['after'] = '费用导入';
+                $operation_record_data[] = $operation;
+            }
+            // 类型
+            if(!empty($fee_type))
+            {
+                $operation = [];
+                $operation['field'] = 'fee_type';
+                $operation['title'] = '类型';
+                $operation['before'] = '';
+                if($fee_type == 1)
+                {
+                    $operation['after'] = "收入";
+                }
+                else if($fee_type == 99)
+                {
+                    $operation['after'] = "费用";
+                }
+                else if($fee_type == 101)
+                {
+                    $operation['after'] = "订单扣款";
+                }
+                else if($fee_type == 111)
+                {
+                    $operation['after'] = "司机罚款";
+                }
+                else
+                {
+                    $operation['after'] = $fee_type;
+                }
+                $operation_record_data[] = $operation;
+            }
+            // 时间
+            if(!empty($fee_datetime))
+            {
+                $operation = [];
+                $operation['field'] = 'fee_datetime';
+                $operation['title'] = '时间';
+                $operation['before'] = '';
+                $operation['after'] = $fee_datetime;
+                $operation_record_data[] = $operation;
+            }
+            // 金额
+            if(!empty($fee_amount))
+            {
+                $operation = [];
+                $operation['field'] = 'fee_amount';
+                $operation['title'] = '金额';
+                $operation['before'] = '';
+                $operation['after'] = $fee_amount;
+                $operation_record_data[] = $operation;
+            }
+            // 名目
+//        $fee_title = $post_data['fee-title'];
+//        if(!empty($fee_title))
+//        {
+//            $operation = [];
+//            $operation['field'] = 'fee_title';
+//            $operation['title'] = '名目';
+//            $operation['before'] = '';
+//            $operation['after'] = $fee_title;
+//            $operation_record_data[] = $operation;
+//        }
+            $fee_title_key = 0;
+            if($fee_type == 1)
+            {
+            }
+            else if($fee_type == 99)
+            {
+                $key = array_search($fee_title,config('wl.common-config.fee_title'));
+                if($key) $fee_title_key = $key;
+            }
+            else if($fee_type == 101)
+            {
+                $key = array_search($fee_title,config('wl.common-config.deduction_title'));
+                if($key) $fee_title_key = $key;
+            }
+            else if($fee_type == 111)
+            {
+                $key = array_search($fee_title,config('wl.common-config.fine_title'));
+                if($key) $fee_title_key = $key;
+            }
+            if(!empty($fee_title))
+            {
+                $operation = [];
+                $operation['field'] = 'fee_title';
+                $operation['title'] = '名目';
+                $operation['before'] = '';
+                $operation['after'] = $fee_title;
+                $operation_record_data[] = $operation;
+            }
+            else return response_error([],"【名目】不能为空！");
+            // 说明
+            if(!empty($fee_description))
+            {
+                $operation = [];
+                $operation['field'] = 'fee_description';
+                $operation['title'] = '说明';
+                $operation['before'] = '';
+                $operation['after'] = $fee_description;
+                $operation_record_data[] = $operation;
+            }
+
+
+            // 记录类型
+            if(!empty($fee_record_type))
+            {
+                $operation = [];
+                $operation['field'] = 'fee_record_type';
+                $operation['title'] = '记录类型';
+                $operation['before'] = '';
+                if($fee_record_type == 1)
+                {
+                    $operation['after'] = "普通记录";
+                }
+                else if($fee_record_type == 81)
+                {
+                    $operation['after'] = "财务入账";
+                }
+                else if($fee_record_type == 41)
+                {
+                    $operation['after'] = "代收";
+                }
+                else if($fee_record_type == 49)
+                {
+                    $operation['after'] = "垫付";
+                }
+                else
+                {
+                    $operation['after'] = $fee_record_type;
+                }
+                $operation_record_data[] = $operation;
+            }
+
+            // 当记录类型为[财务入账时]
+            if(in_array($fee_type,[1,99]) && $fee_record_type == 81)
+            {
+                // 交易时间
+                if(!empty($transaction_datetime))
+                {
+                    $operation = [];
+                    $operation['field'] = 'transaction_datetime';
+                    $operation['title'] = '交易时间';
+                    $operation['before'] = '';
+                    $operation['after'] = $transaction_datetime;
+                    $operation_record_data[] = $operation;
+                }
+                // 付款方式
+                if(!empty($transaction_payment_method))
+                {
+                    $operation = [];
+                    $operation['field'] = 'transaction_payment_method';
+                    $operation['title'] = '付款方式';
+                    $operation['before'] = '';
+                    $operation['after'] = $transaction_payment_method;
+                    $operation_record_data[] = $operation;
+                }
+                // 交易账号
+//            $transaction_account = $post_data['fee-transaction-account'];
+                // 付款账号
+                if(!empty($transaction_account_from))
+                {
+                    $operation = [];
+                    $operation['field'] = 'transaction_account_from';
+                    $operation['title'] = '付款账号';
+                    $operation['before'] = '';
+                    $operation['after'] = $transaction_account_from;
+                    $operation_record_data[] = $operation;
+                }
+                // 收款账号
+                if(!empty($transaction_account_to))
+                {
+                    $operation['field'] = 'transaction_account_to';
+                    $operation['title'] = '收款账号';
+                    $operation['before'] = '';
+                    $operation['after'] = $transaction_account_to;
+                    $operation_record_data[] = $operation;
+                }
+                // 交易单号
+                if(!empty($transaction_reference_no))
+                {
+                    $operation = [];
+                    $operation['field'] = 'transaction_reference_no';
+                    $operation['title'] = '交易单号';
+                    $operation['before'] = '';
+                    $operation['after'] = $transaction_reference_no;
+                    $operation_record_data[] = $operation;
+                }
+                // 交易说明
+                if(!empty($transaction_description))
+                {
+                    $operation = [];
+                    $operation['field'] = 'transaction_description';
+                    $operation['title'] = '交易说明';
+                    $operation['before'] = '';
+                    $operation['after'] = $transaction_description;
+                    $operation_record_data[] = $operation;
+                }
+            }
+
+
+
+            // 操作记录
+            $record_data = [];
+            $record_data["operate_category"] = 81;
+            $record_data["operate_type"] = 1;
+//            $record_data["order_id"] = $order->id;
+//            $record_data["client_id"] = $order->client_id;
+//            $record_data["project_id"] = $order->project_id;
+            $record_data["creator_id"] = $me->id;
+            $record_data["company_id"] = $me->company_id;
+            $record_data["department_id"] = $me->department_id;
+            $record_data["team_id"] = $me->team_id;
+            $record_data["custom_date"] = $fee_datetime;
+            $record_data["custom_datetime"] = $fee_datetime;
+            $record_data["content"] = json_encode($operation_record_data);
+            $record_data["created_at"] = $timestamp;
+            $record_data["updated_at"] = $timestamp;
+
+            $import_data['record_data'] = $record_data;
+
+
+
+
+            // 费用记录
+            $fee_data = [];
+            $fee_data["fee_category"] = 1;
+            $fee_data["fee_type"] = $fee_type;
+            $fee_data["fee_date"] = $fee_datetime;
+            $fee_data["fee_datetime"] = $fee_datetime;
+            $fee_data["fee_amount"] = $fee_amount;
+            $fee_data["fee_title"] = $fee_title;
+            $fee_data["fee_title_num"] = $fee_title_key;
+            $fee_data["fee_description"] = $fee_description;
+
+//            $fee_data["order_id"] = $order->id;
+//            $fee_data["client_id"] = $order->client_id;
+//            $fee_data["project_id"] = $order->project_id;
+//            $fee_data["order_assign_date"] = $order->assign_date;
+//            $fee_data["order_task_date"] = $order->task_date;
+//            $fee_data["car_id"] = $order->car_id;
+//            $fee_data["driver_id"] = $order->driver_id;
+            $fee_data["creator_id"] = $me->id;
+            $fee_data["company_id"] = $me->company_id;
+            $fee_data["department_id"] = $me->department_id;
+            $fee_data["team_id"] = $me->team_id;
+            if(in_array($fee_type,[1,99]) && $fee_record_type == 81)
+            {
+                $record_data["operate_type"] = 88;
+
+                $fee_data["is_recorded"] = 1;
+                $fee_data["recorder_id"] = $me->id;
+                $fee_data["recorded_date"] = $datetime;
+                $fee_data["recorded_datetime"] = $datetime;
+            }
+            $fee_data["created_at"] = $timestamp;
+            $fee_data["updated_at"] = $timestamp;
+
+            $import_data['fee_data'] = $fee_data;
+
+
+
+
+            // 财务记录
+            if(in_array($fee_type,[1,99]) && $fee_record_type == 81)
+            {
+                $finance_data = [];
+                $finance_data["transaction_category"] = 1;
+                $finance_data["transaction_type"] = $fee_type;
+                $finance_data["transaction_date"] = $transaction_datetime;
+                $finance_data["transaction_datetime"] = $transaction_datetime;
+                $finance_data["transaction_amount"] = $fee_amount;
+                $finance_data["transaction_title"] = $fee_title;
+                $finance_data["transaction_description"] = $transaction_description;
+                $finance_data["transaction_payment_method"] = $transaction_payment_method;
+                $finance_data["transaction_account_from"] = $transaction_account_from;
+                $finance_data["transaction_account_to"] = $transaction_account_to;
+                $finance_data["transaction_reference_no"] = $transaction_reference_no;
+
+//                $finance_data["order_id"] = $order->id;
+//                $finance_data["client_id"] = $order->client_id;
+//                $finance_data["project_id"] = $order->project_id;
+//                $finance_data["order_assign_date"] = $order->assign_date;
+//                $finance_data["order_task_date"] = $order->task_date;
+//                $finance_data["car_id"] = $order->car_id;
+//                $finance_data["driver_id"] = $order->driver_id;
+                $finance_data["creator_id"] = $me->id;
+                $finance_data["company_id"] = $me->company_id;
+                $finance_data["department_id"] = $me->department_id;
+                $finance_data["team_id"] = $me->team_id;
+                $finance_data["created_at"] = $timestamp;
+                $finance_data["updated_at"] = $timestamp;
+
+                $import_data['finance_data'] = $finance_data;
+            }
+
+
+            $import_list[] = $import_data;
+
+        }
+//        dd($import_list);
+//        dd(count($import_list));
+
+
+
+        // 启动数据库事务
+        DB::beginTransaction();
+        try
+        {
+            $count = 0;
+
+            foreach($import_list as $k => $v)
+            {
+
+                $this_car_name = $v['car_name'];
+                $this_assign_date = $v['assign_date'];
+
+                $car =  WL_Common_Car::select('*')->where('car_name',$this_car_name)->first();
+                if(!$car) continue;
+
+                $order = WL_Common_Order::select('*')
+                    ->where('car_id',$car->id)
+                    ->where('assign_date',$this_assign_date)
+                    ->first();
+                if(!$order) continue;
+
+
+                $this_fee_data = $v['fee_data'];
+
+                $this_fee_data["created_type"] = 101;
+                $this_fee_data["order_id"] = $order->id;
+                $this_fee_data["client_id"] = $order->client_id;
+                $this_fee_data["project_id"] = $order->project_id;
+                $this_fee_data["order_assign_date"] = $order->assign_date;
+                $this_fee_data["order_task_date"] = $order->task_date;
+                $this_fee_data["car_id"] = $order->car_id;
+                $this_fee_data["driver_id"] = $order->driver_id;
+
+                $fee = new WL_Common_Fee;
+                $bool_fee = $fee->fill($this_fee_data)->save();
+                if($bool_fee)
+                {
+                    $this_record_data = $v['record_data'];
+
+                    $this_record_data["order_id"] = $order->id;
+                    $this_record_data["client_id"] = $order->id;
+                    $this_record_data["project_id"] = $order->id;
+
+                    $this_record_data["fee_id"] = $fee->id;
+
+                    // 财务记录
+                    if(in_array($fee_type,[1,99]) && $fee_record_type == 81)
+                    {
+                        $this_finance_data = $v['finance_data'];
+
+                        $this_finance_data["created_type"] = 101;
+                        $this_finance_data["order_id"] = $order->id;
+                        $this_finance_data["client_id"] = $order->client_id;
+                        $this_finance_data["project_id"] = $order->project_id;
+                        $this_finance_data["order_assign_date"] = $order->assign_date;
+                        $this_finance_data["order_task_date"] = $order->task_date;
+                        $this_finance_data["car_id"] = $order->car_id;
+                        $this_finance_data["driver_id"] = $order->driver_id;
+
+                        $finance = new WL_Common_Finance;
+                        $this_finance_data["fee_id"] = $fee->id;
+                        $bool_finance = $finance->fill($this_finance_data)->save();
+                        if($bool_finance)
+                        {
+                            $this_record_data["finance_id"] = $finance->id;
+
+                            $fee->finance_id = $finance->id;
+                            $bool_fee_2 = $fee->save();
+                            if(!$bool_fee_2) throw new Exception("WL_Common_Fee--update--fail");
+                        }
+                    }
+
+                    $order_operation_record = new WL_Common_Order_Operation_Record;
+                    $bool_oor = $order_operation_record->fill($this_record_data)->save();
+                    if($bool_oor)
+                    {
+                        $fee->order_operation_record_id = $order_operation_record->id;
+                        $bool_fee_3 = $fee->save();
+                        if(!$bool_fee_3) throw new Exception("WL_Common_Fee--update--fail");
+
+
+                        $lock_order = WL_Common_Order::lockForUpdate()->find($order->id);
+                        if($fee_type == 1)
+                        {
+                            $lock_order->financial_income_total += $this_fee_data['fee_amount'];
+                        }
+                        else if($fee_type == 99)
+                        {
+                            $lock_order->financial_expense_total += $this_fee_data['fee_amount'];
+                        }
+                        else if($fee_type == 101)
+                        {
+                            $lock_order->financial_deduction_total += $this_fee_data['fee_amount'];
+                        }
+                        else if($fee_type == 111)
+                        {
+                            $lock_order->financial_fine_total += $this_fee_data['fee_amount'];
+                        }
+                        $lock_order->last_operation_datetime = $datetime;
+                        $lock_order->last_operation_date = $datetime;
+                        $bool_order = $lock_order->save();
+                        if(!$bool_order) throw new Exception("WL_Common_Order--update--fail");
+                    }
+                    else throw new Exception("WL_Staff_Record_Operation--insert--fail");
+                }
+                else throw new Exception("WL_Common_Fee--insert--fail");
+
+                $count += 1;
+
+            }
+
+
+            DB::commit();
+            return response_success(['count'=>$count]);
+        }
+        catch (Exception $e)
+        {
+            DB::rollback();
+            $msg = '操作失败，请重试！';
+            $msg = $e->getMessage();
+//            exit($e->getMessage());
+            return response_fail([],$msg);
+        }
+
+    }
 
 
     /*

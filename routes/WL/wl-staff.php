@@ -262,6 +262,8 @@ Route::group(['middleware' => ['wl.staff.login']], function () {
     Route::post('/o1/fee/fee-list/datatable-query', $controller.'@o1__fee__list__datatable_query');
     Route::post('/o1/fee/item-get', $controller.'@o1__fee__item_get');
     Route::post('/o1/fee/item-save', $controller.'@o1__fee__item_save');
+    // 【费用】导入
+    Route::post('/o1/fee/import--save', $controller.'@o1__fee__import__save');
     // 【费用】删除 & 恢复 & 永久删除
     Route::post('/o1/fee/item-delete', $controller.'@o1__fee__item_delete');
     // 【费用】财务
