@@ -454,9 +454,9 @@ class WLStaffExportRepository {
                     'W'=>10,
                     'X'=>10,
                     'Y'=>10,
-                    'Z'=>30,
-                    'AA'=>10,
-                    'AB'=>20,
+                    'Z'=>10,
+                    'AA'=>30,
+                    'AB'=>10,
                     'AC'=>20
                 ));
                 $sheet->setAutoSize(false);
