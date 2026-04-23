@@ -292,6 +292,8 @@ class WLStaffExportRepository {
             $cellData[$k]['transport_destination_place'] = $v['transport_destination_place'];
             // 线路
             $cellData[$k]['transport_route'] = $v['transport_route'];
+            // 公里数
+            $cellData[$k]['transport_distance'] = $v['transport_distance'];
 
             //
             $settlement_period_name = '';
@@ -351,6 +353,7 @@ class WLStaffExportRepository {
             'transport_departure_place'=>'出发地',
             'transport_destination_place'=>'目的地',
             'transport_route'=>'线路',
+            'transport_distance'=>'公里数',
             'settlement_period_name'=>'账期',
             'freight_amount'=>'运费·收',
             'freight_oil_card_amount'=>'油卡·收',
