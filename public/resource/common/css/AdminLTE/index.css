@@ -38,7 +38,7 @@ table.dataTable tfoot th,
 table.dataTable tfoot td { text-align:center; vertical-align: middle; }
 
 table.dataTable tbody th,
-table.dataTable tbody td { padding:8px 4px; line-height:20px; }
+table.dataTable tbody td { padding:4px 2px; line-height:16px; }
 
 table.dataTable thead > tr > th { padding-left:0; }
 table.dataTable thead > tr > th.text-left { padding-left:4px; }
