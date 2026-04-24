@@ -781,7 +781,7 @@
                     "title": "出发地",
                     "data": "transport_departure_place",
                     "className": "",
-                    "width": "80px",
+                    "width": "100px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
@@ -806,7 +806,7 @@
                     "title": "目的地",
                     "data": "transport_destination_place",
                     "className": "",
-                    "width": "80px",
+                    "width": "100px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
