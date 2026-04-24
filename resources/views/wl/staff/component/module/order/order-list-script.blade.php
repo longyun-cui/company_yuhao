@@ -120,6 +120,7 @@
 
                         // 运费 & 油卡 & 共建车费 & 信息费
                         $modal.find('input[name="freight_amount"]').val(parseFloat($response.data.freight_amount));
+                        $modal.find('input[name="freight_extra_amount"]').val(parseFloat($response.data.freight_extra_amount));
                         $modal.find('input[name="freight_oil_card_amount"]').val(parseFloat($response.data.freight_oil_card_amount));
                         $modal.find('input[name="cooperative_vehicle_amount"]').val(parseFloat($response.data.cooperative_vehicle_amount));
                         $modal.find('input[name="financial_fee_for_information"]').val(parseFloat($response.data.financial_fee_for_information));
