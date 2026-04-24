@@ -419,7 +419,7 @@
                     "title": "项目",
                     "data": "project_id",
                     "className": "",
-                    "width": "80px",
+                    "width": "72px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
@@ -553,7 +553,7 @@
                     "title": "驾驶员",
                     "data": "driver_id",
                     "className": "",
-                    "width": "120px",
+                    "width": "100px",
                     "orderable": false,
                     "visible" : true,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -831,7 +831,7 @@
                     "title": "线路",
                     "data": "transport_route",
                     "className": "",
-                    "width": "160px",
+                    "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
@@ -854,7 +854,7 @@
                 },
 
                 {
-                    "title": "距离(km)",
+                    "title": "距离",
                     "name": "transport_distance",
                     "data": "transport_distance",
                     "className": "bg-route",
@@ -1764,7 +1764,7 @@
                     },
                     render: function(data, type, row, meta) {
                         var $income_should = parseFloat(row.freight_amount) - parseFloat(row.financial_deduction_total);
-                        return parseFloat($income_should);
+                        return parseFloat($income_should.toFixed(2));
                     }
                 },
                 {
@@ -1811,7 +1811,7 @@
                     },
                     render: function(data, type, row, meta) {
                         var $income_pending = parseFloat(row.freight_amount) - parseFloat(row.financial_deduction_total) - parseFloat(row.financial_income_total);
-                        return parseFloat($income_pending);
+                        return parseFloat($income_pending.toFixed(2));
                     }
                 },
                 {
@@ -1824,7 +1824,7 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_published != 0)
                         {
-                            var $profit = parseFloat(row.freight_amount) - parseFloat(row.financial_deduction_total) - parseFloat(row.financial_expense_total);
+                            var $profit = parseFloat(row.freight_amount - row.financial_deduction_total - row.financial_expense_total);
                             // $(nTd).addClass('color-green');
                             $(nTd).addClass('item-modal-show--for--finance');
                             $(nTd).attr('data-type','all');
@@ -1833,8 +1833,8 @@
                         }
                     },
                     render: function(data, type, row, meta) {
-                        var $profit = parseFloat(row.freight_amount) - parseFloat(row.financial_deduction_total) - parseFloat(row.financial_expense_total);
-                        return parseFloat($profit);
+                        var $profit = parseFloat(row.freight_amount - row.financial_deduction_total - row.financial_expense_total);
+                        return parseFloat($profit.toFixed(2));
                     }
                 },
 
