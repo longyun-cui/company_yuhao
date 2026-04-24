@@ -854,6 +854,31 @@
                 },
 
                 {
+                    "title": "距离(km)",
+                    "name": "transport_distance",
+                    "data": "transport_distance",
+                    "className": "bg-route",
+                    "width": "60px",
+                    "orderable": false,
+                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        if(row.is_completed != 1)
+                        {
+                            $(nTd).addClass('modal-show--for--info-text-set');
+                            $(nTd).attr('data-id',row.id).attr('data-name','距离');
+                            $(nTd).attr('data-key','transport_distance').attr('data-value',data);
+                            $(nTd).attr('data-column-name','距离');
+                            $(nTd).attr('data-text-type','text');
+                            if(data) $(nTd).attr('data-operate-type','edit');
+                            else $(nTd).attr('data-operate-type','add');
+                        }
+                    },
+                    render: function(data, type, row, meta) {
+                        if(!data) return '';
+                        else return data;
+                    }
+                },
+
+                {
                     "title": "账期",
                     "data": "settlement_period",
                     "className": "",
@@ -1909,30 +1934,6 @@
                     }
                 },
 
-                {
-                    "title": "距离(km)",
-                    "name": "transport_distance",
-                    "data": "transport_distance",
-                    "className": "bg-route",
-                    "width": "60px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1)
-                        {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','距离');
-                            $(nTd).attr('data-key','transport_distance').attr('data-value',data);
-                            $(nTd).attr('data-column-name','距离');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                    },
-                    render: function(data, type, row, meta) {
-                        if(!data) return '';
-                        else return data;
-                    }
-                },
                 // {
                 //     "title": "时效(H)",
                 //     "data": "transport_time_limitation",
