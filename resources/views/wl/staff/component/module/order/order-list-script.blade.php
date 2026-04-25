@@ -243,7 +243,7 @@
 
         });
         // 【工单】编辑-提交
-        $(".main-content").on('click', "#submit--for--order--item-edit", function() {
+        $(".main-content").off('click', "#submit--for--order--item-edit").on('click', "#submit--for--order--item-edit", function() {
             var $that = $(this);
 
             var $table_id = $that.data('datatable-list-id');

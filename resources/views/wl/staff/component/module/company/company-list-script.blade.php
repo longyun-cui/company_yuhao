@@ -117,7 +117,7 @@
 
         });
         // 【公司】编辑-提交
-        $(".main-wrapper").on('click', "#submit--for--company-item-edit", function() {
+        $(".main-wrapper").off('click', "#submit--for--company-item-edit").on('click', "#submit--for--company-item-edit", function() {
             var $that = $(this);
 
             var $table_id = $that.data('datatable-list-id');

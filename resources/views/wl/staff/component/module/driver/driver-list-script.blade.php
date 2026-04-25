@@ -221,7 +221,7 @@
 
         });
         // 【司机】编辑-提交
-        $(".main-wrapper").on('click', "#submit--for--driver-item-edit", function() {
+        $(".main-wrapper").off('click', "#submit--for--driver-item-edit").on('click', "#submit--for--driver-item-edit", function() {
             var $that = $(this);
 
             var $table_id = $that.data('datatable-list-id');

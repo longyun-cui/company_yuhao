@@ -116,7 +116,7 @@
 
         });
         // 【车队】编辑-提交
-        $(".main-wrapper").on('click', "#submit--for--motorcade-item-edit", function() {
+        $(".main-wrapper").off('click', "#submit--for--motorcade-item-edit").on('click', "#submit--for--motorcade-item-edit", function() {
             var $that = $(this);
 
             var $table_id = $that.data('datatable-list-id');

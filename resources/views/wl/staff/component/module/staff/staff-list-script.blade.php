@@ -132,8 +132,9 @@
 
         });
         // 【员工】编辑-提交
-        $(".main-wrapper").on('click', "#submit--for--staff-item-edit", function() {
+        $(".main-wrapper").off('click', "#submit--for--staff-item-edit").on('click', "#submit--for--staff-item-edit", function() {
             var $that = $(this);
+            console.log(91);
 
             var $table_id = $that.data('datatable-list-id');
             var $table = $('#'+$table_id);
