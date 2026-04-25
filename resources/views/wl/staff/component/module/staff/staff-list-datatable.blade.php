@@ -6,7 +6,7 @@
         let $tableSearch = $datatable_wrapper.find('.datatable-search-box');
 
         $($tableId).DataTable({
-            "aLengthMenu": [[10, 50, 100, 200, -1], ["10", "50", "100", "200", "全部"]],
+            "aLengthMenu": [[20, 50, 100, 200, -1], ["20", "50", "100", "200", "全部"]],
             "processing": true,
             "serverSide": true,
             "searching": false,
