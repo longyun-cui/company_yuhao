@@ -1477,7 +1477,7 @@
                     "name": "payee_name",
                     "data": "payee_name",
                     "className": "",
-                    "width": "60px",
+                    "width": "80px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
@@ -1500,7 +1500,7 @@
                     "name": "car_supply",
                     "data": "car_supply",
                     "className": "",
-                    "width": "60px",
+                    "width": "80px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)

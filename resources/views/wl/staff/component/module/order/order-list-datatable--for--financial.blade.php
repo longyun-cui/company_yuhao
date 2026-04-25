@@ -1844,7 +1844,7 @@
                     "name": "arrange_people",
                     "data": "arrange_people",
                     "className": "",
-                    "width": "80px",
+                    "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
