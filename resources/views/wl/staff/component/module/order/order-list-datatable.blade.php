@@ -800,7 +800,7 @@
                         $(nTd).addClass('text-left');
                     },
                     render: function(data, type, row, meta) {
-                        return data == null ? '--' : data;
+                        return data == null ? '' : data;
                     }
                 },
                 {
@@ -826,13 +826,13 @@
                         $(nTd).addClass('text-left');
                     },
                     render: function(data, type, row, meta) {
-                        return data == null ? '--' : data;
+                        return data == null ? '' : data;
                     }
                 },
                 {
                     "title": "线路",
                     "data": "transport_route",
-                    "className": "text-center ",
+                    "className": "",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -849,9 +849,10 @@
                             if(data) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
                         }
+                        if(data) $(nTd).addClass('text-left');
                     },
                     render: function(data, type, row, meta) {
-                        return data == null ? '--' : data;
+                        return data == null ? '' : data;
                     }
                 },
 
@@ -860,7 +861,7 @@
                     "name": "transport_distance",
                     "data": "transport_distance",
                     "className": "bg-route",
-                    "width": "60px",
+                    "width": "50px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
@@ -878,7 +879,7 @@
                         }
                         if(!data)
                         {
-                            $(nTd).addClass('text-left');
+                            $(nTd).addClass('text-center');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -947,12 +948,12 @@
                         $(nTd).attr('data-value',parseFloat(data));
                         $(nTd).attr('data-column-name','运费');
                         $(nTd).addClass('color-blue');
-                        $(nTd).addClass('_bold');
+                        // $(nTd).addClass('_bold');
 
                         var $data = parseFloat(data);
                         if($data)
                         {
-                            $(nTd).addClass('text-left');
+                            $(nTd).addClass('text-center');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -979,7 +980,7 @@
                         var $data = parseFloat(data);
                         if($data)
                         {
-                            $(nTd).addClass('text-left');
+                            $(nTd).addClass('text-center');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -1006,7 +1007,7 @@
                         var $data = parseFloat(data);
                         if($data)
                         {
-                            $(nTd).addClass('text-left');
+                            $(nTd).addClass('text-center');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -1031,7 +1032,7 @@
                         var $data = parseFloat(data);
                         if($data)
                         {
-                            $(nTd).addClass('text-left');
+                            $(nTd).addClass('text-center');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -1057,7 +1058,7 @@
                         var $data = parseFloat(data);
                         if($data)
                         {
-                            $(nTd).addClass('text-left');
+                            $(nTd).addClass('text-center');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -1084,7 +1085,7 @@
                         var $data = parseFloat(data);
                         if($data)
                         {
-                            $(nTd).addClass('text-left');
+                            $(nTd).addClass('text-center');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -1111,7 +1112,7 @@
                         var $data = parseFloat(data);
                         if($data)
                         {
-                            $(nTd).addClass('text-left');
+                            $(nTd).addClass('text-center');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -1138,7 +1139,7 @@
                         var $data = parseFloat(data);
                         if($data)
                         {
-                            $(nTd).addClass('text-left');
+                            $(nTd).addClass('text-center');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -1295,7 +1296,7 @@
                         var $data = parseFloat(data);
                         if($data)
                         {
-                            $(nTd).addClass('text-left');
+                            $(nTd).addClass('text-center');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -1322,7 +1323,7 @@
                         var $data = parseFloat(data);
                         if($data)
                         {
-                            $(nTd).addClass('text-left');
+                            $(nTd).addClass('text-center');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -1350,7 +1351,7 @@
 
                         if($income_should)
                         {
-                            $(nTd).addClass('text-left');
+                            $(nTd).addClass('text-center');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -1379,7 +1380,7 @@
                         var $data = parseFloat(data);
                         if($data)
                         {
-                            $(nTd).addClass('text-left');
+                            $(nTd).addClass('text-center');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -1405,7 +1406,7 @@
 
                         if($income_pending)
                         {
-                            $(nTd).addClass('text-left');
+                            $(nTd).addClass('text-center');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -1434,7 +1435,7 @@
 
                         if($profit)
                         {
-                            $(nTd).addClass('text-left');
+                            $(nTd).addClass('text-center');
                         }
                     },
                     render: function(data, type, row, meta) {
