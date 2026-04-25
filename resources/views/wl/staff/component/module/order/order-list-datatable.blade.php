@@ -96,7 +96,7 @@
                 {
                     "title": "类型",
                     "className": "",
-                    "width": "60px",
+                    "width": "50px",
                     "data": "order_type",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -668,7 +668,7 @@
                 //     render: function(data, type, row, meta) {
                 //         if(data == 1)
                 //         {
-                //             if(row.route_er == null) return '--';
+                //             if(row.route_er == null) return '-';
                 //             else return '<a href="javascript:void(0);">'+row.route_er.title+'</a>';
                 //         }
                 //         else if(data == 11)
@@ -700,7 +700,7 @@
                 //         }
                 //     },
                 //     render: function(data, type, row, meta) {
-                //         if(row.route_er == null) return '--';
+                //         if(row.route_er == null) return '-';
                 //         else return '<a href="javascript:void(0);">'+row.route_er.title+'</a>';
                 //     }
                 // },
@@ -797,6 +797,7 @@
                             if(data) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
                         }
+                        $(nTd).addClass('text-left');
                     },
                     render: function(data, type, row, meta) {
                         return data == null ? '--' : data;
@@ -822,6 +823,7 @@
                             if(data) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
                         }
+                        $(nTd).addClass('text-left');
                     },
                     render: function(data, type, row, meta) {
                         return data == null ? '--' : data;
@@ -830,7 +832,7 @@
                 {
                     "title": "线路",
                     "data": "transport_route",
-                    "className": "",
+                    "className": "text-center ",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -863,13 +865,20 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
                         {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-id',row.id).attr('data-name','距离');
-                            $(nTd).attr('data-key','transport_distance').attr('data-value',data);
+                            $(nTd).attr('data-id',row.id);
+                            $(nTd).attr('data-name','距离');
+                            $(nTd).attr('data-key','transport_distance');
+                            $(nTd).attr('data-value',data);
                             $(nTd).attr('data-column-name','距离');
+
+                            $(nTd).addClass('modal-show--for--info-text-set');
                             $(nTd).attr('data-text-type','text');
                             if(data) $(nTd).attr('data-operate-type','edit');
                             else $(nTd).attr('data-operate-type','add');
+                        }
+                        if(!data)
+                        {
+                            $(nTd).addClass('text-left');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -882,7 +891,7 @@
                     "title": "账期",
                     "data": "settlement_period",
                     "className": "",
-                    "width": "80px",
+                    "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
@@ -929,7 +938,7 @@
                     "title": "运费·收",
                     "data": "freight_amount",
                     "className": "bg-fee",
-                    "width": "60px",
+                    "width": "50px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         $(nTd).attr('data-id',row.id);
@@ -940,25 +949,23 @@
                         $(nTd).addClass('color-blue');
                         $(nTd).addClass('_bold');
 
-                        if(row.is_completed != 1)
+                        var $data = parseFloat(data);
+                        if($data)
                         {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
+                            $(nTd).addClass('text-left');
                         }
                     },
                     render: function(data, type, row, meta) {
                         var $data = parseFloat(data);
                         if($data) return $data;
-                        else return '--';
+                        else return '-';
                     }
                 },
                 {
                     "title": "油卡·收",
                     "data": "freight_oil_card_amount",
                     "className": "bg-fee",
-                    "width": "60px",
+                    "width": "50px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         $(nTd).attr('data-id',row.id);
@@ -967,27 +974,25 @@
                         $(nTd).attr('data-value',parseFloat(data));
                         $(nTd).attr('data-column-name','油卡');
                         $(nTd).addClass('color-blue');
-                        $(nTd).addClass('_bold');
+                        // $(nTd).addClass('_bold');
 
-                        if(row.is_completed != 1)
+                        var $data = parseFloat(data);
+                        if($data)
                         {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
+                            $(nTd).addClass('text-left');
                         }
                     },
                     render: function(data, type, row, meta) {
                         var $data = parseFloat(data);
                         if($data) return $data;
-                        else return '--';
+                        else return '-';
                     }
                 },
                 {
-                    "title": "串点费·收",
+                    "title": "串点·收",
                     "data": "freight_extra_amount",
                     "className": "bg-fee",
-                    "width": "60px",
+                    "width": "50px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         $(nTd).attr('data-id',row.id);
@@ -996,53 +1001,50 @@
                         $(nTd).attr('data-value',parseFloat(data));
                         $(nTd).attr('data-column-name','串点费');
                         $(nTd).addClass('color-blue');
-                        $(nTd).addClass('_bold');
+                        // $(nTd).addClass('_bold');
 
-                        if(row.is_completed != 1)
+                        var $data = parseFloat(data);
+                        if($data)
                         {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
+                            $(nTd).addClass('text-left');
                         }
                     },
                     render: function(data, type, row, meta) {
                         var $data = parseFloat(data);
                         if($data) return $data;
-                        else return '--';
+                        else return '-';
                     }
                 },
                 {
-                    "title": "开票金额",
+                    "title": "开票额",
                     "data": "financial_receipt_for_invoice_amount",
                     "className": "bg-fee",
-                    "width": "60px",
+                    "width": "50px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         $(nTd).attr('data-id',row.id);
                         $(nTd).attr('data-name','开票金额');
                         $(nTd).attr('data-key','financial_receipt_for_invoice_amount');
                         $(nTd).attr('data-value',parseFloat(data));
+                        // $(nTd).addClass('_bold');
 
-                        if(row.is_completed != 1)
+                        var $data = parseFloat(data);
+                        if($data)
                         {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
+                            $(nTd).addClass('text-left');
                         }
                     },
                     render: function(data, type, row, meta) {
                         var $data = parseFloat(data);
                         if($data) return $data;
-                        else return '--';
+                        else return '-';
                     }
                 },
                 {
                     "title": "票点",
                     "data": "financial_receipt_for_invoice_point",
                     "className": "bg-fee",
-                    "width": "60px",
+                    "width": "50px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         $(nTd).attr('data-id',row.id);
@@ -1050,26 +1052,25 @@
                         $(nTd).attr('data-key','financial_receipt_for_invoice_point');
                         $(nTd).attr('data-value',parseFloat(data));
                         $(nTd).attr('data-column-name','票点');
+                        // $(nTd).addClass('_bold');
 
-                        if(row.is_completed != 1)
+                        var $data = parseFloat(data);
+                        if($data)
                         {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
+                            $(nTd).addClass('text-left');
                         }
                     },
                     render: function(data, type, row, meta) {
                         var $data = parseFloat(data);
                         if($data) return $data;
-                        else return '--';
+                        else return '-';
                     }
                 },
                 {
-                    "title": "共建车费",
+                    "title": "共建费",
                     "data": "cooperative_vehicle_amount",
                     "className": "bg-fee",
-                    "width": "60px",
+                    "width": "50px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         $(nTd).attr('data-id',row.id);
@@ -1078,27 +1079,25 @@
                         $(nTd).attr('data-value',parseFloat(data));
                         $(nTd).attr('data-column-name','共建车费');
                         $(nTd).addClass('color-red');
-                        $(nTd).addClass('_bold');
+                        // $(nTd).addClass('_bold');
 
-                        if(row.is_completed != 1)
+                        var $data = parseFloat(data);
+                        if($data)
                         {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
+                            $(nTd).addClass('text-left');
                         }
                     },
                     render: function(data, type, row, meta) {
                         var $data = parseFloat(data);
                         if($data) return $data;
-                        else return '--';
+                        else return '-';
                     }
                 },
                 {
                     "title": "请车价",
                     "data": "external_car_price",
                     "className": "bg-fee",
-                    "width": "60px",
+                    "width": "50px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         $(nTd).attr('data-id',row.id);
@@ -1107,27 +1106,25 @@
                         $(nTd).attr('data-value',parseFloat(data));
                         $(nTd).attr('data-column-name','请车价');
                         $(nTd).addClass('color-red');
-                        $(nTd).addClass('_bold');
+                        // $(nTd).addClass('_bold');
 
-                        if(row.is_completed != 1)
+                        var $data = parseFloat(data);
+                        if($data)
                         {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
+                            $(nTd).addClass('text-left');
                         }
                     },
                     render: function(data, type, row, meta) {
                         var $data = parseFloat(data);
                         if($data) return $data;
-                        else return '--';
+                        else return '-';
                     }
                 },
                 {
                     "title": "信息费",
                     "data": "financial_fee_for_information",
                     "className": "bg-fee",
-                    "width": "60px",
+                    "width": "50px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         $(nTd).attr('data-id',row.id);
@@ -1136,20 +1133,18 @@
                         $(nTd).attr('data-value',parseFloat(data));
                         $(nTd).attr('data-column-name','信息费');
                         $(nTd).addClass('color-red');
-                        $(nTd).addClass('_bold');
+                        // $(nTd).addClass('_bold');
 
-                        if(row.is_completed != 1)
+                        var $data = parseFloat(data);
+                        if($data)
                         {
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
+                            $(nTd).addClass('text-left');
                         }
                     },
                     render: function(data, type, row, meta) {
                         var $data = parseFloat(data);
                         if($data) return $data;
-                        else return '--';
+                        else return '-';
                     }
                 },
                 // {
@@ -1175,7 +1170,7 @@
                 //     render: function(data, type, row, meta) {
                 //         var $data = parseFloat(data);
                 //         if($data) return $data;
-                //         else return '--';
+                //         else return '-';
                 //     }
                 // },
                 // {
@@ -1201,7 +1196,7 @@
                 //     render: function(data, type, row, meta) {
                 //         var $data = parseFloat(data);
                 //         if($data) return $data;
-                //         else return '--';
+                //         else return '-';
                 //     }
                 // },
                 // {
@@ -1227,7 +1222,7 @@
                 //     render: function(data, type, row, meta) {
                 //         var $data = parseFloat(data);
                 //         if($data) return $data;
-                //         else return '--';
+                //         else return '-';
                 //     }
                 // },
                 // {
@@ -1253,7 +1248,7 @@
                 //     render: function(data, type, row, meta) {
                 //         var $data = parseFloat(data);
                 //         if($data) return $data;
-                //         else return '--';
+                //         else return '-';
                 //     }
                 // },
                 // {
@@ -1279,7 +1274,7 @@
                 //     render: function(data, type, row, meta) {
                 //         var $data = parseFloat(data);
                 //         if($data) return $data;
-                //         else return '--';
+                //         else return '-';
                 //     }
                 // },
                 {
@@ -1295,19 +1290,18 @@
                         $(nTd).attr('data-key','financial_expense_total');
                         $(nTd).attr('data-value',parseFloat(data));
                         $(nTd).addClass('color-red');
-                        $(nTd).addClass('_bold');
+                        // $(nTd).addClass('_bold');
 
-                        if(row.is_published != 0)
+                        var $data = parseFloat(data);
+                        if($data)
                         {
-                            // $(nTd).addClass('color-green');
-                            $(nTd).addClass('modal-show--for--order-finance');
-                            $(nTd).attr('data-type','all');
+                            $(nTd).addClass('text-left');
                         }
                     },
                     render: function(data, type, row, meta) {
                         var $data = parseFloat(data);
                         if($data) return $data;
-                        else return '--';
+                        else return '-';
                     }
                 },
                 {
@@ -1323,19 +1317,18 @@
                         $(nTd).attr('data-key','financial_deduction_total');
                         $(nTd).attr('data-value',parseFloat(data));
                         $(nTd).addClass('color-orange');
-                        $(nTd).addClass('_bold');
+                        // $(nTd).addClass('_bold');
 
-                        if(row.is_published != 0)
+                        var $data = parseFloat(data);
+                        if($data)
                         {
-                            // $(nTd).addClass('color-green');
-                            $(nTd).addClass('modal-show--for--order-finance');
-                            $(nTd).attr('data-type','all');
+                            $(nTd).addClass('text-left');
                         }
                     },
                     render: function(data, type, row, meta) {
                         var $data = parseFloat(data);
                         if($data) return $data;
-                        else return '--';
+                        else return '-';
                     }
                 },
                 {
@@ -1355,16 +1348,16 @@
                         $(nTd).addClass('color-blue');
                         $(nTd).addClass('_bold');
 
-                        if(row.is_published != 0)
+                        if($income_should)
                         {
-                            // $(nTd).addClass('color-green');
-                            $(nTd).addClass('item-modal-show--for--finance');
-                            $(nTd).attr('data-type','all');
+                            $(nTd).addClass('text-left');
                         }
                     },
                     render: function(data, type, row, meta) {
                         var $income_should = parseFloat(row.freight_amount) - parseFloat(row.financial_deduction_total);
-                        return parseFloat($income_should);
+                        var $data = parseFloat($income_should.toFixed(2));
+                        if($data) return $data;
+                        else return '-';
                     }
                 },
                 {
@@ -1381,12 +1374,12 @@
                         $(nTd).attr('data-value',parseFloat(data));
                         $(nTd).addClass('color-green');
                         $(nTd).addClass('_bold');
+                        $(nTd).addClass('item-modal-show--for--finance');
 
-                        if(row.is_published != 0)
+                        var $data = parseFloat(data);
+                        if($data)
                         {
-                            // $(nTd).addClass('color-green');
-                            $(nTd).addClass('item-modal-show--for--finance');
-                            $(nTd).attr('data-type','all');
+                            $(nTd).addClass('text-left');
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -1397,10 +1390,12 @@
                     "title": "待收款",
                     "name": "financial_income_pending",
                     "data": "id",
-                    "className": "bg-fee _bold_",
+                    "className": "bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        var $income_pending = parseFloat(row.freight_amount) - parseFloat(row.financial_deduction_total) - parseFloat(row.financial_income_total);
+
                         $(nTd).attr('data-id',row.id);
                         $(nTd).attr('data-name','待收款');
                         $(nTd).attr('data-key','financial_income_pending');
@@ -1408,29 +1403,28 @@
                         $(nTd).addClass('color-red');
                         $(nTd).addClass('_bold');
 
-                        if(row.is_published != 0)
+                        if($income_pending)
                         {
-                            var $income_pending = parseFloat(row.freight_amount) - parseFloat(row.financial_deduction_total) - parseFloat(row.financial_income_total);
-                            // $(nTd).addClass('color-green');
-                            $(nTd).addClass('item-modal-show--for--finance');
-                            $(nTd).attr('data-type','all');
-                            $(nTd).attr('data-id',row.id).attr('data-name','待收款');
-                            $(nTd).attr('data-key','financial_income_pending').attr('data-value',parseFloat($income_pending));
+                            $(nTd).addClass('text-left');
                         }
                     },
                     render: function(data, type, row, meta) {
                         var $income_pending = parseFloat(row.freight_amount) - parseFloat(row.financial_deduction_total) - parseFloat(row.financial_income_total);
-                        return parseFloat($income_pending.toFixed(2));
+                        var $data = parseFloat($income_pending.toFixed(2));
+                        if($data) return $data;
+                        else return '-';
                     }
                 },
                 {
                     "title": "利润",
                     "name": "financial_profit",
                     "data": "id",
-                    "className": "bg-fee _bold_",
+                    "className": "bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                        var $profit = parseFloat(row.freight_amount) - parseFloat(row.financial_deduction_total) - parseFloat(row.financial_expense_total);
+
                         $(nTd).attr('data-id',row.id);
                         $(nTd).attr('data-name','待收款');
                         $(nTd).attr('data-key','financial_income_pending');
@@ -1438,19 +1432,16 @@
                         $(nTd).addClass('color-red');
                         $(nTd).addClass('_bold');
 
-                        if(row.is_published != 0)
+                        if($profit)
                         {
-                            var $profit = parseFloat(row.freight_amount) - parseFloat(row.financial_deduction_total) - parseFloat(row.financial_expense_total);
-                            // $(nTd).addClass('color-green');
-                            $(nTd).addClass('item-modal-show--for--finance');
-                            $(nTd).attr('data-type','all');
-                            $(nTd).attr('data-id',row.id).attr('data-name','利润');
-                            $(nTd).attr('data-key','financial_profit').attr('data-value',parseFloat($profit));
+                            $(nTd).addClass('text-left');
                         }
                     },
                     render: function(data, type, row, meta) {
                         var $profit = parseFloat(row.freight_amount - row.financial_deduction_total - row.financial_expense_total);
-                        return parseFloat($profit.toFixed(2));
+                        var $data = parseFloat($profit.toFixed(2));
+                        if($data) return $data;
+                        else return '-';
                     }
                 },
 
@@ -1460,7 +1451,7 @@
                     "name": "arrange_people",
                     "data": "arrange_people",
                     "className": "",
-                    "width": "80px",
+                    "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
@@ -1483,7 +1474,7 @@
                     "name": "payee_name",
                     "data": "payee_name",
                     "className": "",
-                    "width": "80px",
+                    "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)
@@ -1506,7 +1497,7 @@
                     "name": "car_supply",
                     "data": "car_supply",
                     "className": "",
-                    "width": "80px",
+                    "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(row.is_completed != 1)

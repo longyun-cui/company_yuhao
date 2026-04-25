@@ -780,7 +780,7 @@
                 {
                     "title": "出发地",
                     "data": "transport_departure_place",
-                    "className": "",
+                    "className": "text-left",
                     "width": "100px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -805,7 +805,7 @@
                 {
                     "title": "目的地",
                     "data": "transport_destination_place",
-                    "className": "",
+                    "className": "text-left",
                     "width": "100px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -928,7 +928,7 @@
                 {
                     "title": "运费",
                     "data": "freight_amount",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -957,7 +957,7 @@
                 {
                     "title": "油卡",
                     "data": "freight_oil_card_amount",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -986,7 +986,7 @@
                 {
                     "title": "串点费·收",
                     "data": "freight_extra_amount",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1015,7 +1015,7 @@
                 {
                     "title": "开票金额",
                     "data": "financial_receipt_for_invoice_amount",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1044,7 +1044,7 @@
                 {
                     "title": "票点",
                     "data": "financial_receipt_for_invoice_point",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1073,7 +1073,7 @@
                 {
                     "title": "共建车费",
                     "data": "cooperative_vehicle_amount",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1102,7 +1102,7 @@
                 {
                     "title": "请车价",
                     "data": "external_car_price",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1132,7 +1132,7 @@
                     "title": "运费现金",
                     "name": "financial_receipt_for_freight_cash",
                     "data": "financial_receipt_for_freight_cash",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1158,7 +1158,7 @@
                     "title": "运费油卡",
                     "name": "financial_receipt_for_freight_oil_card",
                     "data": "financial_receipt_for_freight_oil_card",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1184,7 +1184,7 @@
                     "title": "公里数",
                     "name": "oil_mileage",
                     "data": "oil_mileage",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1204,7 +1204,7 @@
                     "title": "油耗",
                     "name": "oil_consumption",
                     "data": "oil_consumption",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1224,7 +1224,7 @@
                     "title": "油价",
                     "name": "oil_unit_price",
                     "data": "oil_unit_price",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1244,7 +1244,7 @@
                     "title": "油费-油卡",
                     "name": "financial_fee_for_oil_card",
                     "data": "financial_fee_for_oil_card",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1264,7 +1264,7 @@
                     "title": "油费-现金",
                     "name": "financial_fee_for_oil_cash",
                     "data": "financial_fee_for_oil_cash",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1284,7 +1284,7 @@
                     "title": "总油费",
                     "name": "financial_fee_for_oil_total",
                     "data": "financial_fee_for_oil_total",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1305,7 +1305,7 @@
                     "title": "公里数",
                     "name": "gas_mileage",
                     "data": "gas_mileage",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1325,7 +1325,7 @@
                     "title": "气耗",
                     "name": "gas_consumption",
                     "data": "gas_consumption",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1346,7 +1346,7 @@
                     "name": "gas_unit_price",
                     "data": "gas_unit_price",
                     "className": "bg-fee",
-                    "width": "60px",
+                    "width": "text-right 60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         $(nTd).attr('data-id',row.id);
@@ -1365,7 +1365,7 @@
                     "title": "气费-平台",
                     "name": "financial_fee_for_gas_card",
                     "data": "financial_fee_for_gas_card",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1385,7 +1385,7 @@
                     "title": "气费-现金",
                     "name": "financial_fee_for_gas_cash",
                     "data": "financial_fee_for_gas_cash",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1405,7 +1405,7 @@
                     "title": "总气费",
                     "name": "financial_fee_for_gas_total",
                     "data": "financial_fee_for_gas_total",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1426,7 +1426,7 @@
                     "title": "过路费",
                     "name": "financial_fee_for_toll_total",
                     "data": "financial_fee_for_toll_total",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1446,7 +1446,7 @@
                     "title": "路费-ETC",
                     "name": "financial_fee_for_toll_etc",
                     "data": "financial_fee_for_toll_etc",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1466,7 +1466,7 @@
                     "title": "路费-现金",
                     "name": "financial_fee_for_toll_cash",
                     "data": "financial_fee_for_toll_cash",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1486,7 +1486,7 @@
                     "title": "停车费",
                     "name": "financial_fee_for_parking",
                     "data": "financial_fee_for_parking",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1506,7 +1506,7 @@
                     "title": "工资",
                     "name": "financial_fee_for_salary",
                     "data": "financial_fee_for_salary",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1526,7 +1526,7 @@
                     "title": "奖金",
                     "name": "financial_fee_for_bonus",
                     "data": "financial_fee_for_bonus",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1546,7 +1546,7 @@
                     "title": "信息费",
                     "name": "financial_fee_for_information",
                     "data": "financial_fee_for_information",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1566,7 +1566,7 @@
                     "title": "管理费",
                     "name": "financial_fee_for_administrative",
                     "data": "financial_fee_for_administrative",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1586,7 +1586,7 @@
                     "title": "维修费",
                     "name": "financial_fee_for_repair_cost",
                     "data": "financial_fee_for_repair_cost",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1606,7 +1606,7 @@
                     "title": "保养费",
                     "name": "financial_fee_for_maintenance_cost",
                     "data": "financial_fee_for_maintenance_cost",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1626,7 +1626,7 @@
                     "title": "审核费",
                     "name": "financial_fee_for_inspection_cost",
                     "data": "financial_fee_for_inspection_cost",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1646,7 +1646,7 @@
                     "title": "过户费",
                     "name": "financial_fee_for_transfer_cost",
                     "data": "financial_fee_for_transfer_cost",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1666,7 +1666,7 @@
                     "title": "保险费",
                     "name": "financial_fee_for_insurance_cost",
                     "data": "financial_fee_for_insurance_cost",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1686,7 +1686,7 @@
                     "title": "贷款费用",
                     "name": "financial_fee_for_loan_cost",
                     "data": "financial_fee_for_loan_cost",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1706,7 +1706,7 @@
                     "title": "总费用",
                     "name": "financial_expense_total",
                     "data": "financial_expense_total",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1725,7 +1725,7 @@
                     "title": "订单扣款",
                     "name": "financial_deduction_total",
                     "data": "financial_deduction_total",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1744,7 +1744,7 @@
                     "title": "应收款",
                     "name": "financial_income_should",
                     "data": "id",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1771,7 +1771,7 @@
                     "title": "已收款",
                     "name": "financial_income_total",
                     "data": "financial_income_total",
-                    "className": "bg-fee",
+                    "className": "text-right bg-fee",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1795,7 +1795,7 @@
                     "title": "待收款",
                     "name": "financial_income_pending",
                     "data": "id",
-                    "className": "bg-fee _bold_",
+                    "className": "text-right bg-fee _bold_",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -1818,7 +1818,7 @@
                     "title": "利润",
                     "name": "financial_profit",
                     "data": "id",
-                    "className": "bg-fee _bold_",
+                    "className": "text-right bg-fee _bold_",
                     "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
