@@ -129,7 +129,7 @@
                     "title": "车牌名称",
                     "data": "name",
                     "className": "text-center",
-                    "width": "120px",
+                    "width": "200px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
                         var $name = data;
