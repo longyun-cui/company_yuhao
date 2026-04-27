@@ -25,6 +25,7 @@
             if($('input[name="order-export--start"]').val())  $obj.order_start = $('input[name="order-export--start"]').val();
             if($('input[name="order-export--ended"]').val())  $obj.order_ended = $('input[name="order-export--ended"]').val();
             if($('select[name="order-export--project"]').val() > 0)  $obj.project = $('select[name="order-export--project"]').val();
+            if($('select[name="order-export--car-owner-type"]').val() > 0)  $obj.car_owner_type = $('select[name="order-export--car-owner-type"]').val();
 
             var $url = url_build('/o1/export/order-export',$obj);
             window.open($url);

@@ -21,6 +21,15 @@
                                 <input type="hidden" name="export-time-type" class="time-type" value="" readonly>
 
 
+                                {{--选择车辆所有人--}}
+                                <select class="search-filter form-filter filter-lg select2-box-c" name="order-export--car-owner-type">
+                                    <option value="-1">选择车辆类型</option>
+                                    <option value="1">自有</option>
+                                    <option value="9">共建</option>
+                                    <option value="11">外请</option>
+                                </select>
+
+
                                 <select class="search-filter form-filter filter-lg select2-reset select2-box-c select2-project-c-" name="order-export--project">
                                     <option value="-1">选择项目</option>
                                     @if(!empty($project_list) && count($project_list) > 0)
@@ -29,17 +38,6 @@
                                         @endforeach
                                     @endif
                                 </select>
-
-{{--                                <select class="search-filter form-filter filter-lg select2-reset select2-box-c" name="order-export--inspected-result">--}}
-{{--                                    <option value ="-1">审核结果</option>--}}
-{{--                                    <option value ="-2">审核结果</option>--}}
-{{--                                    <option value ="通过">通过</option>--}}
-{{--                                    <option value ="折扣通过">折扣通过</option>--}}
-{{--                                    <option value ="郊区通过">郊区通过</option>--}}
-{{--                                    <option value ="内部通过">内部通过</option>--}}
-{{--                                    <option value ="拒绝">拒绝</option>--}}
-{{--                                    <option value ="重复">重复</option>--}}
-{{--                                </select>--}}
 
 
                                 {{--<button type="button" class="btn btn-default btn-filter filter-submit filter-submit-for-order" data-type="latest">--}}

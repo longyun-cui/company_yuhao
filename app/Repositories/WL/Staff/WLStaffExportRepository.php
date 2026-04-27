@@ -219,6 +219,16 @@ class WLStaffExportRepository {
         if($client_id) $query->where('client_id',$client_id);
         if($project_id) $query->where('project_id',$project_id);
 
+        // 车辆所有人
+        if(isset($post_data['car_owner_type']))
+        {
+            $car_owner_type_int = intval($post_data['car_owner_type']);
+            if(!in_array($car_owner_type_int,[-1,0]))
+            {
+                $query->where('car_owner_type', $car_owner_type_int);
+            }
+        }
+
 
         $data = $query->orderBy('assign_date','asc')->get();
         $data = $data->toArray();
