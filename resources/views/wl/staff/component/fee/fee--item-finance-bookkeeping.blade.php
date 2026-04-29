@@ -1,5 +1,5 @@
 {{--添加-财务-信息--}}
-<div class="modal fade modal-wrapper" id="modal--for--fee-item-finance-bookkeeping">
+<div class="modal fade modal-wrapper" id="modal--for--fee--item-finance-bookkeeping">
     <div class="col-md-8 col-md-offset-2 margin-top-16px margin-bottom-64px bg-white">
 
 
@@ -14,7 +14,7 @@
                 </div>
             </div>
 
-            <form action="" method="post" class="form-horizontal form-bordered " id="form--for--fee-item-finance-bookkeeping">
+            <form action="" method="post" class="form-horizontal form-bordered " id="form--for--fee--item-finance-bookkeeping">
                 <div class="box-body">
 
                     {{ csrf_field() }}
@@ -97,7 +97,7 @@
             <div class="box-footer">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <button type="button" class="btn btn-success" id="item-submit--for--fee-item-finance-bookkeeping"><i class="fa fa-check"></i> 提交</button>
+                        <button type="button" class="btn btn-success" id="item-submit--for--fee--item-finance-bookkeeping"><i class="fa fa-check"></i> 提交</button>
                         <button type="button" class="btn btn-default modal-cancel">取消</button>
                     </div>
                 </div>

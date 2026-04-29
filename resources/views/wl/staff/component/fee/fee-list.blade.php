@@ -7,9 +7,9 @@
         <div class=" pull-left">
 
             @if(in_array($me->user_type,[0,1,9,11,19,41,81,61]))
-            <button type="button" onclick="" class="btn btn-filter btn-success- item-create-modal-show"
-                    data-form-id="form-for-fee-edit"
-                    data-modal-id="modal-for-fee-edit"
+            <button type="button" onclick="" class="btn btn-filter btn-success- modal-show--for--fee--item-create"
+                    data-form-id="form--for--fee--item-edit"
+                    data-modal-id="modal--for--fee--item-edit"
                     data-title="添加费用"
             >
                 <i class="fa fa-plus"></i> 添加

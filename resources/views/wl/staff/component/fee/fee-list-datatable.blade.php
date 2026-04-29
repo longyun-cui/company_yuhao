@@ -6,7 +6,7 @@
         let $tableSearch = $datatable_wrapper.find('.datatable-search-box');
 
         $($tableId).DataTable({
-            "aLengthMenu": [[10, 50, 200, 500], ["10", "50", "200", "500"]],
+            "aLengthMenu": [[20, 50, 200, 500], ["20", "50", "200", "500"]],
             "processing": true,
             "serverSide": true,
             "searching": false,
@@ -188,7 +188,7 @@
                     "title": "客户",
                     "data": "client_id",
                     "className": "",
-                    "width": "80px",
+                    "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                     },
@@ -204,7 +204,7 @@
                     "title": "项目",
                     "data": "project_id",
                     "className": "",
-                    "width": "100px",
+                    "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                     },
@@ -220,7 +220,7 @@
                     "title": "工单",
                     "data": "order_id",
                     "className": "",
-                    "width": "240px",
+                    "width": "200px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                     },
@@ -234,21 +234,21 @@
                             $order_info += ' - ' + row.order_er.transport_destination_place;
                             return '<a href="javascript:void(0);" class="text-black">' + $order_info + '</a>';
                         }
-                        else return '未指定';
+                        else return '--';
                     }
                 },
                 {
                     "title": "车辆",
                     "data": "car_id",
                     "className": "",
-                    "width": "100px",
+                    "width": "80px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                     },
                     render: function(data, type, row, meta) {
                         if(row.car_er)
                         {
-                            return '<a href="javascript:void(0);" class="text-black">'+row.car_er.name+'</a>';
+                            return '<a href="javascript:void(0);" class="text-black">'+row.car_er.car_name+'</a>';
                         }
                         else return '--';
                     }
@@ -257,7 +257,7 @@
                     "title": "驾驶员",
                     "data": "driver_id",
                     "className": "",
-                    "width": "100px",
+                    "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                     },
@@ -343,7 +343,7 @@
                 {
                     "title": "操作",
                     "data": "id",
-                    "width": "120px",
+                    "width": "100px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
                         var $html_edit = '';
@@ -356,7 +356,7 @@
                             $html_delete = '<a class="btn btn-xs fee--item-delete-submit" data-id="'+data+'">删除</a>';
                             if([1,99].includes(row.fee_type) && row.is_recorded == 0)
                             {
-                                $html_bookkeeping = '<a class="btn btn-xs modal-show--for--fee-item-finance-bookkeeping" data-id="'+data+'">入账</a>';
+                                $html_bookkeeping = '<a class="btn btn-xs modal-show--for--fee--item-finance-bookkeeping" data-id="'+data+'">入账</a>';
                             }
                             else
                             {

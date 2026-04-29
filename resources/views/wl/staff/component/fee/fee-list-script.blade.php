@@ -98,7 +98,7 @@
 
 
         // 【费用】添加-显示
-        $(".main-wrapper").on('click', ".modal-show--for--fee-item-create", function() {
+        $(".main-wrapper").on('click', ".modal-show--for--fee--item-create", function() {
             var $that = $(this);
             var $form_id = $that.data('form-id');
             var $modal_id = $that.data('modal-id');
@@ -125,16 +125,16 @@
             });
         });
         // 【财务】编辑-提交
-        $(".main-wrapper").on('click', "#submit--for--fee-item-edit", function() {
+        $(".main-wrapper").on('click', "#submit--for--fee--item-edit", function() {
             var $that = $(this);
 
             var $table_id = $that.data('datatable-list-id');
             var $table = $('#'+$table_id);
 
-            var $modal_id = 'modal--for--fee-item-edit';
+            var $modal_id = 'modal--for--fee--item-edit';
             var $modal = $("#"+$modal_id);
 
-            var $form_id = 'form--for--fee-item-edit';
+            var $form_id = 'form--for--fee--item-edit';
             var $form = $("#"+$form_id);
 
             var $index = layer.load(1, {
@@ -193,6 +193,76 @@
 
             };
             $form.ajaxSubmit(options);
+        });
+
+
+
+
+        // 【工单】【添加费用】费用类型
+        $(".main-wrapper").on('change', '#modal--for--fee--item-edit input[name="fee-type"]', function() {
+            var $that = $(this);
+            var $modal = $that.parents('.modal-wrapper');
+
+            var $value = $(this).val();
+            if($value == 1)
+            {
+                // 收款
+                $modal.find('input[name="fee-record-type"][value="1"]').prop('checked', true).trigger('change');
+                $modal.find('.fee-record-type-box').show();
+                $modal.find('.collection-box').show();
+                $modal.find('.advance-box').hide();
+                $modal.find('.fee-title-box').hide();
+                $modal.find('.receipt-box').show();
+            }
+            else if($value == 99)
+            {
+                // 费用
+                $modal.find('input[name="fee-record-type"][value="1"]').prop('checked', true).trigger('change');
+                $modal.find('.fee-record-type-box').show();
+                $modal.find('.advance-box').show();
+                $modal.find('.collection-box').hide();
+                $modal.find('.fee-title-box').hide();
+                $modal.find('.fee-box').show();
+            }
+            else if($value == 101)
+            {
+                // 订单扣款
+                $modal.find('input[name="fee-record-type"][value="1"]').prop('checked', true).trigger('change');
+                $modal.find('.fee-record-type-box').hide();
+                $modal.find('.payment-show').hide();
+                $modal.find('.fee-title-box').hide();
+                $modal.find('.deduction-box').show();
+            }
+            else if($value == 111)
+            {
+                // 员工罚款
+                $modal.find('input[name="fee-record-type"][value="1"]').prop('checked', true).trigger('change');
+                $modal.find('.fee-record-type-box').hide();
+                $modal.find('.payment-show').hide();
+                $modal.find('.fee-title-box').hide();
+                $modal.find('.fine-box').show();
+            }
+            else
+            {
+                $modal.find('input[name="fee-record-type"][value="1"]').prop('checked', true).trigger('change');
+                $modal.find('.fee-record-type-box').hide();
+                $modal.find('.payment-show').hide();
+            }
+        });
+        // 【工单】【添加费用】记录类型
+        $(".main-wrapper").on('change', '#modal--for--fee--item-edit input[name="fee-record-type"]', function() {
+            var $that = $(this);
+            var $modal = $that.parents('.modal-wrapper');
+
+            var $value = $(this).val();
+            if($value == 81)
+            {
+                $modal.find('.payment-show').show();
+            }
+            else
+            {
+                $modal.find('.payment-show').hide();
+            }
         });
 
 
@@ -268,7 +338,7 @@
 
 
         // 【费用】财务入账-显示
-        $(".main-wrapper").off('click', ".modal-show--for--fee-item-finance-bookkeeping").on('click', ".modal-show--for--fee-item-finance-bookkeeping", function() {
+        $(".main-wrapper").off('click', ".modal-show--for--fee--item-finance-bookkeeping").on('click', ".modal-show--for--fee--item-finance-bookkeeping", function() {
             var $that = $(this);
             var $id = $(this).data('id');
             var $row = $that.parents('tr');
@@ -283,13 +353,13 @@
             $datatable_wrapper.find('tr').removeClass('operating');
             $row.addClass('operating');
 
-            form_reset('#form--for--fee-item-finance-bookkeeping');
+            form_reset('#form--for--fee--item-finance-bookkeeping');
 
-            var $modal = $('#modal--for--fee-item-finance-bookkeeping');
+            var $modal = $('#modal--for--fee--item-finance-bookkeeping');
             $modal.find('.id-title').html('【'+$id+'】');
 
-            $modal.find('#item-submit--for--fee-item-finance-bookkeeping').data('item-id',$id);
-            $modal.find('#item-submit--for--fee-item-finance-bookkeeping').data('datatable-list-id',$table_id);
+            $modal.find('#item-submit--for--fee--item-finance-bookkeeping').data('item-id',$id);
+            $modal.find('#item-submit--for--fee--item-finance-bookkeeping').data('datatable-list-id',$table_id);
             $modal.find('input[name="operate[id]"]').val($that.attr('data-id'));
             $modal.find('.finance-create-order-id').html($id);
 
@@ -299,17 +369,17 @@
             $modal.modal('show');
         });
         // 【费用】财务入账-提交
-        $(".main-wrapper").off('click', "#item-submit--for--fee-item-finance-bookkeeping").on('click', "#item-submit--for--fee-item-finance-bookkeeping", function() {
+        $(".main-wrapper").off('click', "#item-submit--for--fee--item-finance-bookkeeping").on('click', "#item-submit--for--fee--item-finance-bookkeeping", function() {
             var $that = $(this);
             var $item_id = $that.data('item-id');
             var $table_id = $that.data('datatable-list-id');
             var $table = $('#'+$table_id);
             var $row = $('#'+$table_id).find('[data-key="id"][data-value='+$item_id+']').parents('tr');
 
-            var $modal_id = 'modal--for--fee-item-finance-bookkeeping';
+            var $modal_id = 'modal--for--fee--item-finance-bookkeeping';
             var $modal = $("#"+$modal_id);
 
-            var $form_id = 'form--for--fee-item-finance-bookkeeping';
+            var $form_id = 'form--for--fee--item-finance-bookkeeping';
             var $form = $("#"+$form_id);
 
             var $index = layer.load(1, {
@@ -374,13 +444,13 @@
 
 
             };
-            $("#form--for--fee-item-finance-bookkeeping").ajaxSubmit(options);
+            $("#form--for--fee--item-finance-bookkeeping").ajaxSubmit(options);
         });
 
 
 
         // 【费用】操作记录
-        $(".main-content").off('click', ".modal-show--for--fee-item-operation-record").on('click', ".modal-show--for--fee-item-operation-record", function() {
+        $(".main-content").off('click', ".modal-show--for--fee--item-operation-record").on('click', ".modal-show--for--fee--item-operation-record", function() {
             var $that = $(this);
             var $id = $(this).data('id');
             var $datatable_wrapper = $that.closest('.datatable-wrapper');
@@ -389,7 +459,7 @@
 
             Datatable__for__Fee_Item_Operation_Record_List.init($id);
 
-            $('#modal--for--fee-item-operation-record-list').modal('show');
+            $('#modal--for--fee--item-operation-record-list').modal('show');
         });
 
 

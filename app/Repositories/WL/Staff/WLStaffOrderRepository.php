@@ -2706,6 +2706,7 @@ class WLStaffOrderRepository {
                         $bool_fee_2 = $fee->save();
                         if(!$bool_fee_2) throw new Exception("WL_Common_Fee--update--fail");
                     }
+                    else throw new Exception("WL_Common_Finance--update--fail");
                 }
 
                 $order_operation_record = new WL_Common_Order_Operation_Record;

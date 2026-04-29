@@ -132,7 +132,7 @@
                     "title": "客户",
                     "data": "client_id",
                     "className": "",
-                    "width": "80px",
+                    "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                     },
@@ -141,14 +141,14 @@
                         {
                             return '<a href="javascript:void(0);" class="text-black">'+row.client_er.name+'</a>';
                         }
-                        else return '未指定';
+                        else return '--';
                     }
                 },
                 {
                     "title": "项目",
                     "data": "project_id",
                     "className": "",
-                    "width": "100px",
+                    "width": "60px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                     },
@@ -157,12 +157,12 @@
                         {
                             return '<a href="javascript:void(0);" class="text-black">'+row.project_er.name+'</a>';
                         }
-                        else return '未指定';
+                        else return '--';
                     }
                 },
                 {
                     "className": "",
-                    "width": "240px",
+                    "width": "200px",
                     "title": "工单",
                     "data": "order_id",
                     "orderable": false,
@@ -223,7 +223,7 @@
                 {
                     "title": "说明",
                     "data": "transaction_description",
-                    "className": "",
+                    "className": "text-left",
                     "width": "300px",
                     "orderable": false,
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
@@ -287,7 +287,7 @@
                 {
                     "title": "操作",
                     "data": "id",
-                    "width": "100px",
+                    "width": "60px",
                     "orderable": false,
                     render: function(data, type, row, meta) {
                         var html_edit = '';

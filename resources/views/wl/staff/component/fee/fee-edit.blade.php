@@ -1,5 +1,5 @@
 {{--添加-财务-信息--}}
-<div class="modal fade modal-wrapper" id="modal--for--fee-item-edit">
+<div class="modal fade modal-wrapper" id="modal--for--fee--item-edit">
     <div class="col-md-8 col-md-offset-2 margin-top-16px margin-bottom-64px bg-white">
 
 
@@ -14,7 +14,7 @@
                 </div>
             </div>
 
-            <form action="" method="post" class="form-horizontal form-bordered " id="form--for--fee-item-edit">
+            <form action="" method="post" class="form-horizontal form-bordered " id="form--for--fee--item-edit">
                 <div class="box-body">
 
                     {{ csrf_field() }}
@@ -29,29 +29,69 @@
                         <div class="col-md-9 control-label" style="text-align:left;">
                             <button type="button" class="btn radio">
                                 <label>
-                                    <input type="radio" name="finance-type" value="1" checked="checked" data-default="default"> 收入
+                                    <input type="radio" name="fee-type" value="1"> 收入
                                 </label>
                             </button>
                             <button type="button" class="btn radio">
                                 <label>
-                                    <input type="radio" name="finance-type" value="99"> 费用
+                                    <input type="radio" name="fee-type" value="99" checked="checked" data-default="default"> 费用
                                 </label>
                             </button>
                         </div>
                     </div>
 
                     {{--交易时间--}}
-                    <div class="form-group payment-show">
+                    <div class="form-group">
+                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 时间</label>
+                        <div class="col-md-9 ">
+                            <input type="text" class="form-control form-filter time-picker" name="fee-datetime" readonly="readonly" />
+                        </div>
+                    </div>
+                    {{--名目--}}
+                    <div class="form-group">
                         <label class="control-label col-md-2"><sup class="text-red">*</sup> 名目</label>
                         <div class="col-md-9 control-text ">
                             <input type="text" class="form-control" name="fee-title" placeholder="请输入名目" value="" list="_fee_title">
                         </div>
                     </div>
                     {{--交易时间--}}
-                    <div class="form-group payment-show">
+                    <div class="form-group">
                         <label class="control-label col-md-2"><sup class="text-red">*</sup> 金额</label>
                         <div class="col-md-9 control-text ">
                             <input type="text" class="form-control" name="fee-amount" placeholder="请输入金额" value="">
+                        </div>
+                    </div>
+                    {{--说明--}}
+                    <div class="form-group">
+                        <label class="control-label col-md-2">说明</label>
+                        <div class="col-md-9 ">
+                            <textarea class="form-control" name="fee-description" rows="3" cols="100%"></textarea>
+                        </div>
+                    </div>
+                    {{--记录类型--}}
+                    <div class="form-group fee-record-type-box">
+                        <label class="control-label col-md-2"><sup class="text-red">*</sup> 记录类型</label>
+                        <div class="col-md-8 control-label" style="text-align:left;">
+                            <button type="button" class="btn radio">
+                                <label>
+                                    <input type="radio" name="fee-record-type" value=1> 普通记录
+                                </label>
+                            </button>
+                            <button type="button" class="btn radio">
+                                <label>
+                                    <input type="radio" name="fee-record-type" value=81 checked="checked"> 财务入账
+                                </label>
+                            </button>
+                            <button type="button" class="btn radio advance-box">
+                                <label>
+                                    <input type="radio" name="fee-record-type" value=49> 垫付
+                                </label>
+                            </button>
+                            <button type="button" class="btn radio collection-box">
+                                <label>
+                                    <input type="radio" name="fee-record-type" value=41> 代收
+                                </label>
+                            </button>
                         </div>
                     </div>
                     {{--交易时间--}}
@@ -114,7 +154,7 @@
             <div class="box-footer">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <button type="button" class="btn btn-success" id="item-submit--for--fee-item-edit"><i class="fa fa-check"></i> 提交</button>
+                        <button type="button" class="btn btn-success" id="submit--for--fee--item-edit"><i class="fa fa-check"></i> 提交</button>
                         <button type="button" class="btn btn-default modal-cancel">取消</button>
                     </div>
                 </div>
