@@ -7,7 +7,7 @@
         <div class=" pull-left">
 
             @if(in_array($me->user_type,[0,1,9,11]))
-            <button type="button" onclick="" class="btn btn-filter modal-show--for--finance-item-create"
+            <button type="button" onclick="" class="btn btn-filter modal-show--for--finance-item-create _none"
                     data-form-id="form--for--finance-item-edit"
                     data-modal-id="modal--for--finance-item-edit"
                     data-title="添加财务记录"
