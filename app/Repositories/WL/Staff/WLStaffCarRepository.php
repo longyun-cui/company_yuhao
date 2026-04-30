@@ -250,6 +250,10 @@ class WLStaffCarRepository {
             $mine_data = $post_data;
             unset($mine_data['operate']);
 
+            if($mine_data['car_type'] == 1) $mine_data['car_category'] = 1;
+            else if($mine_data['car_type'] == 11) $mine_data['car_category'] = 1;
+            else if($mine_data['car_type'] == 21) $mine_data['car_category'] = 21;
+
 //            if(in_array($mine_data["trailer_type"],["0","-1"])) unset($mine_data['trailer_type']);
 //            if(in_array($mine_data["trailer_length"],["0","-1"])) unset($mine_data['trailer_length']);
 //            if(in_array($mine_data["trailer_volume"],["0","-1"])) unset($mine_data['trailer_volume']);
