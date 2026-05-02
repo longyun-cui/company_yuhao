@@ -163,7 +163,24 @@ class WLStaffOrderRepository {
         if(!empty($post_data['task_date'])) $query->where('task_date', $post_data['task_date']);
 
 
+//        dd($post_data['month']);
+        if(!empty($post_data['month']))
+        {
+            if($post_data['month'] == '-1')
+            {
 
+            }
+            else
+            {
+                $the_month  = isset($post_data['month']) ? $post_data['month'] : date('Y-m');
+                $the_month_timestamp = strtotime($the_month);
+
+                $the_month_start_date = date('Y-m-01',$the_month_timestamp); // 指定月份-开始日期
+                $the_month_ended_date = date('Y-m-t',$the_month_timestamp); // 指定月份-结束日期
+
+                $query->whereBetween('assign_date',[$the_month_start_date,$the_month_ended_date]);
+            }
+        }
 
 
 

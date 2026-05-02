@@ -29,6 +29,7 @@
                     d.remark = $tableSearch.find('input[name="order-remark"]').val();
                     d.description = $tableSearch.find('input[name="order-description"]').val();
                     d.status = $tableSearch.find('select[name="order-status"]').val();
+                    d.month = $tableSearch.find('select[name="order-month"]').val();
                     d.assign_date = $tableSearch.find('input[name="order-assign-date"]').val();
                     d.task_date = $tableSearch.find('input[name="order-task-date"]').val();
                     d.date_start = $tableSearch.find('input[name="order-start"]').val();

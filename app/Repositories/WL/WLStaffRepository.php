@@ -87,6 +87,23 @@ class WLStaffRepository {
         $me = $this->me;
 
 
+        // Laravel 的 now() 函数返回一个 DateTime 实例
+        $start = now()->create(2026, 03, 01);
+        $end = now()->startOfMonth();
+        $currentMonth = $end->format('Y-m');
+
+        $months = [];
+        $current = clone $end;
+
+        while ($current->gte($start)) {
+            $months[$current->format('Y-m')] = $current->format('Y-m');
+            $current->subMonth();
+        }
+        $view_data['months'] = $months;
+        $view_data['currentMonth'] = $currentMonth;
+//        dd($current);
+
+
         Cache::forget('wl_common_department_list');
         if(Cache::has('wl_common_department_list'))
         {

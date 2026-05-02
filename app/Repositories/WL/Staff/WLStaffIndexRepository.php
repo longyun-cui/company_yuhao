@@ -87,6 +87,21 @@ class WLStaffIndexRepository {
         $me = $this->me;
 
 
+        $start = Carbon::create(2026, 04, 1);
+        $end = Carbon::now()->startOfMonth();
+        $currentMonth = $end->format('Y-m');
+
+        $months = [];
+        $current = $end->copy();
+
+        while ($current->gte($start)) {
+            $months[$current->format('Y-m')] = $current->format('Y-m');
+            $current->subMonth();
+        }
+        $view_data['months'] = $months;
+        $view_data['current'] = $current;
+
+
         Cache::forget('wl_common_department_list');
         if(Cache::has('wl_common_department_list'))
         {

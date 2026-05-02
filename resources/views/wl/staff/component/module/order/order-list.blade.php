@@ -108,6 +108,15 @@
             {{--ID--}}
             <input type="text" class="search-filter form-filter filter-sm filter-keyup" name="order-id" placeholder="ID" value="" />
 
+            <select class="search-filter form-filter filter-md select2-box-c" name="order-month">
+                <option value="-1">全部时间</option>
+                @foreach($months as $value => $label)
+                    <option value="{{ $value }}" {{ $value == $currentMonth ? 'selected' : '' }}>
+                        {{ $label }}
+                    </option>
+                @endforeach
+            </select>
+
             {{--派车日期--}}
             <input type="text" class="search-filter form-filter filter-md filter-keyup date-picker-c" name="order-assign-date" placeholder="派车日期" value="" readonly="readonly" />
 
@@ -142,15 +151,15 @@
 {{--            @endif--}}
 
             {{--选择车辆所有人--}}
-            <select class="search-filter form-filter filter-lg select2-box-c" name="order-car-owner-type">
-                <option value="-1">选择车辆类型</option>
+            <select class="search-filter form-filter filter-md select2-box-c" name="order-car-owner-type">
+                <option value="-1">选择类型</option>
                 <option value="1">自有</option>
                 <option value="9">共建</option>
                 <option value="11">外请</option>
             </select>
 
             {{--选择项目--}}
-            <select class="search-filter form-filter filter-lg select2-box-c select2--project-c-" name="order-project">
+            <select class="search-filter form-filter filter-md select2-box-c select2--project-c-" name="order-project">
                 <option value="-1">选择项目</option>
                 @if(!empty($project_list) && count($project_list) > 0)
                     @foreach($project_list as $v)
@@ -161,7 +170,7 @@
 
 
             {{--选择车辆--}}
-            <select class="search-filter form-filter filter-lg select2-box-c select2--car-c-" name="order-car" data-car-type="1">
+            <select class="search-filter form-filter filter-md select2-box-c select2--car-c-" name="order-car" data-car-type="1">
                 <option value="-1">选择车辆</option>
                 @if(!empty($car_list) && count($car_list) > 0)
                     @foreach($car_list as $v)
@@ -171,7 +180,7 @@
             </select>
 
             {{--选择车挂--}}
-            <select class="search-filter form-filter filter-lg select2-box-c select2--car-c-" name="order-trailer" data-car-type="21">
+            <select class="search-filter form-filter filter-md select2-box-c select2--car-c-" name="order-trailer" data-car-type="21">
                 <option value="-1">选择车挂</option>
                 @if(!empty($trailer_list) && count($trailer_list) > 0)
                     @foreach($trailer_list as $v)
@@ -184,7 +193,7 @@
             <input type="text" class="search-filter form-filter filter-md filter-keyup" name="order-external-car" placeholder="外请车" value="" />
 
             {{--选择车型--}}
-            <select class="search-filter form-filter filter-lg select2-box-c" name="order-car-type">
+            <select class="search-filter form-filter filter-md select2-box-c" name="order-car-type">
                 <option value="">选择车型</option>
                 @if(!empty(config('wl.common-config.car_type')))
                     @foreach(config('wl.common-config.car_type') as $k => $v)
