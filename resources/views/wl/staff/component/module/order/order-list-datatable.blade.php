@@ -830,32 +830,32 @@
                         return data == null ? '' : data;
                     }
                 },
-                {
-                    "title": "线路",
-                    "data": "transport_route",
-                    "className": "",
-                    "width": "60px",
-                    "orderable": false,
-                    "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
-                        if(row.is_completed != 1)
-                        {
-                            $(nTd).attr('data-id',row.id);
-                            $(nTd).attr('data-name','线路');
-                            $(nTd).attr('data-key','transport_route');
-                            $(nTd).attr('data-value',data);
-                            $(nTd).attr('data-column-name','线路');
-
-                            $(nTd).addClass('modal-show--for--info-text-set');
-                            $(nTd).attr('data-text-type','text');
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
-                        }
-                        if(data) $(nTd).addClass('text-left');
-                    },
-                    render: function(data, type, row, meta) {
-                        return data == null ? '' : data;
-                    }
-                },
+                // {
+                //     "title": "线路",
+                //     "data": "transport_route",
+                //     "className": "",
+                //     "width": "60px",
+                //     "orderable": false,
+                //     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
+                //         if(row.is_completed != 1)
+                //         {
+                //             $(nTd).attr('data-id',row.id);
+                //             $(nTd).attr('data-name','线路');
+                //             $(nTd).attr('data-key','transport_route');
+                //             $(nTd).attr('data-value',data);
+                //             $(nTd).attr('data-column-name','线路');
+                //
+                //             $(nTd).addClass('modal-show--for--info-text-set');
+                //             $(nTd).attr('data-text-type','text');
+                //             if(data) $(nTd).attr('data-operate-type','edit');
+                //             else $(nTd).attr('data-operate-type','add');
+                //         }
+                //         if(data) $(nTd).addClass('text-left');
+                //     },
+                //     render: function(data, type, row, meta) {
+                //         return data == null ? '' : data;
+                //     }
+                // },
 
                 {
                     "title": "距离",
