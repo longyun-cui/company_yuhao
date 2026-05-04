@@ -80,7 +80,7 @@ class WLStaffExportRepository {
         $this->get_me();
         $me = $this->me;
 
-        if(!in_array($me->staff_category,[0,1,9,71])) return view($this->view_blade_403);
+        if(!in_array($me->staff_category,[0,1,9,31,71])) return view($this->view_blade_403);
 
         $time = time();
 

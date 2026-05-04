@@ -439,7 +439,7 @@
 
 
             {{----}}
-            @if(in_array($me->staff_category,[0,1,9,71]))
+            @if(in_array($me->staff_category,[0,1,9,31,71]))
                 <li class="treeview _none-">
                     <a class="tab-control datatable-control"
                        data-type="create"
