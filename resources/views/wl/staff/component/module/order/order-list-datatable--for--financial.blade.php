@@ -84,10 +84,13 @@
                     "fnCreatedCell": function (nTd, data, row, iRow, iCol) {
                         if(true)
                         {
-                            $(nTd).attr('data-id',row.id).attr('data-name','附件');
-                            $(nTd).attr('data-key','id').attr('data-value',data);
-                            if(data) $(nTd).attr('data-operate-type','edit');
-                            else $(nTd).attr('data-operate-type','add');
+                            $(nTd).attr('data-id',row.id);
+                            $(nTd).attr('data-name','ID');
+                            $(nTd).attr('data-key','id');
+                            $(nTd).attr('data-value',data);
+
+                            $(nTd).addClass('order--item--page--control');
+                            $(nTd).data('title','工单 '+data);
                         }
                     },
                     render: function(data, type, row, meta) {
@@ -1989,7 +1992,8 @@
                         $html_calculation = '<a class="btn btn-xs order--item-financial--one-click-calculation" data-id="'+data+'">一键核对</a>';
                         $html_accounting = '<a class="btn btn-xs modal-show--for--order--item-financial--accounting-set" data-id="'+data+'">手工核对</a>';
 
-
+                        // $html_detail = '<a class="btn btn-xs bg-primary item-modal-show--for--detail" data-id="'+data+'">详情</a>';
+                        $html_detail = '<a class="btn btn-xs order--item--page--control" data-id="'+data+'" data-title="工单 '+data+'">详情</a>';
 
 
                         var $html =
@@ -1997,7 +2001,7 @@
                             $html_calculation+
                             $html_accounting+
                             $html_operation_record+
-                            // $html_abandon+
+                            $html_detail+
                             '';
                         return $html;
 

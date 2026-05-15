@@ -791,7 +791,7 @@ class WLStaffOrderRepository {
             else throw new Exception("WL_Common_Order--insert--fail");
 
             DB::commit();
-            return response_success(['id'=>$mine->id],$msg);
+            return response_success(['order'=>$mine,'id'=>$mine->id],'操作成功！');
         }
         catch (Exception $e)
         {
@@ -2989,31 +2989,96 @@ class WLStaffOrderRepository {
 //            $operation['after'] = $accounting_datetime;
 //            $operation_record_data[] = $operation;
 //        }
+//        // 运费现金
+//        $accounting_freight_cash = (float)$post_data['accounting_freight_cash'];
+//        if((float)$order->financial_receipt_for_freight_cash != $accounting_freight_cash)
+//        {
+//            $operation = [];
+//            $operation['field'] = 'financial_receipt_for_freight_cash';
+//            $operation['title'] = '运费现金';
+//            $operation['before'] = (float)$order->financial_receipt_for_freight_cash;
+//            $operation['after'] = $accounting_freight_cash;
+//            $operation_record_data[] = $operation;
+//
+//            $order_update_date['financial_receipt_for_freight_cash'] = $accounting_freight_cash;
+//        }
+//        // 运费油卡
+//        $financial_receipt_for_freight_oil_card = (float)$post_data['accounting_freight_oil_card'];
+//        if((float)$order->financial_receipt_for_freight_oil_card != $financial_receipt_for_freight_oil_card)
+//        {
+//            $operation = [];
+//            $operation['field'] = 'financial_receipt_for_freight_oil_card';
+//            $operation['title'] = '运费油卡';
+//            $operation['before'] = (float)$order->financial_receipt_for_freight_oil_card;
+//            $operation['after'] = $financial_receipt_for_freight_oil_card;
+//            $operation_record_data[] = $operation;
+//
+//            $order_update_date['financial_receipt_for_freight_oil_card'] = $financial_receipt_for_freight_oil_card;
+//        }
         // 运费现金
         $accounting_freight_cash = (float)$post_data['accounting_freight_cash'];
-        if((float)$order->financial_receipt_for_freight_cash != $accounting_freight_cash)
+        if((float)$order->freight_amount != $accounting_freight_cash)
         {
             $operation = [];
-            $operation['field'] = 'financial_receipt_for_freight_cash';
+            $operation['field'] = 'freight_amount';
             $operation['title'] = '运费现金';
-            $operation['before'] = (float)$order->financial_receipt_for_freight_cash;
+            $operation['before'] = (float)$order->freight_amount;
             $operation['after'] = $accounting_freight_cash;
             $operation_record_data[] = $operation;
 
-            $order_update_date['financial_receipt_for_freight_cash'] = $accounting_freight_cash;
+            $order_update_date['freight_amount'] = $accounting_freight_cash;
         }
         // 运费油卡
-        $financial_receipt_for_freight_oil_card = (float)$post_data['accounting_freight_oil_card'];
-        if((float)$order->financial_receipt_for_freight_oil_card != $financial_receipt_for_freight_oil_card)
+        $accounting_freight_oil_card = (float)$post_data['accounting_freight_oil_card'];
+        if((float)$order->freight_oil_card_amount != $accounting_freight_oil_card)
         {
             $operation = [];
-            $operation['field'] = 'financial_receipt_for_freight_oil_card';
+            $operation['field'] = 'freight_oil_card_amount';
             $operation['title'] = '运费油卡';
-            $operation['before'] = (float)$order->financial_receipt_for_freight_oil_card;
-            $operation['after'] = $financial_receipt_for_freight_oil_card;
+            $operation['before'] = (float)$order->freight_oil_card_amount;
+            $operation['after'] = $accounting_freight_oil_card;
             $operation_record_data[] = $operation;
 
-            $order_update_date['financial_receipt_for_freight_oil_card'] = $financial_receipt_for_freight_oil_card;
+            $order_update_date['freight_oil_card_amount'] = $accounting_freight_oil_card;
+        }
+        // 串点运费
+        $freight_extra_amount = (float)$post_data['accounting_freight_extra_amount'];
+        if((float)$order->freight_extra_amount != $freight_extra_amount)
+        {
+            $operation = [];
+            $operation['field'] = 'freight_extra_amount';
+            $operation['title'] = '串点运费';
+            $operation['before'] = (float)$order->freight_extra_amount;
+            $operation['after'] = $freight_extra_amount;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['freight_extra_amount'] = $freight_extra_amount;
+        }
+        // 共建车费
+        $cooperative_vehicle_amount = (float)$post_data['accounting_cooperative_vehicle_amount'];
+        if((float)$order->cooperative_vehicle_amount != $cooperative_vehicle_amount)
+        {
+            $operation = [];
+            $operation['field'] = 'freight_extra_amount';
+            $operation['title'] = '共建车费';
+            $operation['before'] = (float)$order->cooperative_vehicle_amount;
+            $operation['after'] = $cooperative_vehicle_amount;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['cooperative_vehicle_amount'] = $cooperative_vehicle_amount;
+        }
+        // 外请车费
+        $external_car_price = (float)$post_data['accounting_external_car_price'];
+        if((float)$order->external_car_price != $external_car_price)
+        {
+            $operation = [];
+            $operation['field'] = 'freight_extra_amount';
+            $operation['title'] = '共建车费';
+            $operation['before'] = (float)$order->external_car_price;
+            $operation['after'] = $external_car_price;
+            $operation_record_data[] = $operation;
+
+            $order_update_date['external_car_price'] = $external_car_price;
         }
 
 
@@ -4058,7 +4123,7 @@ class WLStaffOrderRepository {
 
 
             DB::commit();
-            return response_success(['order'=>$order]);
+            return response_success(['order'=>$order,'操作成功！']);
         }
         catch (Exception $e)
         {

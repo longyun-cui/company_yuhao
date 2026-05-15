@@ -462,7 +462,7 @@ class WLStaffCommonRepository {
         $this->get_me();
         $me = $this->me;
 
-        $query = WL_Common_Driver::select(['id','driver_name','driver_phone','copilot_name','copilot_phone'])
+        $query = WL_Common_Driver::select(['id','driver_name as text','driver_name','driver_phone','copilot_name','copilot_phone'])
             ->where(['item_status'=>1]);
 
         if(!empty($post_data['keyword']))
@@ -477,16 +477,16 @@ class WLStaffCommonRepository {
         }
 
         $list = $query->orderBy('id','desc')->get()
-            ->map(function ($item) {
-                $text = $item->driver_name;
-
-                if($item->driver_phone) $text .= ' ('.$item->driver_phone.')';
-//                if($item->copilot_name) $text .= ' - '.$item->copilot_name;
-//                if($item->copilot_phone) $text .= ' ('.$item->copilot_phone.')';
-
-                $item->text = $text;
-                return $item;
-            })
+//            ->map(function ($item) {
+//                $text = $item->driver_name;
+//
+//                if($item->driver_phone) $text .= ' ('.$item->driver_phone.')';
+////                if($item->copilot_name) $text .= ' - '.$item->copilot_name;
+////                if($item->copilot_phone) $text .= ' ('.$item->copilot_phone.')';
+//
+//                $item->text = $text;
+//                return $item;
+//            })
             ->toArray();
 
         $unSpecified = ['id'=>0,'text'=>'选择司机'];

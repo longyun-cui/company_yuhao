@@ -1,5 +1,5 @@
 {{--工单详情--}}
-<div class="modal fade modal-wrapper" id="modal--for--order-item-detail">
+<div class="modal fade modal-wrapper">
     <div class="col-md-8 col-md-offset-2 margin-top-64px margin-bottom-64px bg-white">
 
         <div class="box- box-info- form-container">

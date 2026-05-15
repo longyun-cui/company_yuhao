@@ -377,7 +377,7 @@
                    data-type="create"
                    data-unique="y"
                    data-id="order-list--for--financial"
-                   data-title='订单(财务)'
+                   data-title='订单列表(财务)'
                    data-content='<i class="fa fa-file-text text-red"></i> 订单列表(财务用)'
                    data-icon='<i class="fa fa-file-text text-red"></i>'
 

@@ -81,6 +81,7 @@
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order-list')
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order-list--for--duplicate')
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order-list--for--financial')
+    @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--page--item--comprehensive')
 
     {{--费用--}}
     @include(env('TEMPLATE_WL_STAFF').'component.fee.fee-list')
@@ -155,6 +156,7 @@
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--item-fee-create')
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--item-fee-record')
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--item-financial-accounting-set')
+{{--    @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--page--item--comprehensive')--}}
 
     {{--费用--}}
     @include(env('TEMPLATE_WL_STAFF').'component.fee.fee-edit')
@@ -254,6 +256,10 @@
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--item-operation-record-datatable')
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--item-journey-record-datatable')
     @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--item-fee-record-datatable')
+    {{--订单--item-page--}}
+    @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--page--item--operation-record--datatable')
+    @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--page--item--fee-record--datatable')
+    @include(env('TEMPLATE_WL_STAFF').'component.module.order.order--page--script')
 
 
     {{--费用--}}

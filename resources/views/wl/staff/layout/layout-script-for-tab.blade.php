@@ -83,12 +83,22 @@
             var $targetTab = $(this).closest('.nav-item');
             var $tabId = $targetTab.find('a').attr('href');
 
+            var $prevTab = $targetTab.prev('.nav-item');
+
             // 移除对应内容
             $($tabId).remove();
             $targetTab.remove();
 
-            // 自动激活剩余第一个标签页
-            $('.nav-tabs .nav-item:first-child a').tab('show');
+            // 如果有前一个标签页，则激活它；否则激活第一个
+            if ($prevTab.length > 0)
+            {
+                $prevTab.find('a').tab('show');
+            }
+            else
+            {
+                // 自动激活剩余第一个标签页
+                $('.nav-tabs .nav-item:first-child a').tab('show');
+            }
         });
 
 
@@ -808,8 +818,8 @@
         });
         $('#'+$config.target).find('.date-picker-c').datetimepicker({
             // 1. 格式控制是否显示时间
-            // format: 'YYYY-MM-DD HH:mm',  // 包含HH:mm自动启用时间选择
-            format: 'YYYY-MM-DD',      // 只显示日期
+            format: 'YYYY-MM-DD',  // 包含HH:mm自动启用时间选择
+            // format: 'YYYY-MM-DD',      // 只显示日期
 
             // 2. 显示模式
             sideBySide: true,           // ✅ 并排显示日期和时间选择器
@@ -853,231 +863,247 @@
         });
 
         // select2
-        $('#'+$config.target).find('.select2-department-c').select2({
-            ajax: {
-                url: "{{ url('/o1/select2/select2-department') }}",
-                type: 'post',
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        _token: $('meta[name="_token"]').attr('content'),
-                        department_category: this.data('department-category'),
-                        department_type: this.data('department-type'),
-                        keyword: params.term, // search term
-                        page: params.page
-                    };
-                },
-                processResults: function (data, params) {
+        // 通用
+        $('#'+$config.target).find('.select2-box-c').each(function() {
+            var $that = $(this);
 
-                    params.page = params.page || 1;
-                    return {
-                        results: data,
-                        pagination: {
-                            more: (params.page * 30) < data.total_count
-                        }
-                    };
-                },
-                cache: true
-            },
-            escapeMarkup: function (markup) { return markup; }, // var our custom formatter work
-            minimumInputLength: 0,
-            theme: 'classic'
+            var $dropdownParent = $(document.body);
+            var $modalSelector = $that.data('modal');
+            if ($modalSelector)
+            {
+                $dropdownParent = $($modalSelector);
+            }
+
+            $that.select2({
+                // dropdownParent: $dropdownParent.find('.modal-content'),
+                minimumInputLength: 0,
+                theme: 'classic'
+            });
         });
-        $('#'+$config.target).find('.select2-team-c').select2({
-            ajax: {
-                url: "{{ url('/o1/select2/select2-team') }}",
-                type: 'post',
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        _token: $('meta[name="_token"]').attr('content'),
-                        department_category: this.data('department-category'),
-                        team_category: this.data('team-category'),
-                        team_type: this.data('team-type'),
-                        keyword: params.term, // search term
-                        page: params.page
-                    };
-                },
-                processResults: function (data, params) {
+        // 客户
+        // 客户
+        $('#'+$config.target).find('.select2--client-c').each(function() {
+            var $this = $(this);
 
-                    params.page = params.page || 1;
-                    return {
-                        results: data,
-                        pagination: {
-                            more: (params.page * 30) < data.total_count
-                        }
-                    };
+            var $dropdownParent = $(document.body);
+            var $modalSelector = $this.data('modal');
+            if ($modalSelector)
+            {
+                $dropdownParent = $($modalSelector).find('.modal-content');
+            }
+
+            $this.select2({
+                ajax: {
+                    url: "{{ url('/o1/select2/select2--client') }}",
+                    type: 'post',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            _token: $('meta[name="_token"]').attr('content'),
+                            item_category: this.data('item-category'),
+                            item_type: this.data('item-type'),
+                            keyword: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
                 },
-                cache: true
-            },
-            escapeMarkup: function (markup) { return markup; }, // var our custom formatter work
-            minimumInputLength: 0,
-            theme: 'classic'
+                escapeMarkup: function (markup) { return markup; },
+                dropdownParent: $dropdownParent,
+                minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
+                minimumInputLength: 0,
+                placeholder: '请选择',
+                allowClear: true,
+                theme: 'classic'
+            });
         });
-        $('#'+$config.target).find('.select2-staff-c').select2({
-            ajax: {
-                url: "{{ url('/o1/select2/select2-staff') }}",
-                type: 'post',
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        _token: $('meta[name="_token"]').attr('content'),
-                        staff_category: this.data('staff-category'),
-                        staff_type: this.data('staff-type'),
-                        keyword: params.term, // search term
-                        page: params.page
-                    };
-                },
-                processResults: function (data, params) {
+        // 项目
+        $('#'+$config.target).find('.select2--project-c').each(function() {
+            var $this = $(this);
 
-                    params.page = params.page || 1;
-                    return {
-                        results: data,
-                        pagination: {
-                            more: (params.page * 30) < data.total_count
-                        }
-                    };
+            var $dropdownParent = $(document.body);
+            var $modalSelector = $this.data('modal');
+            if ($modalSelector)
+            {
+                $dropdownParent = $($modalSelector).find('.modal-content');
+            }
+
+            $this.select2({
+                ajax: {
+                    url: "{{ url('/o1/select2/select2--project') }}",
+                    type: 'post',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            _token: $('meta[name="_token"]').attr('content'),
+                            item_category: this.data('item-category'),
+                            item_type: this.data('item-type'),
+                            keyword: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
                 },
-                cache: true
-            },
-            escapeMarkup: function (markup) { return markup; }, // var our custom formatter work
-            minimumInputLength: 0,
-            theme: 'classic'
+                escapeMarkup: function (markup) { return markup; },
+                dropdownParent: $dropdownParent,
+                minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
+                minimumInputLength: 0,
+                placeholder: '请选择项目',
+                allowClear: true,
+                theme: 'classic'
+            });
         });
-        $('#'+$config.target).find('.select2-car-c').select2({
-            ajax: {
-                url: "{{ url('/v1/operate/select2/select2-car') }}",
-                type: 'post',
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        _token: $('meta[name="_token"]').attr('content'),
-                        car_category: this.data('car-category'),
-                        car_type: this.data('car-type'),
-                        keyword: params.term, // search term
-                        page: params.page
-                    };
-                },
-                processResults: function (data, params) {
+        // 车辆
+        $('#'+$config.target).find('.select2--car-c').each(function() {
+            var $this = $(this);
 
-                    params.page = params.page || 1;
-                    return {
-                        results: data,
-                        pagination: {
-                            more: (params.page * 30) < data.total_count
-                        }
-                    };
+            var $dropdownParent = $(document.body);
+            var $modalSelector = $this.data('modal');
+            if ($modalSelector)
+            {
+                $dropdownParent = $($modalSelector).find('.modal-content');
+            }
+
+            $this.select2({
+                ajax: {
+                    url: "{{ url('/o1/select2/select2--car') }}",
+                    type: 'post',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            _token: $('meta[name="_token"]').attr('content'),
+                            item_category: this.data('item-category'),
+                            item_type: this.data('item-type'),
+                            car_category: this.data('car-category'),
+                            car_type: this.data('car-type'),
+                            motorcade_id: this.data('motorcade-id'),
+                            with: this.data('with'),
+                            keyword: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
                 },
-                cache: true
-            },
-            escapeMarkup: function (markup) { return markup; }, // var our custom formatter work
-            // dropdownParent: this.data('modal'), // 替换为你的模态框 ID
-            // dropdownParent: function() {
-            //     // 获取当前元素的 modal 属性
-            //     var modalSelector = $(this).data('modal');
-            //     return $(modalSelector).length ? $(modalSelector) : $(document.body);
-            // },
-            minimumInputLength: 0,
-            // width: '100%',
-            theme: 'classic'
-            // placeholder: "搜索或选择车辆..."
+                templateSelection: function(data, container) {
+                    // 检查是否为有效选中项（避免空数据打印）
+                    if (data.id && data.text)
+                    {
+                        // console.log("Selected:", data.id, data.text);
+                        // console.log(data);
+                    }
+                    if(data.driver_er)
+                    {
+                        $(data.element).data("car-id",data.id);
+                        $(data.element).data("trailer-id",data.trailer_id);
+                        $(data.element).data("driver-id",data.driver_id);
+                        $(data.element).data("driver-name",data.driver_er.driver_name);
+                        $(data.element).data("driver-phone",data.driver_er.driver_phone);
+                        $(data.element).data("copilot-id",data.copilot_id);
+                        $(data.element).data("copilot-name",data.driver_er.copilot_name);
+                        $(data.element).data("copilot-phone",data.driver_er.copilot_phone);
+                    }
+                    else
+                    {
+                        $(data.element).data("car-id",0);
+                        $(data.element).data("trailer-id",0);
+                        $(data.element).data("driver-id",0);
+                        $(data.element).data("driver-name",'');
+                        $(data.element).data("driver-phone",'');
+                        $(data.element).data("copilot-id",0);
+                        $(data.element).data("copilot-name",'');
+                        $(data.element).data("copilot-phone",'');
+                    }
+                    return data.text;
+                },
+                escapeMarkup: function (markup) { return markup; },
+                dropdownParent: $dropdownParent,
+                minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
+                minimumInputLength: 0,
+                placeholder: '请选择',
+                allowClear: true,
+                theme: 'classic'
+            });
         });
-        $('#'+$config.target).find('.select2-driver-c').select2({
-            ajax: {
-                url: "{{ url('/v1/operate/select2/select2-driver') }}",
-                type: 'post',
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        _token: $('meta[name="_token"]').attr('content'),
-                        car_category: this.data('driver-category'),
-                        car_type: this.data('driver-type'),
-                        keyword: params.term, // search term
-                        page: params.page
-                    };
-                },
-                processResults: function (data, params) {
+        // 司机
+        $('#'+$config.target).find('.select2--driver-c').each(function() {
+            var $this = $(this);
 
-                    params.page = params.page || 1;
-                    return {
-                        results: data,
-                        pagination: {
-                            more: (params.page * 30) < data.total_count
-                        }
-                    };
-                },
-                cache: true
-            },
-            escapeMarkup: function (markup) { return markup; }, // var our custom formatter work
-            minimumInputLength: 0,
-            theme: 'classic'
-        });
-        $('#'+$config.target).find('.select2-client-c').select2({
-            ajax: {
-                url: "{{ url('/v1/operate/select2/select2-client') }}",
-                type: 'post',
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        _token: $('meta[name="_token"]').attr('content'),
-                        client_category: this.data('client-category'),
-                        client_type: this.data('client-type'),
-                        keyword: params.term, // search term
-                        page: params.page
-                    };
-                },
-                processResults: function (data, params) {
+            var $dropdownParent = $(document.body);
+            var $modalSelector = $this.data('modal');
+            if ($modalSelector)
+            {
+                $dropdownParent = $($modalSelector).find('.modal-content');
+            }
 
-                    params.page = params.page || 1;
-                    return {
-                        results: data,
-                        pagination: {
-                            more: (params.page * 30) < data.total_count
-                        }
-                    };
+            $this.select2({
+                ajax: {
+                    url: "{{ url('/o1/select2/select2--driver') }}",
+                    type: 'post',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            _token: $('meta[name="_token"]').attr('content'),
+                            item_category: this.data('item-category'),
+                            item_type: this.data('item-type'),
+                            driver_type: this.data('driver-type'),
+                            company_id: this.data('company-id'),
+                            department_id: this.data('department-id'),
+                            team_id: this.data('team-id'),
+                            motorcade_id: this.data('motorcade-id'),
+                            keyword: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
                 },
-                cache: true
-            },
-            escapeMarkup: function (markup) { return markup; }, // var our custom formatter work
-            minimumInputLength: 0,
-            theme: 'classic'
-        });
-        $('#'+$config.target).find('.select2-project-c').select2({
-            ajax: {
-                url: "{{ url('/v1/operate/select2/select2-project') }}",
-                type: 'post',
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        _token: $('meta[name="_token"]').attr('content'),
-                        project_category: this.data('project-category'),
-                        project_type: this.data('project-type'),
-                        keyword: params.term, // search term
-                        page: params.page
-                    };
-                },
-                processResults: function (data, params) {
-
-                    params.page = params.page || 1;
-                    return {
-                        results: data,
-                        pagination: {
-                            more: (params.page * 30) < data.total_count
-                        }
-                    };
-                },
-                cache: true
-            },
-            escapeMarkup: function (markup) { return markup; }, // var our custom formatter work
-            minimumInputLength: 0,
-            theme: 'classic'
+                escapeMarkup: function (markup) { return markup; },
+                dropdownParent: $dropdownParent,
+                minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
+                minimumInputLength: 0,
+                placeholder: '请选择',
+                allowClear: true,
+                theme: 'classic'
+            });
         });
     }
 

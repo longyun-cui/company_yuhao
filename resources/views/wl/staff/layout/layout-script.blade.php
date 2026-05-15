@@ -620,7 +620,7 @@
             var $modalSelector = $this.data('modal');
             if ($modalSelector)
             {
-                $dropdownParent = $($modalSelector);
+                $dropdownParent = $($modalSelector).find('.modal-content');
             }
 
             $this.select2({
@@ -650,7 +650,7 @@
                     cache: true
                 },
                 escapeMarkup: function (markup) { return markup; },
-                dropdownParent: $dropdownParent.find('.modal-content'),
+                dropdownParent: $dropdownParent,
                 minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
                 placeholder: '请选择',
@@ -666,7 +666,7 @@
             var $modalSelector = $this.data('modal');
             if ($modalSelector)
             {
-                $dropdownParent = $($modalSelector);
+                $dropdownParent = $($modalSelector).find('.modal-content');
             }
 
             $this.select2({
@@ -696,7 +696,7 @@
                     cache: true
                 },
                 escapeMarkup: function (markup) { return markup; },
-                dropdownParent: $dropdownParent.find('.modal-content'),
+                dropdownParent: $dropdownParent,
                 minimumResultsForSearch: 1, // 确保开启搜索（默认就是开启的）
                 minimumInputLength: 0,
                 placeholder: '请选择',
@@ -731,6 +731,51 @@
         // select
         $form.find('select option').prop("selected",false);
         $form.find('select').find('option:eq(0)').prop('selected', true).trigger('change');
+
+
+        // $form.find(".select2-box").val(-1).trigger("change");
+        // $form.find(".select2-box").val("-1").trigger("change");
+        // selectFirstOption($form_id + " .select2-box");
+        $.each( $form.find(".select2-box"), function(index, element) {
+            select2FirstOptionSelected(element);
+        });
+
+        // $form.find(".select2-box-c").val(-1).trigger("change");
+        // $form.find(".select2-box-c").val("-1").trigger("change");
+        // selectFirstOption($form_id + " .select2-box-c");
+        $.each( $form.find(".select2-box-c"), function(index, element) {
+            select2FirstOptionSelected(element);
+        });
+
+
+        $.each( $form.find(".select2-reset"), function(index, element) {
+            select2FirstOptionSelected(element);
+        });
+
+
+        $form.find(".select2-multi-box-c").val([]).trigger('change');
+        $form.find(".select2-multi-box-c").val(null).trigger('change');
+        $form.find(".select2-multi-box-c").empty().trigger('change');
+    }
+    // 表单初始化
+    function form_reset__by__object($form)
+    {
+        console.log('function form_reset__by__object() execute.');
+
+        // $form.find('.select2-container').remove();
+        // input
+        $form.find('textarea.form-control, input.form-control').each(function () {
+            $(this).val("");
+            $(this).val($(this).data('default'));
+
+        });
+
+        // radio
+        $form.find('input[type="radio"][data-default="default"]').prop('checked', true).trigger('change');
+
+        // select
+        $form.find('select option').prop("selected",false);
+        // $form.find('select').find('option:first').prop('selected', true).trigger('change');
 
 
         // $form.find(".select2-box").val(-1).trigger("change");
